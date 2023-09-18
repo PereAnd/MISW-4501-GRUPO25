@@ -1,0 +1,262 @@
+###################################
+# PUBLIC_POST
+###################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: publicpost
+  labels:
+    app: publicpost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: publicpost
+  template:
+    metadata:
+      labels:
+        app: publicpost
+    spec:
+      containers:
+        - name: publicpost
+          image: us-central1-docker.pkg.dev/cloud-native-course-31/native-calculadora-app/publicpost:1.0
+          env:
+          - name: GU_URL
+            value: "http://servicio-user"
+          - name: GO_URL
+            value: "http://servicio-offer"
+          - name: GR_URL
+            value: "http://servicio-route"
+          - name: GP_URL
+            value: "http://servicio-publication"
+          ports:
+            - containerPort: 5005
+          imagePullPolicy: Always
+         
+
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: publicpost-config
+spec:
+  healthCheck:
+    checkIntervalSec: 30
+    port: 5005
+    type: HTTP
+    requestPath: /public/posts/ping/
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: servicio-publicpost
+  annotations:
+    cloud.google.com/backend-config: '{"default": "publicpost-config"}'
+spec:
+  type: NodePort
+  selector:
+    app: publicpost
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5005
+      nodePort: 31021
+
+---
+###################################
+# PUBLICPOSTSOFFERS
+###################################
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: publicpostsoffers
+  labels:
+    app: publicpostsoffers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: publicpostsoffers
+  template:
+    metadata:
+      labels:
+        app: publicpostsoffers
+    spec:
+      containers:
+        - name: publicpostsoffers
+          image: us-central1-docker.pkg.dev/cloud-native-course-31/native-calculadora-app/publicpostsoffers:1.0
+          ports:
+            - containerPort: 5007
+          imagePullPolicy: Always
+          env:
+          - name: GU_URL
+            value: "http://servicio-user"
+          - name: OFFER_URL
+            value: "http://servicio-offer"
+          - name: PUBLICATION_URL
+            value: "http://servicio-publication"
+          - name: ROUTE_URL
+            value: "http://servicio-route"
+          - name: UTILITY_URL
+            value: "http://servicio-utility"
+          
+
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: publicpostsoffers-config
+spec:
+  healthCheck:
+    checkIntervalSec: 30
+    port: 5007
+    type: HTTP
+    requestPath: /publics/posts/offers/ping
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: servicio-publicpostsoffers
+  annotations:
+    cloud.google.com/backend-config: '{"default": "publicpostsoffers-config"}'
+spec:
+  type: NodePort
+  selector:
+    app: publicpostsoffers
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5007
+      nodePort: 31022
+
+---
+###################################
+# UTILITY
+###################################
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: utility
+  labels:
+    app: utility
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: utility
+  template:
+    metadata:
+      labels:
+        app: utility
+    spec:
+      containers:
+        - name: utility
+          image: us-central1-docker.pkg.dev/cloud-native-course-31/native-calculadora-app/utility:1.0
+          ports:
+            - containerPort: 5006
+          imagePullPolicy: Always
+          env:
+          - name: "SQLALCHEMY_DATABASE_URI"
+            valueFrom:
+              secretKeyRef:
+                name: appsecrets 
+                key: uri
+      volumes:
+        - name: appsecrets-volume
+          secret:
+            secretName: appsecrets
+          
+
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: utility-config
+spec:
+  healthCheck:
+    checkIntervalSec: 30
+    port: 5006
+    type: HTTP
+    requestPath: /utilitys/ping
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: servicio-utility
+  annotations:
+    cloud.google.com/backend-config: '{"default": "utility-config"}'
+spec:
+  type: NodePort
+  selector:
+    app: utility
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5006
+      nodePort: 31023
+
+---
+###################################
+# PUBLIC_POST_ID
+###################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: publicpostid
+  labels:
+    app: publicpostid
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: publicpostid
+  template:
+    metadata:
+      labels:
+        app: publicpostid
+    spec:
+      containers:
+        - name: publicpostid
+          image: us-central1-docker.pkg.dev/cloud-native-course-31/native-calculadora-app/publicpostid:1.0
+          ports:
+            - containerPort: 5008
+          imagePullPolicy: Always
+          env:
+          - name: GU_URL
+            value: "http://servicio-user"
+          - name: GO_URL
+            value: "http://servicio-offer"
+          - name: GR_URL
+            value: "http://servicio-route"
+          - name: GP_URL
+            value: "http://servicio-publication"
+
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: publicpostid-config
+spec:
+  healthCheck:
+    checkIntervalSec: 30
+    port: 5008
+    type: HTTP
+    requestPath: /publicid/posts/ping/
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: servicio-publicpostid
+  annotations:
+    cloud.google.com/backend-config: '{"default": "publicpostid-config"}'
+spec:
+  type: NodePort
+  selector:
+    app: publicpostid
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5008
+      nodePort: 31024

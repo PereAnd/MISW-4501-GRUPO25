@@ -1,0 +1,1708 @@
+{
+	"info": {
+		"_postman_id": "709f2306-636d-4e2c-ae61-2ce263ec5bac",
+		"name": "Proyecto Entrega 1 Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24060260"
+	},
+	"item": [
+		{
+			"name": "user-management",
+			"item": [
+				{
+					"name": "Crear",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa962\",\n    \"password\": \"passwordCesa96\",\n    \"email\": \"cesa96@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa96\",\n    \"password\": \"passwordCesa96\",\n    \"email\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa96_3\",\n    \"password\": \"passwordCesa96\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Autenticar",
+					"item": [
+						{
+							"name": "200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"Token\", jsonData.token);",
+											"console.log(\"Variable value is:\", pm.collectionVariables.get(\"Token\"));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa962\",\n    \"password\": \"passwordCesa96\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/auth",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa96\",\n    \"password\": \"passwordCesa965\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/auth",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa96\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/auth",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Obtener",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/me",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/me",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "PING",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/ping",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"ping"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Validar",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"cesa96@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/manual-verification",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"manual-verification"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "estado",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"estado\":\"VERIFICADO\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/1",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WEBHOOK",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"RUV\":\"aaaa\",\n    \"score\":80,\n    \"userIdentifier\":\"1\",\n    \"verifyToken\":\"aaaaaaaa\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/webhook",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"webhook"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "post-management",
+			"item": [
+				{
+					"name": "Crear",
+					"item": [
+						{
+							"name": "Crear Publicacion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjQzNDkxNCwianRpIjoiY2VmZGYwZTAtZGU0ZS00ZWZlLTk1MWUtZmYwYjEzOTg2N2UwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImNlc2E5NjIiLCJuYmYiOjE2NzY0MzQ5MTQsImV4cCI6MTY3NjQzNTIxNH0.mu6BHmHBhNaMNkms6mMEB4P2ZqalYR6-Gs0xu-g_nok",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeId\":\"4\",\r\n    \"plannedStartDate\":\"02/19/23 14:55:27\",\r\n    \"plannedEndDate\":\"04/19/23 13:55:27\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portPosts}}/posts/",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portPosts}}",
+									"path": [
+										"posts",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Buscar",
+					"item": [
+						{
+							"name": "Buscar Publicacion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjQzNDkxNCwianRpIjoiY2VmZGYwZTAtZGU0ZS00ZWZlLTk1MWUtZmYwYjEzOTg2N2UwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImNlc2E5NjIiLCJuYmYiOjE2NzY0MzQ5MTQsImV4cCI6MTY3NjQzNTIxNH0.mu6BHmHBhNaMNkms6mMEB4P2ZqalYR6-Gs0xu-g_nok",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipUser}}:{{portPosts}}/posts?filter=me&when=02-19-23 14:55:27",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portPosts}}",
+									"path": [
+										"posts"
+									],
+									"query": [
+										{
+											"key": "route",
+											"value": "67",
+											"disabled": true
+										},
+										{
+											"key": "filter",
+											"value": "me"
+										},
+										{
+											"key": "when",
+											"value": "02-19-23 14:55:27"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Consultar",
+					"item": [
+						{
+							"name": "Consultar Publicacion",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portPosts}}/posts/1",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portPosts}}",
+									"path": [
+										"posts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PING",
+					"item": [
+						{
+							"name": "Verificar endpoint Publicaciones",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjQwMDA5NSwianRpIjoiMGE5M2ViOTItMDViMi00Yzc3LTk5NDQtNWYxMjgxZThjNGRkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImNlc2E5NiIsIm5iZiI6MTY3NjQwMDA5NSwiZXhwIjoxNjc2NDAwMzk1fQ.NS-lrWIYwcBFGTDlP8eWreJzdjZBtOqply837Q5oHhE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipUser}}:{{portPosts}}/posts/ping/",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portPosts}}",
+									"path": [
+										"posts",
+										"ping",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "offer-management",
+			"item": [
+				{
+					"name": "Crear",
+					"item": [
+						{
+							"name": "Crear Oferta",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjQzNDkxNCwianRpIjoiY2VmZGYwZTAtZGU0ZS00ZWZlLTk1MWUtZmYwYjEzOTg2N2UwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImNlc2E5NjIiLCJuYmYiOjE2NzY0MzQ5MTQsImV4cCI6MTY3NjQzNTIxNH0.mu6BHmHBhNaMNkms6mMEB4P2ZqalYR6-Gs0xu-g_nok",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": 2, \r\n    \"description\": \"dsfsdfsd\", \r\n    \"size\": \"LARGE\", \r\n    \"fragile\" : 1, \r\n    \"offer\": 1000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipUser}}:{{portOffers}}/offers/",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portOffers}}",
+									"path": [
+										"offers",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Buscar",
+					"item": [
+						{
+							"name": "Buscar Oferta",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipUser}}:{{portOffers}}/offers?filter=me&post=1",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portOffers}}",
+									"path": [
+										"offers"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "me"
+										},
+										{
+											"key": "post",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Consultar",
+					"item": [
+						{
+							"name": "Consultar Oferta",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjQzNDkxNCwianRpIjoiY2VmZGYwZTAtZGU0ZS00ZWZlLTk1MWUtZmYwYjEzOTg2N2UwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImNlc2E5NjIiLCJuYmYiOjE2NzY0MzQ5MTQsImV4cCI6MTY3NjQzNTIxNH0.mu6BHmHBhNaMNkms6mMEB4P2ZqalYR6-Gs0xu-g_nok",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipUser}}:{{portOffers}}/offers/1",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portOffers}}",
+									"path": [
+										"offers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PING",
+					"item": [
+						{
+							"name": "Verificar endpoint Ofertas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipUser}}:{{portOffers}}/offers/ping/",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portOffers}}",
+									"path": [
+										"offers",
+										"ping",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "route-management",
+			"item": [
+				{
+					"name": "Crear",
+					"item": [
+						{
+							"name": "201",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sourceAirportCode\": \"ABC\",\n    \"sourceCountry\": \"Espana\",\n    \"destinyAirportCode\": \"AEP\",\n    \"destinyCountry\": \"Argentina\",\n    \"bagCost\": 10.50\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes/",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sourceAirportCode\": \"ABC\",\n    \"sourceCountry\": \"Espana\",\n    \"destinyAirportCode\": \"AEP\",\n    \"destinyCountry\": \"Argentina\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes/",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiusInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjQxOTk1MywianRpIjoiMzU5MDQ0ZWYtZmNiYi00NDhlLWI4M2ItMzhkYjBmYmU2OTdkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImNlc2E5NiIsIm5iZiI6MTY3NjQxOTk1MywiZXhwIjoxNjc2NDIwMjUzfQ.MP3JZHz_xdBt7hUrk8Ekhli0bEA7j4D705XCte9jY-",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa96\",\n    \"password\": \"passwordCesa96\",\n    \"email\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes/",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "412",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjQyMDI4MiwianRpIjoiYjQyYzlmNDAtOGU2ZS00OWZiLWFkNTMtOTA0NWRiMDdiMzYyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImNlc2E5NiIsIm5iZiI6MTY3NjQyMDI4MiwiZXhwIjoxNjc2NDIwNTgyfQ.vG6_KwiHVLLAl3gan2Icx8PU5MV2h9AGtS6t9fuq9es",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sourceAirportCode\": \"ABC\",\n    \"sourceCountry\": \"Espana\",\n    \"destinyAirportCode\": \"AEP\",\n    \"destinyCountry\": \"Argentina\",\n    \"bagCost\": 10.50\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes/",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BUSCAR",
+					"item": [
+						{
+							"name": "200",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa96\",\n    \"password\": \"passwordCesa96\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "ABC",
+											"disabled": true
+										},
+										{
+											"key": "when",
+											"value": "4-19-23 9:35:17",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "AEP",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa96\",\n    \"password\": \"passwordCesa965\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes?from=ABC&to=AEP",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "ABC"
+										},
+										{
+											"key": "to",
+											"value": "AEP"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"cesa96\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes?when=13-19-23 9:35:17",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes"
+									],
+									"query": [
+										{
+											"key": "when",
+											"value": "13-19-23 9:35:17"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Obtener",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes/1",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes/1",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes/abc",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes",
+										"abc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipRoute}}:{{portRoute}}/routes/15",
+									"protocol": "http",
+									"host": [
+										"{{ipRoute}}"
+									],
+									"port": "{{portRoute}}",
+									"path": [
+										"routes",
+										"15"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "PING",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipUser}}:{{portUser}}/users/ping",
+									"protocol": "http",
+									"host": [
+										"{{ipUser}}"
+									],
+									"port": "{{portUser}}",
+									"path": [
+										"users",
+										"ping"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "RF-003",
+			"item": [
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "400",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"plannedStartDate\":\"3/05/23 14:55:27\",\n    \"origin\": {\n       \"airportCode\": \"ABC\",\n       \"country\": \"Espana\"\n    },\n    \"destiny\": {\n       \"airportCode\": \"AEP\",\n       \"country\": \"Argentina\"\n    },\n    \"bagCost\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipPublicPost}}:{{portPublicPost}}/public/posts",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPost}}"
+									],
+									"port": "{{portPublicPost}}",
+									"path": [
+										"public",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"plannedStartDate\":\"3/05/23 14:55:27\",\n    \"plannedEndDate\":\"3/06/23 13:55:27\",\n    \"origin\": {\n       \"airportCode\": \"ABC\",\n       \"country\": \"Espana\"\n    },\n    \"destiny\": {\n       \"airportCode\": \"AEP\",\n       \"country\": \"Argentina\"\n    },\n    \"bagCost\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipPublicPost}}:{{portPublicPost}}/public/posts",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPost}}"
+									],
+									"port": "{{portPublicPost}}",
+									"path": [
+										"public",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "412 - 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"plannedStartDate\":\"5/05/23 14:55:27\",\n    \"plannedEndDate\":\"5/06/23 13:55:27\",\n    \"origin\": {\n       \"airportCode\": \"DDD\",\n       \"country\": \"otro\"\n    },\n    \"destiny\": {\n       \"airportCode\": \"DDD\",\n       \"country\": \"Otro 2\"\n    },\n    \"bagCost\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipPublicPost}}:{{portPublicPost}}/public/posts",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPost}}"
+									],
+									"port": "{{portPublicPost}}",
+									"path": [
+										"public",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "412 - 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"plannedStartDate\":\"3/05/23 14:55:27\",\n    \"plannedEndDate\":\"3/06/23 13:55:27\",\n    \"origin\": {\n       \"airportCode\": \"EEE\",\n       \"country\": \"otro\"\n    },\n    \"destiny\": {\n       \"airportCode\": \"DDD\",\n       \"country\": \"Otro 2\"\n    },\n    \"bagCost\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipPublicPost}}:{{portPublicPost}}/public/posts",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPost}}"
+									],
+									"port": "{{portPublicPost}}",
+									"path": [
+										"public",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "201",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"plannedStartDate\":\"3/05/23 14:55:27\",\n    \"plannedEndDate\":\"3/06/23 13:55:27\",\n    \"origin\": {\n       \"airportCode\": \"EEE\",\n       \"country\": \"otro\"\n    },\n    \"destiny\": {\n       \"airportCode\": \"DDD\",\n       \"country\": \"Otro 2\"\n    },\n    \"bagCost\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipPublicPost}}:{{portPublicPost}}/public/posts",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPost}}"
+									],
+									"port": "{{portPublicPost}}",
+									"path": [
+										"public",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PING",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipPublicPost}}:{{portPublicPost}}/public/posts/ping",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPost}}"
+									],
+									"port": "{{portPublicPost}}",
+									"path": [
+										"public",
+										"posts",
+										"ping"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "RF-005",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "404",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"plannedStartDate\":\"3/05/23 14:55:27\",\n    \"origin\": {\n       \"airportCode\": \"ABC\",\n       \"country\": \"Espana\"\n    },\n    \"destiny\": {\n       \"airportCode\": \"AEP\",\n       \"country\": \"Argentina\"\n    },\n    \"bagCost\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipPublicPostId}}:{{portPublicPostId}}/public/posts/10",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPostId}}"
+									],
+									"port": "{{portPublicPostId}}",
+									"path": [
+										"public",
+										"posts",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"plannedStartDate\":\"3/05/23 14:55:27\",\n    \"plannedEndDate\":\"3/06/23 13:55:27\",\n    \"origin\": {\n       \"airportCode\": \"ABC\",\n       \"country\": \"Espana\"\n    },\n    \"destiny\": {\n       \"airportCode\": \"AEP\",\n       \"country\": \"Argentina\"\n    },\n    \"bagCost\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipPublicPostId}}:{{portPublicPostId}}/public/posts/1",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPostId}}"
+									],
+									"port": "{{portPublicPostId}}",
+									"path": [
+										"public",
+										"posts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"plannedStartDate\":\"3/05/23 14:55:27\",\n    \"plannedEndDate\":\"3/06/23 13:55:27\",\n    \"origin\": {\n       \"airportCode\": \"EEE\",\n       \"country\": \"otro\"\n    },\n    \"destiny\": {\n       \"airportCode\": \"DDD\",\n       \"country\": \"Otro 2\"\n    },\n    \"bagCost\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{ipPublicPostId}}:{{portPublicPostId}}/public/posts/1",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPostId}}"
+									],
+									"port": "{{portPublicPostId}}",
+									"path": [
+										"public",
+										"posts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PING",
+					"item": [
+						{
+							"name": "200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{ipPublicPost}}:{{portPublicPost}}/public/posts/ping",
+									"protocol": "http",
+									"host": [
+										"{{ipPublicPost}}"
+									],
+									"port": "{{portPublicPost}}",
+									"path": [
+										"public",
+										"posts",
+										"ping"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "utility",
+			"item": [
+				{
+					"name": "Buscar",
+					"item": [
+						{
+							"name": "Buscar Utilidad por Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3ODA2MTA5NywianRpIjoiZWUyODhiNDctN2M4Yy00NmJlLThhMWYtNGFjYTdkOTAwMzkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJyYXlhbiIsIm5iZiI6MTY3ODA2MTA5NywiZXhwIjoxNjc4MDYxMzk3fQ.PkZFEmTnq4CE6nZem9x0UO0m455VqTOz8ZczFUEG0NI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5006/utility/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5006",
+									"path": [
+										"utility",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Crear",
+					"item": [
+						{
+							"name": "Crear utilidad",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3ODA2MTA5NywianRpIjoiZWUyODhiNDctN2M4Yy00NmJlLThhMWYtNGFjYTdkOTAwMzkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJyYXlhbiIsIm5iZiI6MTY3ODA2MTA5NywiZXhwIjoxNjc4MDYxMzk3fQ.PkZFEmTnq4CE6nZem9x0UO0m455VqTOz8ZczFUEG0NI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"offerId\":1,\r\n    \"value\":50.31\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5006/utility/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5006",
+									"path": [
+										"utility",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "publicpostsoffers",
+			"item": [
+				{
+					"name": "Ofertar",
+					"item": [
+						{
+							"name": "Ofertar una publicacion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3ODA2MTA5NywianRpIjoiZWUyODhiNDctN2M4Yy00NmJlLThhMWYtNGFjYTdkOTAwMzkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJyYXlhbiIsIm5iZiI6MTY3ODA2MTA5NywiZXhwIjoxNjc4MDYxMzk3fQ.PkZFEmTnq4CE6nZem9x0UO0m455VqTOz8ZczFUEG0NI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"sadasdasd\",\r\n    \"size\": \"LARGE\",\r\n    \"fragile\" : false,\r\n    \"offer\":25\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5005/public/posts/1/offers",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5005",
+									"path": [
+										"public",
+										"posts",
+										"1",
+										"offers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ipUser",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "portUser",
+			"value": "5001",
+			"type": "string"
+		},
+		{
+			"key": "portPosts",
+			"value": "5002",
+			"type": "string"
+		},
+		{
+			"key": "portOffers",
+			"value": "5004",
+			"type": "string"
+		},
+		{
+			"key": "ipRoute",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "portRoute",
+			"value": "5003",
+			"type": "string"
+		},
+		{
+			"key": "ipPublicPost",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "portPublicPost",
+			"value": "8005",
+			"type": "string"
+		},
+		{
+			"key": "Token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "portPublicPostId",
+			"value": "5008",
+			"type": "string"
+		},
+		{
+			"key": "ipPublicPostId",
+			"value": "localhost",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,57 @@
+team: Grupo 31
+board: https://github.com/orgs/MISW-4301-Desarrollo-Apps-en-la-Nube/projects/95
+url: <url del ingress de la aplicación>
+user-management:
+  folder: user/src
+  type: contenedor
+  authors:
+    - ch.garciaa1@uniandes.edu.co
+    - bs.hernandezb1@uniandes.edu.co
+post-management:
+  folder: publication/src
+  type: contenedor
+  authors:
+    - ch.garciaa1@uniandes.edu.co
+    - bs.hernandezb1@uniandes.edu.co
+offer-management:
+  folder: offer/src
+  type: contenedor
+  authors:
+    - ch.garciaa1@uniandes.edu.co
+    - bs.hernandezb1@uniandes.edu.co
+route-management:
+  folder: route/src
+  type: contenedor
+  authors:
+    - ch.garciaa1@uniandes.edu.co
+    - bs.hernandezb1@uniandes.edu.co
+public_post-management:
+  folder: public_post/src
+  type: contenedor
+  authors:
+    - ch.garciaa1@uniandes.edu.co
+    - bs.hernandezb1@uniandes.edu.co
+public_post_id-management:
+  folder: public_post_id/src
+  type: contenedor
+  authors:
+    - ch.garciaa1@uniandes.edu.co
+    - bs.hernandezb1@uniandes.edu.co
+publicpostsoffers-management:
+  folder: publicpostsoffers/src
+  type: contenedor
+  authors:
+    - ch.garciaa1@uniandes.edu.co
+    - bs.hernandezb1@uniandes.edu.co
+utility-management:
+  folder: utility/src
+  type: contenedor
+  authors:
+    - ch.garciaa1@uniandes.edu.co
+    - bs.hernandezb1@uniandes.edu.co
+validate-management:
+  folder: validate
+  type: función
+  authors:
+    - ch.garciaa1@uniandes.edu.co
+    - bs.hernandezb1@uniandes.edu.co

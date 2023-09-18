@@ -1,0 +1,78 @@
+###################################
+# INGRESS
+###################################
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gateway-entrega-3
+  labels:
+    name: gateway-entrega-3
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /users
+        backend:
+          service:
+            name: servicio-user
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /routes
+        backend:
+          service:
+            name: servicio-route
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /offers
+        backend:
+          service:
+            name: servicio-offer
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /posts
+        backend:
+          service:
+            name: servicio-publication
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /public
+        backend:
+          service:
+            name: servicio-publicpost
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /publics
+        backend:
+          service:
+            name: servicio-publicpostsoffers
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /utilitys
+        backend:
+          service:
+            name: servicio-utility
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /publicid
+        backend:
+          service:
+            name: servicio-publicpostid
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /verify
+        backend:
+          service:
+            name: servicio-truenative
+            port: 
+              number: 80
+

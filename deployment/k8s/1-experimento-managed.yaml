@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: experimento3-managed
+  namespace: default
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: experimento3-managed
+  template:
+    metadata:
+      labels:
+        app: experimento3-managed
+    spec:
+      containers:
+      - name: experimento3-managed
+        image: 798178280816.dkr.ecr.us-east-1.amazonaws.com/experimento:latest
+        ports:
+        - containerPort: 5001
+        env:
+        - name: SQLALCHEMY_DATABASE_URI
+          value: "postgresql://postgres:postgres@database-1.cfgkb3tpxr7g.us-east-1.rds.amazonaws.com:5432/postgres"            
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role
+                operator: In
+                values:
+                - managed-nodes
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - experimento3-managed
+            topologyKey: kubernetes.io/hostname
+            namespaces:
+            - default

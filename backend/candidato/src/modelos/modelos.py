@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_field
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_field, fields
 
 db = SQLAlchemy()
 
@@ -35,21 +35,6 @@ class InformacionTecnica(db.Model):
     description = db.Column(db.String(150), nullable=False)
     candidatoId = db.Column(db.Integer, db.ForeignKey('candidato.id'))
 
-class CandidatoEschema(SQLAlchemySchema):
-    class Meta:
-         model = Candidato
-         include_relationships = True
-         load_instance = True         
-    id = auto_field()
-    names = auto_field()
-    lastNames = auto_field()
-    mail = auto_field()
-    docType = auto_field()
-    phone = auto_field()
-    address = auto_field()
-    birthDate = auto_field()
-    country = auto_field()
-    city = auto_field()
 
 class InformacionAcademicaEschema(SQLAlchemySchema):
     class Meta:
@@ -66,7 +51,7 @@ class InformacionAcademicaEschema(SQLAlchemySchema):
 
 class InformacionTecnicaEschema(SQLAlchemySchema):
     class Meta:
-         model = InformacionAcademica
+         model = InformacionTecnica
          include_relationships = False
          load_instance = True         
     id = auto_field()
@@ -74,4 +59,21 @@ class InformacionTecnicaEschema(SQLAlchemySchema):
     description = auto_field()
     candidatoId = auto_field()
 
-
+class CandidatoEschema(SQLAlchemySchema):
+    class Meta:
+         model = Candidato
+         include_relationships = True
+         load_instance = True         
+    id = auto_field()
+    names = auto_field()
+    lastNames = auto_field()
+    mail = auto_field()
+    docType = auto_field()
+    phone = auto_field()
+    address = auto_field()
+    birthDate = auto_field()
+    country = auto_field()
+    city = auto_field()
+    language = auto_field()
+    informacionAcademica = fields.Nested(InformacionAcademicaEschema(many=True), many=True)
+    informacionTecnica = fields.Nested(InformacionTecnicaEschema, many=True)

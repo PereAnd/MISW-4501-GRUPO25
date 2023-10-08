@@ -1,10 +1,9 @@
 from flask_restful import Api
 from .modelos import db
-from .vistas import VistaExperimento, VistaPing, VistaExperimentos
+from .vistas import VistaPing, VistaCandidato, VistaInformacionAcademica, VistaInformacionesAcademicas, VistaInformacionesTecnicas, VistaInformacionTecnica, VistaRegistro
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
-from datetime import datetime, timedelta
 from os import environ
 import os
 
@@ -30,7 +29,11 @@ db.create_all()
 cors = CORS(app)
 
 api = Api(app)
-api.add_resource(VistaExperimentos, '/experimento/')
-api.add_resource(VistaExperimento, '/experimento/<string:id>')
-api.add_resource(VistaPing, '/experimento/ping/')
+api.add_resource(VistaRegistro, '/candidato')
+api.add_resource(VistaCandidato, '/candidato/<string:id>')
+api.add_resource(VistaInformacionesAcademicas, '/candidato/<string:candidatoId>/informacionAcademica')
+api.add_resource(VistaInformacionAcademica, '/candidato/<string:candidatoId>/informacionAcademica/<string:id>')
+api.add_resource(VistaInformacionesTecnicas, '/candidato/<string:candidatoId>/informacionTecnica')
+api.add_resource(VistaInformacionTecnica, '/candidato/<string:candidatoId>/informacionTecnica/<string:id>')
+api.add_resource(VistaPing, '/candidato/ping')
 

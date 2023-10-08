@@ -1,0 +1,3 @@
+python -m flask run --host=0.0.0.0 --port=5001
+coverage report --fail-under=95 
+coverage run -m pytest 

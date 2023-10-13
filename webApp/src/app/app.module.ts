@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { RegCandidatoComponent } from './candidates/components/reg-candidato/reg-candidato.component';
 import { LoginCandidatoComponent } from './core/auth/login-candidato/login-candidato.component';
+import { RegCandidatoService } from './candidates/services/reg-candidato.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { LoginCandidatoComponent } from './core/auth/login-candidato/login-candi
     BrowserAnimationsModule,
     AngularMaterialModule
   ],
-  providers: [],
+  providers: [
+    RegCandidatoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

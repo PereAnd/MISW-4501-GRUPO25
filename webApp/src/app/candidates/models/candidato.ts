@@ -7,15 +7,16 @@ export class Candidato {
     public lastNames: string,
     public mail: string,
     public password: string,
-    public docType: string,
-    public phone: string,
-    public address: string,
-    public birthDate: Date,
-    public country: string,
-    public city: string,
-    public language: string,
-    public informacionAcademica: InfoAcademica[],
-    public informacionTecnica: InfoTecnica[]
+    public confirmPassword: string,
+    public docType?: string,
+    public phone?: string,
+    public address?: string,
+    public birthDate?: Date,
+    public country?: string,
+    public city?: string,
+    public language?: string,
+    public informacionAcademica?: InfoAcademica[],
+    public informacionTecnica?: InfoTecnica[]
   ) { }
 }
 

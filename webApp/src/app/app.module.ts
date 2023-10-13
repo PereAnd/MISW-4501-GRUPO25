@@ -9,7 +9,7 @@ import { RegCandidatoComponent } from './candidates/components/reg-candidato/reg
 import { LoginCandidatoComponent } from './core/auth/login-candidato/login-candidato.component';
 import { RegCandidatoService } from './candidates/services/reg-candidato.service';
 import { CandidatesComponent } from './candidates/candidates.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -21,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,

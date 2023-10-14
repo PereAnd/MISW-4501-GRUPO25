@@ -15,6 +15,7 @@ export class RegCandidatoService {
   ) { }
 
   registrarCandidato(candidato: Candidato): Observable<Candidato> {
-    return this.httpClient.post<Candidato>(environment.URL_REGISTRO_CANDIDATOS, candidato);
+    let baseUrl: string = environment.HOST + 'candidato';
+    return this.httpClient.post<Candidato>(baseUrl, candidato);
   }
 }

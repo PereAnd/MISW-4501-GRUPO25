@@ -78,8 +78,8 @@ header.masthead {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
   text-align: center;
-  color: #212529;
-  background-image: url("../../../assets/img/header-bg.jpg");
+  color: #3f51b5;
+  background-image: url("../../../../assets/img/header-bg.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -245,7 +245,7 @@ header.masthead {
   color: white;
   border: 7px solid #e9ecef;
   border-radius: 100%;
-  background-color: #83c0f5;
+  background-color: #3f51b5;
 }
 .timeline > li .timeline-image h4, .timeline > li .timeline-image .h4 {
   font-size: 10px;
@@ -375,7 +375,7 @@ header.masthead {
 
 section#contact {
   background-color: #212529;
-  background-image: url("../../../assets/img/map-image.png");
+  background-image: url("../../../../assets/img/map-image.png");
   background-repeat: no-repeat;
   background-position: center;
 }

@@ -13,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { InfoAcademicaComponent } from './candidates/components/info-academica/info-academica.component';
+import { CreateInfoAcadComponent } from './candidates/components/info-academica/create-info-acad/create-info-acad.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     LoginCandidatoComponent,
     CandidatesComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    InfoAcademicaComponent,
+    CreateInfoAcadComponent
   ],
   imports: [
     BrowserModule,

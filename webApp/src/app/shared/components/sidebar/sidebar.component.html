@@ -1,0 +1,34 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav opened="true" mode="side" class="col-12">
+    <h4>Mis Datos</h4>
+    <mat-nav-list>
+      <mat-list-item>
+        <div mat-button><mat-icon>person</mat-icon>Información Personal</div>
+      </mat-list-item>
+      <mat-list-item>
+        <div mat-button><mat-icon>school</mat-icon>Información académica</div>
+      </mat-list-item>
+      <mat-list-item>
+        <div mat-button><mat-icon>devices</mat-icon>Información técnica</div>
+      </mat-list-item>
+      <mat-list-item>
+        <div mat-button><mat-icon>work</mat-icon>Información laboral</div>
+      </mat-list-item>
+    </mat-nav-list>
+    <h4>Entrevistas</h4>
+    <mat-nav-list>
+      <mat-list-item>
+        <div mat-button><mat-icon>pending_actions</mat-icon>Pendientes</div>
+      </mat-list-item>
+      <mat-list-item>
+        <div mat-button><mat-icon>fact_check</mat-icon>Completadas</div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+    <!-- Router outlet-->
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

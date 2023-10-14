@@ -9,9 +9,10 @@ import { RegCandidatoComponent } from './candidates/components/reg-candidato/reg
 import { LoginCandidatoComponent } from './core/auth/login-candidato/login-candidato.component';
 import { RegCandidatoService } from './candidates/services/reg-candidato.service';
 import { CandidatesComponent } from './candidates/candidates.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
     RegCandidatoComponent,
     LoginCandidatoComponent,
     CandidatesComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

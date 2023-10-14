@@ -11,13 +11,15 @@ import { RegCandidatoService } from './candidates/services/reg-candidato.service
 import { CandidatesComponent } from './candidates/candidates.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegCandidatoComponent,
     LoginCandidatoComponent,
-    CandidatesComponent
+    CandidatesComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

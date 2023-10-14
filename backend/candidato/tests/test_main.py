@@ -260,11 +260,11 @@ def test_obtiene_informacion_academica_id_no_existe(client: FlaskClient):
     assert resp.status_code == 404
 
 
-#def test_elimina_informacion_academica(client: FlaskClient):
-#    global id_candidato, id_informacion_academica
-#    resp = client.delete(
-#        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + str(id_informacion_academica))
-#    assert resp.status_code == 204
+def test_elimina_informacion_academica(client: FlaskClient):
+    global id_candidato, id_informacion_academica
+    resp = client.delete(
+        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + str(id_informacion_academica))
+    assert resp.status_code == 204
 
 def test_elimina_informacion_academica_id_no_existe(client: FlaskClient):
     global id_candidato, id_informacion_academica
@@ -376,11 +376,11 @@ def test_obtiene_informacion_tecnica_id_no_existe(client: FlaskClient):
     assert resp.status_code == 404
 
 
-#def test_elimina_informacion_tecnica(client: FlaskClient):
-#    global id_candidato, id_informacion_tecnica
-#    resp = client.delete(
-#        '/candidato/' + str(id_candidato) + '/informacionTecnica/' + str(id_informacion_tecnica))
-#    assert resp.status_code == 204
+def test_elimina_informacion_tecnica(client: FlaskClient):
+    global id_candidato, id_informacion_tecnica
+    resp = client.delete(
+        '/candidato/' + str(id_candidato) + '/informacionTecnica/' + str(id_informacion_tecnica))
+    assert resp.status_code == 204
 
 def test_elimina_informacion_tecnica_id_no_existe(client: FlaskClient):
     global id_candidato, id_informacion_tecnica

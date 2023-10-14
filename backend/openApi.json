@@ -24,7 +24,7 @@
         "application/json"
     ],
     "paths": {
-        "/candidatos": {
+        "/candidato": {
             "get": {
                 "description": "Retorna todos los canditaos",
                 "operationId": "findCandidatos",

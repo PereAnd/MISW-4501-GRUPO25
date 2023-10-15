@@ -15,6 +15,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { InfoAcademicaComponent } from './candidates/components/info-academica/info-academica.component';
 import { CreateInfoAcadComponent } from './candidates/components/info-academica/create-info-acad/create-info-acad.component';
+import { ListInfoAcadComponent } from './candidates/components/info-academica/list-info-acad/list-info-acad.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CreateInfoAcadComponent } from './candidates/components/info-academica/
     HeaderComponent,
     SidebarComponent,
     InfoAcademicaComponent,
-    CreateInfoAcadComponent
+    CreateInfoAcadComponent,
+    ListInfoAcadComponent
   ],
   imports: [
     BrowserModule,

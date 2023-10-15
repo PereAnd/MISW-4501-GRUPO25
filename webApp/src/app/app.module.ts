@@ -27,7 +27,7 @@ import { ListInfoAcadComponent } from './candidates/components/info-academica/li
     SidebarComponent,
     InfoAcademicaComponent,
     CreateInfoAcadComponent,
-    ListInfoAcadComponent
+    ListInfoAcadComponent,
   ],
   imports: [
     BrowserModule,

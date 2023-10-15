@@ -14,6 +14,6 @@ managedNodeGroups:
     role: managed-nodes
   instanceType: t3.medium
   minSize: 1
-  maxSize: 10
+  maxSize: 4
   desiredCapacity: 1
   volumeSize: 20

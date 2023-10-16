@@ -1,0 +1,103 @@
+<div class="container text-center">
+  <h2 id="titulo">Agregar información académica</h2>
+
+  <form
+    [formGroup]="formInfoAcademica"
+    (ngSubmit)="!formInfoAcademica.invalid && registrarInfoAcademica()"
+  >
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label name="title">Título obtenido</mat-label>
+          <input matInput type="text"
+          id="title" formControlName="title">
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label name="institution">Institución</mat-label>
+          <input matInput type="text"
+          id="institution" formControlName="institution">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Validacion -->
+    <div class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          formInfoAcademica.get('title')!.hasError('required') &&
+          formInfoAcademica.get('title')!.touched ||
+          formInfoAcademica.get('institution')!.hasError('required') &&
+          formInfoAcademica.get('institution')!.touched"
+          >El título obtenido y la institución son requeridos</div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field>
+          <mat-label name="beginDate">Fecha de inicio</mat-label>
+          <input matInput [matDatepicker]="beginDate" id="beginDate"
+            formControlName="beginDate" type="datetime">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="beginDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #beginDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field>
+          <mat-label name="endDate">Fecha de finalización</mat-label>
+          <input matInput [matDatepicker]="endDate" id="endDate"
+            formControlName="endDate" type="datetime">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="endDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Validacion -->
+    <div class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          formInfoAcademica.get('beginDate')!.hasError('required') &&
+          formInfoAcademica.get('beginDate')!.touched ||
+          formInfoAcademica.get('endDate')!.hasError('required') &&
+          formInfoAcademica.get('endDate')!.touched"
+          >La fecha de inicio y de finalización son requeridas</div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label name="typeStudy">Tipo de estudio</mat-label>
+          <input matInput type="text"
+          id="typeStudy" formControlName="typeStudy">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Validacion -->
+    <div class="alert alert-danger alert-dismissible fade show col-sm-6"
+        *ngIf="
+          formInfoAcademica.get('typeStudy')!.hasError('required') &&
+          formInfoAcademica.get('typeStudy')!.touched"
+          >El tipo de estudio es requerido</div>
+
+    <div class="botones">
+      <div class="button">
+        <button mat-raised-button color="secondary" (click)="cancelarCreacion()">Cancelar</button>
+      </div>
+      <div class="button">
+        <button mat-raised-button color="primary"
+        type="submit"
+        [disabled]="formInfoAcademica.invalid"
+        >Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

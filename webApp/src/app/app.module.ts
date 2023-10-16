@@ -16,6 +16,9 @@ import { CreateInfoAcadComponent } from './candidates/components/dashboard-cand/
 import { ListInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/list-info-acad/list-info-acad.component';
 import { DashboardCandComponent } from './candidates/components/dashboard-cand/dashboard-cand.component';
 
+import { InicioComponent } from './shared/components/inicio/inicio.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,8 +40,14 @@ import { DashboardCandComponent } from './candidates/components/dashboard-cand/d
     AngularMaterialModule
   ],
   providers: [
-    RegCandidatoService
+    RegCandidatoService,
+    InicioComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

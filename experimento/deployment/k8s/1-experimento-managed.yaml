@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: experimento3-managed
+  name: candidato
   namespace: default
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
-      app: experimento3-managed
+      app: candidato
   template:
     metadata:
       labels:
-        app: experimento3-managed
+        app: candidato
     spec:
       containers:
-      - name: experimento3-managed
-        image: 798178280816.dkr.ecr.us-east-1.amazonaws.com/experimento:latest
+      - name: candidato
+        image: 798178280816.dkr.ecr.us-east-1.amazonaws.com/candidato:latest
         ports:
         - containerPort: 5001
         env:
@@ -37,7 +37,7 @@ spec:
               - key: app
                 operator: In
                 values:
-                - experimento3-managed
+                - candidato
             topologyKey: kubernetes.io/hostname
             namespaces:
             - default

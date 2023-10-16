@@ -15,7 +15,6 @@ import { InfoAcademicaComponent } from './candidates/components/dashboard-cand/i
 import { CreateInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/create-info-acad/create-info-acad.component';
 import { ListInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/list-info-acad/list-info-acad.component';
 import { DashboardCandComponent } from './candidates/components/dashboard-cand/dashboard-cand.component';
-
 import { InicioComponent } from './shared/components/inicio/inicio.component';
 
 
@@ -23,6 +22,7 @@ import { InicioComponent } from './shared/components/inicio/inicio.component';
   declarations: [
     AppComponent,
     RegCandidatoComponent,
+    InicioComponent,
     LoginCandidatoComponent,
     CandidatesComponent,
     InfoAcademicaComponent,
@@ -32,7 +32,6 @@ import { InicioComponent } from './shared/components/inicio/inicio.component';
   ],
   imports: [
     BrowserModule,
-
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -42,10 +41,6 @@ import { InicioComponent } from './shared/components/inicio/inicio.component';
   providers: [
     RegCandidatoService,
     InicioComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
   ],
   bootstrap: [AppComponent]
 

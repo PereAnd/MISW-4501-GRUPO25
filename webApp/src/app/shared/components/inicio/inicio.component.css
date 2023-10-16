@@ -79,7 +79,8 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #3f51b5;
-  background-image: url("../../../../assets/img/header-bg.jpg");
+  background-image: url("../../../../assets/img/header-bg.webp");
+  opacity: 1;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -90,6 +91,7 @@ header.masthead {
   header.masthead {
     padding-top: 17rem;
     padding-bottom: 12.5rem;
+    height: 80vh;
   }
   header.masthead .masthead-subheading {
     font-size: 2.25rem;
@@ -102,12 +104,17 @@ header.masthead {
     font-weight: 700;
     line-height: 4.5rem;
     margin-bottom: 4rem;
+    color: #000;
   }
 }
 #portfolio .portfolio-item {
   max-width: 26rem;
   margin-left: auto;
   margin-right: auto;
+}
+#portfolio .portfolio-item:hover {
+  scale: 1.05;
+  transition: all 0.3s ease-in-out;
 }
 #portfolio .portfolio-item .portfolio-link {
   position: relative;

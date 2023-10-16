@@ -4,10 +4,11 @@ import { LoginCandidatoComponent } from './core/auth/login-candidato/login-candi
 import { RegCandidatoComponent } from './candidates/components/dashboard-cand/reg-candidato/reg-candidato.component';
 import { CreateInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/create-info-acad/create-info-acad.component';
 import { ListInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/list-info-acad/list-info-acad.component';
+import { InicioComponent } from './shared/components/inicio/inicio.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginCandidatoComponent },
+  { path: '', component: InicioComponent },
   { path: 'candidato/login', component: LoginCandidatoComponent },
   { path: 'candidato/register', component: RegCandidatoComponent },
   { path: 'candidato/dashboard/:id', component: ListInfoAcadComponent },

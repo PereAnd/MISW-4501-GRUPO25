@@ -11,6 +11,8 @@ import { RegCandidatoService } from './candidates/services/reg-candidato.service
 import { CandidatesComponent } from './candidates/candidates.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { InicioComponent } from './shared/components/inicio/inicio.component';
+
 
 @NgModule({
   declarations: [
@@ -29,8 +31,14 @@ import { HttpClientModule } from '@angular/common/http';
     AngularMaterialModule
   ],
   providers: [
-    RegCandidatoService
+    RegCandidatoService,
+    InicioComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

@@ -1,0 +1,34 @@
+<resources>
+
+    <string name="sobre_nosotros">Nulla feugiat dictum magna, eget aliquam orci vestibulum ac. Phasellus laoreet dignissim tortor, et iaculis quam auctor at. In hac habitasse platea dictumst. Aenean nec orci congue, ultrices nisi sit amet, vulputate turpis. Vivamus interdum diam eget lectus pharetra lobortis eu ut purus.\n\nAliquam vitae ultrices nisi. Etiam magna orci, efficitur et urna at, cursus faucibus ipsum. Nulla scelerisque, ante sed faucibus rutrum, elit nunc mattis lacus, eget blandit lorem mi cursus elit. Maecenas faucibus quam in ante consequat interdum. </string>
+    <string name="reclutamiento_y_seleccion">Simplificamos su búsqueda de talento con servicios especializados. Identificamos perfiles precisos, publicamos ofertas estratégicas y evaluamos candidatos destacados. Optimice su proceso de contratación con nuestra experiencia.</string>
+    <string name="evaluacion_de_candidatos">Garantizamos un proceso completo para seleccionar al mejor talento. Verificamos habilidades técnicas, laborales y experiencia relevante, evaluamos la personalidad y habilidades blandas destacando características personales clave.</string>
+    <string name="formacion_online">Nuestra oferta de Formación y Desarrollo se centra en el desarrollo de programas de capacitación diseñados para beneficiar tanto a los empleados actuales como a los futuros. Permitiendo un acceso flexible para el crecimiento profesional</string>
+
+    <string name="app_name"></string>
+    <string name="boton_entrar">ENTRAR</string>
+    <string name="boton_enviar">ENVIAR</string>
+    <string name="titulo_login">INICIO DE SESIÓN</string>
+    <string name="usuario_label">Usuario</string>
+    <string name="usuario_placeholder">Ingrese su correo electrónico</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="password_label">Contraseña</string>
+    <string name="password_placeholder">Strong password</string>
+    <string name="olvido_contrasena">Olvidó su contraseña o usuario?</string>
+    <string name="registrarse">REGISTRARSE</string>
+    <string name="registro_usuario">REGISTRO DE USUARIO</string>
+    <string name="bienvenido_texto">Su registro se ha realizado satisfactoriamente.</string>
+    <string name="seleccionar_modelo">Seleccione el modelo</string>
+
+
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+</resources>
+
+

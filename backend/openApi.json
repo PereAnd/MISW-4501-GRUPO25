@@ -1,0 +1,768 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Candidatos",
+        "description": "Api de Candidatos BackEnd",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Grupo 25"
+        },
+        "license": {
+            "name": "MIT"
+        }
+    },
+    "host": "proyectoGrupo25.swagger.io",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/candidato": {
+            "get": {
+                "description": "Retorna todos los canditaos",
+                "operationId": "findCandidatos",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "mail",
+                        "in": "query",
+                        "description": "correo del candidato",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta candidatos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Candidato"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Registra un candidato",
+                "operationId": "addcandidato",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidato",
+                        "in": "body",
+                        "description": "Candidato a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewCandidato"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Candidato",
+                        "schema": {
+                            "$ref": "#/definitions/CandidatoRegistro"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{id}": {
+            "get": {
+                "description": "Retorna un candidato a partir de su id",
+                "operationId": "findCandidatoById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta candidato",
+                        "schema": {
+                            "$ref": "#/definitions/Candidato"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza un candidato a partir de su id",
+                "operationId": "findCandidatoById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "candidato",
+                        "in": "body",
+                        "description": "Candidato a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateCandidato"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta candidato",
+                        "schema": {
+                            "$ref": "#/definitions/Candidato"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{candidatoId}/informacionAcademica": {
+            "get": {
+                "description": "Retorna la información académdica de un candidato",
+                "operationId": "findInformacionAcademica",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Informacion Academica",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/InformacionAcademica"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de información académica para un candidato",
+                "operationId": "addinformacionAcademica",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "informacionAcademica",
+                        "in": "body",
+                        "description": "Información académica a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateInformacionAcademica"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Informacion Academica",
+                        "schema": {
+                            "$ref": "#/definitions/InformacionAcademica"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{candidatoId}/informacionAcademica/{id}": {
+            "get": {
+                "description": "Retorna una informacion académica a partir de su id",
+                "operationId": "findInformacionAcademicaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la información académica",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta candidato",
+                        "schema": {
+                            "$ref": "#/definitions/InformacionAcademica"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una información académica a partir de su id",
+                "operationId": "findInformacionAcademicaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la información académica",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "informacionAcademica",
+                        "in": "body",
+                        "description": "Informacion Académica a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateInformacionAcademica"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta informacion académica",
+                        "schema": {
+                            "$ref": "#/definitions/InformacionAcademica"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{candidatoId}/informacionTecnica": {
+            "get": {
+                "description": "Retorna la información técnica de un candidato",
+                "operationId": "findInformacionTecnica",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Informacion Tecnica",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/InformacionTecnica"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de información técnica para un candidato",
+                "operationId": "addinformacionTecnica",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "informacionTecnica",
+                        "in": "body",
+                        "description": "Información técnica a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateInformacionTecnica"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Informacion Tecnica",
+                        "schema": {
+                            "$ref": "#/definitions/InformacionTecnica"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{candidatoId}/informacionTecnica/{id}": {
+            "get": {
+                "description": "Retorna una información técnica a partir de su id",
+                "operationId": "findInformacionTecnicaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la información técnica",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta información técnica",
+                        "schema": {
+                            "$ref": "#/definitions/InformacionTecnica"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una información técnica a partir de su id",
+                "operationId": "findInformacionTecnicaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la información técnica",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "informacionTecnica",
+                        "in": "body",
+                        "description": "Informacion Técnica a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateInformacionTecnica"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta informacion técnica",
+                        "schema": {
+                            "$ref": "#/definitions/InformacionTecnica"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        }
+
+    },
+    "definitions": {
+        "CandidatoRegistro": {
+            "type": "object",
+            "required": [
+                "id",
+                "names",
+                "lastNames",
+                "mail"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "names": {
+                    "type": "string"
+                },
+                "lastNames": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "confirmPassword": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateCandidato": {
+            "type": "object",
+            "required": [],
+            "properties": {
+                "names": {
+                    "type": "string"
+                },
+                "lastNames": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                },
+                "docType": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "language": {
+                    "type": "string"
+                }
+            }
+        },
+        "Candidato": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "names": {
+                    "type": "string"
+                },
+                "lastNames": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                },
+                "docType": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "language": {
+                    "type": "string"
+                },
+                "informacionAcademica": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/InformacionAcademica"
+                    }
+                },
+                "informacionTecnica": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/InformacionTecnica"
+                    }
+                }
+            }
+        },
+        "NewCandidato": {
+            "type": "object",
+            "required": [
+                "names",
+                "lastNames",
+                "password",
+                "confirmPassword",
+                "mail"
+            ],
+            "properties": {
+                "names": {
+                    "type": "string"
+                },
+                "lastNames": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "confirmPassword": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                }
+            }
+        },
+        "InformacionAcademica": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "tittle": {
+                    "type": "string"
+                },
+                "institution": {
+                    "type": "string"
+                },
+                "beginDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "endDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "studyType": {
+                    "type": "string"
+                }
+            }
+        },
+
+        "UpdateInformacionAcademica": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "tittle": {
+                    "type": "string"
+                },
+                "institution": {
+                    "type": "string"
+                },
+                "beginDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "endDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "studyType": {
+                    "type": "string"
+                }
+            }
+        },
+
+
+        "InformacionTecnica": {
+            "type": "object",
+            "required": [
+
+            ],
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateInformacionTecnica": {
+            "type": "object",
+            "required": [
+
+            ],
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorModel": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

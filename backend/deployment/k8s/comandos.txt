@@ -1,0 +1,18 @@
+# crear cluster
+
+eksctl create cluster -f eks.yaml
+
+# validar conexión 
+kubectl get svc
+
+#IDENTITY PROVIDERS
+
+openid connect https://oidc.eks.us-east-1.amazonaws.com/id/7CDAD9973AAC31C6C5290E59A3B2B989
+AmazonEKSClusterAutoscalerRole
+AmazonEKSClusterAutoscalerPolicy
+
+kubectl apply -f 0-cluster-autoscaler.yaml
+
+
+
+eksctl create cluster --name backend-proyecto3 --region us-east-1 --fargate

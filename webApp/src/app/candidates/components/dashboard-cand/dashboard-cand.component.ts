@@ -12,13 +12,12 @@ export class DashboardCandComponent {
   // fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
   fillerNav = [
     { name: 'Información Personal', route: '', icon: 'person' },
-    { name: 'Información académica', route: 'candidato/:id/list-info-academica', icon: 'school' },
+    { name: 'Información académica', route: 'candidato/dashboard/1/list-info-academica', icon: 'school' },
     { name: 'Información técnica', route: '', icon: 'build' },
     { name: 'Información laboral', route: '', icon: 'work' },
     { name: 'Entrevistas pendientes', route: '', icon: 'assignment_late' },
     { name: 'Entrevistas realizadas', route: '', icon: 'assignment_turned_in' }
   ]
-
 
   private _mobileQueryListener: () => void;
 

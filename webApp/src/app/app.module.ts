@@ -11,8 +11,6 @@ import { RegCandidatoService } from './candidates/services/reg-candidato.service
 import { CandidatesComponent } from './candidates/candidates.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { InfoAcademicaComponent } from './candidates/components/dashboard-cand/info-academica/info-academica.component';
 import { CreateInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/create-info-acad/create-info-acad.component';
 import { ListInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/list-info-acad/list-info-acad.component';
@@ -24,8 +22,6 @@ import { DashboardCandComponent } from './candidates/components/dashboard-cand/d
     RegCandidatoComponent,
     LoginCandidatoComponent,
     CandidatesComponent,
-    HeaderComponent,
-    SidebarComponent,
     InfoAcademicaComponent,
     CreateInfoAcadComponent,
     ListInfoAcadComponent,

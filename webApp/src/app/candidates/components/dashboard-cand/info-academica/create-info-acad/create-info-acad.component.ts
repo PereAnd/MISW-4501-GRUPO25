@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { InfoAcademica } from 'src/app/candidates/models/info-academica';
 import { AddInfoAcademicaService } from 'src/app/candidates/services/add-info-academica.service';
 
@@ -20,7 +21,8 @@ export class CreateInfoAcadComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private addInfoAcademicaService: AddInfoAcademicaService
+    private addInfoAcademicaService: AddInfoAcademicaService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -51,9 +53,23 @@ export class CreateInfoAcadComponent implements OnInit{
 
     this.addInfoAcademicaService.addInfoAcademica(newInfoAcademica)
       .subscribe({
-        next: data => console.log("Información académica registrada", data),
-        error: error => console.log("Error registrando la información académica", error)
+        next: data => {
+          console.log("Información académica registrada", data)
+          this.formInfoAcademica.reset();
+        },
+        error: error => {
+          console.log("Error registrando la información académica", error)
+          alert('Error registrando la información académica')
+        },
+        complete: () => {
+          this.router.navigate(['candidato/dashboard/1/list-info-academica'])
+        }
       })
-    this.formInfoAcademica.reset();
+
+  }
+
+  cancelarCreacion(){
+    this.formInfoAcademica.reset()
+    this.router.navigate(['candidato/dashboard/1/list-info-academica'])
   }
 }

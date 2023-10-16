@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ListInfoAcademicaService } from 'src/app/candidates/services/list-info-academica.service';
 @Component({
   selector: 'app-list-info-acad',
@@ -16,7 +17,8 @@ export class ListInfoAcadComponent implements OnInit{
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private listInfoAcademicaService: ListInfoAcademicaService
+    private listInfoAcademicaService: ListInfoAcademicaService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -41,5 +43,9 @@ export class ListInfoAcadComponent implements OnInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  redirectCreateInfoAcad(){
+    this.router.navigate(['candidato/dashboard/1/add-info-academica'])
   }
 }

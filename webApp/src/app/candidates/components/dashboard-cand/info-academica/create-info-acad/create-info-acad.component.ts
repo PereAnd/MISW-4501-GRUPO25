@@ -98,7 +98,6 @@ export class CreateInfoAcadComponent implements OnInit{
 
   cancelarCreacion(){
     this.formInfoAcademica.reset()
-    this.router.navigate(['candidato/dashboard/1/list-info-academica'])
   }
 }
 

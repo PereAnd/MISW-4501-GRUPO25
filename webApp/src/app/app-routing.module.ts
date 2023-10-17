@@ -5,7 +5,7 @@ import { RegCandidatoComponent } from './candidates/components/reg-candidato/reg
 import { InicioComponent } from './shared/components/inicio/inicio.component';
 import { DashboardCandComponent } from './candidates/components/dashboard-cand/dashboard-cand.component';
 import { CreateInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/create-info-acad/create-info-acad.component';
-import { ListInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/list-info-acad/list-info-acad.component';
+import { InfoAcademicaComponent } from './candidates/components/dashboard-cand/info-academica/info-academica.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -13,8 +13,9 @@ const routes: Routes = [
   { path: 'candidatos/register', component: RegCandidatoComponent },
   { path: 'candidatos/dashboard/:id', component: DashboardCandComponent,
     children: [
-      { path: 'info-academica', component: ListInfoAcadComponent },
-      { path: 'add-info-academica/:idia', component: CreateInfoAcadComponent }
+      { path: 'info-academica', component: InfoAcademicaComponent },
+      { path: 'info-academica/add', component: CreateInfoAcadComponent },
+      { path: 'info-academica/:idia', component: CreateInfoAcadComponent }
     ]
   }
 ];

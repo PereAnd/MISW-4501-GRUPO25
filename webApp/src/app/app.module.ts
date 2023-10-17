@@ -13,7 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InfoAcademicaComponent } from './candidates/components/dashboard-cand/info-academica/info-academica.component';
 import { CreateInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/create-info-acad/create-info-acad.component';
-import { ListInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/list-info-acad/list-info-acad.component';
 import { DashboardCandComponent } from './candidates/components/dashboard-cand/dashboard-cand.component';
 import { InicioComponent } from './shared/components/inicio/inicio.component';
 
@@ -27,7 +26,6 @@ import { InicioComponent } from './shared/components/inicio/inicio.component';
     CandidatesComponent,
     InfoAcademicaComponent,
     CreateInfoAcadComponent,
-    ListInfoAcadComponent,
     DashboardCandComponent,
   ],
   imports: [

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InfoAcademica } from 'src/app/candidates/models/info-academica';
-import { AddInfoAcademicaService } from 'src/app/candidates/services/add-info-academica.service';
+import { InfAcademicaService } from 'src/app/candidates/services/inf-academica.service';
 
 @Component({
   selector: 'app-create-info-acad',
@@ -28,16 +28,15 @@ export class CreateInfoAcadComponent implements OnInit{
   get studyType() { return this.formInfoAcademica.get('studyType') }
 
   constructor(
-    private addInfoAcademicaService: AddInfoAcademicaService,
+    private infAcademicaService: InfAcademicaService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.indexInfoAcad = this.route.snapshot.params['idia'];
-    console.log('Entraste a la InfoAcad No. ', this.indexInfoAcad)
     if(this.indexInfoAcad){
-      this.addInfoAcademicaService.findInfoAcademica(1, this.indexInfoAcad)
+      this.infAcademicaService.findInfoAcademica(1, this.indexInfoAcad)
       .subscribe({
         next: data => {
           this.formInfoAcademica.setValue({
@@ -54,7 +53,6 @@ export class CreateInfoAcadComponent implements OnInit{
   }
 
   registrarInfoAcademica(){
-
     const newInfoAcademica = new InfoAcademica(
       this.formInfoAcademica.value.title,
       this.formInfoAcademica.value.institution,
@@ -63,26 +61,24 @@ export class CreateInfoAcadComponent implements OnInit{
       this.formInfoAcademica.value.studyType,
       1 // OBTENER ID DEL CANDIDATO ACTUAL
     )
-
     if(!this.indexInfoAcad){
-      this.addInfoAcademicaService.addInfoAcademica(newInfoAcademica).subscribe({
+      this.infAcademicaService.addInfoAcademica(newInfoAcademica).subscribe({
           next: data => {
             console.log("Información académica registrada", data)
             this.formInfoAcademica.reset();
           },
           error: error => {
             console.log("Error registrando la información académica", error)
-            console.log(newInfoAcademica)
             alert('Error registrando la información académica')
           },
           complete: () => {
-            this.router.navigate(['candidato/dashboard/1/list-info-academica'])
+            this.router.navigate(['..'], {relativeTo: this.route})
           }
         })
     } else {
-      this.addInfoAcademicaService.editInfoAcademica(newInfoAcademica, this.indexInfoAcad).subscribe({
+      this.infAcademicaService.editInfoAcademica(newInfoAcademica, this.indexInfoAcad).subscribe({
         next: data => {
-          console.log('Información académica editada', data)
+          console.log('Información académica editada')
           this.formInfoAcademica.reset()
         },
         error: error => {
@@ -90,7 +86,7 @@ export class CreateInfoAcadComponent implements OnInit{
           alert('Error editando la información académica')
         },
         complete: () => {
-          this.router.navigate(['candidato/dashboard/1/list-info-academica'])
+          this.router.navigate(['..'], {relativeTo: this.route})
         }
       })
     }
@@ -98,7 +94,6 @@ export class CreateInfoAcadComponent implements OnInit{
 
   cancelarCreacion(){
     this.formInfoAcademica.reset()
-    this.router.navigate(['candidato/dashboard/1/list-info-academica'])
   }
 }
 

@@ -1,17 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { InfoAcademica } from '../models/info-academica';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { InfoAcademica } from '../models/info-academica';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AddInfoAcademicaService {
+export class InfAcademicaService {
 
   constructor(
     private httpClient: HttpClient
   ) { }
+
+  listInfoAcademica(idCandidato: number): Observable<any>{
+    let baseUrl: string = environment.HOST + 'candidato/' + idCandidato + '/informacionAcademica';
+    return this.httpClient.get<any>(baseUrl);
+  }
 
   addInfoAcademica(infoAcademica: InfoAcademica): Observable<InfoAcademica>{
     console.log(infoAcademica)

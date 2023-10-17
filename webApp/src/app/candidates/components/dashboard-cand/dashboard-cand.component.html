@@ -1,43 +1,43 @@
 <div
-  class="example-container"
-  [class.example-is-mobile]="mobileQuery.matches"
+  class="dash-container"
+  [class.dash-is-mobile]="mobileQuery.matches"
 >
   <mat-toolbar color="primary">
     <button
       mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
+      class="dash-icon"
+      aria-label="dash icon-button with menu icon"
       (click)="snav.toggle()"
     >
       <mat-icon>menu</mat-icon>
     </button>
     <img src="../../../../assets/img/LogoABC.png" alt="Logo ABC Jobs" />
-    <span class="example-spacer"></span>
+    <span class="dash-spacer"></span>
     <button
       mat-icon-button
-      class="example-icon favorite-icon"
-      aria-label="Example icon-button with heart icon"
+      class="dash-icon favorite-icon"
+      aria-label="dash icon-button with heart icon"
     >
       <mat-icon>settings</mat-icon>
     </button>
     <button
       mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with share icon"
+      class="dash-icon"
+      aria-label="dash icon-button with share icon"
     >
       <mat-icon>account_circle</mat-icon>
     </button>
     <button
       mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with share icon"
+      class="dash-icon"
+      aria-label="dash icon-button with share icon"
     >
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar>
 
   <mat-sidenav-container
-    class="example-sidenav-container"
+    class="dash-sidenav-container"
     [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
   >
     <mat-sidenav
@@ -47,10 +47,20 @@
       fixedTopGap="56"
     >
       <mat-nav-list>
-        <a mat-list-item [routerLink]="nav.route" *ngFor="let nav of fillerNav">
-          <mat-icon>{{ nav.icon }}</mat-icon
-          >{{ nav.name }}</a
-        >
+        <h4 mat-list-item>Mis datos</h4>
+        <!-- INFORMACIÓN PERSONAL -->
+        <a mat-list-item [routerLink]=""><mat-icon>person</mat-icon>Información personal</a>
+        <!-- INFORMACIÓN ACADÉMICA -->
+        <a mat-list-item [routerLink]="['info-academica']"><mat-icon>school</mat-icon>Información académica</a>
+        <!-- INFORMACIÓN TÉCNICA -->
+        <a mat-list-item [routerLink]=""><mat-icon>build</mat-icon>Información técnica</a>
+        <!-- INFORMACIÓN LABORAL -->
+        <a mat-list-item [routerLink]=""><mat-icon>work</mat-icon>Información laboral</a>
+        <h4 mat-list-item>Entrevistas</h4>
+        <!-- ENTREVISTAS PENDIENTES -->
+        <a mat-list-item [routerLink]=""><mat-icon>assignment_late</mat-icon>Entrevistas pendientes</a>
+        <!-- ENTREVISTAS REALIZADAS -->
+        <a mat-list-item [routerLink]=""><mat-icon>assignment_turned_in</mat-icon>Entrevistas realizadas</a>
       </mat-nav-list>
     </mat-sidenav>
 

@@ -10,7 +10,7 @@ import { ListInfoAcademicaService } from 'src/app/candidates/services/list-info-
   styleUrls: ['./list-info-acad.component.css']
 })
 export class ListInfoAcadComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'tittle', 'institution', 'beginDate', 'endDate', 'studyType']
+  displayedColumns: string[] = ['id', 'tittle', 'institution', 'beginDate', 'endDate', 'studyType', 'actions']
   dataSource = new MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

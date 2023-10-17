@@ -26,10 +26,8 @@
     <!-- Validacion -->
     <div class="alert alert-danger alert-dismissible fade show"
         *ngIf="
-          formInfoAcademica.get('title')!.hasError('required') &&
-          formInfoAcademica.get('title')!.touched ||
-          formInfoAcademica.get('institution')!.hasError('required') &&
-          formInfoAcademica.get('institution')!.touched"
+          title?.hasError('required') && title?.touched ||
+          institution?.hasError('required') && institution?.touched"
           >El título obtenido y la institución son requeridos</div>
 
     <div class="row">
@@ -37,7 +35,7 @@
         <mat-form-field>
           <mat-label name="beginDate">Fecha de inicio</mat-label>
           <input matInput [matDatepicker]="beginDate" id="beginDate"
-            formControlName="beginDate" type="datetime">
+            type="datetime" formControlName="beginDate">
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle
             matIconSuffix
@@ -51,8 +49,8 @@
         <mat-form-field>
           <mat-label name="endDate">Fecha de finalización</mat-label>
           <input matInput [matDatepicker]="endDate" id="endDate"
-            formControlName="endDate" type="datetime">
-          <mat-hint>DD/MM/YYYY</mat-hint>
+            type="datetime" formControlName="endDate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle
             matIconSuffix
             [for]="endDate"
@@ -62,21 +60,12 @@
       </div>
     </div>
 
-    <!-- Validacion -->
-    <div class="alert alert-danger alert-dismissible fade show"
-        *ngIf="
-          formInfoAcademica.get('beginDate')!.hasError('required') &&
-          formInfoAcademica.get('beginDate')!.touched ||
-          formInfoAcademica.get('endDate')!.hasError('required') &&
-          formInfoAcademica.get('endDate')!.touched"
-          >La fecha de inicio y de finalización son requeridas</div>
-
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="typeStudy">Tipo de estudio</mat-label>
+          <mat-label name="studyType">Tipo de estudio</mat-label>
           <input matInput type="text"
-          id="typeStudy" formControlName="typeStudy">
+          id="studyType" formControlName="studyType">
         </mat-form-field>
       </div>
     </div>
@@ -84,8 +73,7 @@
     <!-- Validacion -->
     <div class="alert alert-danger alert-dismissible fade show col-sm-6"
         *ngIf="
-          formInfoAcademica.get('typeStudy')!.hasError('required') &&
-          formInfoAcademica.get('typeStudy')!.touched"
+          studyType?.hasError('required') && studyType?.touched"
           >El tipo de estudio es requerido</div>
 
     <div class="botones">
@@ -101,3 +89,4 @@
     </div>
   </form>
 </div>
+{{ formInfoAcademica.value | json }}

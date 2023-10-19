@@ -15,6 +15,7 @@ export class Candidato {
     public country?: string,
     public city?: string,
     public language?: string,
+    public id?: number,
     public informacionAcademica?: InfoAcademica[],
     public informacionTecnica?: InfoTecnica[]
   ) { }

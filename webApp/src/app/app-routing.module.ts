@@ -8,6 +8,7 @@ import { CreateInfoAcadComponent } from './candidates/components/dashboard-cand/
 import { InfoAcademicaComponent } from './candidates/components/dashboard-cand/info-academica/info-academica.component';
 import { InfoTecnicaComponent } from './candidates/components/dashboard-cand/info-tecnica/info-tecnica.component';
 import { CreateInfoTecComponent } from './candidates/components/dashboard-cand/info-tecnica/create-info-tec/create-info-tec.component';
+import { InfoPersonalComponent } from './candidates/components/dashboard-cand/info-personal/info-personal.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'candidatos/register', component: RegCandidatoComponent },
   { path: 'candidatos/dashboard/:id', component: DashboardCandComponent,
     children: [
+      { path: 'info-personal', component: InfoPersonalComponent },
       { path: 'info-academica', component: InfoAcademicaComponent },
       { path: 'info-academica/add', component: CreateInfoAcadComponent },
       { path: 'info-academica/:idia', component: CreateInfoAcadComponent },

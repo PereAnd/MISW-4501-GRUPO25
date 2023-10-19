@@ -18,4 +18,14 @@ export class RegCandidatoService {
     let baseUrl: string = environment.HOST + 'candidato';
     return this.httpClient.post<Candidato>(baseUrl, candidato);
   }
+
+  getDatosCandidato(idCandidato: number): Observable<Candidato> {
+    let baseUrl: string = environment.HOST + 'candidato/' + idCandidato;
+    return this.httpClient.get<Candidato>(baseUrl);
+  }
+
+  updateDatosCandidato(candidato: Candidato): Observable<Candidato> {
+    let baseUrl: string = environment.HOST + 'candidato/' + candidato.id;
+    return this.httpClient.patch<Candidato>(baseUrl, candidato)
+  }
 }

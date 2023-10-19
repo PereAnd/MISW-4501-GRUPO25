@@ -27,4 +27,9 @@ export class InfTecnicaService {
     let baseUrl: string = environment.HOST + 'candidato/' + indexCandidato + '/informacionTecnica/' + indexInfoTec;
     return this.httpClient.get<InfoTecnica>(baseUrl);
   }
+
+  editInfoTecnica(infoTecnica: InfoTecnica, indexInfoTec: number):Observable<InfoTecnica>{
+    let baseUrl: string = environment.HOST + 'candidato/' + infoTecnica.candidatoId + '/informacionTecnica/' + indexInfoTec;
+    return this.httpClient.patch<InfoTecnica>(baseUrl, infoTecnica);
+  }
 }

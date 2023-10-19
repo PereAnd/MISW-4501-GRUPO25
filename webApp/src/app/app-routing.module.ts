@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: 'info-academica/:idia', component: CreateInfoAcadComponent },
       { path: 'info-tecnica', component: InfoTecnicaComponent },
       { path: 'info-tecnica/add', component: CreateInfoTecComponent },
+      { path: 'info-tecnica/:idit', component: CreateInfoTecComponent },
     ]
   }
 ];

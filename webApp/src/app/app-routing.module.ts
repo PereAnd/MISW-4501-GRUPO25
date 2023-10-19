@@ -7,6 +7,7 @@ import { DashboardCandComponent } from './candidates/components/dashboard-cand/d
 import { CreateInfoAcadComponent } from './candidates/components/dashboard-cand/info-academica/create-info-acad/create-info-acad.component';
 import { InfoAcademicaComponent } from './candidates/components/dashboard-cand/info-academica/info-academica.component';
 import { InfoTecnicaComponent } from './candidates/components/dashboard-cand/info-tecnica/info-tecnica.component';
+import { CreateInfoTecComponent } from './candidates/components/dashboard-cand/info-tecnica/create-info-tec/create-info-tec.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'info-academica/add', component: CreateInfoAcadComponent },
       { path: 'info-academica/:idia', component: CreateInfoAcadComponent },
       { path: 'info-tecnica', component: InfoTecnicaComponent },
+      { path: 'info-tecnica/add', component: CreateInfoTecComponent },
     ]
   }
 ];

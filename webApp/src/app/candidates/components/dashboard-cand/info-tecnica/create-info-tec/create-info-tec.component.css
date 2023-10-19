@@ -1,0 +1,17 @@
+.container{
+  margin-top: 5%;
+  max-width: 90%;
+}
+
+mat-form-field{
+  width: 100%;
+}
+.botones{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.row{
+  margin-bottom: 0.5rem;
+}

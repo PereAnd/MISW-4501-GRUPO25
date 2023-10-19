@@ -16,6 +16,7 @@ import { CreateInfoAcadComponent } from './candidates/components/dashboard-cand/
 import { DashboardCandComponent } from './candidates/components/dashboard-cand/dashboard-cand.component';
 import { InicioComponent } from './shared/components/inicio/inicio.component';
 import { InfoTecnicaComponent } from './candidates/components/dashboard-cand/info-tecnica/info-tecnica.component';
+import { CreateInfoTecComponent } from './candidates/components/dashboard-cand/info-tecnica/create-info-tec/create-info-tec.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { InfoTecnicaComponent } from './candidates/components/dashboard-cand/inf
     CreateInfoAcadComponent,
     DashboardCandComponent,
     InfoTecnicaComponent,
+    CreateInfoTecComponent,
   ],
   imports: [
     BrowserModule,

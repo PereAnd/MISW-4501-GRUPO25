@@ -18,9 +18,9 @@ export class InfAcademicaService {
     return this.httpClient.get<any>(baseUrl);
   }
 
-  addInfoAcademica(infoAcademica: InfoAcademica): Observable<InfoAcademica>{
+  addInfoAcademica(infoAcademica: InfoAcademica, candidatoId: number): Observable<InfoAcademica>{
     console.log(infoAcademica)
-    let baseUrl: string = environment.HOST + 'candidato/' + infoAcademica.candidatoId + '/informacionAcademica';
+    let baseUrl: string = environment.HOST + 'candidato/' + candidatoId + '/informacionAcademica';
     return this.httpClient.post<InfoAcademica>(baseUrl, infoAcademica);
   }
 
@@ -29,8 +29,8 @@ export class InfAcademicaService {
     return this.httpClient.get<InfoAcademica>(baseUrl);
   }
 
-  editInfoAcademica(infoAcademica: InfoAcademica, indexInfoAcad: number):Observable<InfoAcademica>{
-    let baseUrl: string = environment.HOST + 'candidato/' + infoAcademica.candidatoId + '/informacionAcademica/' + indexInfoAcad;
+  editInfoAcademica(infoAcademica: InfoAcademica, indexInfoAcad: number, candidatoId: number):Observable<InfoAcademica>{
+    let baseUrl: string = environment.HOST + 'candidato/' + candidatoId + '/informacionAcademica/' + indexInfoAcad;
     return this.httpClient.patch<InfoAcademica>(baseUrl, infoAcademica);
   }
 }

@@ -1,0 +1,21 @@
+.container{
+  margin-top: 5%;
+}
+
+.botones{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.row{
+  margin-bottom: 0.5rem;
+}
+
+table {
+  width: 100%;
+}
+.controles{
+  display: flex;
+  justify-content: space-between;
+}

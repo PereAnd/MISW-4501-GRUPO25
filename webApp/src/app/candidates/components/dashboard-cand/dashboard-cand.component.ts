@@ -9,16 +9,6 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export class DashboardCandComponent {
   mobileQuery: MediaQueryList;
 
-  // fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
-  fillerNav = [
-    { name: 'Información Personal', route: '', icon: 'person' },
-    { name: 'Información académica', route: 'info-academica', icon: 'school' },
-    { name: 'Información técnica', route: '', icon: 'build' },
-    { name: 'Información laboral', route: '', icon: 'work' },
-    { name: 'Entrevistas pendientes', route: '', icon: 'assignment_late' },
-    { name: 'Entrevistas realizadas', route: '', icon: 'assignment_turned_in' }
-  ]
-
   private _mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {

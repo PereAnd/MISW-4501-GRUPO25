@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegCandidatoService } from '../../services/reg-candidato.service';
 import { Candidato } from '../../models/candidato';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reg-candidato',
@@ -21,6 +22,7 @@ export class RegCandidatoComponent implements OnInit{
   constructor(
     private regCandidatoService: RegCandidatoService,
     private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +46,8 @@ export class RegCandidatoComponent implements OnInit{
     this.regCandidatoService.registrarCandidato(newCandidato)
       .subscribe({
         next: data => console.log("Candidato registrado", data),
-        error: error => console.log("Error registrando el candidato", error)
+        error: error => console.log("Error registrando el candidato", error),
+        complete: () => this.router.navigate(['/candidatos/dashboard/1/info-personal'])
       })
       this.formCandidato.reset();
   }

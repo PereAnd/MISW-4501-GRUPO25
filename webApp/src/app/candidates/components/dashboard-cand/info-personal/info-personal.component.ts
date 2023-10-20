@@ -11,21 +11,30 @@ import { RegCandidatoService } from 'src/app/candidates/services/reg-candidato.s
 })
 export class InfoPersonalComponent {
   candidato: Candidato;
+  isEditMode: boolean;
+  formInfoPersonal: FormGroup;
 
   idiomasPreferidos: string[] = ['Español', 'Inglés']
 
-  formInfoPersonal: FormGroup = new FormGroup({
-    names: new FormControl('', Validators.required),
-    lastNames: new FormControl('', Validators.required),
-    mail: new FormControl('', Validators.required),
-    docType: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
-    address: new FormControl('', Validators.required),
-    birthDate: new FormControl(null, Validators.required),
-    country: new FormControl('', Validators.required),
-    city: new FormControl('', Validators.required),
-    language: new FormControl('', Validators.required)
-  })
+  constructor(
+    private regCandidatoService: RegCandidatoService,
+    private router: Router,
+    private route: ActivatedRoute
+  ){
+    this.isEditMode = false;
+    this.formInfoPersonal = new FormGroup({
+      names: new FormControl('', Validators.required),
+      lastNames: new FormControl('', Validators.required),
+      mail: new FormControl('', Validators.required),
+      docType: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
+      birthDate: new FormControl(null, Validators.required),
+      country: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      language: new FormControl('', Validators.required)
+    })
+  }
 
   get names() { return this.formInfoPersonal.get('names') }
   get lastNames() { return this.formInfoPersonal.get('lastNames') }
@@ -38,14 +47,9 @@ export class InfoPersonalComponent {
   get city() { return this.formInfoPersonal.get('city') }
   get language() { return this.formInfoPersonal.get('language') }
 
-  constructor(
-    private regCandidatoService: RegCandidatoService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
-
   ngOnInit(): void {
     const idCandidato: number = 1;
+    this.isEditMode ? this.formInfoPersonal.enable() : this.formInfoPersonal.disable();
     this.regCandidatoService.getDatosCandidato(idCandidato).subscribe({
       next: data => {
         this.candidato = data;
@@ -86,53 +90,16 @@ export class InfoPersonalComponent {
       },
       error: error => {
         console.log("Error actualizando los datos del candidato")
-      },
-      complete: () => {
-        this.router.navigate(['..'], {relativeTo: this.route})
       }
     })
+    this.changeEditMode('guardar')
   }
-/*
-  registrarInfoAcademica(){
-    const newInfoPersonal = new InfoAcademica(
-      this.formInfoPersonal.value.title,
-      this.formInfoPersonal.value.institution,
-      this.formInfoPersonal.value.beginDate,
-      this.formInfoPersonal.value.endDate,
-      this.formInfoPersonal.value.studyType,
-      1 // OBTENER ID DEL CANDIDATO ACTUAL
-    )
-    if(!this.indexInfoAcad){
-      this.infAcademicaService.addInfoAcademica(newInfoPersonal).subscribe({
-          next: data => {
-            console.log("Información académica registrada", data)
-            this.formInfoPersonal.reset();
-          },
-          error: error => {
-            console.log("Error registrando la información académica", error)
-            alert('Error registrando la información académica')
-          },
-          complete: () => {
-            this.router.navigate(['..'], {relativeTo: this.route})
-          }
-        })
-    } else {
-      this.infAcademicaService.editInfoAcademica(newInfoPersonal, this.indexInfoAcad).subscribe({
-        next: data => {
-          console.log('Información académica editada')
-          this.formInfoPersonal.reset()
-        },
-        error: error => {
-          console.log('Error editando la información académica', error)
-          alert('Error editando la información académica')
-        },
-        complete: () => {
-          this.router.navigate(['..'], {relativeTo: this.route})
-        }
-      })
-    }
+
+  changeEditMode(v: string){
+    this.isEditMode = !this.isEditMode;
+    this.isEditMode ? this.formInfoPersonal.enable() : this.formInfoPersonal.disable();
+    console.log('changeEditMode', this.isEditMode, v)
   }
-  */
 
   cancelarCreacion(){
     this.formInfoPersonal.reset()

@@ -108,9 +108,15 @@
       <div class="button">
         <a mat-raised-button color="secondary" (click)="cancelarCreacion()" routerLink="../">Cancelar</a>
       </div>
-      <div class="button">
+      <div class="button" *ngIf="!isEditMode">
         <button mat-raised-button color="primary"
-        [disabled]="formInfoPersonal.invalid"
+        (click)="changeEditMode('editar')"
+        >Editar</button>
+      </div>
+      <div class="button" *ngIf="isEditMode">
+        <button mat-raised-button color="primary"
+        type="submit"
+        (click)="guardarInfoPersonal()"
         >Guardar</button>
       </div>
     </div>

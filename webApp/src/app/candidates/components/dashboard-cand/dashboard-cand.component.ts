@@ -30,4 +30,8 @@ export class DashboardCandComponent {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
+  toggleSidenav(){
+
+  }
 }

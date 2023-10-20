@@ -41,7 +41,7 @@
     [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
   >
     <mat-sidenav
-      #snav
+      #snav opened
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
@@ -49,7 +49,7 @@
       <mat-nav-list>
         <h4 mat-list-item>Mis datos</h4>
         <!-- INFORMACIÓN PERSONAL -->
-        <a mat-list-item [routerLink]=""><mat-icon>person</mat-icon>Información personal</a>
+        <a mat-list-item [routerLink]="['info-personal']"><mat-icon>person</mat-icon>Información personal</a>
         <!-- INFORMACIÓN ACADÉMICA -->
         <a mat-list-item [routerLink]="['info-academica']"><mat-icon>school</mat-icon>Información académica</a>
         <!-- INFORMACIÓN TÉCNICA -->

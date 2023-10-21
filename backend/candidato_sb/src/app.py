@@ -1,11 +1,11 @@
 from flask_restful import Api
-from .modelos import db
-from .vistas import VistaExperimento, VistaPing, VistaExperimentos
+from .vistas import  VistaPing, VistaInformacionesTecnicas, VistaCandidato, VistaInformacionAcademica, VistaInformacionesAcademicas, VistaInformacionTecnica, VistaRegistro
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
 from datetime import datetime, timedelta
 from os import environ
+from .breaker import CircuitBreaker
 import os
 
 def create_app(config_name):
@@ -23,14 +23,17 @@ def create_app(config_name):
 app = create_app('default')
 app_context = app.app_context()
 app_context.push()
-
-db.init_app(app)
-db.create_all()
-
 cors = CORS(app)
 
 api = Api(app)
-api.add_resource(VistaExperimentos, '/experimento/')
-api.add_resource(VistaExperimento, '/experimento/<string:id>')
-api.add_resource(VistaPing, '/experimento/ping/')
 
+
+breaker = CircuitBreaker(exceptions=(Exception,), threshold=5, delay=10)
+
+api.add_resource(VistaRegistro, '/candidato', resource_class_kwargs={ 'breaker': breaker })
+api.add_resource(VistaCandidato, '/candidato/<string:id>', resource_class_kwargs={ 'breaker': breaker })
+api.add_resource(VistaInformacionesAcademicas, '/candidato/<string:candidatoId>/informacionAcademica', resource_class_kwargs={ 'breaker': breaker })
+api.add_resource(VistaInformacionAcademica, '/candidato/<string:candidatoId>/informacionAcademica/<string:id>', resource_class_kwargs={ 'breaker': breaker })
+api.add_resource(VistaInformacionesTecnicas, '/candidato/<string:candidatoId>/informacionTecnica', resource_class_kwargs={ 'breaker': breaker })
+api.add_resource(VistaInformacionTecnica, '/candidato/<string:candidatoId>/informacionTecnica/<string:id>', resource_class_kwargs={ 'breaker': breaker })
+api.add_resource(VistaPing, '/candidato/ping')

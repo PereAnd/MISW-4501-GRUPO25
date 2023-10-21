@@ -14,6 +14,6 @@ RUN pip install -r requirements.txt
 # Copiar el contenido del directorio actual en la imagen de docker
 #COPY . /app
 # Agregar variable de entorno con el nombre del estudiante
-ENV SQLALCHEMY_DATABASE_URI default
-EXPOSE 5001
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5001"]
+ENV CAND_BACK_URL http://127.0.0.1:5001
+EXPOSE 5002
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5002"]

@@ -556,6 +556,9 @@
                 "docType": {
                     "type": "string"
                 },
+                "docNumber": {
+                    "type": "string"
+                },
                 "phone": {
                     "type": "string"
                 },
@@ -597,6 +600,9 @@
                     "type": "string"
                 },
                 "docType": {
+                    "type": "string"
+                },
+                "docNumber": {
                     "type": "string"
                 },
                 "phone": {
@@ -669,7 +675,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "tittle": {
+                "title": {
                     "type": "string"
                 },
                 "institution": {
@@ -699,7 +705,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "tittle": {
+                "title": {
                     "type": "string"
                 },
                 "institution": {

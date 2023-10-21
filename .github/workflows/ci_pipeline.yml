@@ -25,8 +25,4 @@ jobs:
         working-directory: ./backend/candidato
         run: |
           pytest --cov=src -v -s --cov-fail-under=80
-
-
-      - name: Build the Docker image
-        working-directory: ./backend/candidato/src
-        run: docker build . --file Dockerfile --tag candidato:$(date +%s)
+          

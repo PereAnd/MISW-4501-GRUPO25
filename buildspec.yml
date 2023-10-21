@@ -17,7 +17,8 @@ phases:
       - REPOSITORY_URI_CB=798178280816.dkr.ecr.us-east-1.amazonaws.com/candidato_cb
       - COMMIT_HASH_CB=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG_CB=${COMMIT_HASH_CB:=latest}
-
+      - sed -i 's@CANDIDATO_IMAGE@'"$REPOSITORY_URI:$IMAGE_TAG"'@' backend/deployment/k8s/deployment.yaml
+      - sed -i 's@CANDIDATO_CB_IMAGE@'"$REPOSITORY_URI_CB:$IMAGE_TAG_CB"'@' backend/deployment/k8s/deployment.yaml
 
   build:
     commands:

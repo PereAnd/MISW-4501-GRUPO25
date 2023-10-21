@@ -81,6 +81,12 @@ class VistaCandidato(Resource):
                         return 'El campo docType es requerido', 400
                     candidato.docType = request.json["docType"]
 
+                if "docNumber" in request.json:
+                    if request.json["docNumber"] == "":
+                        db.session.rollback()
+                        return 'El campo docNumber es requerido', 400
+                    candidato.docNumber = request.json["docNumber"]
+
                 if "phone" in request.json:
                     if request.json["phone"] == "":
                         db.session.rollback()
@@ -138,7 +144,7 @@ class VistaCandidato(Resource):
             if candidato is None:
                 return 'No existe la cuenta del candidato solicitada', 404
             else:
-                return candidato_schema.dump(candidato)
+                return candidato_schema.dump(candidato), 200
             
 # PING
 # Vista GET
@@ -157,10 +163,10 @@ class VistaInformacionesAcademicas(Resource):
             candidato = Candidato.query.get(candidatoId)
             if candidato is None:
                 return 'No existe la cuenta del candidato solicitada', 404
-        if not "tittle" in request.json or not "institution" in request.json or not "beginDate" in request.json or not "studyType" in request.json:
-            return 'Los campos tittle, institution, beginDate, studyType', 400
-        if request.json["tittle"] == "" or request.json["institution"] == "" or request.json["studyType"] == "": 
-            return 'Los campos tittle, institution, studyType son requeridos', 400
+        if not "title" in request.json or not "institution" in request.json or not "beginDate" in request.json or not "studyType" in request.json:
+            return 'Los campos title, institution, beginDate, studyType', 400
+        if request.json["title"] == "" or request.json["institution"] == "" or request.json["studyType"] == "": 
+            return 'Los campos title, institution, studyType son requeridos', 400
         try:
             beginDate = datetime.strptime(request.json["beginDate"], "%Y-%m-%dT%H:%M:%S.%fZ")
         except:
@@ -176,7 +182,7 @@ class VistaInformacionesAcademicas(Resource):
             endDate = None
 
         try:
-            nueva_informacion = InformacionAcademica(tittle=request.json["tittle"], 
+            nueva_informacion = InformacionAcademica(title=request.json["title"], 
                                         institution=request.json["institution"],
                                         beginDate=beginDate,
                                         endDate=endDate,
@@ -227,10 +233,10 @@ class VistaInformacionAcademica(Resource):
                 return 'No existe la Información Académica del candidato solicitada', 404
 
 
-            if "tittle" in request.json:
-                if request.json["tittle"] == "":
-                    return 'El campo tittle es requerido', 400
-                informacionAcademica.tittle = request.json["tittle"]
+            if "title" in request.json:
+                if request.json["title"] == "":
+                    return 'El campo title es requerido', 400
+                informacionAcademica.title = request.json["title"]
 
             if "institution" in request.json:
                 if request.json["institution"] == "":

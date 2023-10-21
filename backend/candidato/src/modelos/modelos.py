@@ -11,6 +11,7 @@ class Candidato(db.Model):
     mail = db.Column(db.String(120),unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     docType = db.Column(db.String(10), nullable=True)
+    docNumber = db.Column(db.String(30), nullable=True)
     phone = db.Column(db.String(20), nullable=True)
     address = db.Column(db.String(120), nullable=True)
     birthDate = db.Column(db.DateTime, nullable=True)
@@ -22,7 +23,7 @@ class Candidato(db.Model):
 
 class InformacionAcademica(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    tittle = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(50), nullable=False)
     institution = db.Column(db.String(50), nullable=False)
     beginDate = db.Column(db.DateTime, nullable=False)
     endDate = db.Column(db.DateTime, nullable=True)
@@ -42,7 +43,7 @@ class InformacionAcademicaEschema(SQLAlchemySchema):
          include_relationships = False
          load_instance = True         
     id = auto_field()
-    tittle = auto_field()
+    title = auto_field()
     institution = auto_field()
     beginDate = auto_field()
     endDate = auto_field()
@@ -69,6 +70,7 @@ class CandidatoEschema(SQLAlchemySchema):
     lastNames = auto_field()
     mail = auto_field()
     docType = auto_field()
+    docNumber = auto_field()
     phone = auto_field()
     address = auto_field()
     birthDate = auto_field()

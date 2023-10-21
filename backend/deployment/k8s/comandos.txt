@@ -16,3 +16,40 @@ kubectl apply -f 0-cluster-autoscaler.yaml
 
 
 eksctl create cluster --name backend-proyecto3 --region us-east-1 --fargate
+
+
+eksctl create cluster --name backend-proyecto6 --region us-east-1
+kubectl get nodes -o wide
+kubectl get pods -A -o wide
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+
+
+
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy7 \
+    --policy-document file://iam_policy.json
+
+eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=backend-proyecto6 --approve
+
+eksctl create iamserviceaccount \
+  --cluster=backend-proyecto6 \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole7 \
+  --attach-policy-arn=arn:aws:iam::798178280816:policy/AWSLoadBalancerControllerIAMPolicy7 \
+  --approve --override-existing-serviceaccounts
+
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update eks
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=backend-proyecto6 \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller 
+
+kubectl get deployment -n kube-system aws-load-balancer-controller
+
+
+
+
+eksctl delete cluster --name my-cluster --region region-code

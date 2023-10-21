@@ -27,7 +27,7 @@ spec:
         - containerPort: 5001
         env:
         - name: SQLALCHEMY_DATABASE_URI
-          value: "postgresql://postgres:postgres@postgres.cfgkb3tpxr7g.us-east-1.rds.amazonaws.com:5432/postgres"            
+          value: "postgresql://postgres:postgres@postgres.cfgkb3tpxr7g.us-east-1.rds.amazonaws.com:5432/postgres"
 ---
 apiVersion: apps/v1
 kind: Deployment

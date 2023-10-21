@@ -45,13 +45,14 @@ export class CreateInfoTecComponent {
   }
 
   registrarInfoTecnica(){
+    const candidatoId: number = 1;
     const newInfoTecnica = new InfoTecnica(
       this.formInfoTecnica.value.type,
       this.formInfoTecnica.value.description,
       1 // OBTENER ID DEL CANDIDATO ACTUAL
     )
     if(!this.indexInfoTec){
-      this.infTecnicaService.addInfoTecnica(newInfoTecnica).subscribe({
+      this.infTecnicaService.addInfoTecnica(newInfoTecnica, candidatoId).subscribe({
           next: data => {
             console.log("Información técnica registrada")
             this.formInfoTecnica.reset();
@@ -65,7 +66,7 @@ export class CreateInfoTecComponent {
           }
         })
     } else {
-      this.infTecnicaService.editInfoTecnica(newInfoTecnica, this.indexInfoTec).subscribe({
+      this.infTecnicaService.editInfoTecnica(newInfoTecnica, this.indexInfoTec, candidatoId).subscribe({
         next: data => {
           console.log('Información técnica editada')
           this.formInfoTecnica.reset()

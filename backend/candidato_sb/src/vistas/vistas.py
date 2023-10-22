@@ -12,7 +12,7 @@ class VistaRegistro(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
 
     def post(self):
         try:
@@ -34,7 +34,7 @@ class VistaCandidato(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
     def patch(self, id):
         try:
             return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + id , json=request.json)
@@ -62,7 +62,7 @@ class VistaInformacionesAcademicas(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
 
     def post(self, candidatoId):
         try:
@@ -84,7 +84,7 @@ class VistaInformacionAcademica(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
 
     def patch(self, candidatoId, id):
         try:
@@ -113,7 +113,7 @@ class VistaInformacionesTecnicas(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
 
     def post(self, candidatoId):
         try:
@@ -136,7 +136,7 @@ class VistaInformacionTecnica(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
 
 
     def patch(self, candidatoId, id):

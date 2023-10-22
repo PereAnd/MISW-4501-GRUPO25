@@ -95,14 +95,14 @@ spec:
   rules:
     - http:
         paths:
-        - path: /candidato
+        - path: /candidatobe
           pathType: Prefix
           backend:
             service:
               name: service-candidato
               port:
                 number: 5001
-        - path: /candidato-cb
+        - path: /candidato
           pathType: Prefix
           backend:
             service:

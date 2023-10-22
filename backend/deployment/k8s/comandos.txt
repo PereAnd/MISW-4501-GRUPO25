@@ -53,3 +53,10 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 
 
 eksctl delete cluster --name my-cluster --region region-code
+
+
+arn:aws:iam::798178280816:role/codebuild-proyecto-final-grupo-25-service-role
+
+
+https://devopslearning.medium.com/ci-cd-pipeline-for-eks-using-codecommit-codebuild-codepipeline-and-elastic-container-100f4b85e434
+

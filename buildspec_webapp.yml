@@ -1,0 +1,22 @@
+env:
+    variables:
+        CACHE_CONTROL: "86400"
+        BUILD_FOLDER: "dist"
+phases:
+  install:
+    runtime-versions:
+        nodejs: 14
+    commands:
+        - echo Installing source NPM dependencies...
+        - pushd webApp
+        - npm install
+        - npm install -g @angular/cli
+  build:
+    commands:
+        - echo Build started 
+        - ng build --configuration production
+artifacts:
+    files:
+        - '**/*'
+    base-directory: 'webApp/dist*'
+    discard-paths: yes

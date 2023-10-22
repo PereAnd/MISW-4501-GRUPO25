@@ -50,7 +50,6 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Candidato"
-                            }
                         }
                     },
                     "default": {

@@ -29,7 +29,7 @@ describe('InfAcademicaService', () => {
     const mockResponse = [
       {
         "id": 1,
-        "tittle": faker.person.jobTitle(),
+        "title": faker.person.jobTitle(),
         "institution": faker.company.name(),
         "beginDate": faker.date.past().toISOString(),
         "endDate": faker.date.recent().toISOString(),
@@ -37,7 +37,7 @@ describe('InfAcademicaService', () => {
       },
       {
         "id": 2,
-        "tittle": faker.person.jobTitle(),
+        "title": faker.person.jobTitle(),
         "institution": faker.company.name(),
         "beginDate": faker.date.past().toISOString(),
         "endDate": faker.date.recent().toISOString(),
@@ -69,7 +69,7 @@ describe('InfAcademicaService', () => {
     );
     const mockResponse = {
       "id": 1,
-      "tittle": newInfoAcademica.tittle,
+      "title": newInfoAcademica.title,
       "institution": newInfoAcademica.institution,
       "beginDate": newInfoAcademica.beginDate,
       "endDate": newInfoAcademica.endDate,
@@ -95,7 +95,7 @@ describe('InfAcademicaService', () => {
 
     const mockResponse = {
       "id": 1,
-      "tittle": faker.person.jobTitle(),
+      "title": faker.person.jobTitle(),
       "institution": faker.company.name(),
       "beginDate": faker.date.past().toISOString(),
       "endDate": faker.date.recent().toISOString(),
@@ -128,7 +128,7 @@ describe('InfAcademicaService', () => {
     );
     const mockResponse = {
       "id": 1,
-      "tittle": newInfoAcademica.tittle,
+      "title": newInfoAcademica.title,
       "institution": newInfoAcademica.institution,
       "beginDate": newInfoAcademica.beginDate,
       "endDate": newInfoAcademica.endDate,

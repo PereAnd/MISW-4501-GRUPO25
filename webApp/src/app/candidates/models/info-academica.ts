@@ -1,6 +1,6 @@
 export class InfoAcademica {
   constructor(
-    public tittle: string,
+    public title: string,
     public institution: string,
     public beginDate: string,
     public endDate: string,

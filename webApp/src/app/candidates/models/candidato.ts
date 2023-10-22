@@ -9,6 +9,7 @@ export class Candidato {
     public password?: string,
     public confirmPassword?: string,
     public docType?: string,
+    public docNumber?: string,
     public phone?: string,
     public address?: string,
     public birthDate?: Date,

@@ -1,0 +1,37 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('http://localhost:4200/');
+  await page.getByRole('link', { name: 'Login' }).click();
+  await page.getByLabel('Correo').click();
+  await page.getByLabel('Correo').fill('j.cardonao@uniandes.edu.co');
+  await page.getByLabel('Correo').press('Tab');
+  await page.getByLabel('Contraseña', { exact: true }).fill('123456');
+  await page.getByRole('link', { name: 'Ingresar' }).click();
+  await page.getByRole('link', { name: 'Información Personal' }).click();
+  await page.getByRole('link', { name: 'Información Académica' }).click();
+  await page.getByRole('link', { name: 'Agregar nueva' }).click();
+  await page.getByLabel('Título obtenido').click();
+  await page.getByLabel('Título obtenido').press('CapsLock');
+  await page.getByLabel('Título obtenido').fill('Ingeniero de ');
+  await page.getByLabel('Título obtenido').press('CapsLock');
+  await page.getByLabel('Título obtenido').fill('Ingeniero de Sistemas');
+  await page.getByLabel('Título obtenido').press('Tab');
+  await page.getByLabel('Institución').press('CapsLock');
+  await page.getByLabel('Institución').fill('Unilibre');
+  await page.locator('div').filter({ hasText: /^Fecha de inicio$/ }).nth(2).click();
+  await page.locator('mat-form-field').filter({ hasText: 'Fecha de inicioMM/DD/YYYY' }).getByLabel('Open calendar').click();
+  await page.getByLabel('Choose month and year').click();
+  await page.getByLabel('2016').click();
+  await page.getByLabel('January 2016').click();
+  await page.getByLabel('January 3, 2016').click();
+  await page.locator('mat-form-field').filter({ hasText: 'Fecha de finalizaciónMM/DD/YYYY' }).getByLabel('Open calendar').click();
+  await page.getByLabel('Choose month and year').click();
+  await page.getByLabel('2021').click();
+  await page.getByLabel('December 2021').click();
+  await page.getByLabel('December 21, 2021').click();
+  await page.getByLabel('Tipo de estudio').click();
+  await page.getByLabel('Tipo de estudio').press('CapsLock');
+  await page.getByLabel('Tipo de estudio').fill('Pregrado');
+  await page.getByRole('button', { name: 'Guardar' }).click();
+});

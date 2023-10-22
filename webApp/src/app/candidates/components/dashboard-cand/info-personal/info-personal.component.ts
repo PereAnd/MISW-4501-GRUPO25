@@ -15,6 +15,11 @@ export class InfoPersonalComponent {
   formInfoPersonal: FormGroup;
 
   idiomasPreferidos: string[] = ['Español', 'Inglés']
+  tiposDocumento = [
+    { nameDoc: 'Cédula de ciudadanía', value: 'CC' },
+    { nameDoc: 'Cédula de extranjería', value: 'CE' },
+    { nameDoc: 'Pasaporte', value: 'PP' }
+  ]
 
   constructor(
     private regCandidatoService: RegCandidatoService,
@@ -27,6 +32,7 @@ export class InfoPersonalComponent {
       lastNames: new FormControl('', Validators.required),
       mail: new FormControl('', Validators.required),
       docType: new FormControl('', Validators.required),
+      docNumber: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
       birthDate: new FormControl(null, Validators.required),
@@ -40,6 +46,7 @@ export class InfoPersonalComponent {
   get lastNames() { return this.formInfoPersonal.get('lastNames') }
   get mail() { return this.formInfoPersonal.get('mail') }
   get docType() { return this.formInfoPersonal.get('docType') }
+  get docNumber() { return this.formInfoPersonal.get('docNumber') }
   get phone() { return this.formInfoPersonal.get('phone') }
   get address() { return this.formInfoPersonal.get('address') }
   get birthDate() { return this.formInfoPersonal.get('birthDate') }
@@ -58,6 +65,7 @@ export class InfoPersonalComponent {
           lastNames: data.lastNames,
           mail: data.mail,
           docType: data.docType,
+          docNumber: data.docNumber,
           phone: data.phone,
           address: data.address,
           birthDate: data.birthDate ? new Date(data.birthDate) : null,
@@ -77,6 +85,7 @@ export class InfoPersonalComponent {
     this.candidato.lastNames = this.formInfoPersonal.value.lastNames;
     this.candidato.mail = this.formInfoPersonal.value.mail;
     this.candidato.docType = this.formInfoPersonal.value.docType;
+    this.candidato.docNumber = this.formInfoPersonal.value.docNumber;
     this.candidato.phone = this.formInfoPersonal.value.phone;
     this.candidato.address = this.formInfoPersonal.value.address;
     this.candidato.birthDate = this.formInfoPersonal.value.birthDate;
@@ -98,7 +107,6 @@ export class InfoPersonalComponent {
   changeEditMode(v: string){
     this.isEditMode = !this.isEditMode;
     this.isEditMode ? this.formInfoPersonal.enable() : this.formInfoPersonal.disable();
-    console.log('changeEditMode', this.isEditMode, v)
   }
 
   cancelarCreacion(){

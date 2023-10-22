@@ -43,18 +43,21 @@
 
     <div class="row">
       <div class="col-sm-12 col-md-6">
-        <mat-form-field appearance="outline">
-          <mat-label name="docType">Tipo de documento</mat-label>
-          <input matInput type="text"
-          id="docType" formControlName="docType">
+        <mat-form-field>
+          <mat-label>Tipo de documento</mat-label>
+          <mat-select formControlName="docType" id="docType">
+            <mat-option *ngFor="let tipoDoc of tiposDocumento" [value]="tipoDoc.value">
+              {{tipoDoc.nameDoc}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="address">Dirección</mat-label>
-          <input matInput type="text"
-          id="address" formControlName="address">
+          <mat-label name="docNumber">Número de documento</mat-label>
+          <input matInput type="tel"
+          id="docNumber" formControlName="docNumber">
         </mat-form-field>
       </div>
     </div>
@@ -62,9 +65,9 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="city">Ciudad</mat-label>
-          <input matInput type="tel"
-          id="city" formControlName="city">
+          <mat-label name="address">Dirección</mat-label>
+          <input matInput type="text"
+          id="address" formControlName="address">
         </mat-form-field>
       </div>
 
@@ -79,6 +82,14 @@
 
     <div class="row">
       <div class="col-sm-12 col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label name="city">Ciudad</mat-label>
+          <input matInput type="tel"
+          id="city" formControlName="city">
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
         <mat-form-field>
           <mat-label name="birthDate">Fecha de nacimiento</mat-label>
           <input matInput [matDatepicker]="birthDate" id="birthDate"
@@ -91,7 +102,9 @@
           <mat-datepicker #birthDate startView="multi-year"></mat-datepicker>
         </mat-form-field>
       </div>
+    </div>
 
+    <div class="row">
       <div class="col-sm-12 col-md-6">
         <mat-form-field>
           <mat-label>Idioma preferido</mat-label>

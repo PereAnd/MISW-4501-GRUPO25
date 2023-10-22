@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegCandidatoComponent } from './reg-candidato.component';
+import { AppModule } from 'src/app/app.module';
 
 describe('RegCandidatoComponent', () => {
   let component: RegCandidatoComponent;
@@ -8,14 +9,15 @@ describe('RegCandidatoComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RegCandidatoComponent]
+      declarations: [RegCandidatoComponent],
+      imports: [AppModule]
     });
     fixture = TestBed.createComponent(RegCandidatoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'RegCandidatoComponent'", () => {
     expect(component).toBeTruthy();
   });
 });

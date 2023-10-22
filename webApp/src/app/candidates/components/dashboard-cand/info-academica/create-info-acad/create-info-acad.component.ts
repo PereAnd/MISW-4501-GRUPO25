@@ -12,6 +12,7 @@ import { InfAcademicaService } from 'src/app/candidates/services/inf-academica.s
 export class CreateInfoAcadComponent implements OnInit{
 
   indexInfoAcad: number;
+  candidatoId: number = 1;
 
   formInfoAcademica: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -62,9 +63,9 @@ export class CreateInfoAcadComponent implements OnInit{
       1 // OBTENER ID DEL CANDIDATO ACTUAL
     )
     if(!this.indexInfoAcad){
-      this.infAcademicaService.addInfoAcademica(newInfoAcademica).subscribe({
+      this.infAcademicaService.addInfoAcademica(newInfoAcademica, this.candidatoId).subscribe({
           next: data => {
-            console.log("Información académica registrada", data)
+            console.log("Información académica registrada")
             this.formInfoAcademica.reset();
           },
           error: error => {
@@ -76,7 +77,7 @@ export class CreateInfoAcadComponent implements OnInit{
           }
         })
     } else {
-      this.infAcademicaService.editInfoAcademica(newInfoAcademica, this.indexInfoAcad).subscribe({
+      this.infAcademicaService.editInfoAcademica(newInfoAcademica, this.indexInfoAcad, this.candidatoId).subscribe({
         next: data => {
           console.log('Información académica editada')
           this.formInfoAcademica.reset()

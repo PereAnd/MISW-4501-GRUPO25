@@ -17,9 +17,8 @@ export class InfTecnicaService {
     let baseUrl: string = environment.HOST + 'candidato/' + idCandidato + '/informacionTecnica';
     return this.httpClient.get<any>(baseUrl);
   }
-  addInfoTecnica(infoTecnica: InfoTecnica): Observable<InfoTecnica>{
-    console.log(infoTecnica)
-    let baseUrl: string = environment.HOST + 'candidato/' + infoTecnica.candidatoId + '/informacionTecnica';
+  addInfoTecnica(infoTecnica: InfoTecnica, candidatoId: number): Observable<InfoTecnica>{
+    let baseUrl: string = environment.HOST + 'candidato/' + candidatoId + '/informacionTecnica';
     return this.httpClient.post<InfoTecnica>(baseUrl, infoTecnica);
   }
 
@@ -28,8 +27,8 @@ export class InfTecnicaService {
     return this.httpClient.get<InfoTecnica>(baseUrl);
   }
 
-  editInfoTecnica(infoTecnica: InfoTecnica, indexInfoTec: number):Observable<InfoTecnica>{
-    let baseUrl: string = environment.HOST + 'candidato/' + infoTecnica.candidatoId + '/informacionTecnica/' + indexInfoTec;
+  editInfoTecnica(infoTecnica: InfoTecnica, indexInfoTec: number, candidatoId: number):Observable<InfoTecnica>{
+    let baseUrl: string = environment.HOST + 'candidato/' + candidatoId + '/informacionTecnica/' + indexInfoTec;
     return this.httpClient.patch<InfoTecnica>(baseUrl, infoTecnica);
   }
 }

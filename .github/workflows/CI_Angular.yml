@@ -1,0 +1,31 @@
+name: CI Angular App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install Angular CLI
+        working-directory: ./webApp
+        run: npm install -g @angular/cli
+
+      - name: Install dependencies
+        working-directory: ./webApp
+        run: npm install
+
+      - name: Angular tests
+        working-directory: ./webApp
+        run: ng test --no-watch --no-progress --browsers=ChromeHeadless

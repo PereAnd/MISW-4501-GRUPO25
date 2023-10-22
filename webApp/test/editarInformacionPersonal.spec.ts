@@ -10,13 +10,10 @@ test('test', async ({ page }) => {
   await page.getByRole('link', { name: 'Ingresar' }).click();
   await page.getByRole('link', { name: 'Información Personal' }).click();
   await page.getByRole('button', { name: 'Editar' }).click();
-  await page.getByLabel('Apellido').click();
-  await page.getByLabel('Apellido').dblclick();
-  await page.getByLabel('Apellido').dblclick();
-  await page.getByLabel('Apellido').fill('');
-  await page.getByLabel('Apellido').press('CapsLock');
-  await page.getByLabel('Apellido').fill('Ortiz');
-  await page.getByText('Teléfono').click();
-  await page.getByLabel('Teléfono').fill('3003935273');
+  await page.getByLabel('Pasaporte').click();
+  await page.getByRole('listbox', { name: 'Tipo de documento' }).click();
+  await page.getByLabel('Idioma preferido').click();
+  await page.getByRole('listbox', { name: 'Idioma preferido' }).click();
   await page.getByRole('button', { name: 'Guardar' }).click();
+
 });

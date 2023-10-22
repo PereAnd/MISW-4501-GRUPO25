@@ -19,7 +19,6 @@ export class InfAcademicaService {
   }
 
   addInfoAcademica(infoAcademica: InfoAcademica, candidatoId: number): Observable<InfoAcademica>{
-    console.log(infoAcademica)
     let baseUrl: string = environment.HOST + 'candidato/' + candidatoId + '/informacionAcademica';
     return this.httpClient.post<InfoAcademica>(baseUrl, infoAcademica);
   }

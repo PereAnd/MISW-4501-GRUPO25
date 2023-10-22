@@ -65,7 +65,7 @@ export class CreateInfoAcadComponent implements OnInit{
     if(!this.indexInfoAcad){
       this.infAcademicaService.addInfoAcademica(newInfoAcademica, this.candidatoId).subscribe({
           next: data => {
-            console.log("Información académica registrada", data)
+            console.log("Información académica registrada")
             this.formInfoAcademica.reset();
           },
           error: error => {

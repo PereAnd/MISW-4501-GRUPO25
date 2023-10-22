@@ -1,7 +1,11 @@
 .container{
   margin-top: 5%;
 }
-
+#titulo{
+  text-align: left;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+}
 .botones{
   display: flex;
   justify-content: center;

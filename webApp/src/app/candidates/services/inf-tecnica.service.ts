@@ -18,7 +18,6 @@ export class InfTecnicaService {
     return this.httpClient.get<any>(baseUrl);
   }
   addInfoTecnica(infoTecnica: InfoTecnica, candidatoId: number): Observable<InfoTecnica>{
-    console.log(infoTecnica)
     let baseUrl: string = environment.HOST + 'candidato/' + candidatoId + '/informacionTecnica';
     return this.httpClient.post<InfoTecnica>(baseUrl, infoTecnica);
   }

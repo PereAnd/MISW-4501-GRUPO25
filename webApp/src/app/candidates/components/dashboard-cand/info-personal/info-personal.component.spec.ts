@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InfoPersonalComponent } from './info-personal.component';
+import { AppModule } from 'src/app/app.module';
 
 describe('InfoPersonalComponent', () => {
   let component: InfoPersonalComponent;
@@ -8,7 +9,8 @@ describe('InfoPersonalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [InfoPersonalComponent]
+      declarations: [InfoPersonalComponent],
+      imports: [AppModule]
     });
     fixture = TestBed.createComponent(InfoPersonalComponent);
     component = fixture.componentInstance;

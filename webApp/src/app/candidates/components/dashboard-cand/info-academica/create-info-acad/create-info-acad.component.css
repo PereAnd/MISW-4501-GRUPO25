@@ -3,6 +3,12 @@
   width: 90%;
 }
 
+#titulo{
+  text-align: left;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+}
+
 mat-form-field{
   width: 100%;
 }

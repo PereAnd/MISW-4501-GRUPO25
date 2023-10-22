@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
 import { InfAcademicaService } from './inf-academica.service';
 import { environment } from 'src/environments/environment.development';
-import { InfoAcademica } from '../models/info-academica';
-import { faker } from '@faker-js/faker'
+import { InfoAcademica } from '../models/info-academica'
+import { faker } from '@faker-js/faker';
+
 
 describe('InfAcademicaService', () => {
+
   let service: InfAcademicaService;
   let httpMock: HttpTestingController;
 
@@ -149,4 +150,6 @@ describe('InfAcademicaService', () => {
   afterEach(() => {
     httpMock.verify();
   })
+
+
 });

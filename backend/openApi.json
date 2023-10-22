@@ -288,6 +288,45 @@
                     }
                 }
             },
+            "delete": {
+                "description": "Elimina una información académica a partir de su id",
+                "operationId": "deleteInformacionAcadémicaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la información técnica",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó la información académica"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
             "patch": {
                 "description": "actualiza una información académica a partir de su id",
                 "operationId": "findInformacionAcademicaById",
@@ -455,6 +494,46 @@
                     }
                 }
             },
+            "delete": {
+                "description": "Elimina una información técnica a partir de su id",
+                "operationId": "deleteInformacionTecnicaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la información técnica",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó la información técnica"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+
             "patch": {
                 "description": "actualiza una información técnica a partir de su id",
                 "operationId": "findInformacionTecnicaById",

@@ -11,7 +11,7 @@ import { InfAcademicaService } from 'src/app/candidates/services/inf-academica.s
   styleUrls: ['./info-academica.component.css']
 })
 export class InfoAcademicaComponent {
-  displayedColumns: string[] = ['id', 'tittle', 'institution', 'beginDate', 'endDate', 'studyType', 'actions']
+  displayedColumns: string[] = ['id', 'title', 'institution', 'beginDate', 'endDate', 'studyType', 'actions']
   dataSource = new MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

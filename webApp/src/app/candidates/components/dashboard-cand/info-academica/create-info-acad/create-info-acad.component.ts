@@ -41,7 +41,7 @@ export class CreateInfoAcadComponent implements OnInit{
       .subscribe({
         next: data => {
           this.formInfoAcademica.setValue({
-            title: data.tittle,
+            title: data.title,
             institution: data.institution,
             beginDate: new Date(data.beginDate),
             endDate: new Date(data.endDate),

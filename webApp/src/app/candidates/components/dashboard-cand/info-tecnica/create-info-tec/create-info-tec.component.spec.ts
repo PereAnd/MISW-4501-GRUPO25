@@ -17,7 +17,7 @@ describe('CreateInfoTecComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'CreateInfoTecComponent'", () => {
     expect(component).toBeTruthy();
   });
 });

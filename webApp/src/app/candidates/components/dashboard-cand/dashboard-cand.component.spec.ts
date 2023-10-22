@@ -17,7 +17,7 @@ describe('DashboardCandComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'DashboardCandComponent'", () => {
     expect(component).toBeTruthy();
   });
 });

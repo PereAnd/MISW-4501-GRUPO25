@@ -17,7 +17,7 @@ describe('CreateInfoAcadComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'CreateInfoAcadComponent'", () => {
     expect(component).toBeTruthy();
   });
 });

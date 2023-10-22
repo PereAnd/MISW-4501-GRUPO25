@@ -17,7 +17,7 @@ describe('InfoPersonalComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'InfoPersonalComponent'", () => {
     expect(component).toBeTruthy();
   });
 });

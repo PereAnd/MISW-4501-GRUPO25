@@ -17,7 +17,7 @@ describe('LoginCandidatoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'LoginCandidatoComponent'", () => {
     expect(component).toBeTruthy();
   });
 });

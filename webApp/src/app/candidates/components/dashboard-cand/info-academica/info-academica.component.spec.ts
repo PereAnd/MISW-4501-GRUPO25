@@ -17,7 +17,7 @@ describe('InfoAcademicaComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'InfoAcademicaComponent", () => {
     expect(component).toBeTruthy();
   });
 });

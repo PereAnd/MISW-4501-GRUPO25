@@ -15,7 +15,7 @@ describe('InicioComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'InicioComponent'", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -17,7 +17,7 @@ describe('CandidatesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'CandidatesComponent'", () => {
     expect(component).toBeTruthy();
   });
 });

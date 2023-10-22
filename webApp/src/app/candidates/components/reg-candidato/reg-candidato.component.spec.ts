@@ -17,7 +17,7 @@ describe('RegCandidatoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("Crear instancia de 'RegCandidatoComponent'", () => {
     expect(component).toBeTruthy();
   });
 });

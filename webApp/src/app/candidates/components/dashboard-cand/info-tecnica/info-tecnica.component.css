@@ -23,3 +23,9 @@ table {
   display: flex;
   justify-content: space-between;
 }
+.odd-row {
+  background-color: #e4e4e4;
+}
+.even-row {
+  background-color: #ffffff;
+}

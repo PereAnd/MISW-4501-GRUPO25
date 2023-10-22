@@ -26,6 +26,6 @@ jobs:
         working-directory: ./webApp
         run: npm install
 
-      - run: Run Angular tests
+      - name: Angular tests
         working-directory: ./webApp
-      - run: ng test --no-watch --no-progress --browsers=ChromeHeadless
+        run: ng test --no-watch --no-progress --browsers=ChromeHeadless

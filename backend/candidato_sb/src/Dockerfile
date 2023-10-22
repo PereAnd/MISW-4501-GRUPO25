@@ -3,7 +3,7 @@ FROM python:3.8-alpine
 
 # Copiar requerimientos para ejecutar el programa
 COPY ./requirements.txt /app/requirements.txt
-COPY modelos/ /app/modelos/
+COPY breaker/ /app/breaker/
 COPY vistas/ /app/vistas/
 COPY ./app.py /app/app.py
 COPY ./__init__.py /app/__init__.py

@@ -58,7 +58,9 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;
+        let i = index; odd as isOdd; even as isEven"
+        [ngClass]="isOdd ? 'odd-row' : 'odd-even'"></tr>
 
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell text-center" colspan="4">No hay registros</td>

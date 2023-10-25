@@ -50,12 +50,13 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Candidato"
-                        }
-                    },
-                    "default": {
-                        "description": "unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
+                            }
+                        },
+                        "default": {
+                            "description": "unexpected error",
+                            "schema": {
+                                "$ref": "#/definitions/ErrorModel"
+                            }
                         }
                     }
                 }
@@ -191,7 +192,6 @@
                         "type": "integer",
                         "format": "int64"
                     }
-
                 ],
                 "responses": {
                     "200": {
@@ -308,7 +308,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Id de la información técnica",
+                        "description": "Id de la información académica",
                         "required": true,
                         "type": "integer",
                         "format": "int64"
@@ -397,7 +397,6 @@
                         "type": "integer",
                         "format": "int64"
                     }
-
                 ],
                 "responses": {
                     "200": {
@@ -532,7 +531,6 @@
                     }
                 }
             },
-
             "patch": {
                 "description": "actualiza una información técnica a partir de su id",
                 "operationId": "findInformacionTecnicaById",
@@ -584,8 +582,212 @@
                     }
                 }
             }
+        },
+        "/candidato/{candidatoId}/informacionLaboral": {
+            "get": {
+                "description": "Retorna la información laboral de un candidato",
+                "operationId": "findInformacionLaboral",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Informacion Laboral",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/InformacionLaboral"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de información laboral para un candidato",
+                "operationId": "addinformacionLaboral",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "informacionLaboral",
+                        "in": "body",
+                        "description": "Información laboral a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateInformacionLaboral"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Informacion Laboral",
+                        "schema": {
+                            "$ref": "#/definitions/InformacionLaboral"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{candidatoId}/informacionLaboral/{id}": {
+            "get": {
+                "description": "Retorna una información laboral a partir de su id",
+                "operationId": "findInformacionLaboralById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la información laboral",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta información laboral",
+                        "schema": {
+                            "$ref": "#/definitions/InformacionLaboral"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una información laboral a partir de su id",
+                "operationId": "deleteInformacionLaboralById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la información laboral",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó la información laboral"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una información laboral a partir de su id",
+                "operationId": "findInformacionLaboralById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la información laboral",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "informacionLaboral",
+                        "in": "body",
+                        "description": "Informacion Laboral a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateInformacionLaboral"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta informacion laboral",
+                        "schema": {
+                            "$ref": "#/definitions/InformacionLaboral"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
         }
-
     },
     "definitions": {
         "CandidatoRegistro": {
@@ -772,7 +974,6 @@
                 }
             }
         },
-
         "UpdateInformacionAcademica": {
             "type": "object",
             "required": [
@@ -802,12 +1003,11 @@
                 }
             }
         },
-
-
         "InformacionTecnica": {
             "type": "object",
             "required": [
-
+                "type",
+                "description"
             ],
             "properties": {
                 "type": {
@@ -820,15 +1020,64 @@
         },
         "UpdateInformacionTecnica": {
             "type": "object",
-            "required": [
-
-            ],
+            "required": [],
             "properties": {
                 "type": {
                     "type": "string"
                 },
                 "description": {
                     "type": "string"
+                }
+            }
+        },
+        "InformacionLaboral": {
+            "type": "object",
+            "required": [
+                "position",
+                "organization",
+                "activities",
+                "dateFrom"
+            ],
+            "properties": {
+                "position": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "string"
+                },
+                "activities": {
+                    "type": "string"
+                },
+                "dateFrom": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateTo": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "UpdateInformacionLaboral": {
+            "type": "object",
+            "required": [],
+            "properties": {
+                "position": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "string"
+                },
+                "activities": {
+                    "type": "string"
+                },
+                "dateFrom": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateTo": {
+                    "type": "string",
+                    "format": "date-time"
                 }
             }
         },

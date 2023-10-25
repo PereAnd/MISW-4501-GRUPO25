@@ -463,7 +463,7 @@ class VistaInformacionesLaborales(Resource):
 
         dateTo = None
         if "dateTo" in request.json:
-            if request.json["description"] != None:
+            if request.json["dateTo"] != None:
                 try:
                     dateTo = datetime.strptime(request.json["dateTo"], "%Y-%m-%dT%H:%M:%S.%fZ")
                 except:

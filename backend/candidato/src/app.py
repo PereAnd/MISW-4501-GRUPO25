@@ -1,6 +1,6 @@
 from flask_restful import Api
 from .modelos import db
-from .vistas import VistaPing, VistaCandidato, VistaInformacionAcademica, VistaInformacionesAcademicas, VistaInformacionesTecnicas, VistaInformacionTecnica, VistaRegistro
+from .vistas import VistaPing, VistaCandidato, VistaInformacionAcademica, VistaInformacionesAcademicas, VistaInformacionesTecnicas, VistaInformacionTecnica, VistaRegistro, VistaInformacionesLaborales, VistaInformacionLaboral
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
@@ -29,11 +29,13 @@ db.create_all()
 cors = CORS(app)
 
 api = Api(app)
-api.add_resource(VistaRegistro, '/candidatobe')
-api.add_resource(VistaCandidato, '/candidatobe/<string:id>')
-api.add_resource(VistaInformacionesAcademicas, '/candidatobe/<string:candidatoId>/informacionAcademica')
-api.add_resource(VistaInformacionAcademica, '/candidatobe/<string:candidatoId>/informacionAcademica/<string:id>')
-api.add_resource(VistaInformacionesTecnicas, '/candidatobe/<string:candidatoId>/informacionTecnica')
-api.add_resource(VistaInformacionTecnica, '/candidatobe/<string:candidatoId>/informacionTecnica/<string:id>')
-api.add_resource(VistaPing, '/candidatobe/ping')
+api.add_resource(VistaRegistro, '/candidato')
+api.add_resource(VistaCandidato, '/candidato/<string:id>')
+api.add_resource(VistaInformacionesAcademicas, '/candidato/<string:candidatoId>/informacionAcademica')
+api.add_resource(VistaInformacionAcademica, '/candidato/<string:candidatoId>/informacionAcademica/<string:id>')
+api.add_resource(VistaInformacionesTecnicas, '/candidato/<string:candidatoId>/informacionTecnica')
+api.add_resource(VistaInformacionTecnica, '/candidato/<string:candidatoId>/informacionTecnica/<string:id>')
+api.add_resource(VistaInformacionesLaborales, '/candidato/<string:candidatoId>/informacionLaboral')
+api.add_resource(VistaInformacionLaboral, '/candidato/<string:candidatoId>/informacionLaboral/<string:id>')
+api.add_resource(VistaPing, '/candidato/ping')
 

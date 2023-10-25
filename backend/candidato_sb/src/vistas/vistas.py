@@ -12,7 +12,7 @@ class VistaRegistro(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
 
     def post(self):
         try:
@@ -34,7 +34,7 @@ class VistaCandidato(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
     def patch(self, id):
         try:
             return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + id , json=request.json)
@@ -62,7 +62,7 @@ class VistaInformacionesAcademicas(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
 
     def post(self, candidatoId):
         try:
@@ -84,7 +84,7 @@ class VistaInformacionAcademica(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
 
     def patch(self, candidatoId, id):
         try:
@@ -113,7 +113,7 @@ class VistaInformacionesTecnicas(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
 
     def post(self, candidatoId):
         try:
@@ -136,7 +136,7 @@ class VistaInformacionTecnica(Resource):
     def __init__(self, **kwargs):
         # smart_engine is a black box dependency
         self.breaker = kwargs['breaker']
-        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidatobe"
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
 
 
     def patch(self, candidatoId, id):
@@ -157,6 +157,61 @@ class VistaInformacionTecnica(Resource):
         try:
             url = self.urlBackEnd + "/" + candidatoId + "/informacionTecnica/"+ id
 #            requests.delete(self.urlBackEnd + "/" + candidatoId + "/informacionTecnica/"+ id)
+#            return "Correcto", 204
+            return self.breaker.make_remote_call_delete(url)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+# Informacion Laboral
+# Vista POST - GET
+class VistaInformacionesLaborales(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+
+    def post(self, candidatoId):
+        try:
+            return self.breaker.make_remote_call_post(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral", json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def get(self, candidatoId):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral", params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+        
+# Informacion Laboral
+# Vista PATCH - GET - DELETE
+class VistaInformacionLaboral(Resource):
+
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+
+
+    def patch(self, candidatoId, id):
+        try:
+            return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral/" + id, json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+                
+    def get(self, candidatoId, id):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral/"+ id, params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def delete(self, candidatoId, id):
+        try:
+            url = self.urlBackEnd + "/" + candidatoId + "/informacionLaboral/"+ id
+#            requests.delete(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral/"+ id)
 #            return "Correcto", 204
             return self.breaker.make_remote_call_delete(url)
         except Exception:

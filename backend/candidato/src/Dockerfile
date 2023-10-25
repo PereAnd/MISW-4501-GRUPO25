@@ -1,6 +1,6 @@
 # Empezar corriendo una imagen de python 
-#FROM python:3.8-alpine
-FROM public.ecr.aws/lambda/python:3.8
+FROM 798178280816.dkr.ecr.us-east-1.amazonaws.com/python:3.8-alpine
+#FROM public.ecr.aws/lambda/python:3.8
 # Copiar requerimientos para ejecutar el programa
 COPY ./requirements.txt /app/requirements.txt
 COPY modelos/ /app/modelos/

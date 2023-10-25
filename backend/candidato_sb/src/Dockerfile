@@ -11,7 +11,7 @@ COPY ./__init__.py /app/__init__.py
 # Cambiar de directorio de trabajo a donde esta el ejectuable del API
 WORKDIR /app
 # Instalar requerimientos de la app
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 # Copiar el contenido del directorio actual en la imagen de docker
 #COPY . /app
 # Agregar variable de entorno con el nombre del estudiante

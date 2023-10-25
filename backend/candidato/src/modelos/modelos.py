@@ -36,6 +36,29 @@ class InformacionTecnica(db.Model):
     description = db.Column(db.String(150), nullable=False)
     candidatoId = db.Column(db.Integer, db.ForeignKey('candidato.id'))
 
+class InformacionLaboral(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    position = db.Column(db.String(150), nullable=False)
+    organization = db.Column(db.String(150), nullable=False)
+    activities = db.Column(db.Text, nullable=False)
+    dateFrom = db.Column(db.DateTime, nullable=False)
+    dateTo = db.Column(db.DateTime, nullable=True)
+    candidatoId = db.Column(db.Integer, db.ForeignKey('candidato.id'))
+
+
+class InformacionLaboralEschema(SQLAlchemySchema):
+    class Meta:
+         model = InformacionLaboral
+         include_relationships = False
+         load_instance = True         
+    id = auto_field()
+    position = auto_field()
+    organization = auto_field()
+    activities = auto_field()
+    dateFrom = auto_field()
+    dateTo = auto_field()
+    candidatoId = auto_field()
+
 
 class InformacionAcademicaEschema(SQLAlchemySchema):
     class Meta:
@@ -79,3 +102,4 @@ class CandidatoEschema(SQLAlchemySchema):
     language = auto_field()
     informacionAcademica = fields.Nested(InformacionAcademicaEschema(many=True), many=True)
     informacionTecnica = fields.Nested(InformacionTecnicaEschema, many=True)
+    informacionLaboral = fields.Nested(InformacionLaboralEschema, many=True)

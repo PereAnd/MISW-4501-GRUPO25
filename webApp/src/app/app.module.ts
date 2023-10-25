@@ -18,6 +18,7 @@ import { InicioComponent } from './shared/components/inicio/inicio.component';
 import { InfoTecnicaComponent } from './candidates/components/dashboard-cand/info-tecnica/info-tecnica.component';
 import { CreateInfoTecComponent } from './candidates/components/dashboard-cand/info-tecnica/create-info-tec/create-info-tec.component';
 import { InfoPersonalComponent } from './candidates/components/dashboard-cand/info-personal/info-personal.component';
+import { InfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/info-laboral.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { InfoPersonalComponent } from './candidates/components/dashboard-cand/in
     InfoTecnicaComponent,
     CreateInfoTecComponent,
     InfoPersonalComponent,
+    InfoLaboralComponent,
   ],
   imports: [
     BrowserModule,

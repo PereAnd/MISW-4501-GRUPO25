@@ -47,7 +47,7 @@ export class InfoLaboralComponent {
     }
   }
 
-  redirectCreateInfoAcad(){
+  redirectCreateInfoLab(){
     this.router.navigate(['candidato/dashboard/1/add-info-laboral'])
   }
 }

@@ -27,4 +27,9 @@ export class InfLaboralService {
     let baseUrl: string = environment.HOST + 'candidato/' + indexCandidato + '/informacionLaboral/' + indexInfoLab;
     return this.httpClient.get<InfoLaboral>(baseUrl);
   }
+
+  editInfoLaboral(infoLaboral: InfoLaboral, indexInfoLaboral: number, candidatoId: number):Observable<InfoLaboral>{
+    let baseUrl: string = environment.HOST + 'candidato/' + candidatoId + '/informacionLaboral/' + indexInfoLaboral;
+    return this.httpClient.patch<InfoLaboral>(baseUrl, infoLaboral);
+  }
 }

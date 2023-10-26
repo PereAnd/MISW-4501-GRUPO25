@@ -27,6 +27,7 @@ const routes: Routes = [
       { path: 'info-tecnica/:idit', component: CreateInfoTecComponent },
       { path: 'info-laboral', component: InfoLaboralComponent },
       { path: 'info-laboral/add', component: CreateInfoLaboralComponent },
+      { path: 'info-laboral/:idil', component: CreateInfoLaboralComponent },
     ]
   }
 ];

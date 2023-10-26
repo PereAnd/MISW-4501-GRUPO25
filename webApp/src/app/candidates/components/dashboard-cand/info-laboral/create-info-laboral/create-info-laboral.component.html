@@ -77,6 +77,14 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-12">
+        <p><mat-checkbox formControlName="actualJob" id="actualJob" name="actualJob"
+          color="primary" (change)="actualJobChange()"
+          >Actualmente trabajo aquí</mat-checkbox></p>
+      </div>
+    </div>
+
     <div class="botones">
       <div class="button">
         <a mat-raised-button color="secondary" (click)="cancelarCreacion()" routerLink="../">Cancelar</a>
@@ -90,3 +98,5 @@
     </div>
   </form>
 </div>
+
+{{ formInfoLaboral.value | json}}

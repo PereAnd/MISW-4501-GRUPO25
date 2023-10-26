@@ -406,7 +406,7 @@ def test_elimina_informacion_tecnica_id_no_existe(client: FlaskClient):
 def test_crea_informacion_laboral(client: FlaskClient):
     global id_candidato, id_informacion_laboral
     resp = client.post(
-        '/candidato/' + str(id_candidato) + '/informacionLaboral', json={'position': "Prueba Cargo",'organization': 'Prueba empresa', 'activities': 'Estas son algunas actividades', 'dateFrom': '2003-03-15T00:00:00.000Z', 'dateTo' : '2005-03-15T00:00:00.000Z'})
+        '/candidato/' + str(id_candidato) + '/informacionLaboral', json={'position': "Prueba Cargo",'organization': 'Prueba empresa', 'activities': 'Estas son algunas actividades', 'dateFrom': '2003-03-15T00:00:00.000Z'})
     assert resp.status_code == 201
     assert resp.json.get('id')
     id_informacion_laboral = resp.json.get('id')

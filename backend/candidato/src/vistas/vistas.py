@@ -480,7 +480,7 @@ class VistaInformacionesLaborales(Resource):
             nueva_informacion = InformacionLaboral(position=request.json["position"], 
                                         organization=request.json["organization"],
                                         activities=request.json["activities"],
-                                        dateFrom=dateTo,
+                                        dateFrom=dateFrom,
                                         dateTo=dateTo,
                                         candidatoId=candidatoId)
             db.session.add(nueva_informacion)

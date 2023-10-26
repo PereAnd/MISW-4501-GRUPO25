@@ -13,7 +13,7 @@ export class CreateInfoLaboralComponent {
 
   indexInfoLab: number;
   candidatoId: number = 1;
-  isActualJob: boolean = false;
+  isActualJob: boolean;
 
   formInfoLaboral: FormGroup = new FormGroup({
     position: new FormControl('', Validators.required),
@@ -41,7 +41,7 @@ export class CreateInfoLaboralComponent {
     this.isActualJob = false;
     this.indexInfoLab = this.route.snapshot.params['idil'];
     if(this.indexInfoLab){
-      this.infLaboralService.findInfoLaboral(1, this.indexInfoLab)
+      this.infLaboralService.findInfoLaboral(this.candidatoId, this.indexInfoLab)
       .subscribe({
         next: data => {
           this.formInfoLaboral.setValue({
@@ -49,10 +49,13 @@ export class CreateInfoLaboralComponent {
             organization: data.organization,
             activities: data.activities,
             dateFrom: new Date(data.dateFrom),
-            dateTo: new Date(data.dateTo)
+            dateTo: data.dateTo ? new Date(data.dateTo) : null,
+            actualJob: data.dateTo ? false : true
           })
+          this.isActualJob = data.dateTo ? false : true;
         },
-        error: error => console.error('Error obteniendo la información laboral seleccionada', error)
+        error: error => console.error('Error obteniendo la información laboral seleccionada', error),
+        complete: () => this.isActualJob ? this.formInfoLaboral.get('dateTo')?.disable() : this.formInfoLaboral.get('dateTo')?.enable()
       })
     }
   }
@@ -66,8 +69,6 @@ export class CreateInfoLaboralComponent {
       this.formInfoLaboral.value.dateFrom,
       this.formInfoLaboral.value.dateTo ? this.formInfoLaboral.value.dateTo : null,
     )
-
-    console.log(newInfoLaboral)
 
     if(!this.indexInfoLab){
       this.infLaboralService.addInfoLaboral(newInfoLaboral, this.candidatoId).subscribe({
@@ -86,6 +87,9 @@ export class CreateInfoLaboralComponent {
     } else {
       this.infLaboralService.editInfoLaboral(newInfoLaboral, this.indexInfoLab, this.candidatoId).subscribe({
         next: data => {
+          console.log('newInfoLaboral: ', newInfoLaboral)
+          console.log('indexInfoLab: ', this.indexInfoLab)
+          console.log('candidatoId: ', this.candidatoId)
           console.log('Información laboral editada')
           this.formInfoLaboral.reset()
         },
@@ -103,11 +107,7 @@ export class CreateInfoLaboralComponent {
 
   actualJobChange(){
     this.isActualJob = !this.isActualJob;
-    if(this.isActualJob){
-      this.formInfoLaboral.get('dateTo')?.disable()
-    } else {
-      this.formInfoLaboral.get('dateTo')?.enable()
-    }
+    this.isActualJob ? this.formInfoLaboral.get('dateTo')?.disable() : this.formInfoLaboral.get('dateTo')?.enable()
   }
 
   cancelarCreacion(){

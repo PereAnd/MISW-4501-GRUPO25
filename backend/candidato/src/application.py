@@ -8,27 +8,27 @@ from os import environ
 import os
 
 def create_app(config_name):
-    app = Flask(__name__)  
+    application = Flask(__name__)  
     
     if 'SQLALCHEMY_DATABASE_URI' in environ:
-        app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI') if environ.get('SQLALCHEMY_DATABASE_URI') != 'default' else 'sqlite://'
+        application.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI') if environ.get('SQLALCHEMY_DATABASE_URI') != 'default' else 'sqlite://'
     else:
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///candidatos.db'
+        application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///candidatos.db'
 
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['PROPAGATE_EXCEPTIONS']=True
-    return app
+    application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    application.config['PROPAGATE_EXCEPTIONS']=True
+    return application
 
-app = create_app('default')
-app_context = app.app_context()
-app_context.push()
+application = create_app('default')
+application_context = application.app_context()
+application_context.push()
 
-db.init_app(app)
+db.init_app(application)
 db.create_all()
 
-cors = CORS(app)
+cors = CORS(application)
 
-api = Api(app)
+api = Api(application)
 api.add_resource(VistaRegistro, '/candidato')
 api.add_resource(VistaCandidato, '/candidato/<string:id>')
 api.add_resource(VistaInformacionesAcademicas, '/candidato/<string:candidatoId>/informacionAcademica')
@@ -40,4 +40,4 @@ api.add_resource(VistaInformacionLaboral, '/candidato/<string:candidatoId>/infor
 api.add_resource(VistaPing, '/candidato/ping')
 
 if __name__ == '__main__':
-    app.run(port=5001, debug=True)
+    application.run(port=5001, debug=True)

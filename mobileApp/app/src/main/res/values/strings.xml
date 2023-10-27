@@ -1,11 +1,49 @@
 <resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">ABC Jobs</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="texto_coleccionista">COLECCIONISTA</string>
+    <string name="texto_coleccionista_lowcase">Coleccionista</string>
+    <string name="texto_albumes_lowcase">Álbumes</string>
+    <string name="text_album_genero">Género</string>
+    <string name="text_album_fecha">Fecha</string>
+    <string name="text_album_descripcion">Descripción</string>
+    <string name="texto_viniloApp">ViniloApp</string>
+    <string name="text_album">Álbumes</string>
+    <string name="text_artista">"Artista</string>
+    <string name="c_mo_deseas_ingresar">¿Cómo deseas ingresar?</string>
+    <string name="bienvenid_a">Bienvenid@ a</string>
+    <string name="albums_string">Álbumes</string>
+    <string name="crear_album_string">Crear Álbum</string>
+    <string name="artistas_string">Artistas</string>
+    <string name="coleccionistas_string">Coleccionistas</string>
+    <string name="ir_a_home">Ir a home</string>
+    <string name="imagen_album">Imagen álbum</string>
+    <string name="nombre_label">Nombre</string>
+    <string name="name_create_album">Nombre</string>
+    <string name="portada_create_album">URL Portada</string>
+    <string name="release_date_create_album">Fecha de lanzamiento</string>
+    <string name="description_create_album">Descripción</string>
+    <string name="toggle_salsa">Salsa</string>
+    <string name="toggle_rock">Rock</string>
+    <string name="toggle_folk">Folk</string>
+    <string name="text_view_genre_create_album">Género</string>
+    <string name="recordLabel_create_album">Discográfica</string>
+    <string name="button_create_album">Crear</string>
+    <string name="create_album_label">Crear álbum</string>
+    <string name="required">Requerido</string>
+    <string name="sony_music_label">Sony Music</string>
+    <string name="emi_label">EMI</string>
+    <string name="discos_fuentes_label">Discos Fuentes</string>
+    <string name="elektra_label">Elektra</string>
+    <string name="fania_records_label">Fania Records</string>
 
     <string name="sobre_nosotros">Nulla feugiat dictum magna, eget aliquam orci vestibulum ac. Phasellus laoreet dignissim tortor, et iaculis quam auctor at. In hac habitasse platea dictumst. Aenean nec orci congue, ultrices nisi sit amet, vulputate turpis. Vivamus interdum diam eget lectus pharetra lobortis eu ut purus.\n\nAliquam vitae ultrices nisi. Etiam magna orci, efficitur et urna at, cursus faucibus ipsum. Nulla scelerisque, ante sed faucibus rutrum, elit nunc mattis lacus, eget blandit lorem mi cursus elit. Maecenas faucibus quam in ante consequat interdum. </string>
     <string name="reclutamiento_y_seleccion">Simplificamos su búsqueda de talento con servicios especializados. Identificamos perfiles precisos, publicamos ofertas estratégicas y evaluamos candidatos destacados. Optimice su proceso de contratación con nuestra experiencia.</string>
     <string name="evaluacion_de_candidatos">Garantizamos un proceso completo para seleccionar al mejor talento. Verificamos habilidades técnicas, laborales y experiencia relevante, evaluamos la personalidad y habilidades blandas destacando características personales clave.</string>
     <string name="formacion_online">Nuestra oferta de Formación y Desarrollo se centra en el desarrollo de programas de capacitación diseñados para beneficiar tanto a los empleados actuales como a los futuros. Permitiendo un acceso flexible para el crecimiento profesional</string>
 
-    <string name="app_name"></string>
     <string name="boton_entrar">ENTRAR</string>
     <string name="boton_enviar">ENVIAR</string>
     <string name="titulo_login">INICIO DE SESIÓN</string>
@@ -28,7 +66,10 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="genero_folk">Folk</string>
+    <string name="genero_rock">Rock</string>
+    <string name="genero_salsa">Salsa</string>
+
+
 
 </resources>
-
-

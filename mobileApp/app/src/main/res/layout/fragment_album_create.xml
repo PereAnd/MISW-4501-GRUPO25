@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:background="@color/background_general"
+    tools:context=".view.FragmentAlbumCreate">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCreateAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="Ingresa tu información"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textAlignment="center" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiNameCreateAlbum"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name_create_album"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNameCreateAlbum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiCoverCreateAlbum"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/portada_create_album"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCoverCreateAlbum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiReleaseDateCreateAlbum"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/dark_gray"
+                android:layout_height="wrap_content"
+                android:hint="@string/release_date_create_album"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etReleaseDateCreateAlbum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiDescriptionCreateAlbum"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dark_gray"
+                android:hint="@string/description_create_album"
+                app:helperText="@string/required"
+                app:counterEnabled="true"
+                app:counterMaxLength="200"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDescriptionCreateAlbum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tvRecordLabelCreateAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:textColorHint="@color/dark_yellow"
+                android:text="@string/recordLabel_create_album"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/fontOrange"
+                android:textSize="20sp" />
+
+
+            <RadioGroup
+                android:id="@+id/rgRecordLabelCreateAlbum"
+                android:hint="@string/recordLabel_create_album"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/fontOrange"
+                app:singleSelection="true">
+
+                <RadioButton
+                    android:id="@+id/btnSonyMusicLabel"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:text="@string/sony_music_label"
+                    android:textColor="@color/black"
+                    app:backgroundTint="@color/backgroungButton" />
+
+                <RadioButton
+                    android:id="@+id/btnEmi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/emi_label"
+                    android:textColor="@color/black"
+                    app:backgroundTint="@color/backgroungButton"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <RadioButton
+                    android:id="@+id/btnDiscosFuentes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/discos_fuentes_label"
+                    android:textColor="@color/black"
+                    app:backgroundTint="@color/backgroungButton"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <RadioButton
+                    android:id="@+id/btnElektra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/elektra_label"
+                    android:textColor="@color/black"
+                    app:backgroundTint="@color/backgroungButton"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <RadioButton
+                    android:id="@+id/btnFaniaRecords"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fania_records_label"
+                    android:textColor="@color/black"
+                    app:backgroundTint="@color/backgroungButton"
+                    style="?attr/materialButtonOutlinedStyle"/>
+            </RadioGroup>
+
+
+
+            <TextView
+                android:id="@+id/tvGenreCreateAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/text_view_genre_create_album"
+                android:textSize="20sp"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/fontOrange" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/tbGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleSelection="true">
+
+                <Button
+                    android:id="@+id/btnSalsa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/toggle_salsa"
+                    app:backgroundTint="@color/backgroungButton"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <Button
+                    android:id="@+id/btnRock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/toggle_rock"
+                    app:backgroundTint="@color/backgroungButton"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <Button
+                    android:id="@+id/btnFolk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/toggle_folk"
+                    app:backgroundTint="@color/backgroungButton"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSendAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_create_album"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_yellow" />
+    </LinearLayout>
+
+</ScrollView>

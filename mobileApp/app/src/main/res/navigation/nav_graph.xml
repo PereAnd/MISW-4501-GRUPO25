@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/fragment_home">
+
+        <action android:id="@+id/action_global_fragment_home"
+        app:destination="@id/fragment_home"/>
+
+    <!-- Home  - Menú coleccionista  -->
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.example.vinyls.view.FragmentHome"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_menu_coleccionista"
+            app:destination="@id/fragment_menu_coleccionista" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_menu_login"
+            app:destination="@id/fragment_menu_login" />
+    </fragment>
+
+    <!-- Menú coleccionista   -->
+    <fragment
+        android:id="@+id/fragment_menu_coleccionista"
+        android:name="com.example.vinyls.view.FragmentMenuColeccionista"
+        tools:layout="@layout/fragment_menu_coleccionista">
+        <action
+            android:id="@+id/action_fragment_menu_coleccionista_to_fragment_album_list"
+            app:destination="@id/fragment_album_list" />
+        <action
+            android:id="@+id/action_fragment_menu_coleccionista_to_fragment_album_create"
+            app:destination="@id/fragment_album_create" />
+    </fragment>
+
+    <!-- Menú Login   -->
+    <fragment
+        android:id="@+id/fragment_menu_login"
+        android:name="com.example.vinyls.view.FragmentMenuLogin"
+        tools:layout="@layout/fragment_menu_login">
+        <action
+            android:id="@+id/action_fragment_menu_login_to_fragment_entrevista"
+            app:destination="@id/fragment_album_list" />
+        <action
+            android:id="@+id/action_fragment_menu_login_to_fragment_registro"
+            app:destination="@id/fragment_registro" />
+    </fragment>
+
+
+    <!-- Menú coleccionista - Listado Albumes  -->
+    <fragment
+        android:id="@+id/fragment_album_list"
+        android:name="com.example.vinyls.view.FragmentAlbumList"
+        tools:layout="@layout/fragment_album_list">
+    </fragment>
+
+    <!-- Menú coleccionista - Crear álbum -->
+    <fragment
+        android:id="@+id/fragment_album_create"
+        android:name="com.example.vinyls.view.FragmentAlbumCreate"
+        tools:layout="@layout/fragment_album_create" >
+    </fragment>
+
+
+    <!-- Menú Login - Registro  -->
+    <fragment
+        android:id="@+id/fragment_registro"
+        android:name="com.example.vinyls.view.FragmentRegistro"
+        tools:layout="@layout/fragment_registro" >
+    </fragment>
+
+</navigation>
+
+
+

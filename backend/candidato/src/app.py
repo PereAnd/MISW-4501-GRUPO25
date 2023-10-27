@@ -1,6 +1,6 @@
 from flask_restful import Api
-from .modelos import db
-from .vistas import VistaPing, VistaCandidato, VistaInformacionAcademica, VistaInformacionesAcademicas, VistaInformacionesTecnicas, VistaInformacionTecnica, VistaRegistro, VistaInformacionesLaborales, VistaInformacionLaboral
+from modelos import db
+from vistas import VistaPing, VistaCandidato, VistaInformacionAcademica, VistaInformacionesAcademicas, VistaInformacionesTecnicas, VistaInformacionTecnica, VistaRegistro, VistaInformacionesLaborales, VistaInformacionLaboral
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
@@ -13,7 +13,7 @@ def create_app(config_name):
     if 'SQLALCHEMY_DATABASE_URI' in environ:
         app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI') if environ.get('SQLALCHEMY_DATABASE_URI') != 'default' else 'sqlite://'
     else:
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///candidatos.db'
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['PROPAGATE_EXCEPTIONS']=True
@@ -39,3 +39,5 @@ api.add_resource(VistaInformacionesLaborales, '/candidato/<string:candidatoId>/i
 api.add_resource(VistaInformacionLaboral, '/candidato/<string:candidatoId>/informacionLaboral/<string:id>')
 api.add_resource(VistaPing, '/candidato/ping')
 
+if __name__ == '__main__':
+    app.run(port=5001, debug=True)

@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from ..modelos import db, Candidato, CandidatoEschema, InformacionAcademica, InformacionAcademicaEschema, InformacionTecnica, InformacionTecnicaEschema, InformacionLaboral, InformacionLaboralEschema
+from modelos import db, Candidato, CandidatoEschema, InformacionAcademica, InformacionAcademicaEschema, InformacionTecnica, InformacionTecnicaEschema, InformacionLaboral, InformacionLaboralEschema
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime, timedelta
 import requests, sys

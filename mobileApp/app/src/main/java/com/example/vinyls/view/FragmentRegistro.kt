@@ -12,25 +12,26 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.vinyls.R
-import com.example.vinyls.databinding.FragmentAlbumCreateBinding
-import com.example.vinyls.viewmodels.AlbumCreateViewModel
+import com.example.vinyls.databinding.FragmentRegistroBinding
+import com.example.vinyls.viewmodels.RegistroViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_album_create.*
+import kotlinx.android.synthetic.main.fragment_registro.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
 class FragmentRegistro : Fragment() {
-    private var _binding: FragmentAlbumCreateBinding? = null
+    private var _binding: FragmentRegistroBinding? = null
     private val binding get() = _binding!!  // get
-    private lateinit var viewModel: AlbumCreateViewModel
+    private lateinit var viewModel: RegistroViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
             View? {
-        _binding = FragmentAlbumCreateBinding.inflate(inflater, container, false)
+        _binding = FragmentRegistroBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -38,15 +39,14 @@ class FragmentRegistro : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        viewModel = ViewModelProvider(this, AlbumCreateViewModel.Factory(activity.application)).get(
-            AlbumCreateViewModel::class.java)
+        viewModel = ViewModelProvider(this, RegistroViewModel.Factory(activity.application)).get(
+            RegistroViewModel::class.java)
 
         createButton()
-
     }
 
     private fun createButton() {
-        binding.btnSendAlbum.setOnClickListener {
+        binding.btnSendCandidato.setOnClickListener {
             sendDataToServer()
         }
     }
@@ -54,21 +54,22 @@ class FragmentRegistro : Fragment() {
     private fun sendDataToServer() {
         var i:Int=0
         if(validateForm()){
-            var strAlbum = "{\n \"names\": \"" +
-                    binding.etNameCreateAlbum.text.toString() +
+            var strCandidato = "{\n \"names\": \"" +
+                    binding.etNamesRegistro.text.toString() +
                     "\",\n  \"lastNames\":\"" +
-                    binding.etCoverCreateAlbum.text.toString() +
+                    binding.etLastNamesRegistro.text.toString() +
                     "\",\n  \"password\": \"" +
-                    binding.etReleaseDateCreateAlbum.text.toString() +
+                    binding.etPasswordRegistro.text.toString() +
                     "\",\n  \"confirmPassword\": \"" +
-                    binding.etReleaseDateCreateAlbum.text.toString() +
-                    "\",\n  \"mai\": \"" +
+                    binding.etConfirmPasswordRegistro.text.toString() +
+                    "\",\n  \"mail\": \"" +
+                    binding.etMailRegistro.text.toString() +
                     "\"\n}"
-            Log.i("data Captured",strAlbum)
+            Log.i("data Captured",strCandidato)
 
             lifecycleScope.launch{
-                val idAlbumCreated = async { viewModel.createAlbumFromNetwork(JSONObject(strAlbum)) }
-                i = idAlbumCreated.await()
+                val idRegistrod = async { viewModel.registroFromNetwork(JSONObject(strCandidato)) }
+                i = idRegistrod.await()
             }
 
             Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
@@ -83,55 +84,46 @@ class FragmentRegistro : Fragment() {
         var isValid = true
 
         with(binding){
-            if(etNameCreateAlbum.text.toString().isEmpty()){
+            if(etNamesRegistro.text.toString().isEmpty()){
                 isValid = false
-                tiNameCreateAlbum.error = "Campo requerido"
+                tiNamesRegistro.error = "Campo requerido"
             }else{
-                tiNameCreateAlbum.error = null
-            }
-            if(tbGenre.checkedButtonId==-1){
-                isValid = false
-                tvGenreCreateAlbum.error = "Campo requerido"
-            }else{
-                tvGenreCreateAlbum.error = null
-            }
-            if(rgRecordLabelCreateAlbum.checkedRadioButtonId==-1){
-                isValid = false
-                tvRecordLabelCreateAlbum.error = "Campo requerido"
-            }else{
-                tvGenreCreateAlbum.error = null
-            }
-            if(etReleaseDateCreateAlbum.text.toString().matches(".*[A-Z].*".toRegex()) || etReleaseDateCreateAlbum.text.toString().matches(".*[a-z].*".toRegex())){
-               isValid = false
-                tiReleaseDateCreateAlbum.error = "Datos incorrectos de fecha"
-            }
-            else{
-                tiReleaseDateCreateAlbum.error = null
-            }
-            if(etDescriptionCreateAlbum.text.toString().isEmpty()){
-                isValid = false
-                tiDescriptionCreateAlbum.error = "Campo requerido"
-            }else{
-                tiDescriptionCreateAlbum.error = null
+                tiNamesRegistro.error = null
             }
 
-            if(etCoverCreateAlbum.text.toString().isEmpty()){
+            if(etLastNamesRegistro.text.toString().isEmpty()){
                 isValid = false
-                tiCoverCreateAlbum.error = "Campo requerido"
+                tiLastNamesRegistro.error = "Campo requerido"
             }else{
-                tiCoverCreateAlbum.error = null
-            }
-            if(etReleaseDateCreateAlbum.text.toString().isEmpty()){
-                isValid = false
-                tiReleaseDateCreateAlbum.error = "Campo requerido"
-            }else{
-                tiReleaseDateCreateAlbum.error = null
+                tiLastNamesRegistro.error = null
             }
 
+
+            if (etPasswordRegistro.text.toString().isEmpty()) {
+                isValid = false
+                tiPasswordRegistro.error = "Campo requerido"
+            } else {
+                tiPasswordRegistro.error = null
+            }
+
+            if (etConfirmPasswordRegistro.text.toString().isEmpty()) {
+                isValid = false
+                tiConfirmPasswordRegistro.error = "Campo requerido"
+            } else {
+                tiConfirmPasswordRegistro.error = null
+            }
+
+            if(etMailRegistro.text.toString().isEmpty()){
+                isValid = false
+                tiMailRegistro.error = "Campo requerido"
+            }else{
+                tiMailRegistro.error = null
+            }
         }
 
         return isValid
 
     }
+
 
 }

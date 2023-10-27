@@ -555,7 +555,7 @@ class VistaInformacionLaboral(Resource):
             if "dateTo" in request.json:
                 if request.json["dateTo"] != "" and request.json["dateTo"] != None :
                     try:
-                        dateFrom = datetime.strptime(request.json["dateTo"], "%Y-%m-%dT%H:%M:%S.%fZ")
+                        dateTo = datetime.strptime(request.json["dateTo"], "%Y-%m-%dT%H:%M:%S.%fZ")
                     except:
                         return "El campo dateTo no tiene formato de fecha correcto", 400
                 informacionLaboral.dateTo = dateTo

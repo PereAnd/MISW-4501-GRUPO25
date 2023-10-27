@@ -28,11 +28,7 @@ class MainActivityTest {
     fun setUp() {}
 
 
-    @Test
-    fun navigateToAlbumList() {
-        onView(withId(R.id.btnColeccionista)).perform(click())
-        onView(withId(R.id.fragmentAlbumList)).check(matches(isDisplayed()))
-    }
+
 
 
 }

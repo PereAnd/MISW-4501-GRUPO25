@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from ..modelos import db, Empresa, EmpresaEschema, Vertical, VerticalEschema, Ubicacion, UbicacionEschema
+from ..modelos import db, Empresa, EmpresaEschema, Vertical, VerticalEschema, Ubicacion, UbicacionEschema, Proyecto, ProyectoEschema
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime, timedelta
 import requests, sys
@@ -8,6 +8,7 @@ import requests, sys
 empresa_schema = EmpresaEschema()
 vertical_schema = VerticalEschema()
 ubicacion_schema = UbicacionEschema()
+proyecto_schema = ProyectoEschema()
 # informacion_schema = InformacionAcademicaEschema()
 # informacionTecnica_schema = InformacionTecnicaEschema()
 # informacionLaboral_schema = InformacionLaboralEschema()
@@ -372,6 +373,125 @@ class VistaUbicacion(Resource):
 
 
 
+# Proyecto
+# Vista POST - GET
+
+class VistaProyectos(Resource):
+    def post(self, empresaId):
+        if empresaId.isnumeric() == False:
+            return 'El empresaId no es un número.', 400
+        else:
+            empresa = Empresa.query.get(empresaId)
+            if empresa is None:
+                return 'No existe la cuenta del empresa solicitada', 404
+        if not "proyecto" in request.json or not "description" in request.json:
+            return 'Los campos proyecto, description son requeridos', 400
+        if request.json["proyecto"] == "" or request.json["description"] == "": 
+            return 'Los campos proyecto, description son requeridos', 400
+
+
+        try:
+            nueva_proyecto = Proyecto(proyecto=request.json["proyecto"], 
+                                        description=request.json["description"], empresaId=empresaId)
+            db.session.add(nueva_proyecto)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return {'Error': str(sys.exc_info()[0])}, 412
+        
+        return proyecto_schema.dump(nueva_proyecto), 201
+
+
+    
+    def get(self, empresaId):
+        if empresaId.isnumeric() == False:
+            return 'El empresaId no es un número.', 400
+        else:
+            empresa = Empresa.query.get(empresaId)
+            if empresa is None:
+                return 'No existe la cuenta del empresa solicitada', 404
+            
+        try:
+                return[proyecto_schema.dump(t) for t in Proyecto.query.filter(
+                (Proyecto.empresaId == empresaId))], 200
+        except:
+            return {'Error': str(sys.exc_info()[0])}, 412
+        
+# Proyecto
+# Vista PATCH - GET - DELETE
+class VistaProyecto(Resource):
+
+    def patch(self, empresaId, id):
+        
+        if empresaId.isnumeric() == False:
+            return 'El empresaId no es un número.', 400
+        else:
+            empresa = Empresa.query.get(empresaId)
+            if empresa is None:
+                return 'No existe la cuenta del empresa solicitada', 404
+
+        if id.isnumeric() == False:
+            return 'El id no es un número.', 400
+        else:
+            proyecto = Proyecto.query.get(id)
+            if proyecto is None:
+                return 'No existe la Proyecto del empresa solicitada', 404
+
+
+            if "proyecto" in request.json:
+                if request.json["proyecto"] == "":
+                    return 'El campo proyecto es requerido', 400
+                proyecto.proyecto = request.json["proyecto"]
+
+            if "description" in request.json:
+                if request.json["description"] == "":
+                    return 'El campo description es requerido', 400
+                proyecto.description = request.json["description"]
+
+            try:
+                db.session.commit()
+                return proyecto_schema.dump(proyecto), 200
+            except:
+                db.session.rollback()
+                return {'Error': str(sys.exc_info()[0])}, 412
+                
+    def get(self, empresaId, id):
+        if empresaId.isnumeric() == False:
+            return 'El empresaId no es un número.', 400
+        else:
+            empresa = Empresa.query.get(empresaId)
+            if empresa is None:
+                return 'No existe la cuenta del empresa solicitada', 404
+
+        if id.isnumeric() == False:
+            return 'El id no es un número.', 400
+        else:
+            proyecto = Proyecto.query.get(id)
+            if proyecto is None:
+                return 'No existe la Proyecto del empresa solicitada', 404
+        return proyecto_schema.dump(proyecto), 200
+
+    def delete(self, empresaId, id):
+        if empresaId.isnumeric() == False:
+            return 'El empresaId no es un número.', 400
+        else:
+            empresa = Empresa.query.get(empresaId)
+            if empresa is None:
+                return 'No existe la cuenta del empresa solicitada', 404
+
+        if id.isnumeric() == False:
+            return 'El id no es un número.', 400
+        else:
+            proyecto = Proyecto.query.get(id)
+            if proyecto is None:
+                return 'No existe la Proyecto del empresa solicitada', 404
+        try:
+            db.session.delete(proyecto)
+            db.session.commit()
+            return 'Registro Eliminado Correctamente', 204
+        except:
+            db.session.rollback()
+            return {'Error': str(sys.exc_info()[0])}, 412
 
 
 

@@ -1,6 +1,6 @@
 from flask_restful import Api
 from .modelos import db
-from .vistas import VistaPing,VistaRegistro,VistaEmpresa,VistaVerticales, VistaVertical,VistaUbicacion,VistaUbicaciones
+from .vistas import VistaPing,VistaRegistro,VistaEmpresa,VistaVerticales, VistaVertical,VistaUbicacion,VistaUbicaciones, VistaProyecto, VistaProyectos
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
@@ -35,11 +35,7 @@ api.add_resource(VistaVerticales, '/empresa/<string:empresaId>/vertical')
 api.add_resource(VistaVertical, '/empresa/<string:empresaId>/vertical/<string:id>')
 api.add_resource(VistaUbicaciones, '/empresa/<string:empresaId>/ubicacion')
 api.add_resource(VistaUbicacion, '/empresa/<string:empresaId>/ubicacion/<string:id>')
-# api.add_resource(VistaInformacionesAcademicas, '/empresa/<string:empresaId>/informacionAcademica')
-# api.add_resource(VistaInformacionAcademica, '/empresa/<string:empresaId>/informacionAcademica/<string:id>')
-# api.add_resource(VistaInformacionesTecnicas, '/empresa/<string:empresaId>/informacionTecnica')
-# api.add_resource(VistaInformacionTecnica, '/empresa/<string:empresaId>/informacionTecnica/<string:id>')
-# api.add_resource(VistaInformacionesLaborales, '/empresa/<string:empresaId>/informacionLaboral')
-# api.add_resource(VistaInformacionLaboral, '/empresa/<string:empresaId>/informacionLaboral/<string:id>')
+api.add_resource(VistaProyectos, '/empresa/<string:empresaId>/proyecto')
+api.add_resource(VistaProyecto, '/empresa/<string:empresaId>/proyecto/<string:id>')
 api.add_resource(VistaPing, '/empresa/ping')
 

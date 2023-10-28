@@ -1346,6 +1346,211 @@
                     }
                 }
             }
+        },
+        "/empresa/{empresaId}/proyecto": {
+            "get": {
+                "description": "Retorna las proyectos de una empresa",
+                "operationId": "findProyecto",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Proyecto",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Proyecto"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de proyecto para una empresa",
+                "operationId": "addProyecto",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "proyecto",
+                        "in": "body",
+                        "description": "proyecto a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateProyecto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Proyecto",
+                        "schema": {
+                            "$ref": "#/definitions/Proyecto"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{id}": {
+            "get": {
+                "description": "Retorna una proyecto a partir de su id",
+                "operationId": "findProyectoById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta proyecto",
+                        "schema": {
+                            "$ref": "#/definitions/Proyecto"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una proyecto a partir de su id",
+                "operationId": "deleteProyectoById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó la proyecto"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una proyecto a partir de su id",
+                "operationId": "updateProyectoById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "vertical",
+                        "in": "body",
+                        "description": "Proyecto a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateProyecto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta Proyecto",
+                        "schema": {
+                            "$ref": "#/definitions/Proyecto"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -1815,6 +2020,35 @@
                     "type": "string"
                 },
                 "city": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "Proyecto": {
+            "type": "object",
+            "required": [
+                "proyecto",
+                "description"
+            ],
+            "properties": {
+                "proyecto": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+
+                
+            }
+        },
+        "UpdateProyecto": {
+            "type": "object",
+            "required": [],
+            "properties": {
+                "proyecto": {
                     "type": "string"
                 },
                 "description": {

@@ -5,6 +5,22 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_
 db = SQLAlchemy()
 
 
+class Proyecto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    proyecto = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(150), nullable=False)
+    empresaId = db.Column(db.Integer, db.ForeignKey('empresa.id'))
+
+class ProyectoEschema(SQLAlchemySchema):
+    class Meta:
+         model = Proyecto
+         include_relationships = False
+         load_instance = True         
+    id = auto_field()
+    proyecto = auto_field()
+    description = auto_field()
+
+
 class Vertical(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     vertical = db.Column(db.String(50), nullable=False)
@@ -49,6 +65,7 @@ class Empresa(db.Model):
     description = db.Column(db.Text, nullable=True)
     vertical = db.relationship('Vertical', backref='verticalRel')
     ubicacion = db.relationship('Ubicacion', backref='ubicacion')
+    proyecto = db.relationship('Proyecto', backref='proyectoRel')
 
 
 # class InformacionAcademica(db.Model):

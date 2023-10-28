@@ -28,4 +28,15 @@ jobs:
         working-directory: ./backend/candidato
         run: |
           pytest --cov=src -v -s --cov-fail-under=80
+      - name: Install environment empresa
+        working-directory: ./backend/empresa
+        run: |
+          pip install pipenv
+          pipenv sync --system --dev
+          export VIRTUAL_ENV="$(pipenv --venv)" PATH="$(pipenv --venv)/bin:$PATH"
+      - name: Run unit tests empresa
+        working-directory: ./backend/empresa
+        run: |
+          pytest --cov=src -v -s --cov-fail-under=80
+
           

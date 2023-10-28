@@ -17,9 +17,16 @@ phases:
       - REPOSITORY_URI_CB=798178280816.dkr.ecr.us-east-1.amazonaws.com/candidato_cb
       - COMMIT_HASH_CB=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG_CB=${COMMIT_HASH_CB:=latest}
+      - REPOSITORY_URI_EMP=798178280816.dkr.ecr.us-east-1.amazonaws.com/empresa
+      - COMMIT_HASH_EMP=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG_EMP=${COMMIT_HASH:=latest}
+      - REPOSITORY_URI_EMP_CB=798178280816.dkr.ecr.us-east-1.amazonaws.com/empresa_cb
+      - COMMIT_HASH_EMP_CB=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG_EMP_CB=${COMMIT_HASH_CB:=latest}
       - sed -i 's@CANDIDATO_IMAGE@'"$REPOSITORY_URI:$IMAGE_TAG"'@' backend/deployment/k8s/deployment.yaml
       - sed -i 's@CANDIDATO_CB_IMAGE@'"$REPOSITORY_URI_CB:$IMAGE_TAG_CB"'@' backend/deployment/k8s/deployment.yaml
-
+      - sed -i 's@EMPRESA_IMAGE@'"$REPOSITORY_URI_EMP:$IMAGE_TAG_EMP"'@' backend/deployment/k8s/deployment.yaml
+      - sed -i 's@EMPRESA_CB_IMAGE@'"$REPOSITORY_URI_EMP_CB:$IMAGE_TAG_EMP_CB"'@' backend/deployment/k8s/deployment.yaml
   build:
     commands:
       - echo Build started on `date`
@@ -28,6 +35,10 @@ phases:
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
       - docker build -t $REPOSITORY_URI_CB:latest ./backend/candidato_sb/src
       - docker tag $REPOSITORY_URI_CB:latest $REPOSITORY_URI_CB:$IMAGE_TAG_CB
+      - docker build -t $REPOSITORY_URI_EMP:latest ./backend/empresa/src
+      - docker tag $REPOSITORY_URI_EMP:latest $REPOSITORY_URI_EMP:$IMAGE_TAG_EMP
+      - docker build -t $REPOSITORY_URI_EMP_CB:latest ./backend/empresa_sb/src
+      - docker tag $REPOSITORY_URI_EMP_CB:latest $REPOSITORY_URI_EMP_CB:$IMAGE_TAG_EMP_CB
   post_build:
     commands:
       - echo Build completed on `date`
@@ -36,9 +47,15 @@ phases:
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - docker push $REPOSITORY_URI_CB:latest
       - docker push $REPOSITORY_URI_CB:$IMAGE_TAG_CB
+      - docker push $REPOSITORY_URI_EMP:latest
+      - docker push $REPOSITORY_URI_EMP:$IMAGE_TAG_EMP
+      - docker push $REPOSITORY_URI_EMP_CB:latest
+      - docker push $REPOSITORY_URI_EMP_CB:$IMAGE_TAG_EMP_CB
       - echo Writing image definitions file...
-      - printf '[{"name”:"candidato","imageUri":"%s"}]' $REPOSITORY_URI_CB:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name”:"candidato","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - printf '[{"name”:"candidato_cb","imageUri":"%s"}]' $REPOSITORY_URI_CB:$IMAGE_TAG_CB > imagedefinitions_cb.json
+      - printf '[{"name”:"empresa","imageUri":"%s"}]' $REPOSITORY_URI_EMP:$IMAGE_TAG_EMP > imagedefinitions_emp.json
+      - printf '[{"name”:"empresa_cb","imageUri":"%s"}]' $REPOSITORY_URI_EMP_CB:$IMAGE_TAG_EMP_CB > imagedefinitions_empp_cb.json
       - CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::798178280816:role/CodeBuildEKSRole --role-session-name eks-codebuild --duration-seconds 900)
       - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
       - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
@@ -58,4 +75,6 @@ artifacts:
   files: 
     - imagedefinitions.json
     - imagedefinitions_cb.json
+    - imagedefinitions_emp.json
+    - imagedefinitions_emp_cb.json
     - backend/deployment/k8s/deployment.yaml

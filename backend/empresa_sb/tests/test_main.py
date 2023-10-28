@@ -7,6 +7,7 @@ import time
 
 id_empresa = 0
 id_vertical = 0
+id_ubicacion = 0
 
 @pytest.fixture(scope="session", autouse=True)
 def execute_before_any_test():
@@ -234,6 +235,123 @@ def test_elimina_vertical_id_no_existe(client: FlaskClient):
     assert resp.status_code == 404
     resp = client.delete(
         '/empresa/' + str(id_empresa) + '/vertical/' + '1234')
+    assert resp.status_code == 404
+
+
+
+# Pruebas Ubicación
+
+def test_crea_ubicacion(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.post(
+        '/empresa/' + str(id_empresa) + '/ubicacion', json={'country': "Prueba País",'city': "Prueba City",'description': 'Prueba Description'})
+    assert resp.status_code == 201
+    assert resp.json.get('id')
+    id_ubicacion = resp.json.get('id')
+
+def test_crea_ubicacion_datos_incompletos(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.post(
+        '/empresa/' + str(id_empresa) + '/ubicacion', json={'country': "Prueba País",'description': 'Prueba Description'})
+    assert resp.status_code == 400
+    resp = client.post(
+        '/empresa/' + str(id_empresa) + '/ubicacion', json={'country': "Prueba País",'city': "",'description': 'Prueba Description'})
+    assert resp.status_code == 400
+
+def test_crea_ubicacion_empresa_no_existe(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.post(
+        '/empresa/123456/ubicacion', json={'country': "Prueba País",'city': "Prueba City",'description': 'Prueba Description'})
+    assert resp.status_code == 404
+
+def test_actualiza_ubicacion(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + str(id_ubicacion), json={'country': "Prueba País 1",'city': "Prueba City 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 200
+    assert resp.json.get('country') == 'Prueba País 1'
+    assert resp.json.get('city') == 'Prueba City 1'
+    assert resp.json.get('description') == 'Prueba Description 1'
+
+def test_actualiza_ubicacion_id_no_numeric(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.patch(
+        '/empresa/' + 'dddd' + '/ubicacion/' + str(id_ubicacion), json={'country': "Prueba País",'city': "Prueba City",'description': 'Prueba Description'})
+    assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + '5ddd', json={'country': "Prueba País",'city': "Prueba City",'description': 'Prueba Description'})
+    assert resp.status_code == 400
+
+
+def test_actualiza_ubicacion_id_no_existe(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.patch(
+        '/empresa/' + '1234' + '/ubicacion/' + str(id_ubicacion), json={'country': "Prueba País",'city': "Prueba City",'description': 'Prueba Description'})
+    assert resp.status_code == 404
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + '1234', json={'country': "Prueba País",'city': "Prueba City",'description': 'Prueba Description'})
+    assert resp.status_code == 404
+
+def test_actualiza_ubicacion_datos_incompletos(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + str(id_ubicacion), json={'country': ""})
+    assert resp.status_code == 400
+
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + str(id_ubicacion), json={'city': ""})
+    assert resp.status_code == 400
+
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + str(id_ubicacion), json={'description': ''})
+    assert resp.status_code == 400
+
+def test_obtiene_ubicacion(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.get(
+        '/empresa/' + str(id_empresa) + '/ubicacion')
+    assert resp.status_code == 200
+    jsonreponse = resp.json
+    assert jsonreponse[0]['country'] == 'Prueba País 1'
+    # assert jsonreponse == 'Prueba Ubicacion 1'
+
+
+def test_obtiene_ubicacion_empresa_no_existe(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.get(
+        '/empresa/' + '123' + '/ubicacion')
+    assert resp.status_code == 404
+
+def test_obtiene_ubicacion_id(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.get(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + str(id_ubicacion))
+    assert resp.status_code == 200
+    assert resp.json.get('country') == 'Prueba País 1'
+
+def test_obtiene_ubicacion_id_no_existe(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.get(
+        '/empresa/' + '1234' + '/ubicacion/' + str(id_ubicacion))
+    assert resp.status_code == 404
+    resp = client.get(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + '1234')
+    assert resp.status_code == 404
+
+
+def test_elimina_ubicacion(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.delete(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + str(id_ubicacion))
+    assert resp.status_code == 204
+
+def test_elimina_ubicacion_id_no_existe(client: FlaskClient):
+    global id_empresa, id_ubicacion
+    resp = client.delete(
+        '/empresa/' + '1234' + '/ubicacion/' + str(id_ubicacion))
+    assert resp.status_code == 404
+    resp = client.delete(
+        '/empresa/' + str(id_empresa) + '/ubicacion/' + '1234')
     assert resp.status_code == 404
 
 

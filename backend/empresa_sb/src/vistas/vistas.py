@@ -30,22 +30,22 @@ class VistaRegistro(Resource):
 
 # Empresas
 # Vista PATCH - GET
-# class VistaEmpresa(Resource):
-#     def __init__(self, **kwargs):
-#         # smart_engine is a black box dependency
-#         self.breaker = kwargs['breaker']
-#         self.urlBackEnd = str(os.getenv("EMPR_BACK_URL")) + "/empresa"
-#     def patch(self, id):
-#         try:
-#             return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + id , json=request.json)
-#         except Exception:
-#             return {'Error': str(sys.exc_info()[0])}, 412
+class VistaEmpresa(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("EMPR_BACK_URL")) + "/empresa"
+    def patch(self, id):
+        try:
+            return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + id , json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
                 
-#     def get(self, id):
-#         try:
-#             return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + id)
-#         except Exception:
-#             return {'Error': str(sys.exc_info()[0])}, 412
+    def get(self, id):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + id)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
         
             
 # PING

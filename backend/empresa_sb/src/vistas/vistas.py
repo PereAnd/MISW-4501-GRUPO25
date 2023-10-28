@@ -108,6 +108,60 @@ class VistaVertical(Resource):
             return {'Error': str(sys.exc_info()[0])}, 412
 
 
+# Ubicacion
+# Vista POST - GET
+
+class VistaUbicaciones(Resource):
+
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("EMPR_BACK_URL")) + "/empresa"
+
+    def post(self, empresaId):
+        try:
+            return self.breaker.make_remote_call_post(self.urlBackEnd + "/" + empresaId + "/ubicacion", json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def get(self, empresaId):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + empresaId + "/ubicacion", params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+        
+# Ubicacion
+# Vista PATCH - GET - DELETE
+class VistaUbicacion(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("EMPR_BACK_URL")) + "/empresa"
+
+    def patch(self, empresaId, id):
+        try:
+            return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + empresaId + "/ubicacion/" + id, json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+                
+    def get(self, empresaId, id):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + empresaId + "/ubicacion/"+ id, params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def delete(self, empresaId, id):
+        try:
+            return self.breaker.make_remote_call_delete(self.urlBackEnd + "/" + empresaId + "/ubicacion/"+ id)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+
 
 
 

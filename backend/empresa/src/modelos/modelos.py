@@ -8,7 +8,7 @@ db = SQLAlchemy()
 class Vertical(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     vertical = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(150), nullable=False)
     empresaId = db.Column(db.Integer, db.ForeignKey('empresa.id'))
 
 class VerticalEschema(SQLAlchemySchema):
@@ -18,6 +18,23 @@ class VerticalEschema(SQLAlchemySchema):
          load_instance = True         
     id = auto_field()
     vertical = auto_field()
+    description = auto_field()
+
+class Ubicacion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    country = db.Column(db.String(50), nullable=False)
+    city = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(150), nullable=False)
+    empresaId = db.Column(db.Integer, db.ForeignKey('empresa.id'))
+
+class UbicacionEschema(SQLAlchemySchema):
+    class Meta:
+         model = Ubicacion
+         include_relationships = False
+         load_instance = True         
+    id = auto_field()
+    country = auto_field()
+    city = auto_field()
     description = auto_field()
 
 
@@ -31,6 +48,7 @@ class Empresa(db.Model):
     organizationType = db.Column(db.String(100), nullable=True)
     description = db.Column(db.Text, nullable=True)
     vertical = db.relationship('Vertical', backref='verticalRel')
+    ubicacion = db.relationship('Ubicacion', backref='ubicacion')
 
 
 # class InformacionAcademica(db.Model):
@@ -109,6 +127,7 @@ class EmpresaEschema(SQLAlchemySchema):
     organizationType = auto_field()
     description = auto_field()
     vertical = fields.Nested(VerticalEschema, many=True)
+    ubicacion = fields.Nested(UbicacionEschema, many=True)
 #     docType = auto_field()
 #     docNumber = auto_field()
 #     phone = auto_field()

@@ -1141,7 +1141,215 @@
                     }
                 }
             }
+        },
+        "/empresa/{empresaId}/ubicacion": {
+            "get": {
+                "description": "Retorna las ubicaciones de una empresa",
+                "operationId": "findUbicacion",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Ubicacion",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Ubicacion"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de ubicacion para una empresa",
+                "operationId": "addUbicacion",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "ubicacion",
+                        "in": "body",
+                        "description": "ubicacion a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateUbicacion"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Ubicacion",
+                        "schema": {
+                            "$ref": "#/definitions/Ubicacion"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/ubicacion/{id}": {
+            "get": {
+                "description": "Retorna una ubicacion a partir de su id",
+                "operationId": "findUbicacionById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la ubicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta ubicacion",
+                        "schema": {
+                            "$ref": "#/definitions/Ubicacion"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una ubicacion a partir de su id",
+                "operationId": "deleteUbicacionById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la ubicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó la ubicacion"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una ubicacion a partir de su id",
+                "operationId": "updateUbicacionById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la ubicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "ubicacion",
+                        "in": "body",
+                        "description": "Ubicacion a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateUbicacion"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta Ubicacion",
+                        "schema": {
+                            "$ref": "#/definitions/Ubicacion"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
         }
+
+
+
     },
     "definitions": {
         "CandidatoRegistro": {
@@ -1577,7 +1785,44 @@
                     "type": "string"
                 }
             }
+        },
+        "Ubicacion": {
+            "type": "object",
+            "required": [
+                "country",
+                "city",
+                "description"
+            ],
+            "properties": {
+                "coutry": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+
+                
+            }
+        },
+        "UpdateUbicacion": {
+            "type": "object",
+            "required": [],
+            "properties": {
+                "country": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
         }
+
 
 
     }

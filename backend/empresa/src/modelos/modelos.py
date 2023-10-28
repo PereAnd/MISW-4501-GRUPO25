@@ -4,11 +4,34 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_
 
 db = SQLAlchemy()
 
+
+class Vertical(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    vertical = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(50), nullable=False)
+    empresaId = db.Column(db.Integer, db.ForeignKey('empresa.id'))
+
+class VerticalEschema(SQLAlchemySchema):
+    class Meta:
+         model = Vertical
+         include_relationships = False
+         load_instance = True         
+    id = auto_field()
+    vertical = auto_field()
+    description = auto_field()
+
+
 class Empresa(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
     password = db.Column(db.String(120), nullable=False)
     mail = db.Column(db.String(150), nullable=False)
+    docType = db.Column(db.String(10), nullable=True)
+    docNumber = db.Column(db.String(30), nullable=True)
+    organizationType = db.Column(db.String(100), nullable=True)
+    description = db.Column(db.Text, nullable=True)
+    vertical = db.relationship('Vertical', backref='verticalRel')
+
 
 # class InformacionAcademica(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -81,6 +104,11 @@ class EmpresaEschema(SQLAlchemySchema):
     name = auto_field()
 #     lastNames = auto_field()
     mail = auto_field()
+    docType = auto_field()
+    docNumber = auto_field()
+    organizationType = auto_field()
+    description = auto_field()
+    vertical = fields.Nested(VerticalEschema, many=True)
 #     docType = auto_field()
 #     docNumber = auto_field()
 #     phone = auto_field()

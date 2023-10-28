@@ -2,8 +2,8 @@
     "swagger": "2.0",
     "info": {
         "version": "1.0.0",
-        "title": "Candidatos",
-        "description": "Api de Candidatos BackEnd",
+        "title": "Proyecto Final 2",
+        "description": "Api de Proyecto Final 2 BackEnd",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "Grupo 25"
@@ -787,6 +787,360 @@
                     }
                 }
             }
+        },
+        "/empresa": {
+            "get": {
+                "description": "Retorna todos las epresas",
+                "operationId": "findEmpresas",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "mail",
+                        "in": "query",
+                        "description": "correo de la empresa",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta empresa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Empresa"
+                            }
+                        },
+                        "default": {
+                            "description": "unexpected error",
+                            "schema": {
+                                "$ref": "#/definitions/ErrorModel"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Registra una empresa",
+                "operationId": "addEmpresa",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresa",
+                        "in": "body",
+                        "description": "Candidato a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewEmpresa"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Empresa",
+                        "schema": {
+                            "$ref": "#/definitions/EmpresaRegistro"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{id}": {
+            "get": {
+                "description": "Retorna una empresa a partir de su id",
+                "operationId": "findEmpresaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta empresa",
+                        "schema": {
+                            "$ref": "#/definitions/Empresa"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una empresa a partir de su id",
+                "operationId": "updateEmpresaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "empresa",
+                        "in": "body",
+                        "description": "Empresa a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateEmpresa"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta empresa",
+                        "schema": {
+                            "$ref": "#/definitions/Empresa"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/vertical": {
+            "get": {
+                "description": "Retorna las verticales de una empresa",
+                "operationId": "findVertical",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Vertical",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Vertical"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de vertical para una empresa",
+                "operationId": "addVertical",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "vertical",
+                        "in": "body",
+                        "description": "vertical a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateVertical"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Vertical",
+                        "schema": {
+                            "$ref": "#/definitions/Vertical"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/vertical/{id}": {
+            "get": {
+                "description": "Retorna una vertical a partir de su id",
+                "operationId": "findVerticalById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la vertical",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta vertical",
+                        "schema": {
+                            "$ref": "#/definitions/Vertical"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una vertical a partir de su id",
+                "operationId": "deleteVerticalById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la vertical",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó la vertical"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una vertical a partir de su id",
+                "operationId": "updateVerticalById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la vertical",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "vertical",
+                        "in": "body",
+                        "description": "Vertical a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateVertical"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta Vertical",
+                        "schema": {
+                            "$ref": "#/definitions/Vertical"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -807,12 +1161,6 @@
                     "type": "string"
                 },
                 "lastNames": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "confirmPassword": {
                     "type": "string"
                 },
                 "mail": {
@@ -1096,6 +1444,141 @@
                     "type": "string"
                 }
             }
+        },
+        "EmpresaRegistro": {
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "mail"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateEmpresa": {
+            "type": "object",
+            "required": [],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                },
+                "docType": {
+                    "type": "string"
+                },
+                "docNumber": {
+                    "type": "string"
+                },
+                "organizationType": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "Empresa": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                },
+                "docType": {
+                    "type": "string"
+                },
+                "docNumber": {
+                    "type": "string"
+                },
+                "organizationType": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "vertical": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Vertical"
+                    }
+                }
+
+            }
+        },
+        "NewEmpresa": {
+            "type": "object",
+            "required": [
+                "name",
+                "password",
+                "confirmPassword",
+                "mail"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "confirmPassword": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                }
+            }
+        },
+        "Vertical": {
+            "type": "object",
+            "required": [
+                "vertical",
+                "description"
+            ],
+            "properties": {
+                "vertical": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+
+                
+            }
+        },
+        "UpdateVertical": {
+            "type": "object",
+            "required": [],
+            "properties": {
+                "vertical": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
         }
+
+
     }
 }

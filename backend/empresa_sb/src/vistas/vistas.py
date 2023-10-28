@@ -53,6 +53,65 @@ class VistaEmpresa(Resource):
 class VistaPing(Resource):
     def get(self):
         return "pong"            
+    
+
+# Vertical
+# Vista POST - GET
+
+class VistaVerticales(Resource):
+
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("EMPR_BACK_URL")) + "/empresa"
+
+    def post(self, empresaId):
+        try:
+            return self.breaker.make_remote_call_post(self.urlBackEnd + "/" + empresaId + "/vertical", json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def get(self, empresaId):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + empresaId + "/vertical", params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+        
+# Vertical
+# Vista PATCH - GET - DELETE
+class VistaVertical(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("EMPR_BACK_URL")) + "/empresa"
+
+    def patch(self, empresaId, id):
+        try:
+            return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + empresaId + "/vertical/" + id, json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+                
+    def get(self, empresaId, id):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + empresaId + "/vertical/"+ id, params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def delete(self, empresaId, id):
+        try:
+            return self.breaker.make_remote_call_delete(self.urlBackEnd + "/" + empresaId + "/vertical/"+ id)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+
+
+
+
 
 # # Informacion Academica
 # # Vista POST - GET

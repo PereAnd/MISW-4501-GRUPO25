@@ -1,20 +1,20 @@
 import pytest
 from flask.testing import FlaskClient
 from src.app import app, db
-from src.modelos import Empresa #, InformacionAcademica, InformacionTecnica, InformacionLaboral
+from src.modelos import Empresa, Vertical #, InformacionAcademica, InformacionTecnica, InformacionLaboral
 import requests
 import os
 
 id_empresa = 0
-id_informacion_tecnica = 0
-id_informacion_academica = 0
-id_informacion_laboral = 0
+id_vertical = 0
+
 
 @pytest.fixture(scope="session", autouse=True)
 def execute_before_any_test():
     # InformacionAcademica.query.delete()
     # InformacionTecnica.query.delete()
     # InformacionLaboral.query.delete()
+    Vertical.query.delete()
     Empresa.query.delete()
 
 @pytest.fixture
@@ -46,116 +46,196 @@ def test_registro_empresa_datos_incompletos(client: FlaskClient):
         '/empresa', json={'name': 'CIRKUS SAS','mail': '','password': 'prueba1','confirmPassword': 'prueba1'})
     assert resp.status_code == 400  
 
-# def test_actualiza_empresa(client: FlaskClient):
-#     global id_empresa
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'names': 'César',
-#                                             'lastNames': 'García',
-#                                             'mail': 'cesa96@hotmail.com',
-#                                             'docType': 'CC',
-#                                             'docNumber': '13514130',
-#                                             'phone': '3102062948',
-#                                             'address': 'Cll 10 a sur # 2a - 128',
-#                                             'birthDate': '1978-03-15T00:00:00.000Z',
-#                                             'country': 'Colombia',
-#                                             'city': 'Cajicá',
-#                                             'language': 'Español'})
-#     assert resp.status_code == 200
-#     assert resp.json.get('names') == 'César'
-#     assert resp.json.get('lastNames') == 'García'
-#     assert resp.json.get('mail') == 'cesa96@hotmail.com'
-#     assert resp.json.get('docType') == 'CC'
-#     assert resp.json.get('docNumber') == '13514130'
-#     assert resp.json.get('address') == 'Cll 10 a sur # 2a - 128'
-#     assert resp.json.get('country') == 'Colombia'
-#     assert resp.json.get('city') == 'Cajicá'
-#     assert resp.json.get('language') == 'Español'
+def test_actualiza_empresa(client: FlaskClient):
+    global id_empresa
+    resp = client.patch(
+        '/empresa/' + str(id_empresa), json={'name': 'Otra Empresa',
+                                            'mail': 'cesa96@hotmail.com',
+                                            'docType': 'NIT',
+                                            'docNumber': '900874520',
+                                            'organizationType': 'SAS',
+                                            'description': 'esta es una prueba de la descripción'})
+    assert resp.status_code == 200
+    assert resp.json.get('name') == 'Otra Empresa'
+    assert resp.json.get('mail') == 'cesa96@hotmail.com'
+    assert resp.json.get('docType') == 'NIT'
+    assert resp.json.get('docNumber') == '900874520'
+    assert resp.json.get('organizationType') == 'SAS'
+    assert resp.json.get('description') == 'esta es una prueba de la descripción'
 
-# def test_actualiza_empresa_id_no_numeric(client: FlaskClient):
-#     global id_empresa
+def test_actualiza_empresa_id_no_numeric(client: FlaskClient):
+    global id_empresa
 
-#     resp = client.patch(
-#         '/empresa/lll', json={'names': 'César',
-#                                             'lastNames': 'García',
-#                                             'mail': 'cesa96@hotmail.com',
-#                                             'docType': 'CC',
-#                                             'docNumber': '13514130',
-#                                             'phone': '3102062948',
-#                                             'address': 'Cll 10 a sur # 2a - 128',
-#                                             'birthDate': '1978-03-15T00:00:00.000Z',
-#                                             'country': 'Colombia',
-#                                             'city': 'Cajicá',
-#                                             'language': 'Español'})
-#     assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/lll', json={'name': 'Otra Empresa',
+                                            'mail': 'cesa96@hotmail.com',
+                                            'docType': 'NIT',
+                                            'docNumber': '900874520',
+                                            'organizationType': 'SAS',
+                                            'description': 'esta es una prueba de la descripción'})
+    assert resp.status_code == 400
 
 
-# def test_actualiza_empresa_datos_incompletos(client: FlaskClient):
-#     global id_empresa
+def test_actualiza_empresa_datos_incompletos(client: FlaskClient):
+    global id_empresa
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'names': ''})
-#     assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/' + str(id_empresa), json={'name': ''})
+    assert resp.status_code == 400
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'lastNames': ''})
-#     assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/' + str(id_empresa), json={'mail': '',})
+    assert resp.status_code == 400
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'mail': '',})
-#     assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/' + str(id_empresa), json={'docType': ''})
+    assert resp.status_code == 400
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'docType': ''})
-#     assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/' + str(id_empresa), json={'docNumber': ''})
+    assert resp.status_code == 400
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'docNumber': ''})
-#     assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/' + str(id_empresa), json={'organizationType': ''})
+    assert resp.status_code == 400
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'phone': ''})
-#     assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/' + str(id_empresa), json={'description': ''})
+    assert resp.status_code == 400
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'address': ''})
-#     assert resp.status_code == 400
+def test_obtiene_empresas(client: FlaskClient):
+    resp = client.get(
+        '/empresa')
+    assert resp.status_code == 200
+    jsonreponse = resp.json
+    assert jsonreponse[0]['name'] == 'Otra Empresa'
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'birthDate': '1978-15-15T00:00:00.000Z'})
-#     assert resp.status_code == 400
+def test_obtiene_empresas_x_mail(client: FlaskClient):
+    resp = client.get(
+        "/empresa?mail=cesa96@hotmail.com")
+    assert resp.status_code == 200
+    jsonreponse = resp.json
+    assert jsonreponse[0]['name'] == 'Otra Empresa'
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'country': ''})
-#     assert resp.status_code == 400
+def test_obtiene_empresas_id(client: FlaskClient):
+    global id_empresa
+    resp = client.get(
+        "/empresa/" + str(id_empresa))
+    assert resp.status_code == 200
+    assert resp.json.get('name') == 'Otra Empresa'
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'city': ''})
-#     assert resp.status_code == 400
 
-#     resp = client.patch(
-#         '/empresa/' + str(id_empresa), json={'language': ''})
-#     assert resp.status_code == 400
+# Pruebas Vertical
 
-# def test_obtiene_empresas(client: FlaskClient):
-#     resp = client.get(
-#         '/empresa')
-#     assert resp.status_code == 200
-#     jsonreponse = resp.json
-#     #assert jsonreponse[0]['Names'] == 'César'
+def test_crea_vertical(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.post(
+        '/empresa/' + str(id_empresa) + '/vertical', json={'vertical': "Prueba Vertical",'description': 'Prueba Description'})
+    assert resp.status_code == 201
+    assert resp.json.get('id')
+    id_vertical = resp.json.get('id')
 
-# def test_obtiene_empresas_x_mail(client: FlaskClient):
-#     resp = client.get(
-#         "/empresa?mail=cesa96@hotmail.com")
-#     assert resp.status_code == 200
-#     jsonreponse = resp.json
-#     assert jsonreponse[0]['names'] == 'César'
+def test_crea_vertical_datos_incompletos(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.post(
+        '/empresa/' + str(id_empresa) + '/vertical', json={'vertical': "Prueba Vertical"})
+    assert resp.status_code == 400
+    resp = client.post(
+        '/empresa/' + str(id_empresa) + '/vertical', json={'vertical': "Prueba Vertical",'description': ''})
+    assert resp.status_code == 400
 
-# def test_obtiene_empresas_id(client: FlaskClient):
-#     global id_empresa
-#     resp = client.get(
-#         "/empresa/" + str(id_empresa))
-#     assert resp.status_code == 200
-#     assert resp.json.get('names') == 'César'
+def test_crea_vertical_empresa_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.post(
+        '/empresa/123456/vertical', json={'vertical': "Prueba Vertical",'description': 'Prueba Description'})
+    assert resp.status_code == 404
+
+def test_actualiza_vertical(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical), json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 200
+    assert resp.json.get('vertical') == 'Prueba Vertical 1'
+    assert resp.json.get('description') == 'Prueba Description 1'
+
+def test_actualiza_vertical_id_no_numeric(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.patch(
+        '/empresa/' + 'dddd' + '/vertical/' + str(id_vertical), json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + '5ddd', json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 400
+
+
+def test_actualiza_vertical_id_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.patch(
+        '/empresa/' + '1234' + '/vertical/' + str(id_vertical), json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 404
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + '1234', json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 404
+
+def test_actualiza_vertical_datos_incompletos(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical), json={'vertical': ""})
+    assert resp.status_code == 400
+
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical), json={'description': ''})
+    assert resp.status_code == 400
+
+def test_obtiene_vertical(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.get(
+        '/empresa/' + str(id_empresa) + '/vertical')
+    assert resp.status_code == 200
+    jsonreponse = resp.json
+    assert jsonreponse[0]['vertical'] == 'Prueba Vertical 1'
+    # assert jsonreponse == 'Prueba Vertical 1'
+
+
+def test_obtiene_vertical_empresa_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.get(
+        '/empresa/' + '123' + '/vertical')
+    assert resp.status_code == 404
+
+def test_obtiene_vertical_id(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.get(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical))
+    assert resp.status_code == 200
+    assert resp.json.get('vertical') == 'Prueba Vertical 1'
+
+def test_obtiene_vertical_id_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.get(
+        '/empresa/' + '1234' + '/vertical/' + str(id_vertical))
+    assert resp.status_code == 404
+    resp = client.get(
+        '/empresa/' + str(id_empresa) + '/vertical/' + '1234')
+    assert resp.status_code == 404
+
+
+def test_elimina_vertical(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.delete(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical))
+    assert resp.status_code == 204
+
+def test_elimina_vertical_id_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.delete(
+        '/empresa/' + '1234' + '/vertical/' + str(id_vertical))
+    assert resp.status_code == 404
+    resp = client.delete(
+        '/empresa/' + str(id_empresa) + '/vertical/' + '1234')
+    assert resp.status_code == 404
+
+
 
 # # Pruebas Información Académica
 

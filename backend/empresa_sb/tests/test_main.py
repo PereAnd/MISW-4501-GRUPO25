@@ -6,9 +6,7 @@ import os
 import time
 
 id_empresa = 0
-id_informacion_tecnica = 0
-id_informacion_academica = 0
-id_informacion_laboral = 0
+id_vertical = 0
 
 @pytest.fixture(scope="session", autouse=True)
 def execute_before_any_test():
@@ -125,6 +123,122 @@ def test_obtiene_empresas_id(client: FlaskClient):
         "/empresa/" + str(id_empresa))
     assert resp.status_code == 200
     assert resp.json.get('name') == 'Otra Empresa'
+
+
+
+# Pruebas Vertical
+
+def test_crea_vertical(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.post(
+        '/empresa/' + str(id_empresa) + '/vertical', json={'vertical': "Prueba Vertical",'description': 'Prueba Description'})
+    assert resp.status_code == 201
+    assert resp.json.get('id')
+    id_vertical = resp.json.get('id')
+
+def test_crea_vertical_datos_incompletos(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.post(
+        '/empresa/' + str(id_empresa) + '/vertical', json={'vertical': "Prueba Vertical"})
+    assert resp.status_code == 400
+    resp = client.post(
+        '/empresa/' + str(id_empresa) + '/vertical', json={'vertical': "Prueba Vertical",'description': ''})
+    assert resp.status_code == 400
+
+def test_crea_vertical_empresa_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.post(
+        '/empresa/123456/vertical', json={'vertical': "Prueba Vertical",'description': 'Prueba Description'})
+    assert resp.status_code == 404
+
+def test_actualiza_vertical(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical), json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 200
+    assert resp.json.get('vertical') == 'Prueba Vertical 1'
+    assert resp.json.get('description') == 'Prueba Description 1'
+
+def test_actualiza_vertical_id_no_numeric(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.patch(
+        '/empresa/' + 'dddd' + '/vertical/' + str(id_vertical), json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 400
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + '5ddd', json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 400
+
+
+def test_actualiza_vertical_id_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.patch(
+        '/empresa/' + '1234' + '/vertical/' + str(id_vertical), json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 404
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + '1234', json={'vertical': "Prueba Vertical 1",'description': 'Prueba Description 1'})
+    assert resp.status_code == 404
+
+def test_actualiza_vertical_datos_incompletos(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical), json={'vertical': ""})
+    assert resp.status_code == 400
+
+    resp = client.patch(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical), json={'description': ''})
+    assert resp.status_code == 400
+
+def test_obtiene_vertical(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.get(
+        '/empresa/' + str(id_empresa) + '/vertical')
+    assert resp.status_code == 200
+    jsonreponse = resp.json
+    assert jsonreponse[0]['vertical'] == 'Prueba Vertical 1'
+    # assert jsonreponse == 'Prueba Vertical 1'
+
+
+def test_obtiene_vertical_empresa_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.get(
+        '/empresa/' + '123' + '/vertical')
+    assert resp.status_code == 404
+
+def test_obtiene_vertical_id(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.get(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical))
+    assert resp.status_code == 200
+    assert resp.json.get('vertical') == 'Prueba Vertical 1'
+
+def test_obtiene_vertical_id_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.get(
+        '/empresa/' + '1234' + '/vertical/' + str(id_vertical))
+    assert resp.status_code == 404
+    resp = client.get(
+        '/empresa/' + str(id_empresa) + '/vertical/' + '1234')
+    assert resp.status_code == 404
+
+
+def test_elimina_vertical(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.delete(
+        '/empresa/' + str(id_empresa) + '/vertical/' + str(id_vertical))
+    assert resp.status_code == 204
+
+def test_elimina_vertical_id_no_existe(client: FlaskClient):
+    global id_empresa, id_vertical
+    resp = client.delete(
+        '/empresa/' + '1234' + '/vertical/' + str(id_vertical))
+    assert resp.status_code == 404
+    resp = client.delete(
+        '/empresa/' + str(id_empresa) + '/vertical/' + '1234')
+    assert resp.status_code == 404
+
+
+
+
 
 
 # def test_actualiza_empresa(client: FlaskClient):

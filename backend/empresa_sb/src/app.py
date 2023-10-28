@@ -1,5 +1,5 @@
 from flask_restful import Api
-from .vistas import  VistaPing, VistaRegistro #, VistaInformacionesTecnicas, VistaCandidato, VistaInformacionAcademica, VistaInformacionesAcademicas, VistaInformacionTecnica, VistaRegistro, VistaInformacionesLaborales, VistaInformacionLaboral
+from .vistas import  VistaPing, VistaRegistro, VistaEmpresa #, VistaInformacionesTecnicas, VistaCandidato, VistaInformacionAcademica, VistaInformacionesAcademicas, VistaInformacionTecnica, VistaRegistro, VistaInformacionesLaborales, VistaInformacionLaboral
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
@@ -31,7 +31,7 @@ api = Api(app)
 breaker = CircuitBreaker(exceptions=(Exception,), threshold=5, delay=10)
 
 api.add_resource(VistaRegistro, '/empresa', resource_class_kwargs={ 'breaker': breaker })
-# api.add_resource(VistaCandidato, '/candidato/<string:id>', resource_class_kwargs={ 'breaker': breaker })
+api.add_resource(VistaEmpresa, '/empresa/<string:id>', resource_class_kwargs={ 'breaker': breaker })
 # api.add_resource(VistaInformacionesAcademicas, '/candidato/<string:candidatoId>/informacionAcademica', resource_class_kwargs={ 'breaker': breaker })
 # api.add_resource(VistaInformacionAcademica, '/candidato/<string:candidatoId>/informacionAcademica/<string:id>', resource_class_kwargs={ 'breaker': breaker })
 # api.add_resource(VistaInformacionesTecnicas, '/candidato/<string:candidatoId>/informacionTecnica', resource_class_kwargs={ 'breaker': breaker })

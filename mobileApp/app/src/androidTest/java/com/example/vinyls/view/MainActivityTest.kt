@@ -27,8 +27,22 @@ class MainActivityTest {
     @Before
     fun setUp() {}
 
+    @Test
+    fun homeIconNavigateToMainPage() {
 
+        onView(withId(R.id.mainActivity)).check(matches(isDisplayed()))
+    }
 
+    @Test
+    fun validateHomeText() {
+        onView(withId(R.id.btnLogin)).check(matches(withText(containsString("Ingreso candidato"))))
+    }
+
+    @Test
+    fun navigateToLogin() {
+        onView(withId(R.id.buttonRegistro)).perform(click())
+        onView(withId(R.id.buttonEntrevista)).check(matches(isDisplayed()))
+    }
 
 
 }

@@ -33,16 +33,16 @@ class NetworkServiceAdapter constructor(context: Context) {
 
 
     suspend fun getCandidatos() = suspendCoroutine<List<Candidato>>{ cont ->
-        requestQueue.add(getRequest("candidatos",
+        requestQueue.add(getRequest("candidato",
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Candidato>()
                 var item:JSONObject? = null
                 for (i in 0 until resp.length()) {
                     item = resp.getJSONObject(i)
-                    list.add(i, Candidato(candidatoId = item.getInt("id"),
+                    list.add(i, Candidato(id = item.getInt("id"),
                         names = item.getString("names"),
-                        lastNames = item.getString("lastNanmes"),
+                        lastNames = item.getString("lastNames"),
                         password = item.getString("password"),
                         confirmPassword = item.getString("confirmPassword"),
                         mail = item.getString("mail"))
@@ -58,11 +58,11 @@ class NetworkServiceAdapter constructor(context: Context) {
     suspend fun registro(body: JSONObject) = suspendCoroutine<Candidato> { cont ->
         requestQueue.add(postRequest("candidato", body,
             {  response ->
-                val candidato = Candidato(candidatoId = response.getInt("id"),
+                val candidato = Candidato(id = response.getInt("id"),
                     names = response.getString("names"),
                     lastNames = response.getString("lastNames"),
-                    password = response.getString("pasword"),
-                    confirmPassword = response.getString("confirmPasword"),
+                    password = response.getString("password"),
+                    confirmPassword = response.getString("confirmPassword"),
                     mail = response.getString("mail"))
                 cont.resume(candidato)
             },{

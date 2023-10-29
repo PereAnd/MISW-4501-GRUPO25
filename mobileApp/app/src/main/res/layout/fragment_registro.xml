@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/titulo_app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registro"
+            android:textAlignment="center"
+            android:textAppearance="@style/abc_syle"
+            android:layout_marginTop="10dp" />
+
+         <!-- Nombres  -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiNamesRegistro"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="58dp"
+            android:layout_marginTop="30dp"
+            android:hint="Nombres"
+            app:boxBackgroundColor="@color/light_blue"
+            app:boxStrokeColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNamesRegistro"
+                android:layout_width="263dp"
+                android:layout_height="wrap_content"
+                android:text="Ingrese sus nombres" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Apellidos  -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiLastNamesRegistro"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="58dp"
+            android:layout_marginTop="30dp"
+            android:hint="Apellidos"
+            app:boxBackgroundColor="@color/light_blue"
+            app:boxStrokeColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLastNamesRegistro"
+                android:layout_width="263dp"
+                android:layout_height="wrap_content"
+                android:text="Ingrese sus apellidos" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Contraseña  -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiPasswordRegistro"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="58dp"
+            android:layout_marginTop="30dp"
+            android:hint="@string/password_label"
+            app:boxBackgroundColor="@color/light_blue"
+            app:boxStrokeColor="@color/black"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPasswordRegistro"
+                android:layout_width="264dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:text="@string/password_placeholder" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Confirmar Contraseña  -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiConfirmPasswordRegistro"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="58dp"
+            android:layout_marginTop="30dp"
+            android:hint="Confirmar contraseña"
+            app:boxBackgroundColor="@color/light_blue"
+            app:boxStrokeColor="@color/black"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfirmPasswordRegistro"
+                android:layout_width="264dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:text="@string/password_placeholder" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- Email  -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiMailRegistro"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="58dp"
+            android:layout_marginTop="30dp"
+            android:hint="Ingrese su E-mail"
+            app:boxBackgroundColor="@color/light_blue"
+            app:boxStrokeColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMailRegistro"
+                android:layout_width="263dp"
+                android:layout_height="wrap_content"
+                android:text="Ingrese sus correo eléctronico" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón  -->
+        <Button
+            android:id="@+id/btnSendCandidato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="56dp"
+            android:backgroundTint="@color/dark_yellow"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Registrarse"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:cornerRadius="10dp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+    </LinearLayout>
+
+</ScrollView>

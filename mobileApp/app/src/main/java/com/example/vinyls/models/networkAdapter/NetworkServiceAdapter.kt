@@ -61,8 +61,6 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val candidato = Candidato(id = response.getInt("id"),
                     names = response.getString("names"),
                     lastNames = response.getString("lastNames"),
-                    password = response.getString("password"),
-                    confirmPassword = response.getString("confirmPassword"),
                     mail = response.getString("mail"))
                 cont.resume(candidato)
             },{

@@ -14,22 +14,22 @@ export class InfAcademicaService {
   ) { }
 
   listInfoAcademica(idCandidato: number): Observable<any>{
-    let baseUrl: string = environment.HOST + 'candidato/' + idCandidato + '/informacionAcademica';
+    let baseUrl: string = environment.HOST_CAND + 'candidato/' + idCandidato + '/informacionAcademica';
     return this.httpClient.get<any>(baseUrl);
   }
 
   addInfoAcademica(infoAcademica: InfoAcademica, candidatoId: number): Observable<InfoAcademica>{
-    let baseUrl: string = environment.HOST + 'candidato/' + candidatoId + '/informacionAcademica';
+    let baseUrl: string = environment.HOST_CAND + 'candidato/' + candidatoId + '/informacionAcademica';
     return this.httpClient.post<InfoAcademica>(baseUrl, infoAcademica);
   }
 
   findInfoAcademica(indexCandidato: number, indexInfoAcad: number): Observable<InfoAcademica>{
-    let baseUrl: string = environment.HOST + 'candidato/' + indexCandidato + '/informacionAcademica/' + indexInfoAcad;
+    let baseUrl: string = environment.HOST_CAND + 'candidato/' + indexCandidato + '/informacionAcademica/' + indexInfoAcad;
     return this.httpClient.get<InfoAcademica>(baseUrl);
   }
 
   editInfoAcademica(infoAcademica: InfoAcademica, indexInfoAcad: number, candidatoId: number):Observable<InfoAcademica>{
-    let baseUrl: string = environment.HOST + 'candidato/' + candidatoId + '/informacionAcademica/' + indexInfoAcad;
+    let baseUrl: string = environment.HOST_CAND + 'candidato/' + candidatoId + '/informacionAcademica/' + indexInfoAcad;
     return this.httpClient.patch<InfoAcademica>(baseUrl, infoAcademica);
   }
 }

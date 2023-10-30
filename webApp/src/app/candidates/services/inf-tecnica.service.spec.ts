@@ -25,7 +25,7 @@ describe('InfTecnicaService', () => {
 
   it("Método 'listInfoTecnica', servicio 'InfTecnicaService'", () => {
     const candidatoId: number = 1;
-    const baseUrl = environment.HOST + 'candidato/' + candidatoId + '/informacionTecnica';
+    const baseUrl = environment.HOST_CAND + 'candidato/' + candidatoId + '/informacionTecnica';
     const mockResponse = [
       {
         "type": faker.lorem.word(),
@@ -50,7 +50,7 @@ describe('InfTecnicaService', () => {
 
   it("Método 'addInfoTecnica', servicio 'InfTecnicaService'", () => {
     const candidatoId = 1;
-    const baseUrl = environment.HOST + 'candidato/' + candidatoId + '/informacionTecnica';
+    const baseUrl = environment.HOST_CAND + 'candidato/' + candidatoId + '/informacionTecnica';
 
     const newInfoTecnica: InfoTecnica = new InfoTecnica(
       faker.lorem.word(),
@@ -77,7 +77,7 @@ describe('InfTecnicaService', () => {
   it("Método 'findInfoTecnica', servicio 'InfTecnicaService'", () => {
     const candidatoId = 1;
     const indexInfoTec = 1;
-    const baseUrl = environment.HOST + 'candidato/' + candidatoId + '/informacionTecnica/' + indexInfoTec;
+    const baseUrl = environment.HOST_CAND + 'candidato/' + candidatoId + '/informacionTecnica/' + indexInfoTec;
 
     const mockResponse = {
       "id": 1,
@@ -100,7 +100,7 @@ describe('InfTecnicaService', () => {
   it("Método 'editInfoTecnica', servicio 'InfTecnicaService'", () => {
     const candidatoId = 1;
     const indexInfoTec = 1;
-    const baseUrl = environment.HOST + 'candidato/' + candidatoId + '/informacionTecnica/' + indexInfoTec;
+    const baseUrl = environment.HOST_CAND + 'candidato/' + candidatoId + '/informacionTecnica/' + indexInfoTec;
 
     const newInfoTecnica: InfoTecnica = new InfoTecnica(
       faker.lorem.word(),

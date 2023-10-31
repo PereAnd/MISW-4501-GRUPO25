@@ -36,7 +36,7 @@ class CandidatoAdapter : RecyclerView.Adapter<CandidatoAdapter.CandidatoViewHold
         holder.viewDataBinding.also {
             it.candidato = candidatos[position]
         }
-        holder.bind(candidatos[position])
+
     }
 
     override fun getItemCount(): Int {
@@ -51,16 +51,7 @@ class CandidatoAdapter : RecyclerView.Adapter<CandidatoAdapter.CandidatoViewHold
             val LAYOUT = R.layout.candidato_item
         }
 
-        fun bind(candidato: Candidato) {
-            Glide.with(itemView)
-                .load(candidato.names.toUri().buildUpon().scheme("http").build())
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .error(R.drawable.ic_broken_image))
-                .into(viewDataBinding.namesImage)
-        }
+
     }
 
 

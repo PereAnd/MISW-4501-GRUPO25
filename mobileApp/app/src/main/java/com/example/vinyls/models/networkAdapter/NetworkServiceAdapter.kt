@@ -40,7 +40,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 var item:JSONObject? = null
                 for (i in 0 until resp.length()) {
                     item = resp.getJSONObject(i)
-                    list.add(i, Candidato(id = item.getInt("id"),
+                    list.add(i, Candidato(candidatoId = item.getInt("id"),
                         names = item.getString("names"),
                         lastNames = item.getString("lastNames"),
                         password = item.getString("password"),
@@ -55,19 +55,32 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
+
     suspend fun registro(body: JSONObject) = suspendCoroutine<Candidato> { cont ->
         requestQueue.add(postRequest("candidato", body,
-            {  response ->
-                val candidato = Candidato(id = response.getInt("id"),
-                    names = response.getString("names"),
-                    lastNames = response.getString("lastNames"),
-                    mail = response.getString("mail"))
-                cont.resume(candidato)
-            },{
-                cont.resumeWithException(it)
-            }))
-    }
+            { response ->
+                val candidatoId = response.getInt("id")
+                val names = response.getString("names")
+                val lastNames = response.getString("lastNames")
+                val mail = response.getString("mail")
+                val password = response.optString("password", "Sin password") // Usar optString para proporcionar un valor predeterminado
+                val confirmPassword = response.optString("confirmPassword", "Sin confirmPassword")
 
+                val candidato = Candidato(
+                    candidatoId = candidatoId,
+                    names = names,
+                    lastNames = lastNames,
+                    mail = mail,
+                    password = password,
+                    confirmPassword = confirmPassword
+                )
+                cont.resume(candidato)
+            },
+            {
+                cont.resumeWithException(it)
+            }
+        ))
+    }
 
 
 

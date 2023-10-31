@@ -34,7 +34,7 @@ class RegistroViewModel (application: Application) :  AndroidViewModel(applicati
                 withContext(Dispatchers.IO) {
                     var data = candidatoRepository.registro(candidato)
                     _candidato.postValue(data)
-                    id= data.id
+                    id= data.candidatoId
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)

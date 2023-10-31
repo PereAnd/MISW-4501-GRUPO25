@@ -26,9 +26,6 @@ export class RegCandidatoService {
 
   updateDatosCandidato(candidato: Candidato): Observable<Candidato> {
     let baseUrl: string = environment.HOST_CAND + 'candidato/' + candidato.id;
-    console.log('Candidato:', candidato)
-    console.log('URL:', baseUrl)
-    console.log('birthDate:', candidato.birthDate?.toISOString())
     return this.httpClient.patch<Candidato>(baseUrl, candidato)
   }
 }

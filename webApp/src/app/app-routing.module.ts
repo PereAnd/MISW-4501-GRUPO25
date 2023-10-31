@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginCandidatoComponent } from './core/auth/login-candidato/login-candidato.component';
 import { RegCandidatoComponent } from './candidates/components/reg-candidato/reg-candidato.component';
 import { InicioComponent } from './shared/components/inicio/inicio.component';
 import { DashboardCandComponent } from './candidates/components/dashboard-cand/dashboard-cand.component';
@@ -11,10 +10,11 @@ import { CreateInfoTecComponent } from './candidates/components/dashboard-cand/i
 import { InfoPersonalComponent } from './candidates/components/dashboard-cand/info-personal/info-personal.component';
 import { InfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/info-laboral.component';
 import { CreateInfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/create-info-laboral/create-info-laboral.component';
+import { LoginComponent } from './core/auth/login/login.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
-  { path: 'candidatos/login', component: LoginCandidatoComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'candidatos/register', component: RegCandidatoComponent },
   { path: 'candidatos/dashboard/:id', component: DashboardCandComponent,
     children: [

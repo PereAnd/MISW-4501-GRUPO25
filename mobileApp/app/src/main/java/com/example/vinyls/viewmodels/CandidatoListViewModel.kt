@@ -55,9 +55,9 @@ class CandidatoListViewModel (application: Application) :  AndroidViewModel(appl
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumListViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(CandidatoListViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumListViewModel(app) as T
+                return CandidatoListViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

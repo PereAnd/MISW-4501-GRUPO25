@@ -7,7 +7,6 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.vinyls.models.Album
 import com.example.vinyls.models.Candidato
 import org.json.JSONArray
 import org.json.JSONObject
@@ -83,66 +82,6 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
-
-
-
-
-
-
-
-
-    suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont ->
-        requestQueue.add(getRequest("albums",
-            { response ->
-                val resp = JSONArray(response)
-                val list = mutableListOf<Album>()
-                var item:JSONObject? = null
-                for (i in 0 until resp.length()) {
-                    item = resp.getJSONObject(i)
-                    list.add(i, Album(albumId = item.getInt("id"),
-                        name = item.getString("name"),
-                        cover = item.getString("cover"),
-                        recordLabel = item.getString("recordLabel"),
-                        releaseDate = item.getString("releaseDate"),
-                        genre = item.getString("genre"),
-                        description = item.getString("description"))
-                    )
-                }
-                cont.resume(list)
-            },
-            {
-                cont.resumeWithException(it)
-            }))
-    }
-
-    suspend fun createAlbum(body: JSONObject) = suspendCoroutine<Album> { cont ->
-        requestQueue.add(postRequest("albums", body,
-            {  response ->
-                val album = Album(albumId = response.getInt("id"),
-                                name = response.getString("name"),
-                                cover = response.getString("cover"),
-                                recordLabel = response.getString("recordLabel"),
-                                releaseDate = response.getString("releaseDate"),
-                                genre = response.getString("genre"),
-                                description = response.getString("description"))
-                cont.resume(album)
-            },{
-                cont.resumeWithException(it)
-            }))
-    }
-
-
-    fun getAlbumById(albumId:Int, onComplete:(resp: Album)->Unit, onError: (error:VolleyError)->Unit){
-        requestQueue.add(getRequest("albums",
-            { response ->
-                val resp = JSONObject(response)
-                val album = Album(albumId = resp.getInt("id"),name = resp.getString("name"), cover = resp.getString("cover"), recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description"))
-                onComplete(album)
-            },
-            {
-                onError(it)
-            }))
-    }
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL +path, responseListener,errorListener)

@@ -20,6 +20,8 @@ import { InfoPersonalComponent } from './candidates/components/dashboard-cand/in
 import { InfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/info-laboral.component';
 import { CreateInfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/create-info-laboral/create-info-laboral.component';
 import { LoginComponent } from './core/auth/login/login.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { RegEmpresaComponent } from './companies/components/reg-empresa/reg-empresa.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { LoginComponent } from './core/auth/login/login.component';
     InfoLaboralComponent,
     CreateInfoLaboralComponent,
     LoginComponent,
+    CompaniesComponent,
+    RegEmpresaComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { InfoPersonalComponent } from './candidates/components/dashboard-cand/in
 import { InfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/info-laboral.component';
 import { CreateInfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/create-info-laboral/create-info-laboral.component';
 import { LoginComponent } from './core/auth/login/login.component';
+import { RegEmpresaComponent } from './companies/components/reg-empresa/reg-empresa.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -29,7 +30,8 @@ const routes: Routes = [
       { path: 'info-laboral/add', component: CreateInfoLaboralComponent },
       { path: 'info-laboral/:idil', component: CreateInfoLaboralComponent },
     ]
-  }
+  },
+  { path: 'empresas/register', component: RegEmpresaComponent }
 ];
 
 @NgModule({

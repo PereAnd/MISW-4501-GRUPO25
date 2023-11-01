@@ -4,6 +4,7 @@ import { VerticalesService } from './verticales.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
 import { environment } from 'src/environments/environment.development';
+import { Vertical } from '../models/vertical';
 
 describe('VerticalesService', () => {
   let service: VerticalesService;
@@ -45,6 +46,32 @@ describe('VerticalesService', () => {
     })
     const req = httpMock.expectOne(baseUrl);
     expect(req.request.method).toBe('GET');
+
+    req.flush(mockResponse);
+  })
+
+  it("Método 'addVertical', servicio 'VerticalesService'", () => {
+    const empresaId = 1;
+    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + '/vertical';
+
+    const newVertical: Vertical = new Vertical(
+      faker.lorem.word(),
+      faker.lorem.paragraph()
+    );
+    const mockResponse = {
+      "id": newVertical.id,
+      "vertical": newVertical.vertical,
+      "description": newVertical.description
+    }
+    service.addVertical(newVertical, empresaId).subscribe({
+      next: response => {
+        response = <Vertical>response
+        expect(response).toEqual(mockResponse)
+      }
+    })
+
+    const req = httpMock.expectOne(baseUrl);
+    expect(req.request.method).toBe('POST');
 
     req.flush(mockResponse);
   })

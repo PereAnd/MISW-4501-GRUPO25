@@ -14,8 +14,6 @@ export class InfoGeneralComponent implements OnInit {
   isEditMode: boolean;
   formInfoGeneral: FormGroup;
 
-  // verticales: string[] = ['Desarrollo de Software', 'Proveedor de hardware', 'Empresa de Ciberseguridad', 'Consultoría de TI', 'Telecomunicaciones', 'E-Commerce', 'Empresa de Big Data y Análisis de Datos', 'IA y Aprendizaje Automático', 'Infraestructura de Red'];
-
   tiposDeEmpresa: string[] = ['Startup', 'Desarrollo de Software', 'Proveedor de Servicios', 'Empresa de Ciberseguridad', 'Consultora de Tecnología', 'Tienda de Tecnología', 'Agencia de Desarrollo de Aplicaciones Móviles', 'Empresa de Análisis de Datos', 'Compañía de IA']
 
   tiposDeDocumento: string[] = ['NIT', 'RUC']

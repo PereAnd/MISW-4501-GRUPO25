@@ -17,4 +17,9 @@ export class VerticalesService {
     let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/vertical';
     return this.httpClient.get<Vertical>(baseUrl);
   }
+
+  addVertical(vertical: Vertical, empresaId: number): Observable<Vertical>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/vertical';
+    return this.httpClient.post<Vertical>(baseUrl, vertical);
+  }
 }

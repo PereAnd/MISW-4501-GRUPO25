@@ -31,28 +31,38 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
-    suspend fun getCandidatos() = suspendCoroutine<List<Candidato>>{ cont ->
+    suspend fun getCandidatos() = suspendCoroutine<List<Candidato>> { cont ->
         requestQueue.add(getRequest("candidato",
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Candidato>()
-                var item:JSONObject? = null
+
                 for (i in 0 until resp.length()) {
-                    item = resp.getJSONObject(i)
-                    list.add(i, Candidato(candidatoId = item.getInt("id"),
-                        names = item.getString("names"),
-                        lastNames = item.getString("lastNames"),
-                        password = item.getString("password"),
-                        confirmPassword = item.getString("confirmPassword"),
-                        mail = item.getString("mail"))
-                    )
+                    val item = resp.getJSONObject(i)
+
+                    val candidatoId = item.getInt("id")
+                    val names = item.getString("names")
+                    val lastNames = item.getString("lastNames")
+                    val mail = item.getString("mail")
+
+                    // Verificar si la clave "password" está presente en el objeto JSON
+                    val password = if (item.has("password")) {
+                        item.getString("password")
+                    } else { "nd" }
+                    val confirmPassword = if (item.has("confirmPassword")) {
+                        item.getString("confirmPassword")
+                    } else { "nd" }
+
+                    list.add(i, Candidato(candidatoId = candidatoId, names = names, lastNames = lastNames, password = password, confirmPassword = confirmPassword, mail = mail))
                 }
                 cont.resume(list)
             },
             {
                 cont.resumeWithException(it)
-            }))
+            })
+        )
     }
+
 
 
     suspend fun registro(body: JSONObject) = suspendCoroutine<Candidato> { cont ->

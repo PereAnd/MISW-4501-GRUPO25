@@ -14,12 +14,7 @@ class FragmentHome : Fragment(R.layout.fragment_home) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
             View? {
                 val view = inflater.inflate(R.layout.fragment_home, container, false);
-                val buttonMenuColeccionista: Button = view.findViewById(R.id.btnLogin)
                 val buttonMenuLogin: Button = view.findViewById(R.id.btnLogin)
-
-                buttonMenuColeccionista.setOnClickListener {
-                    findNavController().navigate(R.id.action_fragment_home_to_fragment_menu_coleccionista)
-                        }
 
                 buttonMenuLogin.setOnClickListener {
                     findNavController().navigate(R.id.action_fragment_home_to_fragment_menu_login)

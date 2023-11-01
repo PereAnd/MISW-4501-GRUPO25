@@ -101,10 +101,10 @@ export class InfoPersonalComponent {
         console.log("Error actualizando los datos del candidato")
       }
     })
-    this.changeEditMode('guardar')
+    this.changeEditMode()
   }
 
-  changeEditMode(v: string){
+  changeEditMode(){
     this.isEditMode = !this.isEditMode;
     this.isEditMode ? this.formInfoPersonal.enable() : this.formInfoPersonal.disable();
   }

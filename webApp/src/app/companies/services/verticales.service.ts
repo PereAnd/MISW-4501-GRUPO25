@@ -22,4 +22,14 @@ export class VerticalesService {
     let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/vertical';
     return this.httpClient.post<Vertical>(baseUrl, vertical);
   }
+
+  findVertical(empresaId: number, indexVertical: number): Observable<Vertical>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/vertical/' + indexVertical;
+    return this.httpClient.get<Vertical>(baseUrl);
+  }
+
+  editVertical(vertical: Vertical, indexVertical: number, empresaId: number):Observable<Vertical>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/vertical/' + indexVertical;
+    return this.httpClient.patch<Vertical>(baseUrl, vertical);
+  }
 }

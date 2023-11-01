@@ -40,7 +40,8 @@ const routes: Routes = [
     children: [
       { path: 'info-general', component: InfoGeneralComponent },
       { path: 'verticales', component: VerticalesComponent },
-      { path: 'verticales/add', component: CreateVerticalesComponent }
+      { path: 'verticales/add', component: CreateVerticalesComponent },
+      { path: 'verticales/:idv', component: CreateVerticalesComponent }
     ]
   }
 ];

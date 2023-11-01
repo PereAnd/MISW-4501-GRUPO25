@@ -31,7 +31,19 @@ export class CreateVerticalesComponent {
   ) { }
 
   ngOnInit(): void {
-
+    this.indexVertical = this.route.snapshot.params['idv'];
+    if(this.indexVertical){
+      this.verticalesService.findVertical(1, this.indexVertical)
+      .subscribe({
+        next: data => {
+          this.formVerticales.setValue({
+            vertical: data.vertical,
+            description: data.description
+          })
+        },
+        error: error => console.error('Error obteniendo la vertical seleccionada', error)
+      })
+    }
   }
 
   registrarVertical(){
@@ -41,19 +53,35 @@ export class CreateVerticalesComponent {
       this.formVerticales.value.description,
       empresaId
     )
-    this.verticalesService.addVertical(newVertical, empresaId).subscribe({
-      next: data => {
-        console.log("Vertical registrada")
-        this.formVerticales.reset();
-      },
-      error: error => {
-        console.log("Error registrando la Vertical", error)
-        alert('Error registrando la Vertical')
-      },
-      complete: () => {
-        this.router.navigate(['..'], {relativeTo: this.route})
-      }
-    })
+    if(!this.indexVertical){
+      this.verticalesService.addVertical(newVertical, empresaId).subscribe({
+          next: data => {
+            console.log("Vertical registrada")
+            this.formVerticales.reset();
+          },
+          error: error => {
+            console.log("Error registrando la Vertical", error)
+            alert('Error registrando la Vertical')
+          },
+          complete: () => {
+            this.router.navigate(['..'], {relativeTo: this.route})
+          }
+        })
+    } else {
+      this.verticalesService.editVertical(newVertical, this.indexVertical, empresaId).subscribe({
+        next: data => {
+          console.log('Vertical editada')
+          this.formVerticales.reset()
+        },
+        error: error => {
+          console.log('Error editando la Vertical', error)
+          alert('Error editando la Vertical')
+        },
+        complete: () => {
+          this.router.navigate(['..'], {relativeTo: this.route})
+        }
+      })
+    }
   }
 
   cancelarCreacion(){

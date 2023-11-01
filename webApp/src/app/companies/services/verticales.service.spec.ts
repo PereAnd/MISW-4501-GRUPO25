@@ -75,4 +75,58 @@ describe('VerticalesService', () => {
 
     req.flush(mockResponse);
   })
+
+  it("Método 'findVertical', servicio 'VerticalesService'", () => {
+    const empresaId = 1;
+    const indexVertical = 1;
+    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + '/vertical/' + indexVertical;
+
+    const mockResponse = {
+      "id": 1,
+      "vertical": faker.lorem.word(),
+      "description": faker.lorem.paragraph(5)
+    }
+
+    service.findVertical(empresaId, indexVertical).subscribe({
+      next: response => {
+        expect(response).toEqual(mockResponse)
+      }
+    })
+
+    const req = httpMock.expectOne(baseUrl);
+    expect(req.request.method).toBe('GET');
+
+    req.flush(mockResponse);
+  })
+
+  it("Método 'editVertical', servicio 'VerticalesService'", () => {
+    const empresaId = 1;
+    const indexVertical = 1;
+    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + '/vertical/' + indexVertical;
+
+    const newVertical: Vertical = new Vertical(
+      faker.lorem.word(),
+      faker.lorem.paragraph(5)
+    );
+    const mockResponse = {
+      "id": 1,
+      "vertical": newVertical.vertical,
+      "description": newVertical.description
+    }
+    service.editVertical(newVertical, indexVertical, empresaId).subscribe({
+      next: response => {
+        response = <Vertical>response
+        expect(response).toEqual(mockResponse)
+      }
+    })
+
+    const req = httpMock.expectOne(baseUrl);
+    expect(req.request.method).toBe('PATCH');
+
+    req.flush(mockResponse);
+  })
+
+  afterEach(() => {
+    httpMock.verify();
+  })
 });

@@ -8,7 +8,7 @@ import com.example.vinyls.models.repository.CandidatoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
+//import org.json.JSONObject
 
 class CandidatoListViewModel (application: Application) :  AndroidViewModel(application) {
     private val candidatoRepository = CandidatoRepository(application)
@@ -34,18 +34,18 @@ class CandidatoListViewModel (application: Application) :  AndroidViewModel(appl
 
 
     private fun refreshDataFromNetwork() {
-        try {
-            viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.Default) {
+            try {
                 withContext(Dispatchers.IO) {
-                    var data = candidatoRepository.refreshData()
+                    val data = candidatoRepository.refreshData()
                     _candidatos.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
+            } catch (e: Exception) {
+                Log.e("CandidatoListViewModel", "Error al actualizar datos desde la red", e)
+                _eventNetworkError.postValue(true)
             }
-        } catch (e: Exception) { //se procesa la excepcion
-            Log.d("Error", e.toString())
-            _eventNetworkError.postValue(true)
         }
     }
 

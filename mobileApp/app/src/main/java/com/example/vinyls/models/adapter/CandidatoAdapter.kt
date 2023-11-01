@@ -3,20 +3,19 @@ package com.example.vinyls.models.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.core.net.toUri
+//import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
+//import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
+//import com.bumptech.glide.Glide
+//import com.bumptech.glide.load.engine.DiskCacheStrategy
+//import com.bumptech.glide.request.RequestOptions
 import com.example.vinyls.R
 import com.example.vinyls.databinding.CandidatoItemBinding
 import com.example.vinyls.models.Candidato
 
 
-class CandidatoAdapter : RecyclerView.Adapter<CandidatoAdapter.CandidatoViewHolder>(){
-
+class CandidatosAdapter : RecyclerView.Adapter<CandidatosAdapter.CandidatoViewHolder>(){
     var candidatos :List<Candidato> = emptyList()
         set(value) {
             field = value

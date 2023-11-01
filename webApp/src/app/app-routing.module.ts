@@ -9,6 +9,8 @@ import { InfoAcademicaComponent } from './candidates/components/dashboard-cand/i
 import { InfoTecnicaComponent } from './candidates/components/dashboard-cand/info-tecnica/info-tecnica.component';
 import { CreateInfoTecComponent } from './candidates/components/dashboard-cand/info-tecnica/create-info-tec/create-info-tec.component';
 import { InfoPersonalComponent } from './candidates/components/dashboard-cand/info-personal/info-personal.component';
+import { InfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/info-laboral.component';
+import { CreateInfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/create-info-laboral/create-info-laboral.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -23,6 +25,9 @@ const routes: Routes = [
       { path: 'info-tecnica', component: InfoTecnicaComponent },
       { path: 'info-tecnica/add', component: CreateInfoTecComponent },
       { path: 'info-tecnica/:idit', component: CreateInfoTecComponent },
+      { path: 'info-laboral', component: InfoLaboralComponent },
+      { path: 'info-laboral/add', component: CreateInfoLaboralComponent },
+      { path: 'info-laboral/:idil', component: CreateInfoLaboralComponent },
     ]
   }
 ];

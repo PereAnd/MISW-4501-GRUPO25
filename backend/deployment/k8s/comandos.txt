@@ -60,7 +60,7 @@ kubectl patch configmap/aws-auth -n kube-system --patch "$(cat /tmp/auth-patch.y
 
 
 
-eksctl delete cluster --name my-cluster --region region-code
+eksctl delete cluster --name backend-proyecto8 --region us-east-1
 
 
 arn:aws:iam::798178280816:role/codebuild-proyecto-final-grupo-25-service-role

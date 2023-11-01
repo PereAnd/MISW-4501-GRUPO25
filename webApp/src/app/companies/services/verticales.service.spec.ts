@@ -24,17 +24,17 @@ describe('VerticalesService', () => {
 
   it("Método 'listVerticales', servicio 'VerticalesService'", () => {
     const empresaId: number = 1;
-    const baseUrl = environment.HOST_CAND + 'empresa/' + empresaId + '/vertical';
+    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + '/vertical';
     const mockResponse = [
       {
-        "id": 1,
         "vertical": faker.lorem.word(),
-        "description": faker.lorem.paragraph(5)
+        "description": faker.lorem.paragraph(5),
+        "id": 1,
       },
       {
-        "id": 2,
         "vertical": faker.lorem.word(),
-        "description": faker.lorem.paragraph(5)
+        "description": faker.lorem.paragraph(5),
+        "id": 2,
       }
     ]
 

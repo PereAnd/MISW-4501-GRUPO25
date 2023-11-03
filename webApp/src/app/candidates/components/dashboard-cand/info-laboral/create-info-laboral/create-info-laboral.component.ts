@@ -87,10 +87,7 @@ export class CreateInfoLaboralComponent {
     } else {
       this.infLaboralService.editInfoLaboral(newInfoLaboral, this.indexInfoLab, this.candidatoId).subscribe({
         next: data => {
-          console.log('newInfoLaboral: ', newInfoLaboral)
-          console.log('indexInfoLab: ', this.indexInfoLab)
-          console.log('candidatoId: ', this.candidatoId)
-          console.log('Información laboral editada')
+          console.log('Información laboral actualizada')
           this.formInfoLaboral.reset()
         },
         error: error => {

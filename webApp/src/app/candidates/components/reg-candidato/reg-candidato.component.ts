@@ -47,8 +47,10 @@ export class RegCandidatoComponent implements OnInit{
       .subscribe({
         next: data => console.log("Candidato registrado", data),
         error: error => console.log("Error registrando el candidato", error),
-        complete: () => this.router.navigate(['/candidatos/dashboard/1/info-personal'])
+        complete: () => {
+          this.router.navigate(['/candidatos/dashboard/1/info-personal'])
+          this.formCandidato.reset();
+        }
       })
-      this.formCandidato.reset();
   }
 }

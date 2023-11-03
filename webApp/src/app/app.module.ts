@@ -24,6 +24,7 @@ import { CompaniesComponent } from './companies/companies.component';
 import { RegEmpresaComponent } from './companies/components/reg-empresa/reg-empresa.component';
 import { DashboardEmpComponent } from './companies/components/dashboard-emp/dashboard-emp.component';
 import { InfoGeneralComponent } from './companies/components/dashboard-emp/info-general/info-general.component';
+import { VerticalesComponent } from './companies/components/dashboard-emp/verticales/verticales.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { InfoGeneralComponent } from './companies/components/dashboard-emp/info-
     RegEmpresaComponent,
     DashboardEmpComponent,
     InfoGeneralComponent,
+    VerticalesComponent,
   ],
   imports: [
     BrowserModule,

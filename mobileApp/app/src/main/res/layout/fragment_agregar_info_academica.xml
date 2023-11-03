@@ -167,7 +167,7 @@
             android:id="@+id/btnSendInfoAcademica"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text= "Enviar"
+            android:text= "Siguiente"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60sp"
             android:textColor="@color/white"

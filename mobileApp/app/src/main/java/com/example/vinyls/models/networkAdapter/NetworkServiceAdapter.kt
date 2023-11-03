@@ -62,10 +62,14 @@ class NetworkServiceAdapter constructor(context: Context) {
             })
         )
     }
+
+
+    private var currentCandidatoId: Int = -1 // Inicializa con un valor que no se usará en la aplicación
     suspend fun registro(body: JSONObject) = suspendCoroutine<Candidato> { cont ->
         requestQueue.add(postRequest("candidato", body,
             { response ->
                 val candidatoId = response.getInt("id")
+                currentCandidatoId = candidatoId // Almacena el candidatoId
                 val names = response.getString("names")
                 val lastNames = response.getString("lastNames")
                 val mail = response.getString("mail")
@@ -87,34 +91,44 @@ class NetworkServiceAdapter constructor(context: Context) {
             }
         ))
     }
-    suspend fun agregarInfoAcademica(body: JSONObject) = suspendCoroutine<InfoAcademica> { cont ->
-        requestQueue.add(postRequest("candidato/1/informacionAcademica", body,
-            { response ->
-                val infoAcademicaId = response.getInt("id")
-                val title = response.getString("title")
-                val institution = response.getString("institution")
-                val beginDate = response.getString("beginDate")
-                val endDate = response.getString("endDate")
-                val studyType = response.getString("studyType")
-                val candidatoId = response.getInt("candidatoId")
 
+    suspend fun agregarInfoAcademica(body: JSONObject): InfoAcademica {
+        return suspendCoroutine { cont ->
 
-                val infoAcademica = InfoAcademica(
-                    infoAcademicaId = infoAcademicaId,
-                    title = title,
-                    institution = institution,
-                    beginDate = beginDate,
-                    endDate = endDate,
-                    studyType = studyType,
-                    candidatoId = candidatoId
-                )
-                cont.resume(infoAcademica)
-            },
-            {
-                cont.resumeWithException(it)
+            if (currentCandidatoId == -1) {
+               // cont.resumeWithException(NoValidCandidatoIdException("No se encontró un candidatoId válido."))
+              //  return@suspendCoroutine
             }
-        ))
+
+            requestQueue.add(postRequest("candidato/$currentCandidatoId/informacionAcademica", body,
+                { response ->
+                    val infoAcademicaId = response.getInt("id")
+                    val title = response.getString("title")
+                    val institution = response.getString("institution")
+                    val beginDate = response.getString("beginDate")
+                    val endDate = response.getString("endDate")
+                    val studyType = response.getString("studyType")
+                    val candidatoId = response.getInt("candidatoId")
+
+                    val infoAcademica = InfoAcademica(
+                        infoAcademicaId = infoAcademicaId,
+                        title = title,
+                        institution = institution,
+                        beginDate = beginDate,
+                        endDate = endDate,
+                        studyType = studyType,
+                        candidatoId = candidatoId
+                    )
+
+                    cont.resume(infoAcademica)
+                },
+                {
+                    cont.resumeWithException(it)
+                }
+            ))
+        }
     }
+
 
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {

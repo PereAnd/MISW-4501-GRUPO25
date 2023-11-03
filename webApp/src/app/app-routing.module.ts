@@ -15,6 +15,7 @@ import { RegEmpresaComponent } from './companies/components/reg-empresa/reg-empr
 import { DashboardEmpComponent } from './companies/components/dashboard-emp/dashboard-emp.component';
 import { InfoGeneralComponent } from './companies/components/dashboard-emp/info-general/info-general.component';
 import { VerticalesComponent } from './companies/components/dashboard-emp/verticales/verticales.component';
+import { CreateVerticalesComponent } from './companies/components/dashboard-emp/verticales/create-verticales/create-verticales.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -38,7 +39,9 @@ const routes: Routes = [
   { path: 'empresas/dashboard/:id', component: DashboardEmpComponent,
     children: [
       { path: 'info-general', component: InfoGeneralComponent },
-      { path: 'verticales', component: VerticalesComponent }
+      { path: 'verticales', component: VerticalesComponent },
+      { path: 'verticales/add', component: CreateVerticalesComponent },
+      { path: 'verticales/:idv', component: CreateVerticalesComponent }
     ]
   }
 ];

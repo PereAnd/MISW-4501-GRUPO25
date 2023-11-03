@@ -2,11 +2,11 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'app-dashboard-cand',
-  templateUrl: './dashboard-cand.component.html',
-  styleUrls: ['./dashboard-cand.component.css']
+  selector: 'app-dashboard-emp',
+  templateUrl: './dashboard-emp.component.html',
+  styleUrls: ['./dashboard-emp.component.css']
 })
-export class DashboardCandComponent {
+export class DashboardEmpComponent {
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;

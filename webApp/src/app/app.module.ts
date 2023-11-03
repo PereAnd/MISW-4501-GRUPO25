@@ -22,6 +22,8 @@ import { CreateInfoLaboralComponent } from './candidates/components/dashboard-ca
 import { LoginComponent } from './core/auth/login/login.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { RegEmpresaComponent } from './companies/components/reg-empresa/reg-empresa.component';
+import { DashboardEmpComponent } from './companies/components/dashboard-emp/dashboard-emp.component';
+import { InfoGeneralComponent } from './companies/components/dashboard-emp/info-general/info-general.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { RegEmpresaComponent } from './companies/components/reg-empresa/reg-empr
     LoginComponent,
     CompaniesComponent,
     RegEmpresaComponent,
+    DashboardEmpComponent,
+    InfoGeneralComponent,
   ],
   imports: [
     BrowserModule,

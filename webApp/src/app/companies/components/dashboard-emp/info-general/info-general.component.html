@@ -1,0 +1,108 @@
+<div class="container text-center">
+  <h2 id="titulo">Información personal</h2>
+
+  <form
+    [formGroup]="formInfoGeneral"
+    (ngSubmit)="!formInfoGeneral.invalid && guardarInfoGeneral()"
+  >
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label name="name">Nombre Empresa</mat-label>
+          <input matInput type="text"
+          id="name" formControlName="name">
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field>
+          <mat-label>Tipo de empresa</mat-label>
+          <mat-select formControlName="organizationType" id="organizationType">
+            <mat-option *ngFor="let tipoOrg of tiposDeEmpresa" [value]="tipoOrg">
+              {{tipoOrg}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Validacion -->
+    <div class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          name?.hasError('required') && name?.touched ||
+          organizationType?.hasError('required') && organizationType?.touched "
+          >El nombre y el tipo de empresa es requerido</div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field>
+          <mat-label>Tipo de documento</mat-label>
+          <mat-select formControlName="docType" id="docType">
+            <mat-option *ngFor="let tipoDoc of tiposDeDocumento" [value]="tipoDoc">
+              {{tipoDoc}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label name="docNumber">Número de documento</mat-label>
+          <input matInput type="tel"
+          id="docNumber" formControlName="docNumber">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Validacion -->
+    <div class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          docType?.hasError('required') && docType?.touched ||
+          docNumber?.hasError('required') && docNumber?.touched "
+          >El tipo y número de documento es requerido</div>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline">
+          <mat-label name="mail">Email</mat-label>
+          <input matInput type="mail"
+          id="mail" formControlName="mail">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Validacion -->
+    <div class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          mail?.hasError('required') && mail?.touched"
+          >El correo electrónico es requerido</div>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline">
+          <mat-label name="description">Descripción</mat-label>
+          <input matInput type="text"
+          id="description" formControlName="description">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="botones">
+      <div class="button">
+        <a mat-raised-button color="secondary" (click)="cancelarCreacion()" routerLink="../">Cancelar</a>
+      </div>
+      <div class="button" *ngIf="!isEditMode">
+        <button mat-raised-button color="primary"
+        (click)="changeEditMode()"
+        >Editar</button>
+      </div>
+      <div class="button" *ngIf="isEditMode">
+        <button mat-raised-button color="primary"
+        type="submit"
+        [disabled]="formInfoGeneral.invalid"
+        (click)="guardarInfoGeneral()"
+        >Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

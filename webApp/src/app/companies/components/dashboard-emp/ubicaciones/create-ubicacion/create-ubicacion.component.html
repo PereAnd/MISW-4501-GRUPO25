@@ -1,0 +1,61 @@
+<div class="container text-center col-md-6">
+  <h2 id="titulo"><mat-icon>location_on</mat-icon>Agregar ubicación</h2>
+
+  <form
+    [formGroup]="formUbicaciones"
+    (ngSubmit)="!formUbicaciones.invalid && registrarUbicacion()"
+  >
+
+  <mat-form-field>
+    <mat-label>País</mat-label>
+    <mat-select formControlName="country" id="country" (selectionChange)="actualizarCiudades()">
+      <mat-option *ngFor="let reg of countryAndCity" [value]="reg.pais">
+        {{reg.pais}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Validacion -->
+  <div class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        country?.hasError('required') && country?.touched"
+        >Debe seleccionar un país</div>
+
+    <mat-form-field>
+      <mat-label>Ciudad</mat-label>
+      <mat-select formControlName="city" id="city">
+        <mat-option *ngFor="let cityOfCountry of citiesOfCountry" [value]="cityOfCountry">
+          {{cityOfCountry}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline">
+          <mat-label name="description">Descripción</mat-label>
+          <input matInput type="text"
+          id="description" formControlName="description">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Validacion -->
+    <div class="alert alert-danger alert-dismissible fade show col-12"
+        *ngIf="
+          description?.hasError('required') && description?.touched"
+          >La descripción es requerida</div>
+
+    <div class="botones">
+      <div class="button">
+        <a mat-raised-button color="secondary" (click)="cancelarCreacion()" routerLink="../">Cancelar</a>
+      </div>
+      <div class="button">
+        <button mat-raised-button color="primary"
+        type="submit"
+        [disabled]="formUbicaciones.invalid"
+        >Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

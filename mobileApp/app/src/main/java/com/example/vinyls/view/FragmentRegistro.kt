@@ -7,10 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.vinyls.R
 import com.example.vinyls.databinding.FragmentRegistroBinding
 import com.example.vinyls.viewmodels.RegistroViewModel
@@ -20,7 +22,19 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
-class FragmentRegistro : Fragment() {
+class FragmentRegistro : Fragment(R.layout.fragment_menu_login) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val buttonNextAcademic = requireView().findViewById<Button>(R.id.btnNextAcademic)
+
+        buttonNextAcademic.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_registro_login_to_fragment_infoAcademica)
+        }
+    }
+
+
+
     private var _binding: FragmentRegistroBinding? = null
     private val binding get() = _binding!!  // get
     private lateinit var viewModel: RegistroViewModel

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_agregarinfo_academica"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -157,6 +158,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Guardar"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/dark_yellow" />
 
@@ -165,8 +168,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text= "Enviar"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/dark_yellow" />
+            android:backgroundTint="@color/black" />
 
     </LinearLayout>
 

@@ -28,14 +28,7 @@
             app:destination="@id/fragment_candidato_list" />
         <action
             android:id="@+id/action_fragment_menu_login_to_fragment_registro"
-            app:destination="@id/fragment_registro" />
-    </fragment>
-
-    <!-- Menú Login - Registro  -->
-    <fragment
-        android:id="@+id/fragment_registro"
-        android:name="com.example.vinyls.view.FragmentRegistro"
-        tools:layout="@layout/fragment_registro" >
+            app:destination="@+id/fragment_registro" />
     </fragment>
 
     <!-- Menú Login - Lista  -->
@@ -43,6 +36,23 @@
         android:id="@id/fragment_candidato_list"
         android:name="com.example.vinyls.view.FragmentCandidatoList"
         tools:layout="@layout/fragment_candidato_list" >
+    </fragment>
+
+    <!-- Menú Login - Registro  -->
+    <fragment
+        android:id="@+id/fragment_registro"
+        android:name="com.example.vinyls.view.FragmentRegistro"
+        tools:layout="@layout/fragment_registro" >
+        <action
+            android:id="@+id/action_fragment_registro_login_to_fragment_infoAcademica"
+            app:destination="@+id/fragment_info_academica" />
+    </fragment>
+
+    <!-- InfoAcademica -   -->
+    <fragment
+        android:id="@+id/fragment_info_academica"
+        android:name="com.example.vinyls.view.FragmentAgregarInfoAcademica"
+        tools:layout="@layout/fragment_agregar_info_academica">
     </fragment>
 
 </navigation>

@@ -17,4 +17,18 @@ export class UbicacionesService {
     let baseUrl: string = environment.HOST_EMP + 'empresa/' + idEmpresa + '/ubicacion';
     return this.httpClient.get<Ubicacion>(baseUrl);
   }
+  addUbicacion(ubicacion: Ubicacion, empresaId: number): Observable<Ubicacion>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/ubicacion';
+    return this.httpClient.post<Ubicacion>(baseUrl, ubicacion);
+  }
+
+  findUbicacion(empresaId: number, indexUbicacion: number): Observable<Ubicacion>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/ubicacion/' + indexUbicacion;
+    return this.httpClient.get<Ubicacion>(baseUrl);
+  }
+
+  editUbicacion(ubicacion: Ubicacion, indexUbicacion: number, empresaId: number):Observable<Ubicacion>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/ubicacion/' + indexUbicacion;
+    return this.httpClient.patch<Ubicacion>(baseUrl, ubicacion);
+  }
 }

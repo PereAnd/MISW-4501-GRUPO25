@@ -16,6 +16,7 @@ import { DashboardEmpComponent } from './companies/components/dashboard-emp/dash
 import { InfoGeneralComponent } from './companies/components/dashboard-emp/info-general/info-general.component';
 import { VerticalesComponent } from './companies/components/dashboard-emp/verticales/verticales.component';
 import { CreateVerticalesComponent } from './companies/components/dashboard-emp/verticales/create-verticales/create-verticales.component';
+import { UbicacionesComponent } from './companies/components/dashboard-emp/ubicaciones/ubicaciones.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -41,7 +42,8 @@ const routes: Routes = [
       { path: 'info-general', component: InfoGeneralComponent },
       { path: 'verticales', component: VerticalesComponent },
       { path: 'verticales/add', component: CreateVerticalesComponent },
-      { path: 'verticales/:idv', component: CreateVerticalesComponent }
+      { path: 'verticales/:idv', component: CreateVerticalesComponent },
+      { path: 'ubicaciones', component: UbicacionesComponent }
     ]
   }
 ];

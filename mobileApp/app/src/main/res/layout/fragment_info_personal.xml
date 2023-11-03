@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="60dp"
+        android:paddingTop="30dp"
+        android:background="@color/background_general"
+        tools:context=".view.FragmentInfoPersonal">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCreateAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="Ingresa tu información personal"
+                android:textAppearance="@style/abc_syle"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="30dp"
+                android:textColor="@color/black"
+                android:textAlignment="center" />
+
+            <!-- Nombres  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiNamesInfoPersonal"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Nombres"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamesInfoPersonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Apellidos  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiLastNamesInfoPersonal"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Apellidos"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLastNamesInfoPersonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Mail  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiMailInfoPersonal"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "E-mail"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMailInfoPersonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Tipo documento  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiDocType"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= " Tipo de documento"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDocType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Número de identificación  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiDocNumber"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Número de identificación"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDocNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- phone  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiPhone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Teléfono de contacto"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Dirección  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiAddress"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Dirección"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Fecha de nacimiento -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiBirthDate"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Fecha de nacimiento"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBirthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Pais  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiCountry"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "País o región"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Ciudad  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiCity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Ciudad"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Idioma  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiLanguage"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Idioma"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLanguaje"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSaveInfoPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_yellow" />
+
+        <Button
+            android:id="@+id/btnSendInfoPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "Siguiente"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_yellow" />
+
+    </LinearLayout>
+
+</ScrollView>

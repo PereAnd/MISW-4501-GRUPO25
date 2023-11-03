@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.databinding.FragmentCandidatoListBinding
 import com.example.vinyls.models.Candidato
-import com.example.vinyls.models.adapter.CandidatoAdapter
+import com.example.vinyls.models.adapter.CandidatosAdapter
 import com.example.vinyls.viewmodels.CandidatoListViewModel
 
 class FragmentCandidatoList : Fragment() {
@@ -21,12 +21,12 @@ class FragmentCandidatoList : Fragment() {
     private val binding get() = _binding!! // get
     private lateinit var recyclerView: RecyclerView // almacena datos
     private lateinit var viewModel: CandidatoListViewModel // interfaz
-    private var viewModelAdapter: CandidatoAdapter? = null // llenar los datos
+    private var viewModelAdapter: CandidatosAdapter? = null // llenar los datos
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
             View? {
                 _binding = FragmentCandidatoListBinding.inflate(inflater, container, false)
                 val view = binding.root
-                viewModelAdapter = CandidatoAdapter()
+                viewModelAdapter = CandidatosAdapter()
                 return view
             }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

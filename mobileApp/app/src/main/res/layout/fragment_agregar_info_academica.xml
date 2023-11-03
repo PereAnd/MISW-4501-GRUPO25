@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_agregarinfo_academica"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -13,10 +14,10 @@
         android:paddingHorizontal="60dp"
         android:paddingTop="30dp"
         android:background="@color/background_general"
-        tools:context=".view.FragmentRegistro">
+        tools:context=".view.FragmentInfoAcademica">
 
         <LinearLayout
-            android:id="@+id/linearLayouRegistro"
+            android:id="@+id/linearLayoutInfoAcademica"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -26,21 +27,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:text="Registro"
-                android:textColor="@color/black"
+                android:text="Ingresa tu información academica"
                 android:textAppearance="@style/abc_syle"
                 android:textSize="20sp"
                 android:paddingTop="10dp"
                 android:paddingBottom="30dp"
+                android:textColor="@color/black"
                 android:textAlignment="center" />
 
-            <!-- Nombres  -->
+            <!-- Titulo  -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiNamesRegistro"
+                android:id="@+id/tiTitle"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombres"
+                android:hint= "Titulo obtenido"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
                 android:textColorHint="@color/dark_gray"
@@ -50,112 +51,110 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etNamesRegistro"
+                    android:id="@+id/etTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Apellidos  -->
+            <!-- Institución  -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiLastNamesRegistro"
+                android:id="@+id/tiInstitution"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Apellidos"
+                android:hint= "Institución"
                 app:boxBackgroundColor="@color/light_blue"
-                android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
                 app:helperTextTextColor="@color/dark_yellow"
                 app:counterEnabled="true"
-                app:counterMaxLength="100"
+                app:counterMaxLength="20"
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etLastNamesRegistro"
+                    android:id="@+id/etInstitution"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textWebEmailAddress"
+                    android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Email  -->
+            <!-- Fecha inicio  -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiMailRegistro"
+                android:id="@+id/tiBeginDate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/dark_gray"
-                android:hint="E-Mail"
+                android:hint= "Fecha de inicio"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
-                app:counterEnabled="true"
-                app:counterMaxLength="200"
+                android:textColorHint="@color/dark_gray"
                 app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etMailRegistro"
+                    android:id="@+id/etBeginDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
+                    android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Password  -->
+            <!-- Fecha fin  -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiPasswordRegistro"
+                android:id="@+id/tiEndDate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/dark_gray"
-                android:hint="Password"
+                android:hint= "Fecha de finalización"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
-                app:counterEnabled="true"
-                app:counterMaxLength="200"
+                android:textColorHint="@color/dark_gray"
                 app:helperTextTextColor="@color/dark_yellow"
-                app:endIconMode="password_toggle">
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPasswordRegistro"
+                    android:id="@+id/etEndDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
+                    android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- ConfirmPassword  -->
+            <!-- Tipo de estudio  -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiConfirmPasswordRegistro"
+                android:id="@+id/tiStudyType"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/dark_gray"
-                android:hint="ConfirmPassword"
+                android:hint= "Tipo de estudio"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
-                app:counterEnabled="true"
-                app:counterMaxLength="200"
+                android:textColorHint="@color/dark_gray"
                 app:helperTextTextColor="@color/dark_yellow"
-                app:endIconMode="password_toggle">
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etConfirmPasswordRegistro"
+                    android:id="@+id/etStudyType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
+                    android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnSendCandidato"
+            android:id="@+id/btnSaveInfoAcademica"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Guardar"
@@ -165,14 +164,15 @@
             android:backgroundTint="@color/dark_yellow" />
 
         <Button
-            android:id="@+id/btnNextAcademic"
+            android:id="@+id/btnSendInfoAcademica"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="siguiente"
+            android:text= "Siguiente"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/black" />
+
     </LinearLayout>
 
 </ScrollView>

@@ -7,8 +7,8 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.vinyls.models.Album
 import com.example.vinyls.models.Candidato
+import com.example.vinyls.models.InfoAcademica
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -30,106 +30,106 @@ class NetworkServiceAdapter constructor(context: Context) {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
     }
-
-
-    suspend fun getCandidatos() = suspendCoroutine<List<Candidato>>{ cont ->
+    suspend fun getCandidatos() = suspendCoroutine<List<Candidato>> { cont ->
         requestQueue.add(getRequest("candidato",
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Candidato>()
-                var item:JSONObject? = null
+
                 for (i in 0 until resp.length()) {
-                    item = resp.getJSONObject(i)
-                    list.add(i, Candidato(id = item.getInt("id"),
-                        names = item.getString("names"),
-                        lastNames = item.getString("lastNames"),
-                        password = item.getString("password"),
-                        confirmPassword = item.getString("confirmPassword"),
-                        mail = item.getString("mail"))
-                    )
+                    val item = resp.getJSONObject(i)
+
+                    val candidatoId = item.getInt("id")
+                    val names = item.getString("names")
+                    val lastNames = item.getString("lastNames")
+                    val mail = item.getString("mail")
+
+                    // Verificar si la clave "password" está presente en el objeto JSON
+                    val password = if (item.has("password")) {
+                        item.getString("password")
+                    } else { "nd" }
+                    val confirmPassword = if (item.has("confirmPassword")) {
+                        item.getString("confirmPassword")
+                    } else { "nd" }
+
+                    list.add(i, Candidato(candidatoId = candidatoId, names = names, lastNames = lastNames, password = password,
+                                        confirmPassword = confirmPassword, mail = mail))
                 }
                 cont.resume(list)
             },
             {
                 cont.resumeWithException(it)
-            }))
+            })
+        )
     }
 
+
+    private var currentCandidatoId: Int = -1 // Inicializa con un valor que no se usará en la aplicación
     suspend fun registro(body: JSONObject) = suspendCoroutine<Candidato> { cont ->
         requestQueue.add(postRequest("candidato", body,
-            {  response ->
-                val candidato = Candidato(id = response.getInt("id"),
-                    names = response.getString("names"),
-                    lastNames = response.getString("lastNames"),
-                    mail = response.getString("mail"))
+            { response ->
+                val candidatoId = response.getInt("id")
+                currentCandidatoId = candidatoId // Almacena el candidatoId
+                val names = response.getString("names")
+                val lastNames = response.getString("lastNames")
+                val mail = response.getString("mail")
+                val password = response.optString("password", "Sin password") // Usar optString para proporcionar un valor predeterminado
+                val confirmPassword = response.optString("confirmPassword", "Sin confirmPassword")
+
+                val candidato = Candidato(
+                    candidatoId = candidatoId,
+                    names = names,
+                    lastNames = lastNames,
+                    mail = mail,
+                    password = password,
+                    confirmPassword = confirmPassword
+                )
                 cont.resume(candidato)
-            },{
+            },
+            {
                 cont.resumeWithException(it)
-            }))
+            }
+        ))
     }
 
+    suspend fun agregarInfoAcademica(body: JSONObject): InfoAcademica {
+        return suspendCoroutine { cont ->
 
+            if (currentCandidatoId == -1) {
+               // cont.resumeWithException(NoValidCandidatoIdException("No se encontró un candidatoId válido."))
+              //  return@suspendCoroutine
+            }
 
+            requestQueue.add(postRequest("candidato/$currentCandidatoId/informacionAcademica", body,
+                { response ->
+                    val infoAcademicaId = response.getInt("id")
+                    val title = response.getString("title")
+                    val institution = response.getString("institution")
+                    val beginDate = response.getString("beginDate")
+                    val endDate = response.getString("endDate")
+                    val studyType = response.getString("studyType")
+                    val candidatoId = response.getInt("candidatoId")
 
-
-
-
-
-
-
-
-    suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont ->
-        requestQueue.add(getRequest("albums",
-            { response ->
-                val resp = JSONArray(response)
-                val list = mutableListOf<Album>()
-                var item:JSONObject? = null
-                for (i in 0 until resp.length()) {
-                    item = resp.getJSONObject(i)
-                    list.add(i, Album(albumId = item.getInt("id"),
-                        name = item.getString("name"),
-                        cover = item.getString("cover"),
-                        recordLabel = item.getString("recordLabel"),
-                        releaseDate = item.getString("releaseDate"),
-                        genre = item.getString("genre"),
-                        description = item.getString("description"))
+                    val infoAcademica = InfoAcademica(
+                        infoAcademicaId = infoAcademicaId,
+                        title = title,
+                        institution = institution,
+                        beginDate = beginDate,
+                        endDate = endDate,
+                        studyType = studyType,
+                        candidatoId = candidatoId
                     )
+
+                    cont.resume(infoAcademica)
+                },
+                {
+                    cont.resumeWithException(it)
                 }
-                cont.resume(list)
-            },
-            {
-                cont.resumeWithException(it)
-            }))
-    }
-
-    suspend fun createAlbum(body: JSONObject) = suspendCoroutine<Album> { cont ->
-        requestQueue.add(postRequest("albums", body,
-            {  response ->
-                val album = Album(albumId = response.getInt("id"),
-                                name = response.getString("name"),
-                                cover = response.getString("cover"),
-                                recordLabel = response.getString("recordLabel"),
-                                releaseDate = response.getString("releaseDate"),
-                                genre = response.getString("genre"),
-                                description = response.getString("description"))
-                cont.resume(album)
-            },{
-                cont.resumeWithException(it)
-            }))
+            ))
+        }
     }
 
 
-    fun getAlbumById(albumId:Int, onComplete:(resp: Album)->Unit, onError: (error:VolleyError)->Unit){
-        requestQueue.add(getRequest("albums",
-            { response ->
-                val resp = JSONObject(response)
-                val album = Album(albumId = resp.getInt("id"),name = resp.getString("name"), cover = resp.getString("cover"), recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description"))
-                onComplete(album)
-            },
-            {
-                onError(it)
-            }))
-    }
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL +path, responseListener,errorListener)

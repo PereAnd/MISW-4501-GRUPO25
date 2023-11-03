@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="60dp"
+        android:paddingTop="30dp"
+        android:background="@color/background_general"
+        tools:context=".view.FragmentInfoLaboral">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutLaboral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="Ingresa tu información laboral"
+                android:textColor="@color/black"
+                android:textAppearance="@style/abc_syle"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="30dp"
+                android:textAlignment="center" />
+
+            <!-- Tipo de habilidad  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiPendiente"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Pendiente"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPendiente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSaveInfoLaboral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_yellow" />
+
+        <Button
+            android:id="@+id/btnSendInfoLaboral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "Enviar"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_yellow" />
+
+    </LinearLayout>
+
+</ScrollView>

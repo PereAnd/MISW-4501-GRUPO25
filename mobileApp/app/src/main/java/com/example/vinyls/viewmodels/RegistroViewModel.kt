@@ -28,26 +28,23 @@ class RegistroViewModel (application: Application) :  AndroidViewModel(applicati
         get() = _isNetworkErrorShown
 
     suspend fun registroFromNetwork(candidato: JSONObject): Int {
-        var id: Int = 0
+        var id: Int = 0 // Inicializar id fuera del bloque try
         try {
             viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {
                     var data = candidatoRepository.registro(candidato)
                     _candidato.postValue(data)
-                    id= data.id
+                    id = data.candidatoId
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
-
-
+        } catch (e: Exception) {
+            _eventNetworkError.postValue(true)
         }
-        catch (e:Exception){
-            _eventNetworkError.value = true
-        }
-        return id
-
+        return id // Devolver id, que tendrá 0 si no se pudo completar el registro
     }
+
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

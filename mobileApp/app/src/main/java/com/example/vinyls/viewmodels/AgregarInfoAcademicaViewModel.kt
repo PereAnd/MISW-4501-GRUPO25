@@ -2,20 +2,20 @@ package com.example.vinyls.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.vinyls.models.Album
-import com.example.vinyls.models.repository.AlbumRepository
+import com.example.vinyls.models.InfoAcademica
+import com.example.vinyls.models.repository.InfoAcademicaRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
-class AlbumCreateViewModel (application: Application) :  AndroidViewModel(application)  {
-    private val albumRepository = AlbumRepository(application)
+class AgregarInfoAcademicaViewModel(application: Application) :  AndroidViewModel(application)  {
+    private val infoAcademicaRepository = InfoAcademicaRepository(application)
 
-    private val _album = MutableLiveData<Album>()
+    private val _infoAcademica = MutableLiveData<InfoAcademica>()
 
-    val album: LiveData<Album>
-        get() = _album
+    val infoAcademica: LiveData<InfoAcademica>
+        get() = _infoAcademica
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -27,37 +27,30 @@ class AlbumCreateViewModel (application: Application) :  AndroidViewModel(applic
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    /*init {
-        createAlbumFromNetwork()
-    }*/
-
-    suspend fun createAlbumFromNetwork(album: JSONObject): Int {
-        var id: Int = 0
+    suspend fun agregarInfoAcademicaFromNetwork(infoAcademica: JSONObject): Int {
+        var id: Int = 0 // Inicializar id fuera del bloque try
         try {
             viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {
-                    var data = albumRepository.createAlbum(album)
-                    _album.postValue(data)
-                    id= data.albumId
+                    var data = infoAcademicaRepository.agregarInfoAcademica(infoAcademica)
+                    _infoAcademica.postValue(data)
+                    id = data.infoAcademicaId
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
-
-
+        } catch (e: Exception) {
+            _eventNetworkError.postValue(true)
         }
-        catch (e:Exception){
-            _eventNetworkError.value = true
-        }
-        return id
-
+        return id // Devolver id, que tendrá 0 si no se pudo completar el registro
     }
+
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumCreateViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(AgregarInfoAcademicaViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumCreateViewModel(app) as T
+                return AgregarInfoAcademicaViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

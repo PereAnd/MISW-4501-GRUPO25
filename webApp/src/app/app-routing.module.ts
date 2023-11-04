@@ -18,6 +18,7 @@ import { VerticalesComponent } from './companies/components/dashboard-emp/vertic
 import { CreateVerticalesComponent } from './companies/components/dashboard-emp/verticales/create-verticales/create-verticales.component';
 import { UbicacionesComponent } from './companies/components/dashboard-emp/ubicaciones/ubicaciones.component';
 import { CreateUbicacionComponent } from './companies/components/dashboard-emp/ubicaciones/create-ubicacion/create-ubicacion.component';
+import { ProyectosComponent } from './companies/components/dashboard-emp/proyectos/proyectos.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -46,7 +47,8 @@ const routes: Routes = [
       { path: 'verticales/:idv', component: CreateVerticalesComponent },
       { path: 'ubicaciones', component: UbicacionesComponent },
       { path: 'ubicaciones/add', component: CreateUbicacionComponent },
-      { path: 'ubicaciones/:idu', component: CreateUbicacionComponent }
+      { path: 'ubicaciones/:idu', component: CreateUbicacionComponent },
+      { path: 'proyectos', component: ProyectosComponent },
     ]
   }
 ];

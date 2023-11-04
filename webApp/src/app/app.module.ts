@@ -28,6 +28,7 @@ import { VerticalesComponent } from './companies/components/dashboard-emp/vertic
 import { CreateVerticalesComponent } from './companies/components/dashboard-emp/verticales/create-verticales/create-verticales.component';
 import { UbicacionesComponent } from './companies/components/dashboard-emp/ubicaciones/ubicaciones.component';
 import { CreateUbicacionComponent } from './companies/components/dashboard-emp/ubicaciones/create-ubicacion/create-ubicacion.component';
+import { ProyectosComponent } from './companies/components/dashboard-emp/proyectos/proyectos.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { CreateUbicacionComponent } from './companies/components/dashboard-emp/u
     CreateVerticalesComponent,
     UbicacionesComponent,
     CreateUbicacionComponent,
+    ProyectosComponent,
   ],
   imports: [
     BrowserModule,

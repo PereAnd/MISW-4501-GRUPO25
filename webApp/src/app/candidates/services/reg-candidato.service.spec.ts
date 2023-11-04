@@ -33,7 +33,7 @@ describe('RegCandidatoService', () => {
       pass
     )
 
-    const baseUrl = environment.HOST + 'candidato';
+    const baseUrl = environment.HOST_CAND + 'candidato';
 
     const mockResponse = {
       "id": 1,
@@ -55,7 +55,7 @@ describe('RegCandidatoService', () => {
 
   it("Método 'getDatosCandidato', servicio 'RegCandidatoService'", () => {
     const candidatoId: number = 1;
-    const baseUrl = environment.HOST + 'candidato/' + candidatoId;
+    const baseUrl = environment.HOST_CAND + 'candidato/' + candidatoId;
     const mockResponse = {
       "id": 1,
       "names": faker.person.firstName(),
@@ -87,7 +87,7 @@ describe('RegCandidatoService', () => {
   it("Método 'updateDatosCandidato', servicio 'RegCandidatoService'", () => {
     const candidatoId: number = 1;
     const pass: string = faker.lorem.word(10);
-    const baseUrl = environment.HOST + 'candidato/' + candidatoId;
+    const baseUrl = environment.HOST_CAND + 'candidato/' + candidatoId;
 
     const newCandidato: Candidato = new Candidato(
       faker.person.firstName(),

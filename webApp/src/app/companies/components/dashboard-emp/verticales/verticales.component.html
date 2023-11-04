@@ -1,0 +1,57 @@
+<div class="container text-center">
+  <h2 id="titulo"><mat-icon>splitscreen</mat-icon>Verticales</h2>
+    <div class="controles">
+      <div>
+        <mat-form-field>
+          <mat-label>Filtrar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Escribe algo" #input>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" aria-label="Select page of users"></mat-paginator>
+      </div>
+      <div class="mt-3">
+        <a mat-raised-button color="primary" routerLink="./add"
+          >Agregar nueva</a>
+      </div>
+    </div>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vertical">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Vertical </th>
+          <td mat-cell *matCellDef="let row"> {{row.vertical}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+          <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+          <mat-cell *matCellDef="let element">
+            <a mat-icon-button [routerLink]="['./', element.id]"><mat-icon>edit</mat-icon></a>
+            <a mat-icon-button disabled><mat-icon>delete</mat-icon></a>
+          </mat-cell>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;
+        let i = index; odd as isOdd; even as isEven"
+        [ngClass]="isOdd ? 'odd-row' : 'odd-even'"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell text-center" colspan="4">No hay registros</td>
+        </tr>
+      </table>
+
+    </div>
+</div>
+<router-outlet></router-outlet>

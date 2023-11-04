@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { RegCandidatoComponent } from './candidates/components/reg-candidato/reg-candidato.component';
-import { LoginCandidatoComponent } from './core/auth/login-candidato/login-candidato.component';
 import { RegCandidatoService } from './candidates/services/reg-candidato.service';
 import { CandidatesComponent } from './candidates/candidates.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +19,15 @@ import { CreateInfoTecComponent } from './candidates/components/dashboard-cand/i
 import { InfoPersonalComponent } from './candidates/components/dashboard-cand/info-personal/info-personal.component';
 import { InfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/info-laboral.component';
 import { CreateInfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/create-info-laboral/create-info-laboral.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { RegEmpresaComponent } from './companies/components/reg-empresa/reg-empresa.component';
+import { DashboardEmpComponent } from './companies/components/dashboard-emp/dashboard-emp.component';
+import { InfoGeneralComponent } from './companies/components/dashboard-emp/info-general/info-general.component';
+import { VerticalesComponent } from './companies/components/dashboard-emp/verticales/verticales.component';
+import { CreateVerticalesComponent } from './companies/components/dashboard-emp/verticales/create-verticales/create-verticales.component';
+import { UbicacionesComponent } from './companies/components/dashboard-emp/ubicaciones/ubicaciones.component';
+import { CreateUbicacionComponent } from './companies/components/dashboard-emp/ubicaciones/create-ubicacion/create-ubicacion.component';
 
 
 @NgModule({
@@ -27,7 +35,6 @@ import { CreateInfoLaboralComponent } from './candidates/components/dashboard-ca
     AppComponent,
     RegCandidatoComponent,
     InicioComponent,
-    LoginCandidatoComponent,
     CandidatesComponent,
     InfoAcademicaComponent,
     CreateInfoAcadComponent,
@@ -37,6 +44,15 @@ import { CreateInfoLaboralComponent } from './candidates/components/dashboard-ca
     InfoPersonalComponent,
     InfoLaboralComponent,
     CreateInfoLaboralComponent,
+    LoginComponent,
+    CompaniesComponent,
+    RegEmpresaComponent,
+    DashboardEmpComponent,
+    InfoGeneralComponent,
+    VerticalesComponent,
+    CreateVerticalesComponent,
+    UbicacionesComponent,
+    CreateUbicacionComponent,
   ],
   imports: [
     BrowserModule,

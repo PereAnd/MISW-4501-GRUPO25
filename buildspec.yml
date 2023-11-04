@@ -55,7 +55,7 @@ phases:
       - printf '[{"name”:"candidato","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - printf '[{"name”:"candidato_cb","imageUri":"%s"}]' $REPOSITORY_URI_CB:$IMAGE_TAG_CB > imagedefinitions_cb.json
       - printf '[{"name”:"empresa","imageUri":"%s"}]' $REPOSITORY_URI_EMP:$IMAGE_TAG_EMP > imagedefinitions_emp.json
-      - printf '[{"name”:"empresa_cb","imageUri":"%s"}]' $REPOSITORY_URI_EMP_CB:$IMAGE_TAG_EMP_CB > imagedefinitions_empp_cb.json
+      - printf '[{"name”:"empresa_cb","imageUri":"%s"}]' $REPOSITORY_URI_EMP_CB:$IMAGE_TAG_EMP_CB > imagedefinitions_emp_cb.json
       - CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::798178280816:role/CodeBuildEKSRole --role-session-name eks-codebuild --duration-seconds 900)
       - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
       - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"

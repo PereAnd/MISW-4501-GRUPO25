@@ -74,7 +74,55 @@ describe('ProyectosService', () => {
     req.flush(mockResponse);
   })
 
+  it("Método 'findProyecto', servicio 'ProyectosService'", () => {
+    const empresaId = 1;
+    const indexProyecto = 1;
+    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + 'proyecto/' + indexProyecto;
 
+    const mockResponse = {
+      "id": 1,
+      "proyecto": faker.lorem.words(3),
+      "description": faker.lorem.words(5)
+    }
+
+    service.findProyecto(empresaId, indexProyecto).subscribe({
+      next: response => {
+        expect(response).toEqual(mockResponse)
+      }
+    })
+
+    const req = httpMock.expectOne(baseUrl);
+    expect(req.request.method).toBe('GET');
+
+    req.flush(mockResponse);
+  })
+
+  it("Método 'editProyecto', servicio 'ProyectosService'", () => {
+    const empresaId = 1;
+    const indexProyecto = 1;
+    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + 'proyecto/' + indexProyecto;
+
+    const newProyecto: Proyecto = new Proyecto(
+      faker.lorem.words(3),
+      faker.lorem.words(5)
+    );
+    const mockResponse = {
+      "id": 1,
+      "proyecto": newProyecto.proyecto,
+      "description": newProyecto.description
+    }
+    service.editProyecto(newProyecto, indexProyecto, empresaId).subscribe({
+      next: response => {
+        response = <Proyecto>response
+        expect(response).toEqual(mockResponse)
+      }
+    })
+
+    const req = httpMock.expectOne(baseUrl);
+    expect(req.request.method).toBe('PATCH');
+
+    req.flush(mockResponse);
+  })
 
   afterEach(() => {
     httpMock.verify();

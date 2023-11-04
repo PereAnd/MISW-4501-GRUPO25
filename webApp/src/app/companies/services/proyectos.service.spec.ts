@@ -77,7 +77,7 @@ describe('ProyectosService', () => {
   it("Método 'findProyecto', servicio 'ProyectosService'", () => {
     const empresaId = 1;
     const indexProyecto = 1;
-    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + 'proyecto/' + indexProyecto;
+    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + '/proyecto/' + indexProyecto;
 
     const mockResponse = {
       "id": 1,
@@ -100,7 +100,7 @@ describe('ProyectosService', () => {
   it("Método 'editProyecto', servicio 'ProyectosService'", () => {
     const empresaId = 1;
     const indexProyecto = 1;
-    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + 'proyecto/' + indexProyecto;
+    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + '/proyecto/' + indexProyecto;
 
     const newProyecto: Proyecto = new Proyecto(
       faker.lorem.words(3),

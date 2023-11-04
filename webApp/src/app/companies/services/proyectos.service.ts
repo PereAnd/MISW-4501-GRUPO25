@@ -17,4 +17,11 @@ export class ProyectosService {
     let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/proyecto';
     return this.httpClient.get<Proyecto>(baseUrl);
   }
+
+  addProyecto(proyecto: Proyecto, empresaId: number): Observable<Proyecto>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/proyecto';
+    return this.httpClient.post<Proyecto>(baseUrl, proyecto);
+  }
+
+
 }

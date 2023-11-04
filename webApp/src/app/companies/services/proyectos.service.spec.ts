@@ -4,6 +4,7 @@ import { ProyectosService } from './proyectos.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from 'src/environments/environment.development';
 import { faker } from '@faker-js/faker';
+import { Proyecto } from '../models/proyecto';
 
 describe('ProyectosService', () => {
   let service: ProyectosService;
@@ -45,5 +46,37 @@ describe('ProyectosService', () => {
     expect(req.request.method).toBe('GET');
 
     req.flush(mockResponse);
+  })
+
+  it("Método 'addProyecto', servicio 'ProyectosService'", () => {
+    const empresaId = 1;
+    const baseUrl = environment.HOST_EMP + 'empresa/' + empresaId + '/proyecto';
+
+    const newProyecto: Proyecto = new Proyecto(
+      faker.lorem.words(3),
+      faker.lorem.words(5)
+    );
+    const mockResponse = {
+      "id": newProyecto.id,
+      "proyecto": newProyecto.proyecto,
+      "description": newProyecto.description
+    }
+    service.addProyecto(newProyecto, empresaId).subscribe({
+      next: response => {
+        response = <Proyecto>response
+        expect(response).toEqual(mockResponse)
+      }
+    })
+
+    const req = httpMock.expectOne(baseUrl);
+    expect(req.request.method).toBe('POST');
+
+    req.flush(mockResponse);
+  })
+
+
+
+  afterEach(() => {
+    httpMock.verify();
   })
 });

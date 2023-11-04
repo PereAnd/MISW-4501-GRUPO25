@@ -29,6 +29,7 @@ import { CreateVerticalesComponent } from './companies/components/dashboard-emp/
 import { UbicacionesComponent } from './companies/components/dashboard-emp/ubicaciones/ubicaciones.component';
 import { CreateUbicacionComponent } from './companies/components/dashboard-emp/ubicaciones/create-ubicacion/create-ubicacion.component';
 import { ProyectosComponent } from './companies/components/dashboard-emp/proyectos/proyectos.component';
+import { CreateProyectoComponent } from './companies/components/dashboard-emp/proyectos/create-proyecto/create-proyecto.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { ProyectosComponent } from './companies/components/dashboard-emp/proyect
     UbicacionesComponent,
     CreateUbicacionComponent,
     ProyectosComponent,
+    CreateProyectoComponent,
   ],
   imports: [
     BrowserModule,

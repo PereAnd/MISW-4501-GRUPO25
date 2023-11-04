@@ -12,7 +12,7 @@ import { UbicacionesService } from 'src/app/companies/services/ubicaciones.servi
   styleUrls: ['./ubicaciones.component.css']
 })
 export class UbicacionesComponent {
-  empresaId: number = 1;
+  empresaId: number;
   displayedColumns: string[] = ['id', 'country', 'city', 'description', 'actions']
   dataSource = new MatTableDataSource<any>;
 
@@ -22,7 +22,9 @@ export class UbicacionesComponent {
   constructor(
     private ubicacionService: UbicacionesService,
     private router: Router
-  ) { }
+  ) {
+    this.empresaId = +localStorage.getItem('empresaId')!;
+  }
 
   ngOnInit(): void {
     this.ubicacionService.listUbicaciones(this.empresaId)

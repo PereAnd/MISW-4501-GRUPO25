@@ -11,7 +11,7 @@ import { VerticalesService } from 'src/app/companies/services/verticales.service
   styleUrls: ['./verticales.component.css']
 })
 export class VerticalesComponent {
-  empresaId: number = 1;
+  empresaId: number;
   displayedColumns: string[] = ['id', 'vertical', 'description', 'actions']
   dataSource = new MatTableDataSource<any>;
 
@@ -21,7 +21,9 @@ export class VerticalesComponent {
   constructor(
     private verticalesService: VerticalesService,
     private router: Router
-  ) { }
+  ) {
+    this.empresaId = +localStorage.getItem('empresaId')!;
+  }
 
   ngOnInit(): void {
     this.verticalesService.listVerticales(this.empresaId)
@@ -45,9 +47,5 @@ export class VerticalesComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  redirectCreateInfoAcad(){
-    this.router.navigate(['empresa/dashboard/' + this.empresaId + '/verticales'])
   }
 }

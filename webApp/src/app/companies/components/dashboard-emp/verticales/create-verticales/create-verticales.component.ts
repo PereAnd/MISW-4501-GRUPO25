@@ -13,10 +13,10 @@ import { VerticalesService } from 'src/app/companies/services/verticales.service
 })
 export class CreateVerticalesComponent {
   indexVertical: number;
-
+  empresaId: number;
   formVerticales: FormGroup = new FormGroup({
-    vertical: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required)
+  vertical: new FormControl('', Validators.required),
+  description: new FormControl('', Validators.required)
   })
 
   listVerticales: string[] = ['Desarrollo de Software', 'Proveedor de hardware', 'Empresa de Ciberseguridad', 'Consultoría de TI', 'Telecomunicaciones', 'E-Commerce', 'Empresa de Big Data y Análisis de Datos', 'IA y Aprendizaje Automático', 'Infraestructura de Red'];
@@ -33,7 +33,7 @@ export class CreateVerticalesComponent {
   ngOnInit(): void {
     this.indexVertical = this.route.snapshot.params['idv'];
     if(this.indexVertical){
-      this.verticalesService.findVertical(1, this.indexVertical)
+      this.verticalesService.findVertical(this.empresaId, this.indexVertical)
       .subscribe({
         next: data => {
           this.formVerticales.setValue({
@@ -47,14 +47,13 @@ export class CreateVerticalesComponent {
   }
 
   registrarVertical(){
-    const empresaId: number = 1;
     const newVertical = new Vertical(
-      this.formVerticales.value.vertical,
-      this.formVerticales.value.description,
-      empresaId
+    this.formVerticales.value.vertical,
+    this.formVerticales.value.description,
+    this.empresaId
     )
     if(!this.indexVertical){
-      this.verticalesService.addVertical(newVertical, empresaId).subscribe({
+      this.verticalesService.addVertical(newVertical, this.empresaId).subscribe({
           next: data => {
             console.log("Vertical registrada")
             this.formVerticales.reset();
@@ -68,7 +67,7 @@ export class CreateVerticalesComponent {
           }
         })
     } else {
-      this.verticalesService.editVertical(newVertical, this.indexVertical, empresaId).subscribe({
+      this.verticalesService.editVertical(newVertical, this.indexVertical, this.empresaId).subscribe({
         next: data => {
           console.log('Vertical editada')
           this.formVerticales.reset()

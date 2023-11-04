@@ -14,6 +14,7 @@ import { InfLaboralService } from 'src/app/candidates/services/inf-laboral.servi
 export class InfoLaboralComponent {
   displayedColumns: string[] = ['id', 'organization', 'position', 'activities', 'dateFrom', 'dateTo', 'actions']
   dataSource = new MatTableDataSource<any>;
+  candidatoId: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -21,10 +22,12 @@ export class InfoLaboralComponent {
   constructor(
     private infLaboralService: InfLaboralService,
     private router: Router
-  ) { }
+  ) {
+    this.candidatoId = this.candidatoId = +localStorage.getItem('candidatoId')!;
+  }
 
   ngOnInit(): void {
-    this.infLaboralService.listInfoLaboral(1)
+    this.infLaboralService.listInfoLaboral(this.candidatoId)
     .subscribe({
       next: data => {
         this.dataSource = new MatTableDataSource(data);
@@ -48,6 +51,6 @@ export class InfoLaboralComponent {
   }
 
   redirectCreateInfoLab(){
-    this.router.navigate(['candidato/dashboard/1/add-info-laboral'])
+    this.router.navigate(['candidato/dashboard/' + this.candidatoId + '/add-info-laboral'])
   }
 }

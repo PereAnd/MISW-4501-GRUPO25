@@ -13,6 +13,7 @@ export class InfoGeneralComponent implements OnInit {
   empresa: Empresa;
   isEditMode: boolean;
   formInfoGeneral: FormGroup;
+  empresaId: number;
 
   tiposDeEmpresa: string[] = ['Startup', 'Desarrollo de Software', 'Proveedor de Servicios', 'Empresa de Ciberseguridad', 'Consultora de Tecnología', 'Tienda de Tecnología', 'Agencia de Desarrollo de Aplicaciones Móviles', 'Empresa de Análisis de Datos', 'Compañía de IA']
 
@@ -23,6 +24,7 @@ export class InfoGeneralComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ){
+    this.empresaId = +localStorage.getItem('empresaId')!;
     this.formInfoGeneral = new FormGroup({
       name: new FormControl('', Validators.required),
       organizationType: new FormControl('', Validators.required),
@@ -41,9 +43,8 @@ export class InfoGeneralComponent implements OnInit {
   get description() { return this.formInfoGeneral.get('description') }
 
   ngOnInit(): void {
-    const idEmpresa: number = 1;
     this.isEditMode ? this.formInfoGeneral.enable() : this.formInfoGeneral.disable();
-    this.regEmpresaService.getDatosEmpresa(idEmpresa).subscribe({
+    this.regEmpresaService.getDatosEmpresa(this.empresaId).subscribe({
       next: data => {
         this.empresa = data;
         this.formInfoGeneral.setValue({

@@ -12,7 +12,7 @@ import { InfAcademicaService } from 'src/app/candidates/services/inf-academica.s
 export class CreateInfoAcadComponent implements OnInit{
 
   indexInfoAcad: number;
-  candidatoId: number = 1;
+  candidatoId: number;
 
   formInfoAcademica: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -32,12 +32,14 @@ export class CreateInfoAcadComponent implements OnInit{
     private infAcademicaService: InfAcademicaService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.candidatoId = +localStorage.getItem('candidatoId')!;
+  }
 
   ngOnInit(): void {
     this.indexInfoAcad = this.route.snapshot.params['idia'];
     if(this.indexInfoAcad){
-      this.infAcademicaService.findInfoAcademica(1, this.indexInfoAcad)
+      this.infAcademicaService.findInfoAcademica(this.candidatoId, this.indexInfoAcad)
       .subscribe({
         next: data => {
           this.formInfoAcademica.setValue({
@@ -60,7 +62,7 @@ export class CreateInfoAcadComponent implements OnInit{
       this.formInfoAcademica.value.beginDate,
       this.formInfoAcademica.value.endDate,
       this.formInfoAcademica.value.studyType,
-      1 // OBTENER ID DEL CANDIDATO ACTUAL
+      this.candidatoId
     )
     if(!this.indexInfoAcad){
       this.infAcademicaService.addInfoAcademica(newInfoAcademica, this.candidatoId).subscribe({

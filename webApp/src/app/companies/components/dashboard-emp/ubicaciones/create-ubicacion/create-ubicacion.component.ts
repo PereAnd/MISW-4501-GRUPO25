@@ -11,7 +11,7 @@ import { UbicacionesService } from 'src/app/companies/services/ubicaciones.servi
 })
 export class CreateUbicacionComponent {
   indexUbicacion: number;
-  empresaId: number = 1;
+  empresaId: number;
   countrySelected: string = '';
   citiesOfCountry: string[] = [];
 
@@ -45,7 +45,9 @@ export class CreateUbicacionComponent {
     private ubicacionesService: UbicacionesService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.empresaId = +localStorage.getItem('empresaId')!;
+  }
 
   ngOnInit(): void {
     this.indexUbicacion = this.route.snapshot.params['idu'];
@@ -75,7 +77,7 @@ export class CreateUbicacionComponent {
       this.formUbicaciones.value.country,
       this.formUbicaciones.value.city,
       this.formUbicaciones.value.description,
-      this.empresaId // OBTENER ID DEL CANDIDATO ACTUAL
+      this.empresaId
     )
     if(!this.indexUbicacion){
       this.ubicacionesService.addUbicacion(newUbicacion, this.empresaId).subscribe({

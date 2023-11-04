@@ -37,7 +37,7 @@ class VistaRegistro(Resource):
             db.session.rollback()
             return {'Error': str(sys.exc_info()[0])}, 412
         
-        return {'id':nuevo_candidato.id, 'names ': nuevo_candidato.names, 'lastNames': nuevo_candidato.lastNames, 'mail':nuevo_candidato.mail}, 201
+        return {'id':nuevo_candidato.id, 'names': nuevo_candidato.names, 'lastNames': nuevo_candidato.lastNames, 'mail':nuevo_candidato.mail}, 201
     
     def get(self):
         mail = request.args.get('mail', default = "none", type=str)

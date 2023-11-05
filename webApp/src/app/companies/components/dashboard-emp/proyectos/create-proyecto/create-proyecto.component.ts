@@ -30,7 +30,21 @@ export class CreateProyectoComponent {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.indexProyecto = this.route.snapshot.params['idp'];
+    if (this.indexProyecto) {
+      this.proyectosService.findProyecto(1, this.indexProyecto).subscribe({
+        next: (data) => {
+          this.formProyectos.setValue({
+            proyecto: data.proyecto,
+            description: data.description,
+          });
+        },
+        error: (error) =>
+          console.error('Error obteniendo el proyecto seleccionado', error),
+      });
+    }
+  }
 
   registrarProyecto() {
     const empresaId: number = 1;
@@ -39,19 +53,37 @@ export class CreateProyectoComponent {
       this.formProyectos.value.description,
       1 // OBTENER ID DEL CANDIDATO ACTUAL
     );
-    this.proyectosService.addProyecto(newProyecto, empresaId).subscribe({
-      next: (data) => {
-        console.log('Proyecto registrado');
-        this.formProyectos.reset();
-      },
-      error: (error) => {
-        console.log('Error registrando el proyecto', error);
-        alert('Error registrando el proyecto');
-      },
-      complete: () => {
-        this.router.navigate(['..'], { relativeTo: this.route });
-      },
-    });
+    if (!this.indexProyecto) {
+      this.proyectosService.addProyecto(newProyecto, empresaId).subscribe({
+        next: (data) => {
+          console.log('Proyecto registrado');
+          this.formProyectos.reset();
+        },
+        error: (error) => {
+          console.log('Error registrando el proyecto', error);
+          alert('Error registrando el proyecto');
+        },
+        complete: () => {
+          this.router.navigate(['..'], { relativeTo: this.route });
+        },
+      });
+    } else {
+      this.proyectosService
+        .editProyecto(newProyecto, this.indexProyecto, empresaId)
+        .subscribe({
+          next: (data) => {
+            console.log('Proyecto actualizado');
+            this.formProyectos.reset();
+          },
+          error: (error) => {
+            console.log('Error editando el proyecto', error);
+            alert('Error editando el proyecto');
+          },
+          complete: () => {
+            this.router.navigate(['..'], { relativeTo: this.route });
+          },
+        });
+    }
   }
 
   cancelarCreacion() {

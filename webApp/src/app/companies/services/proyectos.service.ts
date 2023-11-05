@@ -23,5 +23,13 @@ export class ProyectosService {
     return this.httpClient.post<Proyecto>(baseUrl, proyecto);
   }
 
+  findProyecto(empresaId: number, indexProyecto: number): Observable<Proyecto>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/proyecto/' + indexProyecto;
+    return this.httpClient.get<Proyecto>(baseUrl);
+  }
 
+  editProyecto(proyecto: Proyecto, indexProyecto: number, empresaId: number):Observable<Proyecto>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/proyecto/' + indexProyecto;
+    return this.httpClient.patch<Proyecto>(baseUrl, proyecto);
+  }
 }

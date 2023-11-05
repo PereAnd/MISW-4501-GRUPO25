@@ -45,12 +45,17 @@ export class RegCandidatoComponent implements OnInit{
       );
     this.regCandidatoService.registrarCandidato(newCandidato)
       .subscribe({
-        next: data => console.log("Candidato registrado", data),
+        next: data => {
+          console.log("Candidato registrado")
+          try {
+              localStorage.setItem('candidatoId', (data as any).id)
+              this.router.navigate(['/candidatos/dashboard/' + localStorage.getItem('candidatoId') + '/info-personal'])
+            } catch (error) {
+              alert('Error registrando el candidato')
+              console.log("Error registrando el candidato", error)
+            }
+        },
         error: error => console.log("Error registrando el candidato", error),
-        complete: () => {
-          this.router.navigate(['/candidatos/dashboard/1/info-personal'])
-          this.formCandidato.reset();
-        }
       })
   }
 }

@@ -12,7 +12,7 @@ import { ProyectosService } from 'src/app/companies/services/proyectos.service';
   styleUrls: ['./proyectos.component.css']
 })
 export class ProyectosComponent {
-  empresaId: number = 1;
+  empresaId: number;
   displayedColumns: string[] = ['id', 'proyecto', 'description', 'actions']
   dataSource = new MatTableDataSource<any>;
 
@@ -22,7 +22,9 @@ export class ProyectosComponent {
   constructor(
     private proyectoService: ProyectosService,
     private router: Router
-  ) { }
+  ) {
+    this.empresaId = +localStorage.getItem('empresaId')!;
+  }
 
   ngOnInit(): void {
     this.proyectoService.listProyectos(this.empresaId)

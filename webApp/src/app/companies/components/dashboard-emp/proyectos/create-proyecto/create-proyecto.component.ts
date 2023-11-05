@@ -11,29 +11,28 @@ import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 })
 export class CreateProyectoComponent {
   indexProyecto: number;
+  empresaId: number;
 
   formProyectos: FormGroup = new FormGroup({
-    proyecto: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
+  proyecto: new FormControl('', Validators.required),
+  description: new FormControl('', Validators.required),
   });
 
-  get proyecto() {
-    return this.formProyectos.get('proyecto');
-  }
-  get description() {
-    return this.formProyectos.get('description');
-  }
+  get proyecto() { return this.formProyectos.get('proyecto') }
+  get description() { return this.formProyectos.get('description') }
 
   constructor(
     private proyectosService: ProyectosService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.empresaId = +localStorage.getItem('empresaId')!;
+  }
 
   ngOnInit(): void {
     this.indexProyecto = this.route.snapshot.params['idp'];
     if (this.indexProyecto) {
-      this.proyectosService.findProyecto(1, this.indexProyecto).subscribe({
+      this.proyectosService.findProyecto(this.empresaId, this.indexProyecto).subscribe({
         next: (data) => {
           this.formProyectos.setValue({
             proyecto: data.proyecto,
@@ -47,14 +46,13 @@ export class CreateProyectoComponent {
   }
 
   registrarProyecto() {
-    const empresaId: number = 1;
     const newProyecto = new Proyecto(
       this.formProyectos.value.proyecto,
       this.formProyectos.value.description,
-      1 // OBTENER ID DEL CANDIDATO ACTUAL
+      this.empresaId
     );
     if (!this.indexProyecto) {
-      this.proyectosService.addProyecto(newProyecto, empresaId).subscribe({
+      this.proyectosService.addProyecto(newProyecto, this.empresaId).subscribe({
         next: (data) => {
           console.log('Proyecto registrado');
           this.formProyectos.reset();
@@ -69,7 +67,7 @@ export class CreateProyectoComponent {
       });
     } else {
       this.proyectosService
-        .editProyecto(newProyecto, this.indexProyecto, empresaId)
+        .editProyecto(newProyecto, this.indexProyecto, this.empresaId)
         .subscribe({
           next: (data) => {
             console.log('Proyecto actualizado');

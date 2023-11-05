@@ -11,6 +11,7 @@ import { RegCandidatoService } from 'src/app/candidates/services/reg-candidato.s
 })
 export class InfoPersonalComponent {
   candidato: Candidato;
+  candidatoId: number;
   isEditMode: boolean;
   formInfoPersonal: FormGroup;
 
@@ -26,6 +27,7 @@ export class InfoPersonalComponent {
     private router: Router,
     private route: ActivatedRoute
   ){
+    this.candidatoId = this.candidatoId = +localStorage.getItem('candidatoId')!;
     this.isEditMode = false;
     this.formInfoPersonal = new FormGroup({
       names: new FormControl('', Validators.required),
@@ -55,9 +57,8 @@ export class InfoPersonalComponent {
   get language() { return this.formInfoPersonal.get('language') }
 
   ngOnInit(): void {
-    const idCandidato: number = 1;
     this.isEditMode ? this.formInfoPersonal.enable() : this.formInfoPersonal.disable();
-    this.regCandidatoService.getDatosCandidato(idCandidato).subscribe({
+    this.regCandidatoService.getDatosCandidato(this.candidatoId).subscribe({
       next: data => {
         this.candidato = data;
         this.formInfoPersonal.setValue({

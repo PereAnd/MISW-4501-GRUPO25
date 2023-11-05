@@ -12,7 +12,7 @@ import { InfLaboralService } from 'src/app/candidates/services/inf-laboral.servi
 export class CreateInfoLaboralComponent {
 
   indexInfoLab: number;
-  candidatoId: number = 1;
+  candidatoId: number;
   isActualJob: boolean;
 
   formInfoLaboral: FormGroup = new FormGroup({
@@ -35,7 +35,9 @@ export class CreateInfoLaboralComponent {
     private infLaboralService: InfLaboralService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.candidatoId = this.candidatoId = +localStorage.getItem('candidatoId')!;
+  }
 
   ngOnInit(): void {
     this.isActualJob = false;

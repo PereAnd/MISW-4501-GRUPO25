@@ -64,6 +64,16 @@
         android:id="@+id/fragment_info_academica"
         android:name="com.example.vinyls.view.FragmentAgregarInfoAcademica"
         tools:layout="@layout/fragment_agregar_info_academica">
+        <action
+            android:id="@+id/action_fragment_infoAcademica_fragment_infoTecnica"
+            app:destination="@+id/fragment_info_tecnica" />
+    </fragment>
+
+    <!-- InfoTecnica -   -->
+    <fragment
+        android:id="@+id/fragment_info_tecnica"
+        android:name="com.example.vinyls.view.FragmentAgregarInfoTecnica"
+        tools:layout="@layout/fragment_agregar_info_tecnica">
     </fragment>
 
 </navigation>

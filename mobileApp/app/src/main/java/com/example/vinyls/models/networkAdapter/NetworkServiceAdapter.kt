@@ -10,6 +10,7 @@ import com.android.volley.toolbox.Volley
 import com.example.vinyls.models.Candidato
 import com.example.vinyls.models.InfoAcademica
 import com.example.vinyls.models.InfoPersonal
+import com.example.vinyls.models.InfoTecnica
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -129,6 +130,40 @@ class NetworkServiceAdapter constructor(context: Context) {
             ))
         }
     }
+
+
+    suspend fun agregarInfoTecnica(body: JSONObject): InfoTecnica {
+        return suspendCoroutine { cont ->
+
+            if (currentCandidatoId == -1) {
+                // Handle this situation appropriately, for example, by throwing an exception.
+                // return@suspendCoroutine
+            }
+
+            requestQueue.add(postRequest("candidato/$currentCandidatoId/informacionTecnica", body,
+                { response ->
+                    val infoTecnicaId = response.getInt("id")
+                    val description = response.getString("description")
+                    val type = response.getString("type")
+                    val candidatoId = response.getInt("candidatoId")
+
+                    val infoTecnica = InfoTecnica(
+                        infoTecnicaId = infoTecnicaId,
+                        description = description,
+                        type = type,
+                        candidatoId = candidatoId
+                    )
+
+                    cont.resume(infoTecnica)
+                },
+                {
+                    cont.resumeWithException(it)
+                }
+            ))
+        }
+    }
+
+
 
 
     suspend fun agregarInfoPersonal(body: JSONObject): InfoPersonal {

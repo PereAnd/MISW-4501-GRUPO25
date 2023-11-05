@@ -177,17 +177,19 @@ class NetworkServiceAdapter constructor(context: Context) {
             requestQueue.add(postRequest("candidato/$currentCandidatoId/informacionLaboral", body,
                 { response ->
                     val infoLaboralId = response.getInt("id")
-                    val description = response.getString("description")
-                    val type = response.getString("type")
-                    val organization = response.optString("organization", "Sin organization")
-                    val activities = response.optString("activities", "Sin activities")
-                    val dateFrom = response.optString("dateFrom", "Sin dataFrom")
-                    val dateTo = response.optString("dateTo","Sin dateTo")
+                    val description = response.optString("description", "Sin description")
+                    val type = response.optString("type",  "Sin type")
+                    val position = response.getString("position")
+                    val organization = response.getString("organization")
+                    val activities = response.getString("activities")
+                    val dateFrom = response.getString("dateFrom")
+                    val dateTo = response.getString("dateTo")
                     val candidatoId = response.getInt("candidatoId")
 
                     val infoLaboral = InfoLaboral(
                         infoLaboralId = infoLaboralId,
                         description = description,
+                        position = position,
                         type = type,
                         organization = organization,
                         activities = activities,

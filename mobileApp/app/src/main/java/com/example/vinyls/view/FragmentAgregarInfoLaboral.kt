@@ -30,9 +30,8 @@ class FragmentAgregarInfoLaboral : Fragment(R.layout.fragment_agregar_info_labor
         super.onViewCreated(view, savedInstanceState)
 
         val buttonLogin = requireView().findViewById<Button>(R.id.btnLogin)
-
         buttonLogin.setOnClickListener {
-         //   findNavController().navigate(R.id.action_fragment_infoLaboral_fragment_infoTecnica)
+            findNavController().navigate(R.id.action_fragment_infolaboral_fragment_login)
         }
     }
 

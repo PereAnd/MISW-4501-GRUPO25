@@ -9,6 +9,9 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinyls.models.Candidato
 import com.example.vinyls.models.InfoAcademica
+import com.example.vinyls.models.InfoPersonal
+import com.example.vinyls.models.InfoTecnica
+import com.example.vinyls.models.InfoLaboral
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -17,7 +20,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
-        const val BASE_URL = "http://candidatos.us-east-2.elasticbeanstalk.com/"
+        const val BASE_URL = "http://k8s-proyecto-ingressp-8502bda72b-1275865132.us-east-1.elb.amazonaws.com/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -73,7 +76,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val names = response.getString("names")
                 val lastNames = response.getString("lastNames")
                 val mail = response.getString("mail")
-                val password = response.optString("password", "Sin password") // Usar optString para proporcionar un valor predeterminado
+                val password = response.optString("password", "Sin password") // Valor predeterminado
                 val confirmPassword = response.optString("confirmPassword", "Sin confirmPassword")
 
                 val candidato = Candidato(
@@ -130,6 +133,135 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
+    suspend fun agregarInfoTecnica(body: JSONObject): InfoTecnica {
+        return suspendCoroutine { cont ->
+
+            if (currentCandidatoId == -1) {
+                // Handle this situation appropriately, for example, by throwing an exception.
+                // return@suspendCoroutine
+            }
+
+            requestQueue.add(postRequest("candidato/$currentCandidatoId/informacionTecnica", body,
+                { response ->
+                    val infoTecnicaId = response.getInt("id")
+                    val description = response.getString("description")
+                    val type = response.getString("type")
+                    val candidatoId = response.getInt("candidatoId")
+
+                    val infoTecnica = InfoTecnica(
+                        infoTecnicaId = infoTecnicaId,
+                        description = description,
+                        type = type,
+                        candidatoId = candidatoId
+                    )
+
+                    cont.resume(infoTecnica)
+                },
+                {
+                    cont.resumeWithException(it)
+                }
+            ))
+        }
+    }
+
+
+
+    suspend fun agregarInfoLaboral(body: JSONObject): InfoLaboral {
+        return suspendCoroutine { cont ->
+
+            if (currentCandidatoId == -1) {
+                // Handle this situation appropriately, for example, by throwing an exception.
+                // return@suspendCoroutine
+            }
+
+            requestQueue.add(postRequest("candidato/$currentCandidatoId/informacionLaboral", body,
+                { response ->
+                    val infoLaboralId = response.getInt("id")
+                    val description = response.optString("description", "Sin description")
+                    val type = response.optString("type",  "Sin type")
+                    val position = response.getString("position")
+                    val organization = response.getString("organization")
+                    val activities = response.getString("activities")
+                    val dateFrom = response.getString("dateFrom")
+                    val dateTo = response.getString("dateTo")
+                    val candidatoId = response.getInt("candidatoId")
+
+                    val infoLaboral = InfoLaboral(
+                        infoLaboralId = infoLaboralId,
+                        description = description,
+                        position = position,
+                        type = type,
+                        organization = organization,
+                        activities = activities,
+                        dateFrom = dateFrom,
+                        dateTo = dateTo,
+                        candidatoId = candidatoId
+                    )
+
+                    cont.resume(infoLaboral)
+                },
+                {
+                    cont.resumeWithException(it)
+                }
+            ))
+        }
+    }
+
+
+    suspend fun agregarInfoPersonal(body: JSONObject): InfoPersonal {
+        return suspendCoroutine { cont ->
+
+            if (currentCandidatoId == -1) {
+                // Handle this situation appropriately, for example, by throwing an exception.
+                // return@suspendCoroutine
+            }
+
+            requestQueue.add(patchRequest("candidato/$currentCandidatoId", body,
+                { response ->
+                    val infoPersonaId = response.getInt("id")
+                    val names = response.getString("names")
+                    val lastNames = response.getString("lastNames")
+                    val mail = response.getString("mail")
+                    val docType = response.getString("docType")
+                    val docNumber = response.getString("docNumber")
+                    val phone = response.getString("phone")
+                    val address = response.getString("address")
+                    val birthDate = response.getString("birthDate")
+                    val country = response.getString("country")
+                    val city = response.getString("city")
+                    val language = response.getString("language")
+                    val informacionAcademica = response.optString("informacionAcademica", "Sin información académica")
+                    val informacionTecnica = response.optString("informacionTecnica", "Sin información técnica")
+
+                    val infoPersonal = InfoPersonal(
+                        infoPersonalId = infoPersonaId,
+                        names = names,
+                        lastNames = lastNames,
+                        mail = mail,
+                        docType = docType,
+                        docNumber = docNumber,
+                        phone = phone,
+                        address = address,
+                        birthDate = birthDate,
+                        country = country,
+                        city = city,
+                        language = language,
+                        informacionAcademica = informacionAcademica,
+                        informacionTecnica = informacionTecnica
+                    )
+
+                    cont.resume(infoPersonal)
+                },
+                {
+                    cont.resumeWithException(it)
+                }
+            ))
+        }
+    }
+
+
+
+
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL +path, responseListener,errorListener)
@@ -137,6 +269,11 @@ class NetworkServiceAdapter constructor(context: Context) {
     private fun postRequest(path: String, body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{
         return  JsonObjectRequest(Request.Method.POST, BASE_URL +path, body, responseListener, errorListener)
     }
+
+    private fun patchRequest(path: String, body: JSONObject, responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener): JsonObjectRequest {
+        return JsonObjectRequest(Request.Method.PATCH, BASE_URL + path, body, responseListener, errorListener)
+    }
+
     private fun putRequest(path: String, body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{
         return  JsonObjectRequest(Request.Method.PUT, BASE_URL +path, body, responseListener, errorListener)
     }

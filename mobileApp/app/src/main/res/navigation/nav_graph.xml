@@ -44,7 +44,18 @@
         android:name="com.example.vinyls.view.FragmentRegistro"
         tools:layout="@layout/fragment_registro" >
         <action
-            android:id="@+id/action_fragment_registro_login_to_fragment_infoAcademica"
+            android:id="@+id/action_fragment_registro_to_fragment_infoPersonal"
+            app:destination="@+id/fragment_info_personal" />
+    </fragment>
+
+
+    <!-- InfoPersonal -   -->
+    <fragment
+        android:id="@+id/fragment_info_personal"
+        android:name="com.example.vinyls.view.FragmentAgregarInfoPersonal"
+        tools:layout="@layout/fragment_agregar_info_personal">
+        <action
+            android:id="@+id/action_fragment_infoPersonal_to_fragment_infoAcademica"
             app:destination="@+id/fragment_info_academica" />
     </fragment>
 
@@ -53,6 +64,29 @@
         android:id="@+id/fragment_info_academica"
         android:name="com.example.vinyls.view.FragmentAgregarInfoAcademica"
         tools:layout="@layout/fragment_agregar_info_academica">
+        <action
+            android:id="@+id/action_fragment_infoAcademica_fragment_infoTecnica"
+            app:destination="@+id/fragment_info_tecnica" />
+    </fragment>
+
+    <!-- InfoTecnica -   -->
+    <fragment
+        android:id="@+id/fragment_info_tecnica"
+        android:name="com.example.vinyls.view.FragmentAgregarInfoTecnica"
+        tools:layout="@layout/fragment_agregar_info_tecnica">
+        <action
+            android:id="@+id/action_fragment_infoTecnica_fragment_infoLaboral"
+            app:destination="@+id/fragment_info_laboral" />
+    </fragment>
+
+    <!-- InfoLaboral -   -->
+    <fragment
+        android:id="@+id/fragment_info_laboral"
+        android:name="com.example.vinyls.view.FragmentAgregarInfoLaboral"
+        tools:layout="@layout/fragment_agregar_info_laboral">
+        <action
+            android:id="@+id/action_fragment_infolaboral_fragment_login"
+            app:destination="@+id/fragment_menu_login" />
     </fragment>
 
 </navigation>

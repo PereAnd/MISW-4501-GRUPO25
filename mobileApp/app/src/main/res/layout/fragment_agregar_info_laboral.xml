@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_agregarinfo_academica"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -14,10 +13,10 @@
         android:paddingHorizontal="60dp"
         android:paddingTop="30dp"
         android:background="@color/background_general"
-        tools:context=".view.FragmentInfoAcademica">
+        tools:context=".view.FragmentInfoLaboral">
 
         <LinearLayout
-            android:id="@+id/linearLayoutInfoAcademica"
+            android:id="@+id/linearLayoutLaboral"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -27,21 +26,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:text="Ingresa tu información academica"
+                android:text="Ingresa tu información laboral"
+                android:textColor="@color/black"
                 android:textAppearance="@style/abc_syle"
                 android:textSize="20sp"
                 android:paddingTop="10dp"
                 android:paddingBottom="30dp"
-                android:textColor="@color/black"
                 android:textAlignment="center" />
 
-            <!-- Titulo  -->
+            <!-- Cargo  -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiTitle"
+                android:id="@+id/tiPosition"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= "Titulo obtenido"
+                android:hint= "Nombre del cargo"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
                 android:textColorHint="@color/dark_gray"
@@ -51,20 +50,20 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTitle"
+                    android:id="@+id/etPosition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Institución  -->
+            <!-- Descripcion  -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiInstitution"
+                android:id="@+id/tiDescription"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= "Institución"
+                android:hint= "Descripcíón de la empresa"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
                 android:textColorHint="@color/dark_gray"
@@ -74,20 +73,20 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etInstitution"
+                    android:id="@+id/etDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Fecha inicio  -->
+            <!-- Tipo -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiBeginDate"
+                android:id="@+id/tiType"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= "Fecha de inicio"
+                android:hint= "Área de trabajo"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
                 android:textColorHint="@color/dark_gray"
@@ -97,20 +96,20 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etBeginDate"
+                    android:id="@+id/etType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Fecha fin  -->
+            <!-- Nombre de empresa -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiEndDate"
+                android:id="@+id/tiOrganization"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= "Fecha de finalización"
+                android:hint= "Nombre de la empresa"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
                 android:textColorHint="@color/dark_gray"
@@ -120,20 +119,20 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEndDate"
+                    android:id="@+id/etOrganization"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Tipo de estudio  -->
+            <!-- Principales actividades -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiStudyType"
+                android:id="@+id/tiActivities"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= "Tipo de estudio"
+                android:hint= "Princicipales funciones"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
                 android:textColorHint="@color/dark_gray"
@@ -143,18 +142,64 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etStudyType"
+                    android:id="@+id/etActivities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Fecha de ingreso -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiDateFrom"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Fecha de ingreso"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDateFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- Fecha de salida -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiDateTo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Fecha de salida"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDateTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnSaveInfoAcademica"
+            android:id="@+id/btnSaveInfoLaboral"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Guardar"
@@ -164,10 +209,10 @@
             android:backgroundTint="@color/dark_yellow" />
 
         <Button
-            android:id="@+id/btnNextTecnic"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text= "Siguiente"
+            android:text= "Salir"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60sp"
             android:textColor="@color/white"

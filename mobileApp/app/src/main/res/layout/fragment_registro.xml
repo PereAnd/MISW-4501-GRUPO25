@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:imeOptions="actionNext"/>
+                    android:imeOptions="actionNext" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Apellidos  -->
@@ -165,7 +165,7 @@
             android:backgroundTint="@color/dark_yellow" />
 
         <Button
-            android:id="@+id/btnNextAcademic"
+            android:id="@+id/btnNextPersonal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="siguiente"

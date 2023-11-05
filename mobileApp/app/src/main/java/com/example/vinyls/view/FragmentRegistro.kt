@@ -26,10 +26,10 @@ class FragmentRegistro : Fragment(R.layout.fragment_menu_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonNextAcademic = requireView().findViewById<Button>(R.id.btnNextAcademic)
+        val buttonNextAcademic = requireView().findViewById<Button>(R.id.btnNextPersonal)
 
         buttonNextAcademic.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_registro_login_to_fragment_infoAcademica)
+            findNavController().navigate(R.id.action_fragment_registro_to_fragment_infoPersonal)
         }
     }
 

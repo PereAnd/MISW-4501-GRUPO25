@@ -13,6 +13,7 @@ import { InfAcademicaService } from 'src/app/candidates/services/inf-academica.s
 export class InfoAcademicaComponent {
   displayedColumns: string[] = ['id', 'title', 'institution', 'beginDate', 'endDate', 'studyType', 'actions']
   dataSource = new MatTableDataSource<any>;
+  candidatoId: number = +localStorage.getItem('candidatoId')!;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -20,10 +21,12 @@ export class InfoAcademicaComponent {
   constructor(
     private infAcademicaService: InfAcademicaService,
     private router: Router
-  ) { }
+  ) {
+    this.candidatoId = +localStorage.getItem('candidatoId')!;
+  }
 
   ngOnInit(): void {
-    this.infAcademicaService.listInfoAcademica(1)
+    this.infAcademicaService.listInfoAcademica(this.candidatoId)
     .subscribe({
       next: data => {
         this.dataSource = new MatTableDataSource(data);
@@ -47,6 +50,6 @@ export class InfoAcademicaComponent {
   }
 
   redirectCreateInfoAcad(){
-    this.router.navigate(['candidato/dashboard/1/add-info-academica'])
+    this.router.navigate(['candidato/dashboard/' + this.candidatoId + '/add-info-academica'])
   }
 }

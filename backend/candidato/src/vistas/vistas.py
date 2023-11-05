@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from ..modelos import db, Candidato, CandidatoEschema, InformacionAcademica, InformacionAcademicaEschema, InformacionTecnica, InformacionTecnicaEschema
+from ..modelos import db, Candidato, CandidatoEschema, InformacionAcademica, InformacionAcademicaEschema, InformacionTecnica, InformacionTecnicaEschema, InformacionLaboral, InformacionLaboralEschema
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime, timedelta
 import requests, sys
@@ -8,6 +8,7 @@ import requests, sys
 candidato_schema = CandidatoEschema()
 informacion_schema = InformacionAcademicaEschema()
 informacionTecnica_schema = InformacionTecnicaEschema()
+informacionLaboral_schema = InformacionLaboralEschema()
 
 
 # Candidatos
@@ -36,7 +37,7 @@ class VistaRegistro(Resource):
             db.session.rollback()
             return {'Error': str(sys.exc_info()[0])}, 412
         
-        return {'id':nuevo_candidato.id, 'names ': nuevo_candidato.names, 'lastNames': nuevo_candidato.lastNames, 'mail':nuevo_candidato.mail}, 201
+        return {'id':nuevo_candidato.id, 'names': nuevo_candidato.names, 'lastNames': nuevo_candidato.lastNames, 'mail':nuevo_candidato.mail}, 201
     
     def get(self):
         mail = request.args.get('mail', default = "none", type=str)
@@ -80,6 +81,12 @@ class VistaCandidato(Resource):
                         db.session.rollback()
                         return 'El campo docType es requerido', 400
                     candidato.docType = request.json["docType"]
+
+                if "docNumber" in request.json:
+                    if request.json["docNumber"] == "":
+                        db.session.rollback()
+                        return 'El campo docNumber es requerido', 400
+                    candidato.docNumber = request.json["docNumber"]
 
                 if "phone" in request.json:
                     if request.json["phone"] == "":
@@ -138,7 +145,7 @@ class VistaCandidato(Resource):
             if candidato is None:
                 return 'No existe la cuenta del candidato solicitada', 404
             else:
-                return candidato_schema.dump(candidato)
+                return candidato_schema.dump(candidato), 200
             
 # PING
 # Vista GET
@@ -157,10 +164,10 @@ class VistaInformacionesAcademicas(Resource):
             candidato = Candidato.query.get(candidatoId)
             if candidato is None:
                 return 'No existe la cuenta del candidato solicitada', 404
-        if not "tittle" in request.json or not "institution" in request.json or not "beginDate" in request.json or not "studyType" in request.json:
-            return 'Los campos tittle, institution, beginDate, studyType', 400
-        if request.json["tittle"] == "" or request.json["institution"] == "" or request.json["studyType"] == "": 
-            return 'Los campos tittle, institution, studyType son requeridos', 400
+        if not "title" in request.json or not "institution" in request.json or not "beginDate" in request.json or not "studyType" in request.json:
+            return 'Los campos title, institution, beginDate, studyType', 400
+        if request.json["title"] == "" or request.json["institution"] == "" or request.json["studyType"] == "": 
+            return 'Los campos title, institution, studyType son requeridos', 400
         try:
             beginDate = datetime.strptime(request.json["beginDate"], "%Y-%m-%dT%H:%M:%S.%fZ")
         except:
@@ -176,7 +183,7 @@ class VistaInformacionesAcademicas(Resource):
             endDate = None
 
         try:
-            nueva_informacion = InformacionAcademica(tittle=request.json["tittle"], 
+            nueva_informacion = InformacionAcademica(title=request.json["title"], 
                                         institution=request.json["institution"],
                                         beginDate=beginDate,
                                         endDate=endDate,
@@ -227,10 +234,10 @@ class VistaInformacionAcademica(Resource):
                 return 'No existe la Información Académica del candidato solicitada', 404
 
 
-            if "tittle" in request.json:
-                if request.json["tittle"] == "":
-                    return 'El campo tittle es requerido', 400
-                informacionAcademica.tittle = request.json["tittle"]
+            if "title" in request.json:
+                if request.json["title"] == "":
+                    return 'El campo title es requerido', 400
+                informacionAcademica.title = request.json["title"]
 
             if "institution" in request.json:
                 if request.json["institution"] == "":
@@ -431,3 +438,170 @@ class VistaInformacionTecnica(Resource):
             db.session.rollback()
             return {'Error': str(sys.exc_info()[0])}, 412
 
+
+
+# Informacion Laboral
+# Vista POST - GET
+class VistaInformacionesLaborales(Resource):
+    def post(self, candidatoId):
+        if candidatoId.isnumeric() == False:
+            return 'El candidatoId no es un número.', 400
+        else:
+            candidato = Candidato.query.get(candidatoId)
+            if candidato is None:
+                return 'No existe la cuenta del candidato solicitada', 404
+            
+        if not "position" in request.json or not "organization" in request.json or not "activities" in request.json  or not "dateFrom" in request.json:
+            return 'Los campos position, organization, activities y dateFrom son requeridos', 400
+        if request.json["position"] == "" or request.json["organization"] == "" or request.json["activities"] == "": 
+            return 'Los campos position, organization, activities y dateFrom son requeridos', 400
+
+        try:
+            dateFrom = datetime.strptime(request.json["dateFrom"], "%Y-%m-%dT%H:%M:%S.%fZ")
+        except:
+            return "El campo dateFrom no tiene formato de fecha correcto", 400
+
+        dateTo = None
+        if "dateTo" in request.json:
+            if request.json["dateTo"] != None:
+                try:
+                    dateTo = datetime.strptime(request.json["dateTo"], "%Y-%m-%dT%H:%M:%S.%fZ")
+                except:
+                    return "El campo dateTo no tiene formato de fecha correcto", 400
+                
+        
+                
+
+
+
+
+
+        try:
+            nueva_informacion = InformacionLaboral(position=request.json["position"], 
+                                        organization=request.json["organization"],
+                                        activities=request.json["activities"],
+                                        dateFrom=dateFrom,
+                                        dateTo=dateTo,
+                                        candidatoId=candidatoId)
+            db.session.add(nueva_informacion)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return {'Error': str(sys.exc_info()[0])}, 412
+        return informacionLaboral_schema.dump(nueva_informacion), 201
+    
+    def get(self, candidatoId):
+        if candidatoId.isnumeric() == False:
+            return 'El candidatoId no es un número.', 400
+        else:
+            candidato = Candidato.query.get(candidatoId)
+            if candidato is None:
+                return 'No existe la cuenta del candidato solicitada', 404
+            
+        try:
+                return[informacionLaboral_schema.dump(t) for t in InformacionLaboral.query.filter(
+                (InformacionLaboral.candidatoId == candidatoId))], 200
+        except:
+            return {'Error': str(sys.exc_info()[0])}, 412
+        
+# Informacion Laboral
+# Vista PATCH - GET - DELETE
+class VistaInformacionLaboral(Resource):
+
+    def patch(self, candidatoId, id):
+        
+        if candidatoId.isnumeric() == False:
+            return 'El candidatoId no es un número.', 400
+        else:
+            candidato = Candidato.query.get(candidatoId)
+            if candidato is None:
+                return 'No existe la cuenta del candidato solicitada', 404
+
+        if id.isnumeric() == False:
+            return 'El id no es un número.', 400
+        else:
+            informacionLaboral = InformacionLaboral.query.get(id)
+            if informacionLaboral is None:
+                return 'No existe la Información Laboral del candidato solicitada', 404
+
+
+            if "position" in request.json:
+                if request.json["position"] == "":
+                    return 'El campo position es requerido', 400
+                informacionLaboral.position = request.json["position"]
+
+            if "organization" in request.json:
+                if request.json["organization"] == "":
+                    return 'El campo organization es requerido', 400
+                informacionLaboral.organization = request.json["organization"]
+
+            if "activities" in request.json:
+                if request.json["activities"] == "":
+                    return 'El campo activities es requerido', 400
+                informacionLaboral.activities = request.json["activities"]
+
+
+            if "dateFrom" in request.json:
+                if request.json["dateFrom"] == "":
+                    return 'El campo dateFrom es requerido', 400
+                try:
+                    dateFrom = datetime.strptime(request.json["dateFrom"], "%Y-%m-%dT%H:%M:%S.%fZ")
+                except:
+                    return "El campo dateFrom no tiene formato de fecha correcto", 400
+
+                informacionLaboral.dateFrom = dateFrom
+
+            dateTo = None
+            if "dateTo" in request.json:
+                if request.json["dateTo"] != "" and request.json["dateTo"] != None :
+                    try:
+                        dateTo = datetime.strptime(request.json["dateTo"], "%Y-%m-%dT%H:%M:%S.%fZ")
+                    except:
+                        return "El campo dateTo no tiene formato de fecha correcto", 400
+                informacionLaboral.dateTo = dateTo
+
+            try:
+                db.session.commit()
+                return informacionLaboral_schema.dump(informacionLaboral), 200
+            except:
+                db.session.rollback()
+                return {'Error': str(sys.exc_info()[0])}, 412
+                
+    def get(self, candidatoId, id):
+        if candidatoId.isnumeric() == False:
+            return 'El candidatoId no es un número.', 400
+        else:
+            candidato = Candidato.query.get(candidatoId)
+            if candidato is None:
+                return 'No existe la cuenta del candidato solicitada', 404
+
+        if id.isnumeric() == False:
+            return 'El id no es un número.', 400
+        else:
+            informacionLaboral = InformacionLaboral.query.get(id)
+            if informacionLaboral is None:
+                return 'No existe la Información Laboral del candidato solicitada', 404
+        return informacionLaboral_schema.dump(informacionLaboral), 200
+
+
+    def delete(self, candidatoId, id):
+        if candidatoId.isnumeric() == False:
+            return 'El candidatoId no es un número.', 400
+        else:
+            candidato = Candidato.query.get(candidatoId)
+            if candidato is None:
+                return 'No existe la cuenta del candidato solicitada', 404
+
+        if id.isnumeric() == False:
+            return 'El id no es un número.', 400
+        else:
+            informacionLaboral = InformacionLaboral.query.get(id)
+            if informacionLaboral is None:
+                return 'No existe la Información Laboral del candidato solicitada', 404
+        try:
+            db.session.delete(informacionLaboral)
+            db.session.commit()
+            return 'Registro Eliminado Correctamente', 204
+        except:
+            db.session.rollback()
+            return {'Error': str(sys.exc_info()[0])}, 412

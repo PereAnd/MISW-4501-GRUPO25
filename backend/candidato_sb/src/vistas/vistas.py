@@ -1,115 +1,219 @@
 from flask_restful import Resource
 from flask import request
-from ..modelos import db, Experimento, ExperimentoSchema
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime, timedelta
 import requests, sys
+import os
 
-experimento_schema = ExperimentoSchema()
 
-class VistaExperimentos(Resource):
+
+class VistaRegistro(Resource):
+
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
 
     def post(self):
-        if not "valor1" in request.json or not "valor2" in request.json or not "valor3" in request.json:
-            return 'los campos valor1, valor2 y valor3 son requeridos.', 400
-
-        if request.json["valor2"] == "" or request.json["valor3"] == "":
-            return 'los campos valor1, valor2 y valor3 son requeridos.', 400
-
-#        try:
-
-        valor3 = datetime.strptime(request.json["valor3"], '%d/%m/%Y %H:%M:%S')
-
-        nuevo_experimento = Experimento(valor1=request.json["valor1"], 
-                                    valor2=request.json["valor2"],
-                                    valor3=valor3)
-
-        db.session.add(nuevo_experimento)
-        db.session.commit()
-#        except:
-#            db.session.rollback()
-#            return {'Error': str(sys.exc_info()[0])}, 412
-        return {'id':nuevo_experimento.id, 'valor1': nuevo_experimento.valor1, 'valor2': nuevo_experimento.valor2, 'valor3':nuevo_experimento.valor3.isoformat()}, 201
-
-    def get(self):
-
-
-        valor1 = request.args.get('valor1', default = -1, type=int)
-        valor2 = request.args.get('valor2', default = "none", type = str)
-        valor3 = request.args.get('valor3', default = "none", type = str)
-
         try:
-            if valor3 != "none":
-                try:
-                    valor3date = datetime.strptime(valor3, '%d/%m/%Y %H:%M:%S')
-                except:
-                    return {'Error': 'La fecha tiene un formato incorrecto'}, 412
-
-                return[experimento_schema.dump(t) for t in Experimento.query.filter(
-                (Experimento.valor1 == valor1) | (valor1== -1)).filter((Experimento.valor2 == valor2) | (valor2== "none")).filter(
-                (Experimento.valor3 == datetime.strptime(valor3, '%d/%m/%Y %H:%M:%S')) | (valor3== "none")).all()], 200 
-            else:
-                return[experimento_schema.dump(t) for t in Experimento.query.filter(
-                (Experimento.valor1 == valor1) | (valor1== -1)).filter((Experimento.valor2 == valor2) | (valor2== "none"))], 200
-        except:
+            return self.breaker.make_remote_call_post(self.urlBackEnd , json=request.json)
+        except Exception:
             return {'Error': str(sys.exc_info()[0])}, 412
-
-
-
-
-class VistaExperimento(Resource):
-
-    def get(self, id):
         
-        if id.isnumeric() == False:
-            return 'El id no es un número.', 400
-        else:
-            experimento = Experimento.query.get(id)
-            if experimento is None:
-                return 'No existe la publicación con ese identificador.', 404
-            
-            return experimento_schema.dump(experimento), 200
+    def get(self):
+        #try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd , params=request.args.to_dict())
+            #return 'Correcto', 200
+        #except Exception:
+            #return 'ocurrió un error', 412
+            #return {'Error': str(sys.exc_info()[0])}, 412
 
+# Candidatos
+# Vista PATCH - GET
+class VistaCandidato(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
     def patch(self, id):
+        try:
+            return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + id , json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+                
+    def get(self, id):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + id)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
         
-        if id.isnumeric() == False:
-            return 'El id no es un número.', 400
-        else:
-            experimento = Experimento.query.get(id)
-            if experimento is None:
-                return 'No existe la publicación con ese identificador.', 404
-            else:
-                if "valor1" in request.json:
-                    experimento.valor1 = request.json["valor1"]
-
-                if "valor2" in request.json:
-                    experimento.valor2 = request.json["valor2"]
-
-                try:
-
-                    if "valor3" in request.json:
-                        valor3 = datetime.strptime(request.json["valor3"], '%d/%m/%Y %H:%M:%S')
-                        experimento.valor3 = valor3
-                    db.session.commit()
-                    return experimento_schema.dump(experimento), 200
-                except:
-                    db.session.rollback()
-                    return {'Error': str(sys.exc_info()[0])}, 412
-
-    def delete(self, id):
-        
-        if id.isnumeric() == False:
-            return 'El id no es un número.', 400
-        else:
-            experimento = Experimento.query.get(id)
-            if experimento is None:
-                return 'No existe la publicación con ese identificador.', 404
-            else:
-                db.session.delete(experimento)
-                db.session.commit()
-                return 'Se eliminó el registro', 200
- 
-
+            
+# PING
+# Vista GET
 class VistaPing(Resource):
     def get(self):
         return "pong"            
+
+# Informacion Academica
+# Vista POST - GET
+
+class VistaInformacionesAcademicas(Resource):
+
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+
+    def post(self, candidatoId):
+        try:
+            return self.breaker.make_remote_call_post(self.urlBackEnd + "/" + candidatoId + "/informacionAcademica", json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def get(self, candidatoId):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + candidatoId + "/informacionAcademica", params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+        
+# Informacion Academica
+# Vista PATCH - GET - DELETE
+class VistaInformacionAcademica(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+
+    def patch(self, candidatoId, id):
+        try:
+            return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + candidatoId + "/informacionAcademica/" + id, json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+                
+    def get(self, candidatoId, id):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + candidatoId + "/informacionAcademica/"+ id, params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def delete(self, candidatoId, id):
+        try:
+            return self.breaker.make_remote_call_delete(self.urlBackEnd + "/" + candidatoId + "/informacionAcademica/"+ id)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+# Informacion Tecnica
+# Vista POST - GET
+class VistaInformacionesTecnicas(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+
+    def post(self, candidatoId):
+        try:
+            return self.breaker.make_remote_call_post(self.urlBackEnd + "/" + candidatoId + "/informacionTecnica", json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def get(self, candidatoId):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + candidatoId + "/informacionTecnica", params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+        
+# Informacion Tecnica
+# Vista PATCH - GET - DELETE
+class VistaInformacionTecnica(Resource):
+
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+
+
+    def patch(self, candidatoId, id):
+        try:
+            return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + candidatoId + "/informacionTecnica/" + id, json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+                
+    def get(self, candidatoId, id):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + candidatoId + "/informacionTecnica/"+ id, params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def delete(self, candidatoId, id):
+        try:
+            url = self.urlBackEnd + "/" + candidatoId + "/informacionTecnica/"+ id
+#            requests.delete(self.urlBackEnd + "/" + candidatoId + "/informacionTecnica/"+ id)
+#            return "Correcto", 204
+            return self.breaker.make_remote_call_delete(url)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+# Informacion Laboral
+# Vista POST - GET
+class VistaInformacionesLaborales(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+
+    def post(self, candidatoId):
+        try:
+            return self.breaker.make_remote_call_post(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral", json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def get(self, candidatoId):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral", params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+        
+# Informacion Laboral
+# Vista PATCH - GET - DELETE
+class VistaInformacionLaboral(Resource):
+
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+
+
+    def patch(self, candidatoId, id):
+        try:
+            return self.breaker.make_remote_call_patch(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral/" + id, json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+                
+    def get(self, candidatoId, id):
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral/"+ id, params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+    def delete(self, candidatoId, id):
+        try:
+            url = self.urlBackEnd + "/" + candidatoId + "/informacionLaboral/"+ id
+#            requests.delete(self.urlBackEnd + "/" + candidatoId + "/informacionLaboral/"+ id)
+#            return "Correcto", 204
+            return self.breaker.make_remote_call_delete(url)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+

@@ -1,18 +1,20 @@
 import pytest
 from flask.testing import FlaskClient
 from src.app import app, db
-from src.modelos import Candidato, InformacionAcademica, InformacionTecnica
+from src.modelos import Candidato, InformacionAcademica, InformacionTecnica, InformacionLaboral
 import requests
 import os
 
 id_candidato = 0
 id_informacion_tecnica = 0
 id_informacion_academica = 0
+id_informacion_laboral = 0
 
 @pytest.fixture(scope="session", autouse=True)
 def execute_before_any_test():
     InformacionAcademica.query.delete()
     InformacionTecnica.query.delete()
+    InformacionLaboral.query.delete()
     Candidato.query.delete()
 
 @pytest.fixture
@@ -51,6 +53,7 @@ def test_actualiza_candidato(client: FlaskClient):
                                             'lastNames': 'García',
                                             'mail': 'cesa96@hotmail.com',
                                             'docType': 'CC',
+                                            'docNumber': '13514130',
                                             'phone': '3102062948',
                                             'address': 'Cll 10 a sur # 2a - 128',
                                             'birthDate': '1978-03-15T00:00:00.000Z',
@@ -62,6 +65,7 @@ def test_actualiza_candidato(client: FlaskClient):
     assert resp.json.get('lastNames') == 'García'
     assert resp.json.get('mail') == 'cesa96@hotmail.com'
     assert resp.json.get('docType') == 'CC'
+    assert resp.json.get('docNumber') == '13514130'
     assert resp.json.get('address') == 'Cll 10 a sur # 2a - 128'
     assert resp.json.get('country') == 'Colombia'
     assert resp.json.get('city') == 'Cajicá'
@@ -75,6 +79,7 @@ def test_actualiza_candidato_id_no_numeric(client: FlaskClient):
                                             'lastNames': 'García',
                                             'mail': 'cesa96@hotmail.com',
                                             'docType': 'CC',
+                                            'docNumber': '13514130',
                                             'phone': '3102062948',
                                             'address': 'Cll 10 a sur # 2a - 128',
                                             'birthDate': '1978-03-15T00:00:00.000Z',
@@ -101,6 +106,10 @@ def test_actualiza_candidato_datos_incompletos(client: FlaskClient):
 
     resp = client.patch(
         '/candidato/' + str(id_candidato), json={'docType': ''})
+    assert resp.status_code == 400
+
+    resp = client.patch(
+        '/candidato/' + str(id_candidato), json={'docNumber': ''})
     assert resp.status_code == 400
 
     resp = client.patch(
@@ -153,7 +162,7 @@ def test_obtiene_candidatos_id(client: FlaskClient):
 def test_crea_informacion_academica(client: FlaskClient):
     global id_candidato, id_informacion_academica
     resp = client.post(
-        '/candidato/' + str(id_candidato) + '/informacionAcademica', json={'tittle': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
+        '/candidato/' + str(id_candidato) + '/informacionAcademica', json={'title': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
     assert resp.status_code == 201
     assert resp.json.get('id')
     id_informacion_academica = resp.json.get('id')
@@ -161,30 +170,30 @@ def test_crea_informacion_academica(client: FlaskClient):
 def test_crea_informacion_academica_datos_incompletos(client: FlaskClient):
     global id_candidato, id_informacion_academica
     resp = client.post(
-        '/candidato/' + str(id_candidato) + '/informacionAcademica', json={'tittle': "Prueba Titulo",'beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
+        '/candidato/' + str(id_candidato) + '/informacionAcademica', json={'title': "Prueba Titulo",'beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
     assert resp.status_code == 400
     resp = client.post(
-        '/candidato/' + str(id_candidato) + '/informacionAcademica', json={'tittle': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-15-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
+        '/candidato/' + str(id_candidato) + '/informacionAcademica', json={'title': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-15-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
     assert resp.status_code == 400
     resp = client.post(
-        '/candidato/' + str(id_candidato) + '/informacionAcademica', json={'tittle': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-15-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
+        '/candidato/' + str(id_candidato) + '/informacionAcademica', json={'title': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-15-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
     assert resp.status_code == 400
 
 def test_crea_informacion_academica_candidato_no_existe(client: FlaskClient):
     global id_candidato, id_informacion_academica
     resp = client.post(
-        '/candidato/123456/informacionAcademica', json={'tittle': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
+        '/candidato/123456/informacionAcademica', json={'title': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
     assert resp.status_code == 404
     resp = client.post(
-        '/candidato/dd444/informacionAcademica', json={'tittle': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
+        '/candidato/dd444/informacionAcademica', json={'title': "Prueba Titulo",'institution': 'Prueba Institution','beginDate': '2008-03-15T00:00:00.000Z','endDate': '2010-03-15T00:00:00.000Z','studyType': 'Prueba Tipo'})
     assert resp.status_code == 400
 
 def test_actualiza_informacion_academica(client: FlaskClient):
     global id_candidato, id_informacion_academica
     resp = client.patch(
-        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + str(id_informacion_academica), json={'tittle': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
+        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + str(id_informacion_academica), json={'title': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
     assert resp.status_code == 200
-    assert resp.json.get('tittle') == 'Prueba Titulo 1'
+    assert resp.json.get('title') == 'Prueba Titulo 1'
     assert resp.json.get('institution') == 'Prueba Institution 1'
     assert resp.json.get('studyType') == 'Prueba Tipo 2'
 
@@ -193,26 +202,26 @@ def test_actualiza_informacion_academica(client: FlaskClient):
 def test_actualiza_informacion_academica_id_no_numeric(client: FlaskClient):
     global id_candidato, id_informacion_academica
     resp = client.patch(
-        '/candidato/' + 'dddd' + '/informacionAcademica/' + str(id_informacion_academica), json={'tittle': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
+        '/candidato/' + 'dddd' + '/informacionAcademica/' + str(id_informacion_academica), json={'title': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
     assert resp.status_code == 400
     resp = client.patch(
-        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + '5ddd', json={'tittle': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
+        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + '5ddd', json={'title': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
     assert resp.status_code == 400
 
 
 def test_actualiza_informacion_academica_id_no_existe(client: FlaskClient):
     global id_candidato, id_informacion_academica
     resp = client.patch(
-        '/candidato/' + '1234' + '/informacionAcademica/' + str(id_informacion_academica), json={'tittle': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
+        '/candidato/' + '1234' + '/informacionAcademica/' + str(id_informacion_academica), json={'title': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
     assert resp.status_code == 404
     resp = client.patch(
-        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + '1234', json={'tittle': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
+        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + '1234', json={'title': "Prueba Titulo 1",'institution': 'Prueba Institution 1','beginDate': '2008-04-15T00:00:00.000Z','endDate': None,'studyType': 'Prueba Tipo 2'})
     assert resp.status_code == 404
 
 def test_actualiza_informacion_academica_datos_incompletos(client: FlaskClient):
     global id_candidato, id_informacion_academica
     resp = client.patch(
-        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + str(id_informacion_academica), json={'tittle': ""})
+        '/candidato/' + str(id_candidato) + '/informacionAcademica/' + str(id_informacion_academica), json={'title': ""})
     assert resp.status_code == 400
 
     resp = client.patch(
@@ -234,7 +243,7 @@ def test_obtiene_informacion_academica(client: FlaskClient):
         '/candidato/' + str(id_candidato) + '/informacionAcademica')
     assert resp.status_code == 200
     jsonreponse = resp.json
-    assert jsonreponse[0]['tittle'] == 'Prueba Titulo 1'
+    assert jsonreponse[0]['title'] == 'Prueba Titulo 1'
 
 
 def test_obtiene_informacion_academica_candidato_no_existe(client: FlaskClient):
@@ -248,7 +257,7 @@ def test_obtiene_informacion_academica_id(client: FlaskClient):
     resp = client.get(
         '/candidato/' + str(id_candidato) + '/informacionAcademica/' + str(id_informacion_academica))
     assert resp.status_code == 200
-    assert resp.json.get('tittle') == 'Prueba Titulo 1'
+    assert resp.json.get('title') == 'Prueba Titulo 1'
 
 def test_obtiene_informacion_academica_id_no_existe(client: FlaskClient):
     global id_candidato, id_informacion_academica
@@ -391,3 +400,126 @@ def test_elimina_informacion_tecnica_id_no_existe(client: FlaskClient):
         '/candidato/' + str(id_candidato) + '/informacionTecnica/' + '1234')
     assert resp.status_code == 404
 
+
+# Pruebas Información Laboral
+
+def test_crea_informacion_laboral(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.post(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral', json={'position': "Prueba Cargo",'organization': 'Prueba empresa', 'activities': 'Estas son algunas actividades', 'dateFrom': '2003-03-15T00:00:00.000Z'})
+    assert resp.status_code == 201
+    assert resp.json.get('id')
+    id_informacion_laboral = resp.json.get('id')
+
+def test_crea_informacion_laboral_datos_incompletos(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.post(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral', json={'position': "Prueba Cargo",'organization': 'Prueba empresa', 'dateFrom': '2003-03-15T00:00:00.000Z'})
+    assert resp.status_code == 400
+    resp = client.post(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral', json={'position': "Prueba Cargo",'organization': '', 'activities': 'Estas son algunas actividades', 'dateFrom': '2003-03-15T00:00:00.000Z'})
+    assert resp.status_code == 400
+
+def test_crea_informacion_laboral_candidato_no_existe(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.post(
+        '/candidato/123456/informacionLaboral', json={'position': "Prueba Cargo",'organization': 'Prueba empresa', 'activities': 'Estas son algunas actividades', 'dateFrom': '2003-03-15T00:00:00.000Z'})
+    assert resp.status_code == 404
+    resp = client.post(
+        '/candidato/ddddd/informacionLaboral', json={'position': "Prueba Cargo",'organization': 'Prueba empresa', 'activities': 'Estas son algunas actividades', 'dateFrom': '2003-03-15T00:00:00.000Z'})
+    assert resp.status_code == 400
+
+def test_actualiza_informacion_laboral(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.patch(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + str(id_informacion_laboral), json={'position': 'Prueba Cargo 2','organization': 'Prueba empresa 2', 'activities': 'Estas son algunas actividades 2', 'dateFrom': '2004-03-15T00:00:00.000Z', 'dateTo' : None})
+    assert resp.status_code == 200
+    assert resp.json.get('position') == 'Prueba Cargo 2'
+    assert resp.json.get('organization') == 'Prueba empresa 2'
+    assert resp.json.get('activities') == 'Estas son algunas actividades 2'
+
+
+
+def test_actualiza_informacion_laboral_id_no_numeric(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.patch(
+        '/candidato/' + 'dddd' + '/informacionLaboral/' + str(id_informacion_laboral), json={'position': 'Prueba Cargo 2','organization': 'Prueba empresa 2', 'activities': 'Estas son algunas actividades 2', 'dateFrom': '2004-03-15T00:00:00.000Z', 'dateTo' : None})
+    assert resp.status_code == 400
+    resp = client.patch(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + '5ddd', json={'position': 'Prueba Cargo 2','organization': 'Prueba empresa 2', 'activities': 'Estas son algunas actividades 2', 'dateFrom': '2004-03-15T00:00:00.000Z', 'dateTo' : None})
+    assert resp.status_code == 400
+
+
+def test_actualiza_informacion_laboral_id_no_existe(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.patch(
+        '/candidato/' + '1234' + '/informacionLaboral/' + str(id_informacion_laboral), json={'position': 'Prueba Cargo 2','organization': 'Prueba empresa 2', 'activities': 'Estas son algunas actividades 2', 'dateFrom': '2004-03-15T00:00:00.000Z', 'dateTo' : None})
+    assert resp.status_code == 404
+    resp = client.patch(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + '1234', json={'position': 'Prueba Cargo 2','organization': 'Prueba empresa 2', 'activities': 'Estas son algunas actividades 2', 'dateFrom': '2004-03-15T00:00:00.000Z', 'dateTo' : None})
+    assert resp.status_code == 404
+
+def test_actualiza_informacion_laboral_datos_incompletos(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.patch(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + str(id_informacion_laboral), json={'position': ""})
+    assert resp.status_code == 400
+
+    resp = client.patch(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + str(id_informacion_laboral), json={'organization': ''})
+    assert resp.status_code == 400
+    resp = client.patch(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + str(id_informacion_laboral), json={'activities': ''})
+    assert resp.status_code == 400
+    resp = client.patch(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + str(id_informacion_laboral), json={'dateFrom': ''})
+    assert resp.status_code == 400
+
+
+def test_obtiene_informacion_laboral(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.get(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral')
+    assert resp.status_code == 200
+    jsonreponse = resp.json
+    assert jsonreponse[0]['position'] == 'Prueba Cargo 2'
+
+
+def test_obtiene_informacion_laboral_candidato_no_existe(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.get(
+        '/candidato/' + '123' + '/informacionLaboral')
+    assert resp.status_code == 404
+
+def test_obtiene_informacion_laboral_id(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.get(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + str(id_informacion_laboral))
+    assert resp.status_code == 200
+    assert resp.json.get('position') == 'Prueba Cargo 2'
+
+def test_obtiene_informacion_laboral_id_no_existe(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.get(
+        '/candidato/' + '1234' + '/informacionLaboral/' + str(id_informacion_laboral))
+    assert resp.status_code == 404
+    resp = client.get(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + '1234')
+    assert resp.status_code == 404
+
+
+def test_elimina_informacion_laboral(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.delete(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + str(id_informacion_laboral))
+    assert resp.status_code == 204
+
+def test_elimina_informacion_laboral_id_no_existe(client: FlaskClient):
+    global id_candidato, id_informacion_laboral
+    resp = client.delete(
+        '/candidato/' + '1234' + '/informacionLaboral/' + str(id_informacion_laboral))
+    assert resp.status_code == 404
+    resp = client.delete(
+        '/candidato/' + str(id_candidato) + '/informacionLaboral/' + '1234')
+    assert resp.status_code == 404
+    

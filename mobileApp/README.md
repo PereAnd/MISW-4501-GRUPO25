@@ -1,7 +1,7 @@
 # MISW-4501-GRUPO25
 Readme MobileApp
 
-# Ejecución de la aplicación desde una maquina local
+## Ejecución de la aplicación desde una maquina local
 - Clonar desde el repositorio https://github.com/cesa96/MISW-4501-GRUPO25/tree/FrontEnd-Mobile-ABC-116 en su equipo
 - Posterior a lo anterior se debera abrir la carpeta "mobileApp" desde la aplicación desde la consola de Android Studio (maquina virtual)
 - Correr la aplicación desde el emulador de esta forma:

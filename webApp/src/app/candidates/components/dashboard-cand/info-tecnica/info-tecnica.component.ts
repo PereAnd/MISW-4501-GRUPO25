@@ -13,6 +13,7 @@ import { InfTecnicaService } from 'src/app/candidates/services/inf-tecnica.servi
 export class InfoTecnicaComponent {
   displayedColumns: string[] = ['id', 'type', 'description', 'actions']
   dataSource = new MatTableDataSource<any>;
+  candidatoId: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -20,10 +21,12 @@ export class InfoTecnicaComponent {
   constructor(
     private infTecnicaService: InfTecnicaService,
     private router: Router
-  ) { }
+  ) {
+    this.candidatoId = this.candidatoId = +localStorage.getItem('candidatoId')!;
+  }
 
   ngOnInit(): void {
-    this.infTecnicaService.listInfoTecnica(1)
+    this.infTecnicaService.listInfoTecnica(this.candidatoId)
     .subscribe({
       next: data => {
         this.dataSource = new MatTableDataSource(data);
@@ -47,6 +50,6 @@ export class InfoTecnicaComponent {
   }
 
   redirectCreateInfoAcad(){
-    this.router.navigate(['candidato/dashboard/1/add-info-academica'])
+    this.router.navigate(['candidato/dashboard/'+ this.candidatoId + '/add-info-academica'])
   }
 }

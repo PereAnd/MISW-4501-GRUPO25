@@ -1,0 +1,42 @@
+.dash-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.dash-is-mobile .dash-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+h1.dash-app-name {
+  margin-left: 8px;
+}
+
+.dash-sidenav-container {
+  flex: 1;
+}
+
+.dash-is-mobile .dash-sidenav-container {
+  flex: 1 0 auto;
+}
+.dash-spacer {
+  flex: 1 1 auto;
+}
+img{
+  height: 40px;
+}
+mat-sidenav{
+  width: 25%;
+}
+mat-icon{
+  margin-right: 1rem;
+}
+h4{
+  margin: 1rem;
+}

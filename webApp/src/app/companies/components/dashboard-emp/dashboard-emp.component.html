@@ -1,0 +1,73 @@
+<div
+  class="dash-container"
+  [class.dash-is-mobile]="mobileQuery.matches"
+>
+  <mat-toolbar color="accent">
+    <button
+      mat-icon-button
+      class="dash-icon"
+      aria-label="dash icon-button with menu icon"
+      (click)="snav.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img src="../../../../assets/img/LogoABC.png" alt="Logo ABC Jobs" />
+    <span class="dash-spacer"></span>
+    <button
+      mat-icon-button
+      class="dash-icon favorite-icon"
+      aria-label="dash icon-button with heart icon"
+    >
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="dash-icon"
+      aria-label="dash icon-button with share icon"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="dash-icon"
+      aria-label="dash icon-button with share icon"
+      (click)="logout()"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container
+    class="dash-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav opened
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list>
+        <h4 mat-list-item>Mi organización</h4>
+        <!-- INFORMACIÓN GENERAL -->
+        <a mat-list-item [routerLink]="['info-general']"><mat-icon>description</mat-icon>Información general</a>
+        <!-- VERTICALES -->
+        <a mat-list-item [routerLink]="['verticales']"><mat-icon>splitscreen</mat-icon>Verticales</a>
+        <!-- UBICACIONES -->
+        <a mat-list-item [routerLink]="['ubicaciones']"><mat-icon>location_on</mat-icon>Ubicaciones</a>
+        <!-- PROYECTOS -->
+        <a mat-list-item [routerLink]="['proyectos']"><mat-icon>terminal</mat-icon>Proyectos</a>
+        <!-- PERFILES -->
+        <a mat-list-item [routerLink]=""><mat-icon>person_add</mat-icon>Perfiles</a>
+        <!-- COMPLETADAS -->
+        <a mat-list-item [routerLink]=""><mat-icon>add_task</mat-icon>Completadas</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

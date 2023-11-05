@@ -141,7 +141,7 @@ class NetworkServiceAdapter constructor(context: Context) {
 
             requestQueue.add(patchRequest("candidato/$currentCandidatoId", body,
                 { response ->
-                    val infoPersonaId = response.getInt("infoPersonaId")
+                    val infoPersonaId = response.getInt("id")
                     val names = response.getString("names")
                     val lastNames = response.getString("lastNames")
                     val mail = response.getString("mail")

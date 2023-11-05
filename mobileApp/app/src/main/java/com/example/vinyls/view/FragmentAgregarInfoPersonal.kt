@@ -23,8 +23,21 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
 
+class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_registro) {
 
-class FragmentAgregarInfoPersonal : Fragment() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val buttonNextAcademic = requireView().findViewById<Button>(R.id.btnNextAcademic)
+
+        buttonNextAcademic.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_infoPersonal_to_fragment_infoAcademica)
+        }
+    }
+
+
+
+
     private var _binding: FragmentAgregarInfoPersonalBinding? = null
     private val binding get() = _binding!!  // get
     private lateinit var viewModel: AgregarInfoPersonalViewModel

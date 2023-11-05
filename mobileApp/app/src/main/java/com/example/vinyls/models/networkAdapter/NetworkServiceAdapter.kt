@@ -9,6 +9,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinyls.models.Candidato
 import com.example.vinyls.models.InfoAcademica
+import com.example.vinyls.models.InfoPersonal
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -130,6 +131,60 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
+    suspend fun agregarInfoPersonal(body: JSONObject): InfoPersonal {
+        return suspendCoroutine { cont ->
+
+            if (currentCandidatoId == -1) {
+                // Handle this situation appropriately, for example, by throwing an exception.
+                // return@suspendCoroutine
+            }
+
+            requestQueue.add(patchRequest("candidato/$currentCandidatoId", body,
+                { response ->
+                    val infoPersonaId = response.getInt("id")
+                    val names = response.getString("names")
+                    val lastNames = response.getString("lastNames")
+                    val mail = response.getString("mail")
+                    val docType = response.getString("docType")
+                    val docNumber = response.getString("docNumber")
+                    val phone = response.getString("phone")
+                    val address = response.getString("address")
+                    val birthDate = response.getString("birthDate")
+                    val country = response.getString("country")
+                    val city = response.getString("city")
+                    val language = response.getString("language")
+                    val informacionAcademica = response.optString("informacionAcademica", "Sin información académica")
+                    val informacionTecnica = response.optString("informacionTecnica", "Sin información técnica")
+
+                    val infoPersonal = InfoPersonal(
+                        infoPersonalId = infoPersonaId,
+                        names = names,
+                        lastNames = lastNames,
+                        mail = mail,
+                        docType = docType,
+                        docNumber = docNumber,
+                        phone = phone,
+                        address = address,
+                        birthDate = birthDate,
+                        country = country,
+                        city = city,
+                        language = language,
+                        informacionAcademica = informacionAcademica,
+                        informacionTecnica = informacionTecnica
+                    )
+
+                    cont.resume(infoPersonal)
+                },
+                {
+                    cont.resumeWithException(it)
+                }
+            ))
+        }
+    }
+
+
+
+
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL +path, responseListener,errorListener)
@@ -137,6 +192,11 @@ class NetworkServiceAdapter constructor(context: Context) {
     private fun postRequest(path: String, body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{
         return  JsonObjectRequest(Request.Method.POST, BASE_URL +path, body, responseListener, errorListener)
     }
+
+    private fun patchRequest(path: String, body: JSONObject, responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener): JsonObjectRequest {
+        return JsonObjectRequest(Request.Method.PATCH, BASE_URL + path, body, responseListener, errorListener)
+    }
+
     private fun putRequest(path: String, body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{
         return  JsonObjectRequest(Request.Method.PUT, BASE_URL +path, body, responseListener, errorListener)
     }

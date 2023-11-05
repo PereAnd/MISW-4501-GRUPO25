@@ -1,13 +1,10 @@
 package com.example.vinyls.models
 
-import java.util.Date
-
-data class InformacionPersonal (
-    val id:Int,
+data class InfoPersonal (
+    val infoPersonalId:Int,
     val names:String,
     val lastNames:String,
     val mail:String,
-    val password:String,
     val docType:String,
     val docNumber:String,
     val phone:String,
@@ -15,5 +12,7 @@ data class InformacionPersonal (
     val birthDate:String,
     val country:String,
     val city:String,
-    val language:String
+    val language:String,
+    val informacionAcademica:String,
+    val informacionTecnica:String
 )

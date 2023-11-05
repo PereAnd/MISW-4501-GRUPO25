@@ -28,7 +28,9 @@ export class CreateVerticalesComponent {
     private verticalesService: VerticalesService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.empresaId = +localStorage.getItem('empresaId')!;
+  }
 
   ngOnInit(): void {
     this.indexVertical = this.route.snapshot.params['idv'];
@@ -49,8 +51,7 @@ export class CreateVerticalesComponent {
   registrarVertical(){
     const newVertical = new Vertical(
     this.formVerticales.value.vertical,
-    this.formVerticales.value.description,
-    this.empresaId
+    this.formVerticales.value.description
     )
     if(!this.indexVertical){
       this.verticalesService.addVertical(newVertical, this.empresaId).subscribe({

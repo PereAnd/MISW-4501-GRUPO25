@@ -32,7 +32,7 @@ export class RegEmpresaComponent implements OnInit {
     })
   }
 
-  registraEmpresa(){
+  registrarEmpresa(){
     const newEmpresa = new Empresa(
       this.formEmpresas.value.name,
       this.formEmpresas.value.email,
@@ -41,13 +41,17 @@ export class RegEmpresaComponent implements OnInit {
     );
 
     this.regEmpresaService.registrarEmpresa(newEmpresa).subscribe({
-      next: data => console.log("Empresa registrada correctamente"),
+      next: data => {
+        console.log("Empresa registrada correctamente");
+        try {
+          localStorage.setItem('empresaId', (data as any).id)
+          this.router.navigate(['/empresas/dashboard/' + localStorage.getItem('empresaId') + '/info-general'])
+        } catch (error) {
+          alert('Error registrando la empresa')
+          console.log("Error registrando la empresa", error)
+        }
+      },
       error: error => console.log("Error registrando la empresa", error),
-      complete: () => {
-        //this.router.navigate(['/'])
-      }
     })
-
   }
-
 }

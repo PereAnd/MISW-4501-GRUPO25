@@ -46,7 +46,7 @@ export class RegCandidatoComponent implements OnInit{
     this.regCandidatoService.registrarCandidato(newCandidato)
       .subscribe({
         next: data => {
-          console.log("Candidato registrado", data)
+          console.log("Candidato registrado")
           try {
               localStorage.setItem('candidatoId', (data as any).id)
               this.router.navigate(['/candidatos/dashboard/' + localStorage.getItem('candidatoId') + '/info-personal'])

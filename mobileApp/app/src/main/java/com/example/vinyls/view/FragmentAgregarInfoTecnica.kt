@@ -24,7 +24,23 @@ import org.json.JSONObject
 import java.util.*
 
 
-class FragmentAgregarInfoTecnica : Fragment() {
+class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecnica) {
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val btnNextLabor= requireView().findViewById<Button>(R.id.btnNextLabor)
+
+        btnNextLabor.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_infoTecnica_fragment_infoLaboral)
+        }
+    }
+
+
+
+
+
     private var _binding: FragmentAgregarInfoTecnicaBinding? = null
     private val binding get() = _binding!!  // get
     private lateinit var viewModel: AgregarInfoTecnicaViewModel

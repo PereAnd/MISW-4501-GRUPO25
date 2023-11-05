@@ -11,6 +11,7 @@ import com.example.vinyls.models.Candidato
 import com.example.vinyls.models.InfoAcademica
 import com.example.vinyls.models.InfoPersonal
 import com.example.vinyls.models.InfoTecnica
+import com.example.vinyls.models.InfoLaboral
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -75,7 +76,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val names = response.getString("names")
                 val lastNames = response.getString("lastNames")
                 val mail = response.getString("mail")
-                val password = response.optString("password", "Sin password") // Usar optString para proporcionar un valor predeterminado
+                val password = response.optString("password", "Sin password") // Valor predeterminado
                 val confirmPassword = response.optString("confirmPassword", "Sin confirmPassword")
 
                 val candidato = Candidato(
@@ -164,6 +165,47 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
+
+    suspend fun agregarInfoLaboral(body: JSONObject): InfoLaboral {
+        return suspendCoroutine { cont ->
+
+            if (currentCandidatoId == -1) {
+                // Handle this situation appropriately, for example, by throwing an exception.
+                // return@suspendCoroutine
+            }
+
+            requestQueue.add(postRequest("candidato/$currentCandidatoId/informacionLaboral", body,
+                { response ->
+                    val infoLaboralId = response.getInt("id")
+                    val description = response.optString("description", "Sin description")
+                    val type = response.optString("type",  "Sin type")
+                    val position = response.getString("position")
+                    val organization = response.getString("organization")
+                    val activities = response.getString("activities")
+                    val dateFrom = response.getString("dateFrom")
+                    val dateTo = response.getString("dateTo")
+                    val candidatoId = response.getInt("candidatoId")
+
+                    val infoLaboral = InfoLaboral(
+                        infoLaboralId = infoLaboralId,
+                        description = description,
+                        position = position,
+                        type = type,
+                        organization = organization,
+                        activities = activities,
+                        dateFrom = dateFrom,
+                        dateTo = dateTo,
+                        candidatoId = candidatoId
+                    )
+
+                    cont.resume(infoLaboral)
+                },
+                {
+                    cont.resumeWithException(it)
+                }
+            ))
+        }
+    }
 
 
     suspend fun agregarInfoPersonal(body: JSONObject): InfoPersonal {

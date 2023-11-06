@@ -112,5 +112,6 @@ export class InfoPersonalComponent {
 
   cancelarCreacion(){
     this.formInfoPersonal.reset()
+    this.changeEditMode()
   }
 }

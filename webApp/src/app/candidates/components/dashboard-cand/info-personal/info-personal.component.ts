@@ -111,6 +111,7 @@ export class InfoPersonalComponent {
   }
 
   cancelarCreacion(){
-    this.formInfoPersonal.reset()
+    this.ngOnInit()
+    this.changeEditMode()
   }
 }

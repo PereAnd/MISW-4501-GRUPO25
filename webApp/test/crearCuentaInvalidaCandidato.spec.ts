@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('http://localhost:4200/');
+  await page.getByRole('link', { name: 'Login' }).click();
+  await page.getByRole('button', { name: 'Crear cuenta' }).click();
+  await page.getByRole('menuitem', { name: 'Candidato' }).click();
+  await page.locator('div').filter({ hasText: /^Crear cuenta$/ }).click();
+  await page.getByLabel('Nombres').click();
+  await page.getByLabel('Nombres').fill('pedro');
+  await page.locator('div:nth-child(2) > .mat-mdc-form-field > .mat-mdc-text-field-wrapper > .mat-mdc-form-field-flex > .mat-mdc-form-field-infix').first().click();
+  await page.getByLabel('Apellidos').fill('palacios');
+  await page.locator('div').filter({ hasText: /^Crear cuenta$/ }).click();
+  await page.getByLabel('Correo').click();
+  await page.getByLabel('Correo').fill('pedrop@gmail.com');
+  await page.locator('div').filter({ hasText: /^Crear cuenta$/ }).click();
+  await page.getByLabel('Contraseña', { exact: true }).click();
+  await page.getByLabel('Contraseña', { exact: true }).fill('1');
+  await page.locator('div').filter({ hasText: /^Crear cuenta$/ }).click();
+  await page.getByText('Confirmar contraseña').click();
+  await page.getByLabel('Confirmar contraseña').fill('1');
+  await page.locator('div').filter({ hasText: /^Crear cuenta$/ }).click();
+  await page.getByLabel('Contraseña', { exact: true }).click();
+  await page.getByLabel('Contraseña', { exact: true }).fill('1234');
+  await page.locator('div').filter({ hasText: /^Crear cuenta$/ }).click();
+  await page.getByLabel('Confirmar contraseña').click();
+  await page.getByLabel('Confirmar contraseña').fill('12345');
+  await page.getByLabel('Contraseña', { exact: true }).click();
+  await page.getByLabel('Contraseña', { exact: true }).fill('123455');
+  await page.getByRole('button', { name: 'Crear cuenta' }).click();
+  await page.getByLabel('Apellidos').dblclick();
+  await page.getByLabel('Apellidos').fill('');
+  await page.getByLabel('Nombres').dblclick();
+  await page.getByLabel('Nombres').fill('');
+});

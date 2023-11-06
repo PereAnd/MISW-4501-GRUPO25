@@ -10,9 +10,11 @@ test('test', async ({ page }) => {
   await page.getByLabel('Rol').locator('span').click();
   await page.getByText('Candidato').click();
   await page.getByRole('button', { name: 'Ingresar' }).click();
-  await page.getByRole('link', { name: 'Información Personal' }).click();
-  await page.getByRole('button', { name: 'Editar' }).click();
-  await page.getByLabel('Fecha de nacimiento').click();
-  await page.getByLabel('Fecha de nacimiento').fill('11/17/1991');
+  await page.getByRole('link', { name: 'Información Laboral' }).click();
+  await page.getByRole('row', { name: '10' }).getByRole('link').click();
+  await page.getByLabel('Empresa').click();
+  await page.getByLabel('Empresa').fill('');
+  await page.getByLabel('Empresa').press('CapsLock');
+  await page.getByLabel('Empresa').fill('Telmex');
   await page.getByRole('button', { name: 'Guardar' }).click();
 });

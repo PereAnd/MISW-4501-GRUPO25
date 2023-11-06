@@ -1,0 +1,37 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('http://localhost:4200/');
+  await page.getByRole('link', { name: 'Login' }).click();
+  await page.getByLabel('Correo').click();
+  await page.getByLabel('Correo').click();
+  await page.getByLabel('Correo').fill('jcardonao@uniandes.edu.co');
+  await page.getByLabel('Correo').press('Tab');
+  await page.getByLabel('Contraseña', { exact: true }).fill('qwerty');
+  await page.getByLabel('Rol').locator('span').click();
+  await page.getByRole('option', { name: 'Candidato' }).click();
+  await page.getByRole('button', { name: 'Ingresar' }).click();
+  await page.getByRole('link', { name: 'Información Laboral' }).click();
+  await page.getByRole('link', { name: 'Agregar nueva' }).click();
+  await page.getByLabel('Posición/Cargo').click();
+  await page.getByLabel('Posición/Cargo').press('CapsLock');
+  await page.getByLabel('Posición/Cargo').fill('Jefe');
+  await page.getByLabel('Empresa').click();
+  await page.getByLabel('Empresa').press('CapsLock');
+  await page.getByLabel('Empresa').fill('Ecopetrol');
+  await page.getByLabel('Actividades realizadas').click();
+  await page.getByLabel('Actividades realizadas').press('CapsLock');
+  await page.getByLabel('Actividades realizadas').fill('Direccion estratégica, Liderazgo.');
+  await page.locator('mat-form-field').filter({ hasText: 'Fecha de inicioMM/DD/YYYY' }).getByLabel('Open calendar').click();
+  await page.getByLabel('Choose month and year').click();
+  await page.getByLabel('2016').click();
+  await page.getByLabel('January 2016').click();
+  await page.getByLabel('January 5, 2016').click();
+  await page.locator('mat-form-field').filter({ hasText: 'Fecha de finalizaciónMM/DD/YYYY' }).getByLabel('Open calendar').click();
+  await page.getByLabel('Choose month and year').click();
+  await page.getByLabel('2021').click();
+  await page.getByLabel('July 2021').click();
+  await page.getByLabel('July 8, 2021').click();
+  await page.getByRole('button', { name: 'Guardar' }).click();
+  await page.locator('button').filter({ hasText: 'logout' }).click();
+});

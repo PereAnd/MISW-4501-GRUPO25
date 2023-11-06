@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
+import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
@@ -77,8 +78,81 @@ class RegistarCuentaTest {
 
         onView(allOf(withText("Datos enviados exitosamente."))).check(matches(isDisplayed()));
 
-        val nextButton = onView(allOf(withId(R.id.btnNextAcademic)))
+        val nextButton = onView(allOf(withId(R.id.btnNextPersonal)))
         nextButton.perform(click())
+
+        /*Pruebas registro de personal*/
+
+
+        val nombrePersonalText = onView(allOf(withId(R.id.etNamesInfoPersonal)))
+        nombrePersonalText.check(matches(withHint("Nombres")))
+        nombrePersonalText.perform(typeText("CESAR HERNAN"), closeSoftKeyboard())
+
+        val apellidoPersonalText = onView(allOf(withId(R.id.etLastNamesInfoPersonal)))
+        apellidoPersonalText.check(matches(withHint("Apellidos")))
+        apellidoPersonalText.perform(typeText("GARCIA AFANADOR"), closeSoftKeyboard())
+
+        val mailPersonaText = onView(allOf(withId(R.id.etMailInfoPersonal)))
+        mailPersonaText.check(matches(withHint("E-mail")))
+        mailPersonaText.perform(typeText("cesa96@gmail.com"), closeSoftKeyboard())
+
+        val docTypeText = onView(allOf(withId(R.id.etDocType)))
+        docTypeText.check(matches(withHint("Tipo de documento")))
+        docTypeText.perform(scrollTo(), click())
+
+        docTypeText.perform(typeText("CC"), closeSoftKeyboard())
+
+
+
+        val docNumberText = onView(allOf(withId(R.id.etDocNumber)))
+        docNumberText.check(matches(withHint("Número de identificación")))
+        docNumberText.perform(scrollTo(), click())
+        docNumberText.perform(typeText("13514130"), closeSoftKeyboard())
+
+        val phoneText = onView(allOf(withId(R.id.etPhone)))
+        phoneText.check(matches(withHint("Teléfono de contacto")))
+        phoneText.perform(scrollTo(), click())
+        phoneText.perform(typeText("3102062948"), closeSoftKeyboard())
+
+        val addressText = onView(allOf(withId(R.id.etAddress)))
+        addressText.check(matches(withHint("Dirección")))
+        addressText.perform(scrollTo(), click())
+        addressText.perform(typeText("CLL 10A SUR"), closeSoftKeyboard())
+
+        val birthDateText = onView(allOf(withId(R.id.etBirthDate)))
+        birthDateText.check(matches(withHint("Fecha de nacimiento")))
+        birthDateText.perform(scrollTo(), click())
+        birthDateText.perform(typeText("1978-03-15T00:00:00.000Z"), closeSoftKeyboard())
+
+        val countryText = onView(allOf(withId(R.id.etCountry)))
+        countryText.check(matches(withHint("País o región")))
+        countryText.perform(scrollTo(), click())
+        countryText.perform(typeText("COLOMBIA"), closeSoftKeyboard())
+
+        val cityText = onView(allOf(withId(R.id.etCity)))
+        cityText.check(matches(withHint("Ciudad")))
+        cityText.perform(scrollTo(), click())
+        cityText.perform(typeText("CAJICA"), closeSoftKeyboard())
+
+
+        val languageText = onView(allOf(withId(R.id.etLanguage)))
+        languageText.check(matches(withHint("Idioma")))
+        languageText.perform(scrollTo(), click())
+        languageText.perform(typeText("ESPANOL"), closeSoftKeyboard())
+
+
+        val saveButtonPersonal = onView(allOf(withId(R.id.btnSaveInfoPersonal)))
+        saveButtonPersonal.perform(scrollTo(),click())
+
+        onView(allOf(withText("Datos enviados exitosamente."))).check(matches(isDisplayed()));
+        Thread.sleep(5000L)
+
+        val nextButtonPersonal = onView(allOf(withId(R.id.btnNextAcademic)))
+        nextButtonPersonal.perform(scrollTo(), click())
+
+        /*Fin pruebas registro de personal*/
+
+
 
         val titleText = onView(allOf(withId(R.id.etTitle)))
         titleText.check(matches(withHint("Titulo obtenido")))
@@ -105,9 +179,70 @@ class RegistarCuentaTest {
 
         onView(allOf(withText("Datos enviados exitosamente."))).check(matches(isDisplayed()));
 
+        val nextButtonInfo = onView(allOf(withId(R.id.btnNextTecnic)))
+        nextButtonInfo.perform(click())
 
 
 
+/*Inicio información técnica*/
+        val typeSkillText = onView(allOf(withId(R.id.etType)))
+        typeSkillText.check(matches(withHint("Titulo de habilidad")))
+        typeSkillText.perform(typeText("LENGUAJE"), closeSoftKeyboard())
+
+        val descText = onView(allOf(withId(R.id.etDescriptionType)))
+        descText.check(matches(withHint("Descripción")))
+        descText.perform(typeText("SQL"), closeSoftKeyboard())
+
+        val saveButtonTecnica = onView(allOf(withId(R.id.btnSaveInfoTecnica)))
+        saveButtonTecnica.perform(click())
+
+        onView(allOf(withText("Datos enviados exitosamente."))).check(matches(isDisplayed()));
+
+        val nextButtonLaboral = onView(allOf(withId(R.id.btnNextLabor)))
+        nextButtonLaboral.perform(click())
+
+
+
+        /*Fin información técnica*/
+
+        /*Inicio información laboral*/
+
+        val positionText = onView(allOf(withId(R.id.etPosition)))
+        positionText.check(matches(withHint("Nombre del cargo")))
+        positionText.perform(typeText("Gerente"), closeSoftKeyboard())
+
+        val descOrganizationText = onView(allOf(withId(R.id.etDescription)))
+        descOrganizationText.check(matches(withHint("Descripcíón de la empresa")))
+        descOrganizationText.perform(typeText("Empresa de mucho trabajo"), closeSoftKeyboard())
+
+        val areaText = onView(allOf(withId(R.id.etType)))
+        areaText.check(matches(withHint("Área de trabajo")))
+        areaText.perform(typeText("Administrativa"), closeSoftKeyboard())
+
+        val organizationText = onView(allOf(withId(R.id.etOrganization)))
+        organizationText.check(matches(withHint("Nombre de la empresa")))
+        organizationText.perform(typeText("Empresa Mayor"), closeSoftKeyboard())
+
+        val activitiesText = onView(allOf(withId(R.id.etActivities)))
+        activitiesText.check(matches(withHint("Princicipales funciones")))
+        activitiesText.perform(typeText("Hacer casi todo el trabajo"), closeSoftKeyboard())
+
+        val dateFromText = onView(allOf(withId(R.id.etDateFrom)))
+        dateFromText.check(matches(withHint("Fecha de ingreso")))
+        dateFromText.perform(typeText("2005-07-16T00:00:00.000Z"), closeSoftKeyboard())
+
+        val dateToText = onView(allOf(withId(R.id.etDateTo)))
+        dateToText.check(matches(withHint("Fecha de salida")))
+        dateToText.perform(typeText("2005-07-16T00:00:00.000Z"), closeSoftKeyboard())
+
+        val saveLaboralButton = onView(allOf(withId(R.id.btnSaveInfoLaboral)))
+        saveLaboralButton.perform(click())
+
+        onView(allOf(withText("Datos enviados exitosamente."))).check(matches(isDisplayed()));
+
+
+
+        /*Fin información técnica*/
 
 
 

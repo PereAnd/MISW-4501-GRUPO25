@@ -17,7 +17,7 @@ test('test', async ({ page }) => {
   });
   await page.getByRole('button', { name: 'Ingresar' }).click();
   await page.getByLabel('Rol').locator('svg').click();
-  await page.getByRole('option', { name: 'Candidato' }).click();
+  // await page.getByRole('option', { name: 'Candidato' }).click();
   page.once('dialog', dialog => {
     console.log(`Dialog message: ${dialog.message()}`);
     dialog.dismiss().catch(() => {});

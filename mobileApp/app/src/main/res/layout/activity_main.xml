@@ -1,187 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.MainActivity">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:background="@color/dark_yellow"
+        android:text="ABC Jobs"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/titulo_app"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bienvenido"
-            android:textAlignment="center"
-            android:textAppearance="@style/SmartFeedTitle"
-            android:layout_marginTop="30dp" />
-
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/dark_yellow"
-            android:fontFamily="@font/raleway_bold"
-            android:onClick="goToLogin"
-            android:text="ENCONTRAR TRABAJO\nAcceso para \nprofesionales"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:cornerRadius="10dp"
-            app:strokeColor="@color/black"
-            app:strokeWidth="1dp"
-            android:textAlignment="center"
-            android:gravity="center" />
-
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/dark_yellow"
-            android:fontFamily="@font/raleway_bold"
-            android:onClick="goToLogin"
-            android:text="ENCONTRAR CANDIDATOS\nAcceso para \nempleadores y empresas"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:cornerRadius="10dp"
-            app:strokeColor="@color/black"
-            app:strokeWidth="1dp"
-            android:textAlignment="center"
-            android:gravity="center" />
-
-
-        <TextView
-            android:id="@+id/titulo_app_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sobre nosotros"
-            android:textAlignment="center"
-            android:textAppearance="@style/SmartFeedTitle"
-            android:layout_marginTop="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/sobre_nosotros"
-            android:textSize="15sp"
-            android:fontFamily="@font/raleway_light"
-            android:textColor="@color/dark_purple"
-            android:textAlignment="center"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/titulo_app_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nuestros servicios"
-            android:textAlignment="center"
-            android:textAppearance="@style/SmartFeedTitle"
-            android:layout_marginTop="20dp" />
-
-        <TextView
-            android:id="@+id/titulo_app_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Reclutamiento y selección"
-            android:textSize="15sp"
-            android:textAlignment="center"
-            android:textAppearance="@style/SmartFeedTitle"
-            android:layout_marginTop="20dp" />
-
-        <ImageView
-            android:id="@+id/servicio1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/reclutamiento_y_seleccion"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/reclutamiento_y_seleccion"
-            android:textSize="15sp"
-            android:fontFamily="@font/raleway_light"
-            android:textColor="@color/dark_purple"
-            android:textAlignment="center"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/titulo_app_5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Evaluación de candidatos"
-            android:textSize="15sp"
-            android:textAlignment="center"
-            android:textAppearance="@style/SmartFeedTitle"
-            android:layout_marginTop="20dp" />
-
-
-        <ImageView
-            android:id="@+id/servicio2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/evaluacion_de_candidatos"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/evaluacion_de_candidatos"
-            android:textSize="15sp"
-            android:fontFamily="@font/raleway_light"
-            android:textColor="@color/dark_purple"
-            android:textAlignment="center"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/titulo_app_6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Formación Online"
-            android:textSize="15sp"
-            android:textAlignment="center"
-            android:textAppearance="@style/SmartFeedTitle"
-            android:layout_marginTop="20dp" />
-
-        <ImageView
-            android:id="@+id/servicio3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/formacion_online"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/formacion_online"
-            android:textSize="15sp"
-            android:fontFamily="@font/raleway_light"
-            android:textColor="@color/dark_purple"
-            android:textAlignment="center"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/logos_final"
-            android:layout_gravity="center_horizontal" />
-
-    </LinearLayout>
-</ScrollView>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/background_general"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+</LinearLayout>

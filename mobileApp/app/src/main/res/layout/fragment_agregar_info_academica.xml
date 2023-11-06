@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_agregarinfo_academica"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="60dp"
+        android:paddingTop="30dp"
+        android:background="@color/background_general"
+        tools:context=".view.FragmentInfoAcademica">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutInfoAcademica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="Ingresa tu información academica"
+                android:textAppearance="@style/abc_syle"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="30dp"
+                android:textColor="@color/black"
+                android:textAlignment="center" />
+
+            <!-- Titulo  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiTitle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Titulo obtenido"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Institución  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiInstitution"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Institución"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etInstitution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Fecha inicio  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiBeginDate"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Fecha de inicio"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBeginDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Fecha fin  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiEndDate"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Fecha de finalización"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Tipo de estudio  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiStudyType"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Tipo de estudio"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etStudyType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSaveInfoAcademica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_yellow" />
+
+        <Button
+            android:id="@+id/btnNextTecnic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "Siguiente"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black" />
+
+    </LinearLayout>
+
+</ScrollView>

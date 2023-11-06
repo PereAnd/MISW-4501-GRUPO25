@@ -25,7 +25,7 @@ describe('InfAcademicaService', () => {
   });
 
   it("Método 'listInfoAcademica', servicio 'InfAcademicaService'", () => {
-    const baseUrl = environment.HOST + 'candidato/1/informacionAcademica';
+    const baseUrl = environment.HOST_CAND + 'candidato/1/informacionAcademica';
     const mockResponse = [
       {
         "id": 1,
@@ -57,7 +57,7 @@ describe('InfAcademicaService', () => {
   })
 
   it("Método 'addInfoAcademica', servicio 'InfAcademicaService'", () => {
-    const baseUrl = environment.HOST + 'candidato/1/informacionAcademica';
+    const baseUrl = environment.HOST_CAND + 'candidato/1/informacionAcademica';
     const candidatoId = 1;
 
     const newInfoAcademica: InfoAcademica = new InfoAcademica(
@@ -89,7 +89,7 @@ describe('InfAcademicaService', () => {
   })
 
   it("Método 'findInfoAcademica', servicio 'InfAcademicaService'", () => {
-    const baseUrl = environment.HOST + 'candidato/1/informacionAcademica/1';
+    const baseUrl = environment.HOST_CAND + 'candidato/1/informacionAcademica/1';
     const candidatoId = 1;
     const indexInfoAcad = 1;
 
@@ -115,7 +115,7 @@ describe('InfAcademicaService', () => {
   })
 
   it("Método 'editInfoAcademica', servicio 'InfAcademicaService'", () => {
-    const baseUrl = environment.HOST + 'candidato/1/informacionAcademica/1';
+    const baseUrl = environment.HOST_CAND + 'candidato/1/informacionAcademica/1';
     const candidatoId = 1;
     const indexInfoAcad = 1;
 

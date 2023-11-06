@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/fragment_home">
+
+        <action android:id="@+id/action_global_fragment_home"
+        app:destination="@id/fragment_home"/>
+
+    <!-- Home  - Login  -->
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.example.vinyls.view.FragmentHome"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_menu_login"
+            app:destination="@id/fragment_menu_login" />
+    </fragment>
+
+    <!-- Menú Login   -->
+    <fragment
+        android:id="@+id/fragment_menu_login"
+        android:name="com.example.vinyls.view.FragmentMenuLogin"
+        tools:layout="@layout/fragment_menu_login">
+        <action
+            android:id="@+id/action_fragment_menu_login_to_fragment_entrevista"
+            app:destination="@id/fragment_candidato_list" />
+        <action
+            android:id="@+id/action_fragment_menu_login_to_fragment_registro"
+            app:destination="@+id/fragment_registro" />
+    </fragment>
+
+    <!-- Menú Login - Lista  -->
+    <fragment
+        android:id="@id/fragment_candidato_list"
+        android:name="com.example.vinyls.view.FragmentCandidatoList"
+        tools:layout="@layout/fragment_candidato_list" >
+    </fragment>
+
+    <!-- Menú Login - Registro  -->
+    <fragment
+        android:id="@+id/fragment_registro"
+        android:name="com.example.vinyls.view.FragmentRegistro"
+        tools:layout="@layout/fragment_registro" >
+        <action
+            android:id="@+id/action_fragment_registro_to_fragment_infoPersonal"
+            app:destination="@+id/fragment_info_personal" />
+    </fragment>
+
+
+    <!-- InfoPersonal -   -->
+    <fragment
+        android:id="@+id/fragment_info_personal"
+        android:name="com.example.vinyls.view.FragmentAgregarInfoPersonal"
+        tools:layout="@layout/fragment_agregar_info_personal">
+        <action
+            android:id="@+id/action_fragment_infoPersonal_to_fragment_infoAcademica"
+            app:destination="@+id/fragment_info_academica" />
+    </fragment>
+
+    <!-- InfoAcademica -   -->
+    <fragment
+        android:id="@+id/fragment_info_academica"
+        android:name="com.example.vinyls.view.FragmentAgregarInfoAcademica"
+        tools:layout="@layout/fragment_agregar_info_academica">
+        <action
+            android:id="@+id/action_fragment_infoAcademica_fragment_infoTecnica"
+            app:destination="@+id/fragment_info_tecnica" />
+    </fragment>
+
+    <!-- InfoTecnica -   -->
+    <fragment
+        android:id="@+id/fragment_info_tecnica"
+        android:name="com.example.vinyls.view.FragmentAgregarInfoTecnica"
+        tools:layout="@layout/fragment_agregar_info_tecnica">
+        <action
+            android:id="@+id/action_fragment_infoTecnica_fragment_infoLaboral"
+            app:destination="@+id/fragment_info_laboral" />
+    </fragment>
+
+    <!-- InfoLaboral -   -->
+    <fragment
+        android:id="@+id/fragment_info_laboral"
+        android:name="com.example.vinyls.view.FragmentAgregarInfoLaboral"
+        tools:layout="@layout/fragment_agregar_info_laboral">
+        <action
+            android:id="@+id/action_fragment_infolaboral_fragment_login"
+            app:destination="@+id/fragment_menu_login" />
+    </fragment>
+
+</navigation>
+
+
+

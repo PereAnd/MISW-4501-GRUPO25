@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="SmartFeedTitle">
+    <style name="abc_syle">
         <item name="android:textSize">25dp</item>
         <item name="android:textColor">@color/dark_purple</item>
         <item name="android:fontFamily">@font/raleway_bold</item>

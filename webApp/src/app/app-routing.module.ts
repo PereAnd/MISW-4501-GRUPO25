@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginCandidatoComponent } from './core/auth/login-candidato/login-candidato.component';
 import { RegCandidatoComponent } from './candidates/components/reg-candidato/reg-candidato.component';
 import { InicioComponent } from './shared/components/inicio/inicio.component';
 import { DashboardCandComponent } from './candidates/components/dashboard-cand/dashboard-cand.component';
@@ -11,10 +10,20 @@ import { CreateInfoTecComponent } from './candidates/components/dashboard-cand/i
 import { InfoPersonalComponent } from './candidates/components/dashboard-cand/info-personal/info-personal.component';
 import { InfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/info-laboral.component';
 import { CreateInfoLaboralComponent } from './candidates/components/dashboard-cand/info-laboral/create-info-laboral/create-info-laboral.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegEmpresaComponent } from './companies/components/reg-empresa/reg-empresa.component';
+import { DashboardEmpComponent } from './companies/components/dashboard-emp/dashboard-emp.component';
+import { InfoGeneralComponent } from './companies/components/dashboard-emp/info-general/info-general.component';
+import { VerticalesComponent } from './companies/components/dashboard-emp/verticales/verticales.component';
+import { CreateVerticalesComponent } from './companies/components/dashboard-emp/verticales/create-verticales/create-verticales.component';
+import { UbicacionesComponent } from './companies/components/dashboard-emp/ubicaciones/ubicaciones.component';
+import { CreateUbicacionComponent } from './companies/components/dashboard-emp/ubicaciones/create-ubicacion/create-ubicacion.component';
+import { ProyectosComponent } from './companies/components/dashboard-emp/proyectos/proyectos.component';
+import { CreateProyectoComponent } from './companies/components/dashboard-emp/proyectos/create-proyecto/create-proyecto.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
-  { path: 'candidatos/login', component: LoginCandidatoComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'candidatos/register', component: RegCandidatoComponent },
   { path: 'candidatos/dashboard/:id', component: DashboardCandComponent,
     children: [
@@ -28,6 +37,21 @@ const routes: Routes = [
       { path: 'info-laboral', component: InfoLaboralComponent },
       { path: 'info-laboral/add', component: CreateInfoLaboralComponent },
       { path: 'info-laboral/:idil', component: CreateInfoLaboralComponent },
+    ]
+  },
+  { path: 'empresas/register', component: RegEmpresaComponent },
+  { path: 'empresas/dashboard/:id', component: DashboardEmpComponent,
+    children: [
+      { path: 'info-general', component: InfoGeneralComponent },
+      { path: 'verticales', component: VerticalesComponent },
+      { path: 'verticales/add', component: CreateVerticalesComponent },
+      { path: 'verticales/:idv', component: CreateVerticalesComponent },
+      { path: 'ubicaciones', component: UbicacionesComponent },
+      { path: 'ubicaciones/add', component: CreateUbicacionComponent },
+      { path: 'ubicaciones/:idu', component: CreateUbicacionComponent },
+      { path: 'proyectos', component: ProyectosComponent },
+      { path: 'proyectos/add', component: CreateProyectoComponent },
+      { path: 'proyectos/:idp', component: CreateProyectoComponent },
     ]
   }
 ];

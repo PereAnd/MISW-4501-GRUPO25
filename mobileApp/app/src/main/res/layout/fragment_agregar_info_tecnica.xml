@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="60dp"
+        android:paddingTop="30dp"
+        android:background="@color/background_general"
+        tools:context=".view.FragmentInfoTecnica">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutTecnica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="Ingresa tu información técnica"
+                android:textColor="@color/black"
+                android:textAppearance="@style/abc_syle"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="30dp"
+                android:textAlignment="center" />
+
+            <!-- Tipo de habilidad  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiType"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Titulo de habilidad"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Descripción  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiDescriptionType"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Descripción"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDescriptionType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSaveInfoTecnica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_yellow" />
+
+        <Button
+            android:id="@+id/btnNextLabor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "Siguiente"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black" />
+
+    </LinearLayout>
+
+</ScrollView>

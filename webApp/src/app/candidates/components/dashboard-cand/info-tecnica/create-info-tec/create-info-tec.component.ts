@@ -11,6 +11,7 @@ import { InfTecnicaService } from 'src/app/candidates/services/inf-tecnica.servi
 })
 export class CreateInfoTecComponent {
   indexInfoTec: number;
+  candidatoId: number;
 
   formInfoTecnica: FormGroup = new FormGroup({
     type: new FormControl('', Validators.required),
@@ -26,12 +27,14 @@ export class CreateInfoTecComponent {
     private infTecnicaService: InfTecnicaService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.candidatoId = this.candidatoId = +localStorage.getItem('candidatoId')!;
+  }
 
   ngOnInit(): void {
     this.indexInfoTec = this.route.snapshot.params['idit'];
     if(this.indexInfoTec){
-      this.infTecnicaService.findInfoTecnica(1, this.indexInfoTec)
+      this.infTecnicaService.findInfoTecnica(this.candidatoId, this.indexInfoTec)
       .subscribe({
         next: data => {
           this.formInfoTecnica.setValue({
@@ -45,14 +48,13 @@ export class CreateInfoTecComponent {
   }
 
   registrarInfoTecnica(){
-    const candidatoId: number = 1;
     const newInfoTecnica = new InfoTecnica(
       this.formInfoTecnica.value.type,
       this.formInfoTecnica.value.description,
-      1 // OBTENER ID DEL CANDIDATO ACTUAL
+      this.candidatoId
     )
     if(!this.indexInfoTec){
-      this.infTecnicaService.addInfoTecnica(newInfoTecnica, candidatoId).subscribe({
+      this.infTecnicaService.addInfoTecnica(newInfoTecnica, this.candidatoId).subscribe({
           next: data => {
             console.log("Información técnica registrada")
             this.formInfoTecnica.reset();
@@ -66,7 +68,7 @@ export class CreateInfoTecComponent {
           }
         })
     } else {
-      this.infTecnicaService.editInfoTecnica(newInfoTecnica, this.indexInfoTec, candidatoId).subscribe({
+      this.infTecnicaService.editInfoTecnica(newInfoTecnica, this.indexInfoTec, this.candidatoId).subscribe({
         next: data => {
           console.log('Información técnica editada')
           this.formInfoTecnica.reset()

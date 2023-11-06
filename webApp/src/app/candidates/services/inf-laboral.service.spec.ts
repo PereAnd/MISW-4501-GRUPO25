@@ -24,7 +24,7 @@ describe('InfLaboralService', () => {
   });
 
   it("Método 'listInfoLaboral', servicio 'InfLaboralService'", () => {
-    const baseUrl = environment.HOST + 'candidato/1/informacionLaboral';
+    const baseUrl = environment.HOST_CAND + 'candidato/1/informacionLaboral';
     const mockResponse = [
       {
         "id": 1,
@@ -56,7 +56,7 @@ describe('InfLaboralService', () => {
   })
 
   it("Método 'addInfoLaboral', servicio 'InfLaboralService'", () => {
-    const baseUrl = environment.HOST + 'candidato/1/informacionLaboral';
+    const baseUrl = environment.HOST_CAND + 'candidato/1/informacionLaboral';
     const candidatoId = 1;
 
     const newInfoLaboral: InfoLaboral = new InfoLaboral(
@@ -88,7 +88,7 @@ describe('InfLaboralService', () => {
   })
 
   it("Método 'findInfoLaboral', servicio 'InfLaboralService'", () => {
-    const baseUrl = environment.HOST + 'candidato/1/informacionLaboral/1';
+    const baseUrl = environment.HOST_CAND + 'candidato/1/informacionLaboral/1';
     const candidatoId = 1;
     const indexInfoLab = 1;
 
@@ -114,7 +114,7 @@ describe('InfLaboralService', () => {
   })
 
   it("Método 'editInfoLaboral', servicio 'InfLaboralService'", () => {
-    const baseUrl = environment.HOST + 'candidato/1/informacionLaboral/1';
+    const baseUrl = environment.HOST_CAND + 'candidato/1/informacionLaboral/1';
     const candidatoId = 1;
     const indexInfoLab = 1;
 

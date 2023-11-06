@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="60dp"
+        android:paddingTop="30dp"
+        android:background="@color/background_general"
+        tools:context=".view.FragmentRegistro">
+
+        <LinearLayout
+            android:id="@+id/linearLayouRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="Registro"
+                android:textColor="@color/black"
+                android:textAppearance="@style/abc_syle"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="30dp"
+                android:textAlignment="center" />
+
+            <!-- Nombres  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiNamesRegistro"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombres"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                android:textColorHint="@color/dark_gray"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamesRegistro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Apellidos  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiLastNamesRegistro"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Apellidos"
+                app:boxBackgroundColor="@color/light_blue"
+                android:textColorHint="@color/dark_gray"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLastNamesRegistro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Email  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiMailRegistro"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dark_gray"
+                android:hint="E-Mail"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                app:counterEnabled="true"
+                app:counterMaxLength="200"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMailRegistro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiPasswordRegistro"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dark_gray"
+                android:hint="Password"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                app:counterEnabled="true"
+                app:counterMaxLength="200"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPasswordRegistro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- ConfirmPassword  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiConfirmPasswordRegistro"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dark_gray"
+                android:hint="ConfirmPassword"
+                app:boxBackgroundColor="@color/light_blue"
+                app:helperText="@string/required"
+                app:counterEnabled="true"
+                app:counterMaxLength="200"
+                app:helperTextTextColor="@color/dark_yellow"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmPasswordRegistro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSendCandidato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_yellow" />
+
+        <Button
+            android:id="@+id/btnNextPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="siguiente"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black" />
+    </LinearLayout>
+
+</ScrollView>

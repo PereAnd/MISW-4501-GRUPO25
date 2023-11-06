@@ -109,7 +109,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= " Tipo de documento"
+                android:hint= "Tipo de documento"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"

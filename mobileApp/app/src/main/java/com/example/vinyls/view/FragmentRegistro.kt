@@ -22,15 +22,15 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
-class FragmentRegistro : Fragment(R.layout.fragment_menu_login) {
+class FragmentRegistro : Fragment(R.layout.fragment_registro) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonNextAcademic = requireView().findViewById<Button>(R.id.btnNextPersonal)
+ //       val buttonNextAcademic = requireView().findViewById<Button>(R.id.btnNextPersonal)
 
-        buttonNextAcademic.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_registro_to_fragment_infoPersonal)
-        }
+    //    buttonNextAcademic.setOnClickListener {
+    //        findNavController().navigate(R.id.action_fragment_registro_to_fragment_infoPersonal)
+    //    }
     }
 
 
@@ -59,9 +59,18 @@ class FragmentRegistro : Fragment(R.layout.fragment_menu_login) {
         createButton()
     }
 
+    private var currentState: Boolean = false
+
     private fun createButton() {
-        binding.btnSendCandidato.setOnClickListener {
+        binding.btnNextPersonal.setOnClickListener {
             sendDataToServer()
+
+            if (currentState) {
+                findNavController().navigate(R.id.action_fragment_registro_to_fragment_infoPersonal)
+            } else {
+                //
+            }
+
         }
     }
 
@@ -86,11 +95,8 @@ class FragmentRegistro : Fragment(R.layout.fragment_menu_login) {
                 i = idRegistrod.await()
             }
 
-            Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
-                .setAction("¿Salir?"){
-                activity?.finish()
-            }.show()
-            
+
+
         }
     }
 
@@ -133,11 +139,26 @@ class FragmentRegistro : Fragment(R.layout.fragment_menu_login) {
             }else{
                 tiMailRegistro.error = null
             }
+
+            val password = etPasswordRegistro.text.toString()
+            val confirmPassword = etConfirmPasswordRegistro.text.toString()
+
+            if (password != confirmPassword) {
+                isValid = false
+                tiPasswordRegistro.error = "Las contraseñas no coinciden"
+                tiConfirmPasswordRegistro.error = "Las contraseñas no coinciden"
+            } else {
+                tiPasswordRegistro.error = null
+                tiConfirmPasswordRegistro.error = null
+
         }
 
-        return isValid
+        currentState = isValid
+        return currentState
 
     }
 
+
+}
 
 }

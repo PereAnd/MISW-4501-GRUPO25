@@ -149,20 +149,9 @@
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnSendCandidato"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/dark_yellow" />
+
 
         <Button
             android:id="@+id/btnNextPersonal"
@@ -172,7 +161,7 @@
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/black" />
+            android:backgroundTint="@color/dark_yellow" />
     </LinearLayout>
 
 </ScrollView>

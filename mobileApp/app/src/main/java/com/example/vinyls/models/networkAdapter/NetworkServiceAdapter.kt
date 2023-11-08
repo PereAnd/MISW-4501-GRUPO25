@@ -20,7 +20,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
-        const val BASE_URL = "http://candidatos.us-east-2.elasticbeanstalk.com/"
+        const val BASE_URL = "http://k8s-proyecto-ingressp-eb59205740-1747100398.us-east-1.elb.amazonaws.com/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {

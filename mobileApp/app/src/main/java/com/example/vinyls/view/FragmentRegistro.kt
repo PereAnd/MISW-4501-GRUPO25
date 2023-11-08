@@ -26,11 +26,6 @@ class FragmentRegistro : Fragment(R.layout.fragment_registro) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
- //       val buttonNextAcademic = requireView().findViewById<Button>(R.id.btnNextPersonal)
-
-    //    buttonNextAcademic.setOnClickListener {
-    //        findNavController().navigate(R.id.action_fragment_registro_to_fragment_infoPersonal)
-    //    }
     }
 
 

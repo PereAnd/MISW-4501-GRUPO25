@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="Ingresa tu información técnica"
+                app:hintTextColor="@color/black"
                 android:textColor="@color/black"
                 android:textAppearance="@style/abc_syle"
                 android:textSize="20sp"
@@ -41,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Titulo de habilidad"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
                 android:textColorHint="@color/dark_gray"
@@ -85,16 +87,6 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnSaveInfoTecnica"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/dark_yellow" />
-
-        <Button
             android:id="@+id/btnNextLabor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,7 +94,7 @@
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/black" />
+            android:backgroundTint="@color/dark_yellow" />
 
     </LinearLayout>
 

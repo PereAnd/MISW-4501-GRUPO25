@@ -23,19 +23,11 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
 
-class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_registro) {
+class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_personal) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val buttonNextAcademic = requireView().findViewById<Button>(R.id.btnNextAcademic)
-
-        buttonNextAcademic.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_infoPersonal_to_fragment_infoAcademica)
-        }
     }
-
-
 
 
     private var _binding: FragmentAgregarInfoPersonalBinding? = null
@@ -63,9 +55,18 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_registro) {
         createButton()
     }
 
+    private var currentState: Boolean = false
     private fun createButton() {
-        binding.btnSaveInfoPersonal.setOnClickListener {
+        binding.btnNextAcademic.setOnClickListener {
             sendDataToServer()
+
+            if (currentState) {
+                findNavController().navigate(R.id.action_fragment_infoPersonal_to_fragment_infoAcademica)
+            }
+            else {
+                //
+            }
+
         }
     }
 
@@ -103,11 +104,6 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_registro) {
                 i = idAgregarInfoPersonal.await()
             }
 
-            Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
-                .setAction("¿Salir?"){
-                activity?.finish()
-            }.show()
-            
         }
     }
 
@@ -195,8 +191,8 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_registro) {
 
 
         }
-
-        return isValid
+        currentState = isValid
+        return currentState
 
     }
 

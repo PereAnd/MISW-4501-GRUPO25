@@ -29,12 +29,6 @@ class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecni
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val btnNextLabor= requireView().findViewById<Button>(R.id.btnNextLabor)
-
-        btnNextLabor.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_infoTecnica_fragment_infoLaboral)
-        }
     }
 
 
@@ -66,9 +60,17 @@ class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecni
         createButton()
     }
 
+    private var currentState: Boolean = false
     private fun createButton() {
-        binding.btnSaveInfoTecnica.setOnClickListener {
+        binding.btnNextLabor.setOnClickListener {
             sendDataToServer()
+
+            if (currentState) {
+                findNavController().navigate(R.id.action_fragment_infoTecnica_fragment_infoLaboral)
+            }
+            else {
+                //
+            }
         }
     }
 
@@ -86,11 +88,6 @@ class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecni
                 val idAgregarInfoTecnica = async { viewModel.agregarInfoTecnicaFromNetwork(JSONObject(strInfoTecnica)) }
                 i = idAgregarInfoTecnica.await()
             }
-
-            Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
-                .setAction("¿Salir?"){
-                activity?.finish()
-            }.show()
             
         }
     }
@@ -114,8 +111,8 @@ class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecni
                 tiType.error = null
             }
         }
-
-        return isValid
+        currentState = isValid
+        return currentState
 
     }
 

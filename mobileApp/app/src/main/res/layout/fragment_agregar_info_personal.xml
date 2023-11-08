@@ -41,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Nombres"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
                 android:textColorHint="@color/dark_gray"
@@ -64,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Apellidos"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -87,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "E-mail"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -110,6 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Tipo de documento"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -133,6 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Número de identificación"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -156,6 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Teléfono de contacto"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -179,6 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Dirección"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -202,6 +209,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Fecha de nacimiento"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -225,6 +233,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "País o región"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -248,6 +257,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Ciudad"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -271,6 +281,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Idioma"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 android:textColorHint="@color/dark_gray"
                 app:helperText="@string/required"
@@ -289,15 +300,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnSaveInfoPersonal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/dark_yellow" />
 
         <Button
             android:id="@+id/btnNextAcademic"
@@ -307,7 +309,7 @@
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/black" />
+            android:backgroundTint="@color/dark_yellow" />
 
     </LinearLayout>
 

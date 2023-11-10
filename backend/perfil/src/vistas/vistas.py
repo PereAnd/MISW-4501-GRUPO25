@@ -654,4 +654,3 @@ class VistaIdioma(Resource):
         except:
             db.session.rollback()
             return {'Error': str(sys.exc_info()[0])}, 412
-        

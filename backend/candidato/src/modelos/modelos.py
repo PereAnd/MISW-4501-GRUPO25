@@ -20,6 +20,7 @@ class Candidato(db.Model):
     language = db.Column(db.String(50))
     informacionAcademica = db.relationship('InformacionAcademica', backref='candidato')
     informacionTecnica = db.relationship('InformacionTecnica', backref='candidato')
+    informacionLaboral = db.relationship('InformacionLaboral', backref='candidato')
 
 class InformacionAcademica(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -32,6 +32,7 @@
         android:layout_marginLeft="58dp"
         android:layout_marginTop="30dp"
         android:hint="@string/usuario_label"
+        app:hintTextColor="@color/black"
         app:boxBackgroundColor="@color/light_blue"
         app:boxStrokeColor="@color/black">
 
@@ -51,6 +52,7 @@
         android:layout_marginLeft="58dp"
         android:layout_marginTop="30dp"
         android:hint="@string/password_label"
+        app:hintTextColor="@color/black"
         app:boxBackgroundColor="@color/light_blue"
         app:boxStrokeColor="@color/black"
         app:endIconMode="password_toggle">

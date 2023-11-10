@@ -29,11 +29,11 @@ class FragmentAgregarInfoAcademica : Fragment(R.layout.fragment_agregar_info_aca
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonNextTecnic = requireView().findViewById<Button>(R.id.btnNextTecnic)
+    //    val buttonNextTecnic = requireView().findViewById<Button>(R.id.btnNextTecnic)
 
-        buttonNextTecnic.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_infoAcademica_fragment_infoTecnica)
-        }
+     //   buttonNextTecnic.setOnClickListener {
+   //         findNavController().navigate(R.id.action_fragment_infoAcademica_fragment_infoTecnica)
+    //    }
     }
 
 
@@ -64,9 +64,19 @@ class FragmentAgregarInfoAcademica : Fragment(R.layout.fragment_agregar_info_aca
         createButton()
     }
 
+    private var currentState: Boolean = false
     private fun createButton() {
-        binding.btnSaveInfoAcademica.setOnClickListener {
+        binding.btnNextTecnic.setOnClickListener {
             sendDataToServer()
+
+            if (currentState) {
+                findNavController().navigate(R.id.action_fragment_infoAcademica_fragment_infoTecnica)
+            }
+            else {
+                //
+            }
+
+
         }
     }
 
@@ -91,11 +101,6 @@ class FragmentAgregarInfoAcademica : Fragment(R.layout.fragment_agregar_info_aca
                 i = idAgregarInfoAcademica.await()
             }
 
-            Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
-                .setAction("¿Salir?"){
-                activity?.finish()
-            }.show()
-            
         }
     }
 
@@ -138,9 +143,8 @@ class FragmentAgregarInfoAcademica : Fragment(R.layout.fragment_agregar_info_aca
                 tiStudyType.error = null
             }
         }
-
-        return isValid
-
+        currentState = isValid
+        return currentState
     }
 
 

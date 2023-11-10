@@ -87,6 +87,7 @@ export class InfoGeneralComponent implements OnInit {
   }
 
   cancelarCreacion(){
-    this.formInfoGeneral.reset()
+    this.ngOnInit();
+    this.changeEditMode();
   }
 }

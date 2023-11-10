@@ -29,10 +29,6 @@ class FragmentAgregarInfoLaboral : Fragment(R.layout.fragment_agregar_info_labor
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonLogin = requireView().findViewById<Button>(R.id.btnLogin)
-        buttonLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_infolaboral_fragment_login)
-        }
     }
 
 
@@ -63,9 +59,19 @@ class FragmentAgregarInfoLaboral : Fragment(R.layout.fragment_agregar_info_labor
         createButton()
     }
 
+    private var currentState: Boolean = false
     private fun createButton() {
-        binding.btnSaveInfoLaboral.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             sendDataToServer()
+
+
+            if (currentState) {
+                findNavController().navigate(R.id.action_fragment_infolaboral_fragment_login)
+            }
+            else {
+                //
+            }
+
         }
     }
 
@@ -95,8 +101,8 @@ class FragmentAgregarInfoLaboral : Fragment(R.layout.fragment_agregar_info_labor
             }
 
             Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
-                .setAction("¿Salir?"){
-                activity?.finish()
+                .setAction(""){
+             //   activity?.finish()
             }.show()
 
         }
@@ -155,8 +161,8 @@ class FragmentAgregarInfoLaboral : Fragment(R.layout.fragment_agregar_info_labor
                 tiDateTo.error = null
             }
         }
-
-        return isValid
+        currentState = isValid
+        return currentState
 
     }
 

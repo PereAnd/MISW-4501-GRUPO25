@@ -1551,10 +1551,1135 @@
                     }
                 }
             }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil": {
+            "get": {
+                "description": "Retorna las proyectos de una perfil",
+                "operationId": "findPeril",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Perfil",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Perfil"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de perfile para una proyectdo",
+                "operationId": "addPerfil",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                    },
+                    {
+                        "name": "perfil",
+                        "in": "body",
+                        "description": "proyecto a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewPerfil"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Perfil",
+                        "schema": {
+                            "$ref": "#/definitions/Perfil"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{id}": {
+            "get": {
+                "description": "Retorna una perfil a partir de su id",
+                "operationId": "findPerfilById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },            
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta perfil",
+                        "schema": {
+                            "$ref": "#/definitions/Perfil"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una perfil a partir de su id",
+                "operationId": "deletePerfilById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó un perfil"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una perfil a partir de su id",
+                "operationId": "updatePerfilById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfil",
+                        "in": "body",
+                        "description": "Perfil a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdatePerfil"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta Perfil",
+                        "schema": {
+                            "$ref": "#/definitions/Perfil"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/habilidad": {
+            "get": {
+                "description": "Retorna las habilidades de una perfil",
+                "operationId": "findPeril",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta habilidad",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Habilidad"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de habilidad para un perfil",
+                "operationId": "addHabilidad",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "habilidad",
+                        "in": "body",
+                        "description": "habilidazd a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewHabilidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Habilidad",
+                        "schema": {
+                            "$ref": "#/definitions/Habilidad"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/habilidad/{id}": {
+            "get": {
+                "description": "Retorna una habilidad a partir de su id",
+                "operationId": "findHabilidadById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },            
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la habilidad",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta habilidad",
+                        "schema": {
+                            "$ref": "#/definitions/Habilidad"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una habilidad a partir de su id",
+                "operationId": "deleteHabilidadById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la habilidad",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó una habilidad"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una habilidad a partir de su id",
+                "operationId": "updateHabilidadById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la habilidad",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "habilidad",
+                        "in": "body",
+                        "description": "habilidad a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateHabilidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta Habilidad",
+                        "schema": {
+                            "$ref": "#/definitions/Habilidad"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/conocimiento": {
+            "get": {
+                "description": "Retorna las conocimientoes de una perfil",
+                "operationId": "findPeril",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta conocimiento",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Conocimiento"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de conocimiento para un perfil",
+                "operationId": "addConocimiento",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "conocimiento",
+                        "in": "body",
+                        "description": "habilidazd a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewConocimiento"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Conocimiento",
+                        "schema": {
+                            "$ref": "#/definitions/Conocimiento"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/conocimiento/{id}": {
+            "get": {
+                "description": "Retorna una conocimiento a partir de su id",
+                "operationId": "findConocimientoById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },            
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la conocimiento",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta conocimiento",
+                        "schema": {
+                            "$ref": "#/definitions/Conocimiento"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una conocimiento a partir de su id",
+                "operationId": "deleteConocimientoById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la conocimiento",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó una conocimiento"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una conocimiento a partir de su id",
+                "operationId": "updateConocimientoById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la conocimiento",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "conocimiento",
+                        "in": "body",
+                        "description": "conocimiento a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateConocimiento"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta Conocimiento",
+                        "schema": {
+                            "$ref": "#/definitions/Conocimiento"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/idioma": {
+            "get": {
+                "description": "Retorna las idiomaes de una perfil",
+                "operationId": "findPeril",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta idioma",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Idioma"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de idioma para un perfil",
+                "operationId": "addIdioma",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "idioma",
+                        "in": "body",
+                        "description": "habilidazd a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewIdioma"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Idioma",
+                        "schema": {
+                            "$ref": "#/definitions/Idioma"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/idioma/{id}": {
+            "get": {
+                "description": "Retorna una idioma a partir de su id",
+                "operationId": "findIdiomaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },            
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la idioma",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta idioma",
+                        "schema": {
+                            "$ref": "#/definitions/Idioma"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una idioma a partir de su id",
+                "operationId": "deleteIdiomaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la idioma",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó una idioma"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una idioma a partir de su id",
+                "operationId": "updateIdiomaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la idioma",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "idioma",
+                        "in": "body",
+                        "description": "idioma a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateIdioma"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta Idioma",
+                        "schema": {
+                            "$ref": "#/definitions/Idioma"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
         }
-
-
-
     },
     "definitions": {
         "CandidatoRegistro": {
@@ -1935,6 +3060,18 @@
                     "items": {
                         "$ref": "#/definitions/Vertical"
                     }
+                },
+                "ubicacion": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Ubicacion"
+                    }
+                },
+                "proyecto": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Proyecto"
+                    }
                 }
 
             }
@@ -2049,6 +3186,238 @@
             "required": [],
             "properties": {
                 "proyecto": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+
+        "NewPerfil": {
+            "type": "object",
+            "required": [
+                "name",
+                "role",
+                "location",
+                "years"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "years": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+                
+            }
+        },
+        "Perfil": {
+            "type": "object",
+            "required": [
+                "name",
+                "role",
+                "location",
+                "years"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "years": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "habilidad": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Habilidad"
+                    }
+                },
+                "conocimiento": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Conocimiento"
+                    }
+                },
+                "idioma": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Idioma"
+                    }
+                }
+                
+            }
+        },
+        "UpdatePerfil": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "years": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        
+        "NewHabilidad": {
+            "type": "object",
+            "required": [
+                "name",
+                "description"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "Habilidad": {
+            "type": "object",
+            "required": [
+                "name",
+                "description"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+                
+            }
+        },
+        "UpdateHabilidad": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "NewConocimiento": {
+            "type": "object",
+            "required": [
+                "name",
+                "description"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "Conocimiento": {
+            "type": "object",
+            "required": [
+                "name",
+                "description"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+                
+            }
+        },
+        "UpdateConocimiento": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        
+        
+        "NewIdioma": {
+            "type": "object",
+            "required": [
+                "name",
+                "description"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "Idioma": {
+            "type": "object",
+            "required": [
+                "name",
+                "description"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+                
+            }
+        },
+        "UpdateIdioma": {
+            "type": "object",
+            "properties": {
+                "name": {
                     "type": "string"
                 },
                 "description": {

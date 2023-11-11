@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -17,108 +17,105 @@ import com.example.vinyls.R
 import com.example.vinyls.databinding.FragmentAgregarInfoAcademicaBinding
 import com.example.vinyls.viewmodels.AgregarInfoAcademicaViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_agregar_info_academica.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
+import android.widget.TextView
 
 
 class FragmentAgregarInfoAcademica : Fragment(R.layout.fragment_agregar_info_academica) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    //    val buttonNextTecnic = requireView().findViewById<Button>(R.id.btnNextTecnic)
-
-     //   buttonNextTecnic.setOnClickListener {
-   //         findNavController().navigate(R.id.action_fragment_infoAcademica_fragment_infoTecnica)
-    //    }
-    }
-
-
-
-
     private var _binding: FragmentAgregarInfoAcademicaBinding? = null
-    private val binding get() = _binding!!  // get
+    private val binding get() = _binding!!
     private lateinit var viewModel: AgregarInfoAcademicaViewModel
 
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
-            View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentAgregarInfoAcademicaBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var i:Int=0
+
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
         viewModel = ViewModelProvider(this, AgregarInfoAcademicaViewModel.Factory(activity.application)).get(
-            AgregarInfoAcademicaViewModel::class.java)
+            AgregarInfoAcademicaViewModel::class.java
+        )
 
         createButton()
+        setupSpinner()
     }
 
     private var currentState: Boolean = false
+
     private fun createButton() {
         binding.btnNextTecnic.setOnClickListener {
             sendDataToServer()
 
             if (currentState) {
                 findNavController().navigate(R.id.action_fragment_infoAcademica_fragment_infoTecnica)
+            } else {
+                // Handle the case when currentState is false
             }
-            else {
-                //
-            }
-
-
         }
     }
 
+    private fun setupSpinner() {
+        val spinner = binding.spinnerStudyType
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.study_types,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+    }
+
     private fun sendDataToServer() {
-        var i:Int=0
-        if(validateForm()){
-            var strInfoAcademica = "{\n \"title\": \"" +
-                    binding.etTitle.text.toString() +
-                    "\",\n  \"institution\":\"" +
-                    binding.etInstitution.text.toString() +
-                    "\",\n  \"beginDate\": \"" +
-                    binding.etBeginDate.text.toString() +
-                    "\",\n  \"endDate\": \"" +
-                    binding.etEndDate.text.toString() +
-                    "\",\n  \"studyType\": \"" +
-                    binding.etStudyType.text.toString() +
-                    "\"\n}"
-            Log.i("data Captured",strInfoAcademica)
+        if (validateForm()) {
+            val selectedStudyType = binding.spinnerStudyType.selectedItem.toString()
+            val strInfoAcademica = """
+                {
+                    "title": "${binding.etTitle.text}",
+                    "institution": "${binding.etInstitution.text}",
+                    "beginDate": "${binding.etBeginDate.text}",
+                    "endDate": "${binding.etEndDate.text}",
+                    "studyType": "$selectedStudyType"
+                }
+            """.trimIndent()
 
-            lifecycleScope.launch{
-                val idAgregarInfoAcademica = async { viewModel.agregarInfoAcademicaFromNetwork(JSONObject(strInfoAcademica)) }
-                i = idAgregarInfoAcademica.await()
+            Log.i("data Captured", strInfoAcademica)
+
+            lifecycleScope.launch {
+                val idAgregarInfoAcademica = async {
+                    viewModel.agregarInfoAcademicaFromNetwork(JSONObject(strInfoAcademica))
+                }
+                val i = idAgregarInfoAcademica.await()
+                // Use the value of i as needed
             }
-
         }
     }
 
     private fun validateForm(): Boolean {
         var isValid = true
 
-        with(binding){
-            if(etTitle.text.toString().isEmpty()){
+        with(binding) {
+            if (etTitle.text.toString().isEmpty()) {
                 isValid = false
                 tiTitle.error = "Campo requerido"
-            }else{
+            } else {
                 tiTitle.error = null
             }
 
-            if(etInstitution.text.toString().isEmpty()){
+            if (etInstitution.text.toString().isEmpty()) {
                 isValid = false
                 tiInstitution.error = "Campo requerido"
-            }else{
+            } else {
                 tiInstitution.error = null
             }
 
@@ -136,16 +133,31 @@ class FragmentAgregarInfoAcademica : Fragment(R.layout.fragment_agregar_info_aca
                 tiEndDate.error = null
             }
 
-            if(etStudyType.text.toString().isEmpty()){
-                isValid = false
-                tiStudyType.error = "Campo requerido"
-            }else{
-                tiStudyType.error = null
+
+
+            val selectedStudyType = spinnerStudyType.selectedItem.toString()
+            if (selectedStudyType == resources.getString(R.string.choose_study_type)) {
+                    isValid = false
+
+                llStudyType.findViewById<TextView>(R.id.tvStudyTypeError).apply {
+                  visibility = View.VISIBLE
+                  text = "Selecciona un Tipo de Estudio!"
+                      }
+                 } else {
+                  llStudyType.findViewById<TextView>(R.id.tvStudyTypeError).visibility = View.GONE
             }
+
+         //       Snackbar.make(root, "Seleccione un tipo de estudio", Snackbar.LENGTH_SHORT).show()
+
+
+
         }
         currentState = isValid
         return currentState
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

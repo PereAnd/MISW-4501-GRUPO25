@@ -70,6 +70,9 @@
     <string name="genero_rock">Rock</string>
     <string name="genero_salsa">Salsa</string>
 
+    <string name="choose_study_type">Tipo de Estudio</string>
+
+
 
 
 </resources>

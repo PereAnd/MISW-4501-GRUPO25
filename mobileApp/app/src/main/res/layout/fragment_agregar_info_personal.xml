@@ -107,28 +107,31 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Tipo documento  -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiDocType"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <LinearLayout
+                android:id="@+id/llDocType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= "Tipo de documento"
-                app:hintTextColor="@color/black"
-                app:boxBackgroundColor="@color/light_blue"
-                android:textColorHint="@color/dark_gray"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/dark_yellow"
-                app:counterEnabled="true"
-                app:counterMaxLength="100"
-                app:endIconMode="clear_text">
+                android:background="@color/light_gray"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etDocType"
+                <Spinner
+                    android:id="@+id/spinnerDocType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textWebEmailAddress"
-                    android:imeOptions="actionNext"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="8dp"
+                    android:entries="@array/doc_types" />
+
+                <TextView
+                    android:id="@+id/tvDocTypeError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint= ""
+                    android:textColor="@color/rojo_alerta"
+                    android:paddingLeft="15dp"
+                    android:textSize="12sp"
+                    android:visibility="visible"/>
+            </LinearLayout>
 
             <!-- Número de identificación  -->
             <com.google.android.material.textfield.TextInputLayout

@@ -22,18 +22,17 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
+import android.widget.TextView
+import android.widget.ArrayAdapter
 
 class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_personal) {
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
 
     private var _binding: FragmentAgregarInfoPersonalBinding? = null
     private val binding get() = _binding!!  // get
     private lateinit var viewModel: AgregarInfoPersonalViewModel
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
@@ -53,6 +52,7 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
             AgregarInfoPersonalViewModel::class.java)
 
         createButton()
+        setupSpinner()
     }
 
     private var currentState: Boolean = false
@@ -70,9 +70,23 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
         }
     }
 
+
+    private fun setupSpinner() {
+        val spinner = binding.spinnerDocType
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.doc_types,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+    }
+
+
     private fun sendDataToServer() {
-        var i:Int=0
-        if(validateForm()){
+        if (validateForm()) {
+            val selectedDocType = binding.spinnerDocType.selectedItem.toString()
+
             var strInfoPersonal = "{\n \"names\": \"" +
                     binding.etNamesInfoPersonal.text.toString() +
                     "\",\n  \"lastNames\":\"" +
@@ -80,9 +94,9 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
                     "\",\n  \"mail\": \"" +
                     binding.etMailInfoPersonal.text.toString() +
                     "\",\n  \"docType\": \"" +
-                    binding.etDocType.text.toString() +
-                    "\",\n  \"docNumber\": \"" +
                     binding.etDocNumber.text.toString() +
+                    "\",\n  \"docNumber\": \"" +
+                    selectedDocType +
                     "\",\n  \"phone\": \"" +
                     binding.etPhone.text.toString() +
                     "\",\n  \"address\": \"" +
@@ -97,15 +111,20 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
                     binding.etLanguage.text.toString() +
                     "\"\n}"
 
-            Log.i("data Captured",strInfoPersonal)
+            Log.i("data Captured", strInfoPersonal)
 
-            lifecycleScope.launch{
-                val idAgregarInfoPersonal = async { viewModel.agregarInfoPersonalFromNetwork(JSONObject(strInfoPersonal)) }
-                i = idAgregarInfoPersonal.await()
+            lifecycleScope.launch {
+                val idAgregarInfoPersonal = async {
+                    viewModel.agregarInfoPersonalFromNetwork(JSONObject(strInfoPersonal))
+                }
+                val result = idAgregarInfoPersonal.await()
+                // Aquí puedes hacer algo con el resultado si es necesario
             }
-
         }
     }
+
+
+
 
     private fun validateForm(): Boolean {
         var isValid = true
@@ -133,12 +152,22 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
                 tiMailInfoPersonal.error = null
             }
 
-            if (etDocType.text.toString().isEmpty()) {
+
+
+            val selectedDocType = spinnerDocType.selectedItem.toString()
+            if (selectedDocType == resources.getString(R.string.choose_doc_type)) {
                 isValid = false
-                tiDocType.error = "Campo requerido"
+
+                llDocType.findViewById<TextView>(R.id.tvDocTypeError).apply {
+                    visibility = View.VISIBLE
+                    text = "Selecciona un Tipo de Documento!"
+                }
             } else {
-                tiDocType.error = null
+                // Si el tipo de documento es seleccionado correctamente, ocultamos el error
+                llDocType.findViewById<TextView>(R.id.tvDocTypeError).visibility = View.GONE
             }
+
+
 
             if (etDocNumber.text.toString().isEmpty()) {
                 isValid = false
@@ -193,8 +222,11 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
         }
         currentState = isValid
         return currentState
-
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

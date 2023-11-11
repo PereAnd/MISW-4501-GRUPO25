@@ -7,4 +7,10 @@
         <item>Especialización</item>
         <item>Maestría</item>
     </string-array>
+
+    <string-array name="doc_types">
+        <item>Tipo de Documento</item>
+        <item>Cedula</item>
+        <item>Pasaporte</item>
+    </string-array>
 </resources>

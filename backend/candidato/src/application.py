@@ -1,4 +1,5 @@
 from flask_restful import Api
+from pathlib import Path
 from modelos import db
 from vistas import VistaPing, VistaCandidato, VistaInformacionAcademica, VistaInformacionesAcademicas, VistaInformacionesTecnicas, VistaInformacionTecnica, VistaRegistro, VistaInformacionesLaborales, VistaInformacionLaboral
 from flask_jwt_extended import JWTManager
@@ -8,12 +9,15 @@ from os import environ
 import os
 
 def create_app(config_name):
-    application = Flask(__name__)  
+    application = Flask(__name__)
+    
+    parent_dir = Path(__file__).parent.parent.parent
+    db_path = parent_dir / 'persistencia' / 'abc.db'
     
     if 'SQLALCHEMY_DATABASE_URI' in environ:
         application.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI') if environ.get('SQLALCHEMY_DATABASE_URI') != 'default' else 'sqlite://'
     else:
-        application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///candidatos.db'
+        application.config['SQLALCHEMY_DATABASE_URI'] =  f'sqlite:///{db_path}'
 
     application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     application.config['PROPAGATE_EXCEPTIONS']=True

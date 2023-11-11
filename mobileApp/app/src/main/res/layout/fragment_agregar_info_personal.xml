@@ -230,28 +230,31 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Pais  -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tiCountry"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <LinearLayout
+                android:id="@+id/llCountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= "País o región"
-                app:hintTextColor="@color/black"
-                app:boxBackgroundColor="@color/light_blue"
-                android:textColorHint="@color/dark_gray"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/dark_yellow"
-                app:counterEnabled="true"
-                app:counterMaxLength="100"
-                app:endIconMode="clear_text">
+                android:background="@color/light_gray"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCountry"
+                <Spinner
+                    android:id="@+id/spinnerCountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textWebEmailAddress"
-                    android:imeOptions="actionNext"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="8dp"
+                    android:entries="@array/country_list" />
+
+                <TextView
+                    android:id="@+id/tvCountryError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint= ""
+                    android:textColor="@color/rojo_alerta"
+                    android:paddingLeft="15dp"
+                    android:textSize="12sp"
+                    android:visibility="visible"/>
+            </LinearLayout>
 
             <!-- Ciudad  -->
             <com.google.android.material.textfield.TextInputLayout

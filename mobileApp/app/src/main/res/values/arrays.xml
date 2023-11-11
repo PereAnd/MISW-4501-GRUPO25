@@ -13,4 +13,30 @@
         <item>Cedula</item>
         <item>Pasaporte</item>
     </string-array>
+
+    <string-array name="country_list">
+        <item>País o Región</item>
+        <item>Argentina</item>
+        <item>Colombia</item>
+        <item>Estados Unidos</item>
+    </string-array>
+
+    <string-array name="city_argentina_list">
+        <item>Buenos Aires</item>
+        <item>Mendoza</item>
+        <item>Santa Fe</item>
+    </string-array>
+
+    <string-array name="city_colombia_list">
+        <item>Bogotá</item>
+        <item>Medellín</item>
+        <item>Cali</item>
+    </string-array>
+
+    <string-array name="city_estados_unidos_list">
+        <item>Los Angeles</item>
+        <item>San Francisco</item>
+        <item>San Agustin</item>
+    </string-array>
+
 </resources>

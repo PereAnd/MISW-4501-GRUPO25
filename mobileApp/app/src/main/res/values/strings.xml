@@ -72,6 +72,8 @@
 
     <string name="choose_study_type">Tipo de Estudio</string>
     <string name="choose_doc_type">Tipo de Documento</string>
+    <string name="choose_country">País o Región</string>
+    <string name="choose_city">Ciudad</string>
 
 
 

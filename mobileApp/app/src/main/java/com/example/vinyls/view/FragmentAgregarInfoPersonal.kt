@@ -53,6 +53,7 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
 
         createButton()
         setupSpinner()
+        setupCountrySpinner()
     }
 
     private var currentState: Boolean = false
@@ -82,10 +83,22 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
         spinner.adapter = adapter
     }
 
+    private fun setupCountrySpinner() {
+        val spinner = binding.spinnerCountry
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.country_list,  // Ajusta con el nombre correcto de tu array de países
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+    }
+
 
     private fun sendDataToServer() {
         if (validateForm()) {
             val selectedDocType = binding.spinnerDocType.selectedItem.toString()
+            val selectedCountry = binding.spinnerCountry.selectedItem.toString()
 
             var strInfoPersonal = "{\n \"names\": \"" +
                     binding.etNamesInfoPersonal.text.toString() +
@@ -104,7 +117,7 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
                     "\",\n  \"birthDate\": \"" +
                     binding.etBirthDate.text.toString() +
                     "\",\n  \"country\": \"" +
-                    binding.etCountry.text.toString() +
+                    selectedCountry +
                     "\",\n  \"city\": \"" +
                     binding.etCity.text.toString() +
                     "\",\n  \"language\": \"" +
@@ -197,12 +210,20 @@ class FragmentAgregarInfoPersonal : Fragment(R.layout.fragment_agregar_info_pers
                 tiBirthDate.error = null
             }
 
-            if (etCountry.text.toString().isEmpty()) {
+
+            val selectedCountry = spinnerCountry.selectedItem.toString()
+            if (selectedCountry == resources.getString(R.string.choose_country)) {
                 isValid = false
-                tiCountry.error = "Campo requerido"
+
+                llCountry.findViewById<TextView>(R.id.tvCountryError).apply {
+                    visibility = View.VISIBLE
+                    text = "Selecciona un País o Región!"
+                }
             } else {
-                tiCountry.error = null
+                llCountry.findViewById<TextView>(R.id.tvCountryError).visibility = View.GONE
             }
+
+
 
             if (etCity.text.toString().isEmpty()) {
                 isValid = false

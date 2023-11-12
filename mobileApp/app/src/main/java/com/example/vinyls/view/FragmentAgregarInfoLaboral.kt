@@ -26,18 +26,13 @@ import java.util.*
 
 class FragmentAgregarInfoLaboral : Fragment(R.layout.fragment_agregar_info_laboral) {
 
+    private var _binding: FragmentAgregarInfoLaboralBinding? = null
+    private val binding get() = _binding!!  // get
+    private lateinit var viewModel: AgregarInfoLaboralViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
     }
-
-
-
-
-    private var _binding: FragmentAgregarInfoLaboralBinding? = null
-    private val binding get() = _binding!!  // get
-    private lateinit var viewModel: AgregarInfoLaboralViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
@@ -56,10 +51,30 @@ class FragmentAgregarInfoLaboral : Fragment(R.layout.fragment_agregar_info_labor
         viewModel = ViewModelProvider(this, AgregarInfoLaboralViewModel.Factory(activity.application)).get(
             AgregarInfoLaboralViewModel::class.java)
 
+        saveButton()
         createButton()
     }
 
     private var currentState: Boolean = false
+    private fun saveButton() {
+        binding.btnSaveLabor.setOnClickListener {
+            sendDataToServer()
+
+
+            if (currentState) {
+                findNavController().navigate(R.id.action_fragment_infolaboral_fragment_infolaboral)
+
+                Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
+                    .setAction(""){
+                        //   activity?.finish()
+                    }.show()
+            }
+            else {
+                //
+            }
+
+        }
+    }
     private fun createButton() {
         binding.btnLogin.setOnClickListener {
             sendDataToServer()
@@ -102,7 +117,7 @@ class FragmentAgregarInfoLaboral : Fragment(R.layout.fragment_agregar_info_labor
 
             Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
                 .setAction(""){
-             //   activity?.finish()
+                activity?.finish()
             }.show()
 
         }

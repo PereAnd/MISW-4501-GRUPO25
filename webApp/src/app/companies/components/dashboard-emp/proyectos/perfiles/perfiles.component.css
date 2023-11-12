@@ -1,0 +1,31 @@
+/* .container{
+  margin-top: 5%;
+} */
+#titulo{
+  text-align: left;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+}
+.botones{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.row{
+  margin-bottom: 0.5rem;
+}
+
+table {
+  width: 100%;
+}
+.controles{
+  display: flex;
+  justify-content: space-between;
+}
+.odd-row {
+  background-color: #e4e4e4;
+}
+.even-row {
+  background-color: #ffffff;
+}

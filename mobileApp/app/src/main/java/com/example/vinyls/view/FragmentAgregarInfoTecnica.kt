@@ -22,23 +22,16 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
-
+import android.widget.TextView
+import android.widget.ArrayAdapter
 
 class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecnica) {
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-
-
-
-
     private var _binding: FragmentAgregarInfoTecnicaBinding? = null
     private val binding get() = _binding!!  // get
     private lateinit var viewModel: AgregarInfoTecnicaViewModel
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
@@ -58,6 +51,7 @@ class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecni
             AgregarInfoTecnicaViewModel::class.java)
 
         createButton()
+        setupSkillSpinner()
     }
 
     private var currentState: Boolean = false
@@ -74,13 +68,27 @@ class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecni
         }
     }
 
+
+    private fun setupSkillSpinner() {
+        val spinner = binding.spinnerSkillType
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.skill_types,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+    }
+
     private fun sendDataToServer() {
         var i:Int=0
         if(validateForm()){
+            val selectedSkill= binding.spinnerSkillType.selectedItem.toString()
+
             var strInfoTecnica = "{\n \"description\": \"" +
                     binding.etDescriptionType.text.toString() +
                     "\",\n  \"type\": \"" +
-                    binding.etType.text.toString() +
+                    selectedSkill +
                     "\"\n}"
             Log.i("data Captured",strInfoTecnica)
 
@@ -104,16 +112,26 @@ class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecni
                 tiDescriptionType.error = null
             }
 
-            if(etType.text.toString().isEmpty()){
+            val selectedSkill= spinnerSkillType.selectedItem.toString()
+            if (selectedSkill == resources.getString(R.string.choose_skill)) {
                 isValid = false
-                tiType.error = "Campo requerido"
-            }else{
-                tiType.error = null
+
+                llSkillType.findViewById<TextView>(R.id.tvSkillError).apply {
+                    visibility = View.VISIBLE
+                    text = "Selecciona una habilidad!"
+                }
+            } else {
+                llSkillType.findViewById<TextView>(R.id.tvSkillError).visibility = View.GONE
             }
+
         }
         currentState = isValid
         return currentState
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

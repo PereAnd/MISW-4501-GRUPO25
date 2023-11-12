@@ -39,4 +39,13 @@
         <item>San Agustin</item>
     </string-array>
 
+    <string-array name="skill_types">
+        <item>Tipo de Habilidad</item>
+        <item>SQL Server</item>
+        <item>Python</item>
+        <item>Android Studio</item>
+        <item>JavaScript</item>
+    </string-array>
+
+
 </resources>

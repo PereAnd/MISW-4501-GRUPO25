@@ -4,10 +4,10 @@ export class Perfil {
     public role: string,
     public location: string,
     public years: number,
-    public id?: number,
-    public idiomas?: Competencia[],
     public conocimientos?: Competencia[],
     public habilidades?: Competencia[],
+    public idiomas?: Competencia[],
+    public id?: number,
   ){}
 }
 

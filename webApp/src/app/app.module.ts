@@ -33,6 +33,7 @@ import { CreateProyectoComponent } from './companies/components/dashboard-emp/pr
 import { DetailProyectoComponent } from './companies/components/dashboard-emp/proyectos/detail-proyecto/detail-proyecto.component';
 import { PerfilesComponent } from './companies/components/dashboard-emp/proyectos/perfiles/perfiles.component';
 import { DetailPerfilComponent } from './companies/components/dashboard-emp/proyectos/perfiles/detail-perfil/detail-perfil.component';
+import { CreatePerfilComponent } from './companies/components/dashboard-emp/proyectos/perfiles/create-perfil/create-perfil.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { DetailPerfilComponent } from './companies/components/dashboard-emp/proy
     DetailProyectoComponent,
     PerfilesComponent,
     DetailPerfilComponent,
+    CreatePerfilComponent,
   ],
   imports: [
     BrowserModule,

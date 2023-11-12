@@ -55,7 +55,7 @@ export class ProyectosComponent {
     this.proyectoService.setProjectDetail(project);
     const dialogRef = this.dialog.open(DetailProyectoComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
     });
   }
 }

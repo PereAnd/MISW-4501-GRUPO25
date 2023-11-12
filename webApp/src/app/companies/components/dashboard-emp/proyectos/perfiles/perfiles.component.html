@@ -9,10 +9,10 @@
       <div>
         <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" aria-label="Select page of users"></mat-paginator>
       </div>
-      <!-- <div class="mt-3">
+      <div class="mt-3" *ngIf="editMode">
         <a mat-raised-button color="primary" routerLink="./add"
           >Agregar nueva</a>
-      </div> -->
+      </div>
     </div>
 
     <div class="mat-elevation-z8">
@@ -42,8 +42,8 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
           <mat-cell *matCellDef="let element">
             <a mat-icon-button (click)="detallePerfil(element)"><mat-icon>visibility</mat-icon></a>
-            <!-- <a mat-icon-button disabled><mat-icon>edit</mat-icon></a>
-            <a mat-icon-button disabled><mat-icon>delete</mat-icon></a> -->
+            <a mat-icon-button *ngIf="editMode"><mat-icon>edit</mat-icon></a>
+            <a mat-icon-button *ngIf="editMode" disabled><mat-icon>delete</mat-icon></a>
           </mat-cell>
         </ng-container>
 

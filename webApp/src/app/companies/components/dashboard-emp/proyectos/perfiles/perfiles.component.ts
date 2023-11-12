@@ -8,16 +8,17 @@ import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { DetailPerfilComponent } from './detail-perfil/detail-perfil.component';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  selector: 'app-perfiles',
+  templateUrl: './perfiles.component.html',
+  styleUrls: ['./perfiles.component.css'],
 })
 export class PerfilesComponent {
   empresaId: number;
   @Input() proyectoId: number;
+  @Input() editMode: boolean = false;
 
-  displayedColumns: string[] = ['id', 'name', 'role', 'location', 'actions']
-  dataSource = new MatTableDataSource<Perfil>;
+  displayedColumns: string[] = ['id', 'name', 'role', 'location', 'actions'];
+  dataSource = new MatTableDataSource<Perfil>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -30,18 +31,21 @@ export class PerfilesComponent {
   }
 
   ngOnInit(): void {
-    this.perfilesService.listPerfiles(this.empresaId, this.proyectoId)
-    .subscribe({
-      next: data => {
-        this.dataSource = new MatTableDataSource(data);
-        return data;
-      },
-      error: error => console.log(error),
-      complete: () => {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
-    })
+    if (this.proyectoId) {
+      this.perfilesService
+        .listPerfiles(this.empresaId, this.proyectoId)
+        .subscribe({
+          next: (data) => {
+            this.dataSource = new MatTableDataSource(data);
+            return data;
+          },
+          error: (error) => console.log(error),
+          complete: () => {
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          },
+        });
+    }
   }
 
   applyFilter(event: Event) {
@@ -53,11 +57,11 @@ export class PerfilesComponent {
     }
   }
 
-  detallePerfil(profile: Perfil){
+  detallePerfil(profile: Perfil) {
     this.perfilesService.setProfileDetail(profile);
     const dialogRef = this.dialog.open(DetailPerfilComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe((result) => {
+      //console.log(`Dialog result: ${result}`);
     });
   }
 }

@@ -1,4 +1,4 @@
-<div class="container text-center col-md-6">
+<div class="container text-center col-12">
   <h2 id="titulo"><mat-icon>terminal</mat-icon> Agregar Proyecto</h2>
 
   <form
@@ -41,6 +41,9 @@
         *ngIf="
           description?.hasError('required') && description?.touched"
           >La descripción del proyecto es requerida</div>
+
+    <h2>Perfiles solicitados:</h2>
+    <app-perfiles [proyectoId]="indexProyecto" [editMode]="true"></app-perfiles>
 
     <div class="botones">
       <div class="button">

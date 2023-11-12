@@ -31,8 +31,8 @@ import { CreateUbicacionComponent } from './companies/components/dashboard-emp/u
 import { ProyectosComponent } from './companies/components/dashboard-emp/proyectos/proyectos.component';
 import { CreateProyectoComponent } from './companies/components/dashboard-emp/proyectos/create-proyecto/create-proyecto.component';
 import { DetailProyectoComponent } from './companies/components/dashboard-emp/proyectos/detail-proyecto/detail-proyecto.component';
-import { PerfilesComponent } from './companies/components/dashboard-emp/proyectos/perfil/perfil.component';
-import { DetailPerfilComponent } from './companies/components/dashboard-emp/proyectos/perfil/detail-perfil/detail-perfil.component';
+import { PerfilesComponent } from './companies/components/dashboard-emp/proyectos/perfiles/perfiles.component';
+import { DetailPerfilComponent } from './companies/components/dashboard-emp/proyectos/perfiles/detail-perfil/detail-perfil.component';
 
 
 @NgModule({

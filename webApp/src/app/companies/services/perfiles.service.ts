@@ -9,9 +9,21 @@ import { Perfil } from '../models/perfil';
 })
 export class PerfilesService {
 
+  profileDetail: Perfil;
+
   constructor(
     private httpClient: HttpClient
   ) { }
+
+  setProfileDetail(profile: Perfil){
+    this.profileDetail = profile;
+  }
+
+  getProfileDetail(): Observable<Perfil>{
+    return new Observable<Perfil>(observer => {
+      observer.next(this.profileDetail)
+    });
+  }
 
   listPerfiles(idEmpresa: number, idProyecto: number): Observable<any>{
     let baseUrl: string = environment.HOST_PERF + 'empresa/' + idEmpresa + '/proyecto/' + idProyecto + '/perfil';

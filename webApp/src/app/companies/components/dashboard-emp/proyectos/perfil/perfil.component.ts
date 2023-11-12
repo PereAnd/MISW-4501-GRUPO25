@@ -1,20 +1,22 @@
 import { Component, Input, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Perfil } from 'src/app/companies/models/perfil';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
+import { DetailPerfilComponent } from './detail-perfil/detail-perfil.component';
 
 @Component({
-  selector: 'app-perfiles',
-  templateUrl: './perfiles.component.html',
-  styleUrls: ['./perfiles.component.css']
+  selector: 'app-perfil',
+  templateUrl: './perfil.component.html',
+  styleUrls: ['./perfil.component.css']
 })
 export class PerfilesComponent {
   empresaId: number;
   @Input() proyectoId: number;
 
-  displayedColumns: string[] = ['id', 'name', 'role', 'location']
+  displayedColumns: string[] = ['id', 'name', 'role', 'location', 'actions']
   dataSource = new MatTableDataSource<Perfil>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -22,6 +24,7 @@ export class PerfilesComponent {
 
   constructor(
     private perfilesService: PerfilesService,
+    public dialog: MatDialog
   ) {
     this.empresaId = +localStorage.getItem('empresaId')!;
   }
@@ -48,5 +51,13 @@ export class PerfilesComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  detallePerfil(profile: Perfil){
+    this.perfilesService.setProfileDetail(profile);
+    const dialogRef = this.dialog.open(DetailPerfilComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

@@ -68,6 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Descripción"
+                app:hintTextColor="@color/black"
                 app:boxBackgroundColor="@color/light_blue"
                 app:helperText="@string/required"
                 android:textColorHint="@color/dark_gray"
@@ -89,12 +90,24 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnSaveTecnic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "Agregar otra habilidad"
+            android:textSize="12sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_gray"/>
+
+        <Button
             android:id="@+id/btnNextLabor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text= "Siguiente"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60sp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/dark_yellow" />
 

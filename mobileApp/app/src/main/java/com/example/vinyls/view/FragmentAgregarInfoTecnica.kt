@@ -50,11 +50,30 @@ class FragmentAgregarInfoTecnica : Fragment(R.layout.fragment_agregar_info_tecni
         viewModel = ViewModelProvider(this, AgregarInfoTecnicaViewModel.Factory(activity.application)).get(
             AgregarInfoTecnicaViewModel::class.java)
 
+        saveButton()
         createButton()
         setupSkillSpinner()
     }
 
     private var currentState: Boolean = false
+    private fun saveButton() {
+        binding.btnSaveTecnic.setOnClickListener {
+            sendDataToServer()
+
+            if (currentState) {
+                findNavController().navigate(R.id.action_fragment_infoTecnica_fragment_infoTecnica)
+
+                Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
+                    .setAction(""){
+                        //   activity?.finish()
+                    }.show()
+            }
+            else {
+                //
+            }
+        }
+    }
+
     private fun createButton() {
         binding.btnNextLabor.setOnClickListener {
             sendDataToServer()

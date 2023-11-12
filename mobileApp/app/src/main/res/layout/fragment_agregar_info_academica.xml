@@ -161,16 +161,27 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btnSaveAcademic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "Agregar otro estudio"
+            android:textSize="12sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_gray"/>
 
         <Button
             android:id="@+id/btnNextTecnic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text= "Siguiente"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60sp"
+            android:textSize="12sp"
             android:textColor="@color/white"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50sp"
             android:backgroundTint="@color/dark_yellow"/>
 
     </LinearLayout>

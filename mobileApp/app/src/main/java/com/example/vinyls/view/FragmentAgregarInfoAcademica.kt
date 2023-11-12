@@ -47,11 +47,32 @@ class FragmentAgregarInfoAcademica : Fragment(R.layout.fragment_agregar_info_aca
             AgregarInfoAcademicaViewModel::class.java
         )
 
+        saveButton()
         createButton()
         setupSpinner()
     }
 
     private var currentState: Boolean = false
+    private fun saveButton() {
+        binding.btnSaveAcademic.setOnClickListener {
+            sendDataToServer()
+
+            if (currentState) {
+                findNavController().navigate(R.id.action_fragment_infoAcademica_fragment_infoAcademica)
+
+                Snackbar.make(binding.root, "Datos enviados exitosamente.", Snackbar.LENGTH_LONG)
+                    .setAction(""){
+                        //   activity?.finish()
+                    }.show()
+            }
+            else {
+                // Handle the case when currentState is false
+            }
+
+        }
+    }
+
+
 
     private fun createButton() {
         binding.btnNextTecnic.setOnClickListener {

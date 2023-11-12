@@ -65,6 +65,9 @@
         android:name="com.example.vinyls.view.FragmentAgregarInfoAcademica"
         tools:layout="@layout/fragment_agregar_info_academica">
         <action
+            android:id="@+id/action_fragment_infoAcademica_fragment_infoAcademica"
+            app:destination="@+id/fragment_info_academica" />
+        <action
             android:id="@+id/action_fragment_infoAcademica_fragment_infoTecnica"
             app:destination="@+id/fragment_info_tecnica" />
     </fragment>
@@ -75,6 +78,9 @@
         android:name="com.example.vinyls.view.FragmentAgregarInfoTecnica"
         tools:layout="@layout/fragment_agregar_info_tecnica">
         <action
+            android:id="@+id/action_fragment_infoTecnica_fragment_infoTecnica"
+            app:destination="@+id/fragment_info_tecnica" />
+        <action
             android:id="@+id/action_fragment_infoTecnica_fragment_infoLaboral"
             app:destination="@+id/fragment_info_laboral" />
     </fragment>
@@ -84,6 +90,9 @@
         android:id="@+id/fragment_info_laboral"
         android:name="com.example.vinyls.view.FragmentAgregarInfoLaboral"
         tools:layout="@layout/fragment_agregar_info_laboral">
+        <action
+            android:id="@+id/action_fragment_infolaboral_fragment_infolaboral"
+            app:destination= "@+id/fragment_info_laboral" />
         <action
             android:id="@+id/action_fragment_infolaboral_fragment_login"
             app:destination="@+id/fragment_menu_login" />

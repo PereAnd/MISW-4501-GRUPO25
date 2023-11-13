@@ -75,6 +75,7 @@ class PerfilEschema(SQLAlchemySchema):
     role = auto_field()
     location = auto_field()
     years = auto_field()
+    proyectoId = auto_field()
     habilidades = fields.Nested(HabilidadEschema(many=True), many=True)
     conocimientos = fields.Nested(ConocimientoEschema, many=True)
     idiomas = fields.Nested(IdiomaEschema, many=True)

@@ -11,75 +11,54 @@ export class PerfilesService {
 
   profileDetail: Perfil;
   competenciaSelected: string = '';
-  conocimientosTemp: Competencia[] = [];
-  habilidadesTemp: Competencia[] = [];
-  idiomasTemp: Competencia[] = [];
-  perfilesTemp: Perfil[] = [];
+  projectToProfile: number;
+  profileToCompetencies: number;
 
   constructor(
     private httpClient: HttpClient
   ) { }
 
+  // Tipo de competencia seleccionada (conocimiento, habilidad, idioma)
   setCompetenciaSelected(tipo: string){
     this.competenciaSelected = tipo;
   }
-
   getCompetenciaSelected(): Observable<string>{
     return new Observable<string>(observer => {
       observer.next(this.competenciaSelected)
     });
   }
 
+  // Perfil seleccionado para ver detalle
   setProfileDetail(profile: Perfil){
     this.profileDetail = profile;
   }
-
   getProfileDetail(): Observable<Perfil>{
     return new Observable<Perfil>(observer => {
       observer.next(this.profileDetail)
     });
   }
 
-  addConocimientoTemp(conocimiento: Competencia){
-    this.conocimientosTemp.push(conocimiento);
+  // Proyecto seleccionado para agregar perfil
+  setProjectToProfile(projectId: number){
+    this.projectToProfile = projectId;
   }
-
-  getConocimientosTemp(): Observable<Competencia[]>{
-    return new Observable<Competencia[]>(observer => {
-      observer.next(this.conocimientosTemp)
+  getProjectToProfile(): Observable<number>{
+    return new Observable<number>(observer => {
+      observer.next(this.projectToProfile)
     });
   }
 
-  addHabilidadeTemp(habilidad: Competencia){
-    this.habilidadesTemp.push(habilidad);
+  // Perfil seleccionado para agregar competencias
+  setProfileToCompetencies(profileId: number){
+    this.profileToCompetencies = profileId;
   }
-
-  getHabilidadesTemp(): Observable<Competencia[]>{
-    return new Observable<Competencia[]>(observer => {
-      observer.next(this.habilidadesTemp)
+  getProfileToCompetencies(): Observable<number>{
+    return new Observable<number>(observer => {
+      observer.next(this.profileToCompetencies)
     });
   }
 
-  addIdiomaTemp(idioma: Competencia){
-    this.idiomasTemp.push(idioma);
-  }
-
-  getIdiomasTemp(): Observable<Competencia[]>{
-    return new Observable<Competencia[]>(observer => {
-      observer.next(this.idiomasTemp)
-    });
-  }
-
-  addPerfilTemp(perfil: Perfil){
-    this.perfilesTemp.push(perfil);
-  }
-
-  getPerfilesTemp(): Observable<Perfil[]>{
-    return new Observable<Perfil[]>(observer => {
-      observer.next(this.perfilesTemp)
-    });
-  }
-
+  // Servicios
   listPerfiles(idEmpresa: number, idProyecto: number): Observable<any>{
     let baseUrl: string = environment.HOST_PERF + 'empresa/' + idEmpresa + '/proyecto/' + idProyecto + '/perfil';
     return this.httpClient.get<any>(baseUrl);
@@ -88,5 +67,28 @@ export class PerfilesService {
   addPerfil(proyectoId: number, empresaId: number, perfil: Perfil): Observable<Perfil>{
     let baseUrl: string = environment.HOST_PERF + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil';
     return this.httpClient.post<Perfil>(baseUrl, perfil);
+  }
+
+  addCompetencia(empresaId: number, proyectoId: number, perfilId: number, competencia: Competencia, tipo: string): Observable<Competencia>{
+    let baseUrl: string = environment.HOST_PERF + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId
+    if (tipo == 'Conocimiento') baseUrl += '/conocimiento';
+    else if (tipo == 'Habilidad') baseUrl += '/habilidad';
+    else if (tipo == 'Idioma') baseUrl += '/idioma';
+    return this.httpClient.post<Competencia>(baseUrl, competencia);
+  }
+
+  getConocimientos(empresaId: number, proyectoId: number, perfilId: number): Observable<Competencia[]>{
+    let baseUrl: string = environment.HOST_PERF + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/conocimiento';
+    return this.httpClient.get<Competencia[]>(baseUrl);
+  }
+
+  getHabilidades(empresaId: number, proyectoId: number, perfilId: number): Observable<Competencia[]>{
+    let baseUrl: string = environment.HOST_PERF + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/habilidad';
+    return this.httpClient.get<Competencia[]>(baseUrl);
+  }
+
+  getIdiomas(empresaId: number, proyectoId: number, perfilId: number): Observable<Competencia[]>{
+    let baseUrl: string = environment.HOST_PERF + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/idioma';
+    return this.httpClient.get<Competencia[]>(baseUrl);
   }
 }

@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Perfil } from 'src/app/companies/models/perfil';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { DetailPerfilComponent } from './detail-perfil/detail-perfil.component';
+import { CreatePerfilComponent } from './create-perfil/create-perfil.component';
 
 @Component({
   selector: 'app-perfiles',
@@ -59,9 +60,26 @@ export class PerfilesComponent {
 
   detallePerfil(profile: Perfil) {
     this.perfilesService.setProfileDetail(profile);
-    const dialogRef = this.dialog.open(DetailPerfilComponent);
+    const dialogRef = this.dialog.open(DetailPerfilComponent, { width: '900px' });
     dialogRef.afterClosed().subscribe((result) => {
       //console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  agregarPerfil() {
+    this.perfilesService.setProjectToProfile(this.proyectoId)
+    const dialogRef = this.dialog.open(CreatePerfilComponent, {
+      width: '1000px',
+      height: '500px'
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result){
+        this.perfilesService.listPerfiles(this.empresaId, this.proyectoId).subscribe({
+          next: data => {
+            this.ngOnInit()
+          }
+        })
+      }
     });
   }
 }

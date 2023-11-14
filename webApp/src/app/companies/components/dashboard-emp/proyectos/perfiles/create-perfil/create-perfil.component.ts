@@ -15,14 +15,17 @@ import { CreateCompetenciaComponent } from '../create-competencia/create-compete
   styleUrls: ['./create-perfil.component.css']
 })
 export class CreatePerfilComponent {
-  indexProyecto: number;
   empresaId: number;
+  proyectoId: number;
+  perfilId: number;
+
   countrySelected: string = '';
   citiesOfCountry: string[] = [];
   countryAndCity = [{pais: '', ciudades: ['']}];
-  conocimientosTemp: Competencia[] = [];
-  habilidadesTemp: Competencia[] = [];
-  idiomasTemp: Competencia[] = [];
+
+  conocimientos: Competencia[] = [];
+  habilidades: Competencia[] = [];
+  idiomas: Competencia[] = [];
 
   formPerfiles: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -30,9 +33,9 @@ export class CreatePerfilComponent {
     country: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
     years: new FormControl('', Validators.required),
-    conocimientos: new FormControl(''),
-    habilidades: new FormControl(''),
-    idiomas: new FormControl(''),
+    conocimientos: new FormControl(null),
+    habilidades: new FormControl(null),
+    idiomas: new FormControl(null),
   });
 
   get name() { return this.formPerfiles.get('name') }
@@ -40,9 +43,6 @@ export class CreatePerfilComponent {
   get country() { return this.formPerfiles.get('country') }
   get city() { return this.formPerfiles.get('city') }
   get years() { return this.formPerfiles.get('years') }
-  get conocimientos() { return this.formPerfiles.get('conocimientos') }
-  get habilidades() { return this.formPerfiles.get('habilidades') }
-  get idiomas() { return this.formPerfiles.get('idiomas') }
 
   constructor(
     private perfilesService: PerfilesService,
@@ -58,19 +58,10 @@ export class CreatePerfilComponent {
   }
 
   ngOnInit(): void {
-    this.formPerfiles.setValue({
-              name: 'Ingeniero de Software',
-              role: 'Desarrollador backend',
-              years: 2,
-              country: null,
-              city: null,
-              conocimientos: [],
-              habilidades: [],
-              idiomas: []
-            });
-    // this.indexProyecto = this.route.snapshot.params['idp'];
-    // if (this.indexProyecto) {
-    //   this.perfilesService.addPerfil(this.empresaId, this.indexProyecto).subscribe({
+    this.perfilesService.getProjectToProfile().subscribe({ next: data => { this.proyectoId = data } })
+    this.perfilesService.getProfileToCompetencies().subscribe({ next: data => { this.perfilId = data } })
+    // if (this.proyectoId) {
+    //   this.perfilesService.addPerfil(this.empresaId, this.proyectoId).subscribe({
     //     next: (data) => {
     //       this.formProyectos.setValue({
     //         proyecto: data.proyecto,
@@ -87,16 +78,24 @@ export class CreatePerfilComponent {
     const newPerfil = new Perfil(
       this.formPerfiles.value.name,
       this.formPerfiles.value.role,
-      this.formPerfiles.value.location,
-      this.formPerfiles.value.years,
-      this.formPerfiles.value.conocimientos,
-      this.formPerfiles.value.habilidades,
-      this.formPerfiles.value.idiomas,
+      this.formPerfiles.value.city + ', ' + this.formPerfiles.value.country,
+      this.formPerfiles.value.years
       // Validar cómo enviar todos estos datos, ya que van a diferentes servicios
     );
-    this.perfilesService.addPerfilTemp(newPerfil);
-    // if (!this.indexProyecto) {
-    //   this.perfilesService.addPerfil(this.indexProyecto, this.empresaId, newPerfil).subscribe({
+    this.perfilesService.addPerfil(this.proyectoId, this.empresaId, newPerfil).subscribe({
+      next: (data) => {
+        console.log('Perfil registrado');
+        this.perfilId = data.id!;
+        this.perfilesService.setProfileToCompetencies(data.id!);
+      },
+      error: (error) => {
+        console.log('Error registrando el perfil', error);
+        alert('Error registrando el perfil');
+      }
+    });
+
+    // if (!this.proyectoId) {
+    //   this.perfilesService.addPerfil(this.proyectoId, this.empresaId, newPerfil).subscribe({
     //     next: (data) => {
     //       console.log('Perfil registrado');
     //       this.formPerfiles.reset();
@@ -112,7 +111,7 @@ export class CreatePerfilComponent {
     // }
     // else {
     //   this.perfilesService
-    //     .editProyecto(newProyecto, this.indexProyecto, this.empresaId)
+    //     .editProyecto(newProyecto, this.proyectoId, this.empresaId)
     //     .subscribe({
     //       next: (data) => {
     //         console.log('Proyecto actualizado');
@@ -144,14 +143,14 @@ export class CreatePerfilComponent {
     this.perfilesService.setCompetenciaSelected(tipo);
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.perfilesService.getConocimientosTemp().subscribe({ next: data => this.conocimientosTemp = data });
-        this.perfilesService.getHabilidadesTemp().subscribe({ next: data => this.habilidadesTemp = data });
-        this.perfilesService.getIdiomasTemp().subscribe({ next: data => this.idiomasTemp = data });
+        if (tipo == 'Conocimiento') this.perfilesService.getConocimientos(this.empresaId, this.proyectoId, this.perfilId).subscribe({ next: data => this.conocimientos = data });
+        else if (tipo == 'Habilidad') this.perfilesService.getHabilidades(this.empresaId, this.proyectoId, this.perfilId).subscribe({ next: data => this.habilidades = data });
+        else if (tipo == 'Idioma') this.perfilesService.getIdiomas(this.empresaId, this.proyectoId, this.perfilId).subscribe({ next: data => this.idiomas = data });
       }
     });
   }
-
   cancelarCreacion() {
     this.formPerfiles.reset();
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }

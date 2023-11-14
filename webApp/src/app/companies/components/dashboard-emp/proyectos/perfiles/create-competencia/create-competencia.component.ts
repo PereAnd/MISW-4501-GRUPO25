@@ -11,6 +11,9 @@ import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 })
 export class CreateCompetenciaComponent {
   title: string = '';
+  empresaId: number;
+  proyectoId: number;
+  perfilId: number;
 
   formCompetencias: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -27,6 +30,10 @@ export class CreateCompetenciaComponent {
   ) { }
 
   ngOnInit(): void {
+    this.empresaId = +localStorage.getItem('empresaId')!;
+    this.perfilesService.getProjectToProfile().subscribe({
+      next: data => { this.proyectoId = data }
+    })
     this.perfilesService.getCompetenciaSelected().subscribe({
       next: data => {
         this.title = data;
@@ -35,13 +42,19 @@ export class CreateCompetenciaComponent {
   }
 
   registrarCompetencia() {
+    this.perfilesService.getProfileToCompetencies().subscribe({
+      next: data => { this.perfilId = data }
+    })
     const newCompetencia = new Competencia(
       this.formCompetencias.value.name,
       this.formCompetencias.value.description
     );
-    if (this.title == 'Conocimiento') this.perfilesService.addConocimientoTemp(newCompetencia);
-    if (this.title == 'Habilidad') this.perfilesService.addHabilidadeTemp(newCompetencia);
-    if (this.title == 'Idioma') this.perfilesService.addIdiomaTemp(newCompetencia);
+    this.perfilesService.addCompetencia(this.empresaId, this.proyectoId, this.perfilId, newCompetencia, this.title).subscribe({
+      next: data => {
+        console.log(this.title + ' registrado');
+      },
+      error: error => console.error('Error registrando' + this.title, error)
+    })
   }
 
   cancelarCreacion() {

@@ -55,14 +55,11 @@ export class CreateProyectoComponent {
       this.proyectosService.addProyecto(newProyecto, this.empresaId).subscribe({
         next: (data) => {
           console.log('Proyecto registrado');
-          this.formProyectos.reset();
+          this.router.navigate(['../', data.id], { relativeTo: this.route });
         },
         error: (error) => {
           console.log('Error registrando el proyecto', error);
           alert('Error registrando el proyecto');
-        },
-        complete: () => {
-          this.router.navigate(['..'], { relativeTo: this.route });
         },
       });
     } else {
@@ -71,14 +68,10 @@ export class CreateProyectoComponent {
         .subscribe({
           next: (data) => {
             console.log('Proyecto actualizado');
-            this.formProyectos.reset();
           },
           error: (error) => {
             console.log('Error editando el proyecto', error);
             alert('Error editando el proyecto');
-          },
-          complete: () => {
-            this.router.navigate(['..'], { relativeTo: this.route });
           },
         });
     }
@@ -86,5 +79,6 @@ export class CreateProyectoComponent {
 
   cancelarCreacion() {
     this.formProyectos.reset();
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }

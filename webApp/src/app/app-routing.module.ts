@@ -52,8 +52,7 @@ const routes: Routes = [
       { path: 'ubicaciones/:idu', component: CreateUbicacionComponent },
       { path: 'proyectos', component: ProyectosComponent },
       { path: 'proyectos/add', component: CreateProyectoComponent },
-      { path: 'proyectos/:idp', component: CreateProyectoComponent },
-      { path: 'proyectos/:idp/addperfil', component: CreatePerfilComponent }
+      { path: 'proyectos/:idp', component: CreateProyectoComponent }
     ]
   }
 ];

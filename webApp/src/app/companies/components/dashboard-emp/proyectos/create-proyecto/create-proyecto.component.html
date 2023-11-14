@@ -42,14 +42,9 @@
           description?.hasError('required') && description?.touched"
           >La descripción del proyecto es requerida</div>
 
-    <mat-divider></mat-divider><br>
-
-    <h2>Perfiles solicitados:</h2>
-    <app-perfiles [proyectoId]="indexProyecto" [editMode]="true"></app-perfiles>
-
     <div class="botones">
       <div class="button">
-        <a mat-raised-button color="secondary" (click)="cancelarCreacion()" routerLink="../">Cancelar</a>
+        <a mat-raised-button color="secondary" (click)="cancelarCreacion()">Atrás</a>
       </div>
       <div class="button">
         <button mat-raised-button color="primary"
@@ -59,4 +54,12 @@
       </div>
     </div>
   </form>
+
+  <br><br><mat-divider></mat-divider><br>
+
+  <h2>Perfiles solicitados:</h2>
+  <app-perfiles [proyectoId]="indexProyecto" [editMode]="true"></app-perfiles>
+
+  <br><mat-divider></mat-divider><br>
+
 </div>

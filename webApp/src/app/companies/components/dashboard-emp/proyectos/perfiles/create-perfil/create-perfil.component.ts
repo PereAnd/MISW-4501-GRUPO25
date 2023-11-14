@@ -59,19 +59,39 @@ export class CreatePerfilComponent {
 
   ngOnInit(): void {
     this.perfilesService.getProjectToProfile().subscribe({ next: data => { this.proyectoId = data } })
-    this.perfilesService.getProfileToCompetencies().subscribe({ next: data => { this.perfilId = data } })
-    // if (this.proyectoId) {
-    //   this.perfilesService.addPerfil(this.empresaId, this.proyectoId).subscribe({
-    //     next: (data) => {
-    //       this.formProyectos.setValue({
-    //         proyecto: data.proyecto,
-    //         description: data.description,
-    //       });
-    //     },
-    //     error: (error) =>
-    //       console.error('Error obteniendo el proyecto seleccionado', error),
-    //   });
-    // }
+    this.perfilesService.getProfileToCompetencies().subscribe({
+      next: data => {
+        this.perfilId = data;
+          if (this.perfilId) {
+            this.perfilesService.findPerfil(this.empresaId, this.proyectoId, this.perfilId).subscribe({
+              next: (data) => {
+                this.formPerfiles.setValue({
+                  name: data.name,
+                  role: data.role,
+                  country: data.location.split(',')[1].trim(),
+                  city: data.location.split(',')[0].trim(),
+                  years: data.years,
+                  conocimientos: null,
+                  habilidades: null,
+                  idiomas: null
+                });
+                this.conocimientos = data.conocimientos!;
+                this.habilidades = data.habilidades!;
+                this.idiomas = data.idiomas!;
+                this.countryAndCity.forEach(item => {
+                  if(item.pais === data.location.split(',')[1].trim()){
+                    this.countrySelected = item.pais;
+                    this.citiesOfCountry = [data.location.split(',')[0].trim(), ... item.ciudades.filter(city => city !== data.location.split(',')[0].trim())];
+                  }
+                })
+              },
+              error: (error) =>
+                console.error('Error obteniendo el proyecto seleccionado', error),
+            });
+          }
+      }
+     })
+
   }
 
   registrarPerfil() {

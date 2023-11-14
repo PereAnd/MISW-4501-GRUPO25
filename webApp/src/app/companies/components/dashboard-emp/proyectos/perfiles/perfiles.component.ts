@@ -66,8 +66,8 @@ export class PerfilesComponent {
     });
   }
 
-  agregarPerfil() {
-    this.perfilesService.setProjectToProfile(this.proyectoId)
+  agregarPerfil(perfilId: number = 0) {
+    if (perfilId) this.perfilesService.setProfileToCompetencies(perfilId)
     const dialogRef = this.dialog.open(CreatePerfilComponent, {
       width: '1000px',
       height: '500px'

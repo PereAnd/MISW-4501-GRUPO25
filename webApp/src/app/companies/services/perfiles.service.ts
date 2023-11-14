@@ -64,6 +64,11 @@ export class PerfilesService {
     return this.httpClient.get<any>(baseUrl);
   }
 
+  findPerfil(idEmpresa: number, idProyecto: number, idPerfil: number): Observable<Perfil>{
+    let baseUrl: string = environment.HOST_PERF + 'empresa/' + idEmpresa + '/proyecto/' + idProyecto + '/perfil/' + idPerfil;
+    return this.httpClient.get<Perfil>(baseUrl);
+  }
+
   addPerfil(proyectoId: number, empresaId: number, perfil: Perfil): Observable<Perfil>{
     let baseUrl: string = environment.HOST_PERF + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil';
     return this.httpClient.post<Perfil>(baseUrl, perfil);

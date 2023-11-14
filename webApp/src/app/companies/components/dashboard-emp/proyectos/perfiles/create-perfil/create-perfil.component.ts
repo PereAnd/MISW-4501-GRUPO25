@@ -1,13 +1,13 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
-import { Perfil } from 'src/app/companies/models/perfil';
+import { Competencia, Perfil } from 'src/app/companies/models/perfil';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { DataService } from 'src/app/shared/services/data.service';
+import { CreateCompetenciaComponent } from '../create-competencia/create-competencia.component';
 
 @Component({
   selector: 'app-create-perfil',
@@ -17,12 +17,18 @@ import { MatChipInputEvent } from '@angular/material/chips';
 export class CreatePerfilComponent {
   indexProyecto: number;
   empresaId: number;
-  longText: string = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.';
+  countrySelected: string = '';
+  citiesOfCountry: string[] = [];
+  countryAndCity = [{pais: '', ciudades: ['']}];
+  conocimientosTemp: Competencia[] = [];
+  habilidadesTemp: Competencia[] = [];
+  idiomasTemp: Competencia[] = [];
 
   formPerfiles: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     role: new FormControl('', Validators.required),
-    location: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
     years: new FormControl('', Validators.required),
     conocimientos: new FormControl('', Validators.required),
     habilidades: new FormControl('', Validators.required),
@@ -31,7 +37,8 @@ export class CreatePerfilComponent {
 
   get name() { return this.formPerfiles.get('name') }
   get role() { return this.formPerfiles.get('role') }
-  get location() { return this.formPerfiles.get('location') }
+  get country() { return this.formPerfiles.get('country') }
+  get city() { return this.formPerfiles.get('city') }
   get years() { return this.formPerfiles.get('years') }
   get conocimientos() { return this.formPerfiles.get('conocimientos') }
   get habilidades() { return this.formPerfiles.get('habilidades') }
@@ -40,9 +47,14 @@ export class CreatePerfilComponent {
   constructor(
     private perfilesService: PerfilesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dataService: DataService,
+    public dialog: MatDialog
   ) {
     this.empresaId = +localStorage.getItem('empresaId')!;
+    dataService.getCountriesAndCities().subscribe({
+      next: data => { this.countryAndCity = data }
+    });
   }
 
   ngOnInit(): void {
@@ -61,7 +73,7 @@ export class CreatePerfilComponent {
     // }
   }
 
-  registrarProyecto() {
+  registrarPerfil() {
     const newPerfil = new Perfil(
       this.formPerfiles.value.name,
       this.formPerfiles.value.role,
@@ -70,6 +82,7 @@ export class CreatePerfilComponent {
       this.formPerfiles.value.conocimientos,
       this.formPerfiles.value.habilidades,
       this.formPerfiles.value.idiomas,
+      // Validar cómo enviar todos estos datos, ya que van a diferentes servicios
     );
     if (!this.indexProyecto) {
       this.perfilesService.addPerfil(this.indexProyecto, this.empresaId, newPerfil).subscribe({
@@ -103,6 +116,28 @@ export class CreatePerfilComponent {
     //       },
     //     });
     // }
+  }
+
+  actualizarCiudades(){
+    const paisSeleccionado = this.formPerfiles.value.country;
+    this.countryAndCity.forEach(item => {
+      if(item.pais === paisSeleccionado){
+        this.countrySelected = item.pais;
+        this.citiesOfCountry = item.ciudades;
+      }
+    })
+  }
+
+  addCompetencia(tipo: string){
+    const dialogRef = this.dialog.open(CreateCompetenciaComponent, { width: '500px' });
+    this.perfilesService.setCompetenciaSelected(tipo);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.perfilesService.getConocimientosTemp().subscribe({ next: data => this.conocimientosTemp = data });
+        this.perfilesService.getHabilidadesTemp().subscribe({ next: data => this.habilidadesTemp = data });
+        this.perfilesService.getIdiomasTemp().subscribe({ next: data => this.idiomasTemp = data });
+      }
+    });
   }
 
   cancelarCreacion() {

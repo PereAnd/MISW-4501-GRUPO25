@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { Perfil } from '../models/perfil';
+import { Competencia, Perfil } from '../models/perfil';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,24 @@ import { Perfil } from '../models/perfil';
 export class PerfilesService {
 
   profileDetail: Perfil;
+  competenciaSelected: string = '';
+  conocimientosTemp: Competencia[] = [];
+  habilidadesTemp: Competencia[] = [];
+  idiomasTemp: Competencia[] = [];
 
   constructor(
     private httpClient: HttpClient
   ) { }
+
+  setCompetenciaSelected(tipo: string){
+    this.competenciaSelected = tipo;
+  }
+
+  getCompetenciaSelected(): Observable<string>{
+    return new Observable<string>(observer => {
+      observer.next(this.competenciaSelected)
+    });
+  }
 
   setProfileDetail(profile: Perfil){
     this.profileDetail = profile;
@@ -22,6 +36,36 @@ export class PerfilesService {
   getProfileDetail(): Observable<Perfil>{
     return new Observable<Perfil>(observer => {
       observer.next(this.profileDetail)
+    });
+  }
+
+  addConocimientoTemp(conocimiento: Competencia){
+    this.conocimientosTemp.push(conocimiento);
+  }
+
+  getConocimientosTemp(): Observable<Competencia[]>{
+    return new Observable<Competencia[]>(observer => {
+      observer.next(this.conocimientosTemp)
+    });
+  }
+
+  addHabilidadeTemp(habilidad: Competencia){
+    this.habilidadesTemp.push(habilidad);
+  }
+
+  getHabilidadesTemp(): Observable<Competencia[]>{
+    return new Observable<Competencia[]>(observer => {
+      observer.next(this.habilidadesTemp)
+    });
+  }
+
+  addIdiomaTemp(idioma: Competencia){
+    this.idiomasTemp.push(idioma);
+  }
+
+  getIdiomasTemp(): Observable<Competencia[]>{
+    return new Observable<Competencia[]>(observer => {
+      observer.next(this.idiomasTemp)
     });
   }
 

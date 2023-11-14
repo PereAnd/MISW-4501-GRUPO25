@@ -29,10 +29,12 @@ class VistaAplicaciones(Resource):
             return 'Los campos applicationDate, candidatoId y status son requeridos', 400
 
         candidatoId = request.json["candidatoId"]
-        if candidatoId.isnumeric() == False:
-            return 'El id del candidato no es un número.', 400
-        
-        response = requests.get(self.urlBackEnd2 + "/" + candidatoId)
+        if isinstance(candidatoId, str):
+            if candidatoId.isnumeric() == False:
+                return 'El id del candidato no es un número.', 400
+
+        response = requests.get(self.urlBackEnd2 + "/" + str(candidatoId))
+
         if response.status_code != 200:
             return response.text, response.status_code 
 
@@ -58,7 +60,7 @@ class VistaAplicaciones(Resource):
             db.session.rollback()
             return {'Error': str(sys.exc_info()[0])}, 412
         
-        return aplicacion_schema.dump(nuevo_aplicacion), 200
+        return aplicacion_schema.dump(nuevo_aplicacion), 201
     
     def get(self,empresaId,proyectoId,perfilId):
 
@@ -191,6 +193,10 @@ class VistaEntrevistas(Resource):
         if not isinstance(done, bool):
             return "El campo done no tiene formato boolean", 400
         
+        feedback = None
+        if "feedback" in request.json: 
+            feedback = request.json["feedback"]
+
         try:
             enterviewDate = datetime.strptime(request.json["enterviewDate"], "%Y-%m-%dT%H:%M:%S.%fZ")
         except:
@@ -201,6 +207,7 @@ class VistaEntrevistas(Resource):
         try:
             nueva_entrevista = Entrevista(enterviewDate=enterviewDate, 
                                         done=done,
+                                        feedback=feedback,
                                         aplicacionId=aplicacionId)
             db.session.add(nueva_entrevista)
             db.session.commit()
@@ -286,6 +293,9 @@ class VistaEntrevista(Resource):
                     return "El campo enterviewDate no tiene formato de fecha correcto", 400
                 entrevista.enterviewDate = enterviewDate
 
+            if "feedback" in request.json:
+                entrevista.feedback = request.json["feedback"]
+
             try:
                 db.session.commit()
                 return entrevista_schema.dump(entrevista), 200
@@ -353,7 +363,7 @@ class VistaAplicacionesCandidato(Resource):
     
     def get(self,candidatoId):
 
-        response = requests.get(self.urlBackEnd2 + "/" + candidatoId + "/aplicacion")
+        response = requests.get(self.urlBackEnd2 + "/" + candidatoId)
         if response.status_code != 200:
             return response.text, response.status_code 
         try:

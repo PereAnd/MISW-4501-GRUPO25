@@ -17,8 +17,8 @@ class Aplicacion(db.Model):
 class Entrevista(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     enterviewDate = db.Column(db.DateTime, nullable=False)
-    done = db.Column(db.Boolean,Default=False, nullable=False)
-    feedBack = db.Column(db.Text, nullable=False)
+    done = db.Column(db.Boolean, nullable=False)
+    feedback = db.Column(db.Text, nullable=True)
     aplicacionId = db.Column(db.Integer, db.ForeignKey('aplicacion.id'))
 
 class EntrevistaEschema(SQLAlchemySchema):
@@ -29,7 +29,7 @@ class EntrevistaEschema(SQLAlchemySchema):
     id = auto_field()
     enterviewDate = auto_field()
     done = auto_field()
-    feedBack = auto_field()
+    feedback = auto_field()
     aplicacionId = auto_field()
 
 class AplicacionEschema(SQLAlchemySchema):

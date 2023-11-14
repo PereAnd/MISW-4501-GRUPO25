@@ -1,0 +1,31 @@
+AKIA3TVZCAVYKRDHH7T2
+0wrbVG+5hv1xq5tDch5RhqlxPg4uxU2YjM3zwty6
+
+
+aws eks --region us-east-1 update-kubeconfig --name uniandesExperimento
+
+
+kubectl logs -n kubernetes-dashboard $(kubectl get po -n kubernetes-dashboard | egrep -o "alb-ingress[a-zA-Z0-9-]+")
+
+
+eksctl create iamserviceaccount \
+  --cluster=uniandesExperimento \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::798178280816:policy/AWSLoadBalancerControllerIAMPolicy \
+  --approve
+
+
+export cluster_name=uniandesExperimento
+oidc_id=$(aws eks describe-cluster --name $cluster_name --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
+
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=uniandesExperimento \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller 
+
+
+  database-1.cfgkb3tpxr7g.us-east-1.rds.amazonaws.com

@@ -14,6 +14,7 @@ export class PerfilesService {
   conocimientosTemp: Competencia[] = [];
   habilidadesTemp: Competencia[] = [];
   idiomasTemp: Competencia[] = [];
+  perfilesTemp: Perfil[] = [];
 
   constructor(
     private httpClient: HttpClient
@@ -66,6 +67,16 @@ export class PerfilesService {
   getIdiomasTemp(): Observable<Competencia[]>{
     return new Observable<Competencia[]>(observer => {
       observer.next(this.idiomasTemp)
+    });
+  }
+
+  addPerfilTemp(perfil: Perfil){
+    this.perfilesTemp.push(perfil);
+  }
+
+  getPerfilesTemp(): Observable<Perfil[]>{
+    return new Observable<Perfil[]>(observer => {
+      observer.next(this.perfilesTemp)
     });
   }
 

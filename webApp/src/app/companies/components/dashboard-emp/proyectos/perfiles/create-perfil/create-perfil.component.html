@@ -69,11 +69,11 @@
           >La descripción del proyecto es requerida</div> -->
 
     <mat-divider></mat-divider><br>
-    <div class="row">
+    <div class="row competencias">
       <section class="competencia col-12 col-lg-4">
         <div class="controles">
           <h2>Conocimientos:</h2>
-          <button mat-mini-fab color="basic" (click)="addCompetencia('Conocimiento')"><mat-icon>add</mat-icon></button>
+          <a mat-mini-fab color="basic" (click)="addCompetencia('Conocimiento')"><mat-icon>add</mat-icon></a>
         </div>
         <div class="card-container">
           <mat-card *ngFor="let competencia of conocimientosTemp" class="card">
@@ -85,7 +85,7 @@
       <section class="competencia col-12 col-lg-4">
         <div class="controles">
           <h2>Habilidades:</h2>
-          <button mat-mini-fab color="basic" (click)="addCompetencia('Habilidad')"><mat-icon>add</mat-icon></button>
+          <a mat-mini-fab color="basic" (click)="addCompetencia('Habilidad')"><mat-icon>add</mat-icon></a>
         </div>
         <div class="card-container">
           <mat-card *ngFor="let competencia of habilidadesTemp" class="card">
@@ -97,7 +97,7 @@
       <section class="competencia col-12 col-lg-4">
         <div class="controles">
           <h2>Idiomas:</h2>
-          <button mat-mini-fab color="basic" (click)="addCompetencia('Idioma')"><mat-icon>add</mat-icon></button>
+          <a mat-mini-fab color="basic" (click)="addCompetencia('Idioma')"><mat-icon>add</mat-icon></a>
         </div>
         <div class="card-container">
           <mat-card *ngFor="let competencia of idiomasTemp" class="card">

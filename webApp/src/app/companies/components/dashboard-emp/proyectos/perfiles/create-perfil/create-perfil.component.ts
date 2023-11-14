@@ -30,9 +30,9 @@ export class CreatePerfilComponent {
     country: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
     years: new FormControl('', Validators.required),
-    conocimientos: new FormControl('', Validators.required),
-    habilidades: new FormControl('', Validators.required),
-    idiomas: new FormControl('', Validators.required),
+    conocimientos: new FormControl(''),
+    habilidades: new FormControl(''),
+    idiomas: new FormControl(''),
   });
 
   get name() { return this.formPerfiles.get('name') }
@@ -58,6 +58,16 @@ export class CreatePerfilComponent {
   }
 
   ngOnInit(): void {
+    this.formPerfiles.setValue({
+              name: 'Ingeniero de Software',
+              role: 'Desarrollador backend',
+              years: 2,
+              country: null,
+              city: null,
+              conocimientos: [],
+              habilidades: [],
+              idiomas: []
+            });
     // this.indexProyecto = this.route.snapshot.params['idp'];
     // if (this.indexProyecto) {
     //   this.perfilesService.addPerfil(this.empresaId, this.indexProyecto).subscribe({
@@ -84,21 +94,22 @@ export class CreatePerfilComponent {
       this.formPerfiles.value.idiomas,
       // Validar cómo enviar todos estos datos, ya que van a diferentes servicios
     );
-    if (!this.indexProyecto) {
-      this.perfilesService.addPerfil(this.indexProyecto, this.empresaId, newPerfil).subscribe({
-        next: (data) => {
-          console.log('Perfil registrado');
-          this.formPerfiles.reset();
-        },
-        error: (error) => {
-          console.log('Error registrando el perfil', error);
-          alert('Error registrando el perfil');
-        },
-        complete: () => {
-          this.router.navigate(['..'], { relativeTo: this.route });
-        },
-      });
-    }
+    this.perfilesService.addPerfilTemp(newPerfil);
+    // if (!this.indexProyecto) {
+    //   this.perfilesService.addPerfil(this.indexProyecto, this.empresaId, newPerfil).subscribe({
+    //     next: (data) => {
+    //       console.log('Perfil registrado');
+    //       this.formPerfiles.reset();
+    //     },
+    //     error: (error) => {
+    //       console.log('Error registrando el perfil', error);
+    //       alert('Error registrando el perfil');
+    //     },
+    //     complete: () => {
+    //       this.router.navigate(['..'], { relativeTo: this.route });
+    //     },
+    //   });
+    // }
     // else {
     //   this.perfilesService
     //     .editProyecto(newProyecto, this.indexProyecto, this.empresaId)

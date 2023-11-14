@@ -14,7 +14,7 @@ export class CreateCompetenciaComponent {
 
   formCompetencias: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
-    description: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    description: new FormControl('', [Validators.required, Validators.maxLength(90)]),
   });
 
   get name() { return this.formCompetencias.get('name') }

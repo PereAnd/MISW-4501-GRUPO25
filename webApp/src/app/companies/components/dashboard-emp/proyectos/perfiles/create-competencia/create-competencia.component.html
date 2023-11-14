@@ -26,12 +26,8 @@
       <div class="col-12">
         <mat-form-field>
           <mat-label>Descripción</mat-label>
-          <textarea matInput
-                    formControlName="description"
-                    cdkTextareaAutosize
-                    #autosize="cdkTextareaAutosize"
-                    cdkAutosizeMinRows="2"
-                    cdkAutosizeMaxRows="2"></textarea>
+          <input matInput maxlength="90" placeholder="Ex. I need help with..." id="description" formControlName="description">
+          <mat-hint align="end">{{description?.value.length}} / 90</mat-hint>
         </mat-form-field>
       </div>
     </div>

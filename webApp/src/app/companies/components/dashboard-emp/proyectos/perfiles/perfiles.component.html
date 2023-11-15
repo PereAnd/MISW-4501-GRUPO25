@@ -9,6 +9,7 @@
       <div>
         <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" aria-label="Select page of users"></mat-paginator>
       </div>
+      <!-- routerLink="./addperfil" -->
       <div class="mt-3" *ngIf="editMode">
         <a mat-mini-fab color="primary" (click)="agregarPerfil()" [disabled]="!proyectoId"><mat-icon>add</mat-icon></a>
       </div>

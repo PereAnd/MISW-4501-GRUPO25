@@ -144,5 +144,6 @@ export class CreatePerfilComponent {
   }
   cancelarCreacion() {
     this.formPerfiles.reset();
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }

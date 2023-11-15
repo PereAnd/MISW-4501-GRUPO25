@@ -10,10 +10,7 @@ import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 })
 export class DetailProyectoComponent implements OnInit{
 
-  projectDetail: Proyecto = {
-    "proyecto": "",
-    "description": ""
-  };
+  projectDetail: Proyecto;
   perfilesProject: Perfil[];
 
   constructor(

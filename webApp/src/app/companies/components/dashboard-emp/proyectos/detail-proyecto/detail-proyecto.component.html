@@ -1,14 +1,14 @@
-<h2 mat-dialog-title>Detalle del proyecto '{{ projectDetail.proyecto }}'</h2>
+<h1 mat-dialog-title>Proyecto <i>{{ projectDetail.proyecto }}</i></h1>
 <mat-dialog-content class="mat-typography">
   <mat-divider></mat-divider>
   <div class="item">
-    <h3>Descripción:</h3>
+    <h2>Descripción:</h2>
     <p>{{ projectDetail.description }}</p>
   </div>
 
   <mat-divider></mat-divider>
   <div class="item">
-    <h3>Perfiles solicitados:</h3>
+    <h2>Perfiles solicitados:</h2>
     <app-perfiles [proyectoId]="projectDetail.id!"></app-perfiles>
   </div>
 

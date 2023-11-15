@@ -32,10 +32,7 @@ export class CreatePerfilComponent {
     role: new FormControl('', Validators.required),
     country: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
-    years: new FormControl('', Validators.required),
-    conocimientos: new FormControl(null),
-    habilidades: new FormControl(null),
-    idiomas: new FormControl(null),
+    years: new FormControl('', Validators.required)
   });
 
   get name() { return this.formPerfiles.get('name') }
@@ -59,19 +56,36 @@ export class CreatePerfilComponent {
 
   ngOnInit(): void {
     this.perfilesService.getProjectToProfile().subscribe({ next: data => { this.proyectoId = data } })
-    this.perfilesService.getProfileToCompetencies().subscribe({ next: data => { this.perfilId = data } })
-    // if (this.proyectoId) {
-    //   this.perfilesService.addPerfil(this.empresaId, this.proyectoId).subscribe({
-    //     next: (data) => {
-    //       this.formProyectos.setValue({
-    //         proyecto: data.proyecto,
-    //         description: data.description,
-    //       });
-    //     },
-    //     error: (error) =>
-    //       console.error('Error obteniendo el proyecto seleccionado', error),
-    //   });
-    // }
+    this.perfilesService.getProfileToCompetencies().subscribe({
+      next: data => {
+        this.perfilId = data;
+          if (this.perfilId) {
+            this.perfilesService.findPerfil(this.empresaId, this.proyectoId, this.perfilId).subscribe({
+              next: (data) => {
+                this.formPerfiles.setValue({
+                  name: data.name,
+                  role: data.role,
+                  country: data.location.split(',')[1].trim(),
+                  city: data.location.split(',')[0].trim(),
+                  years: data.years
+                });
+                this.conocimientos = data.conocimientos!;
+                this.habilidades = data.habilidades!;
+                this.idiomas = data.idiomas!;
+                this.countryAndCity.forEach(item => {
+                  if(item.pais === data.location.split(',')[1].trim()){
+                    this.countrySelected = item.pais;
+                    this.citiesOfCountry = [data.location.split(',')[0].trim(), ... item.ciudades.filter(city => city !== data.location.split(',')[0].trim())];
+                  }
+                })
+              },
+              error: (error) =>
+                console.error('Error obteniendo el proyecto seleccionado', error),
+            });
+          }
+      }
+    })
+
   }
 
   registrarPerfil() {
@@ -80,52 +94,31 @@ export class CreatePerfilComponent {
       this.formPerfiles.value.role,
       this.formPerfiles.value.city + ', ' + this.formPerfiles.value.country,
       this.formPerfiles.value.years
-      // Validar cómo enviar todos estos datos, ya que van a diferentes servicios
     );
-    this.perfilesService.addPerfil(this.proyectoId, this.empresaId, newPerfil).subscribe({
-      next: (data) => {
-        console.log('Perfil registrado');
-        this.perfilId = data.id!;
-        this.perfilesService.setProfileToCompetencies(data.id!);
-      },
-      error: (error) => {
-        console.log('Error registrando el perfil', error);
-        alert('Error registrando el perfil');
-      }
-    });
-
-    // if (!this.proyectoId) {
-    //   this.perfilesService.addPerfil(this.proyectoId, this.empresaId, newPerfil).subscribe({
-    //     next: (data) => {
-    //       console.log('Perfil registrado');
-    //       this.formPerfiles.reset();
-    //     },
-    //     error: (error) => {
-    //       console.log('Error registrando el perfil', error);
-    //       alert('Error registrando el perfil');
-    //     },
-    //     complete: () => {
-    //       this.router.navigate(['..'], { relativeTo: this.route });
-    //     },
-    //   });
-    // }
-    // else {
-    //   this.perfilesService
-    //     .editProyecto(newProyecto, this.proyectoId, this.empresaId)
-    //     .subscribe({
-    //       next: (data) => {
-    //         console.log('Proyecto actualizado');
-    //         this.formProyectos.reset();
-    //       },
-    //       error: (error) => {
-    //         console.log('Error editando el proyecto', error);
-    //         alert('Error editando el proyecto');
-    //       },
-    //       complete: () => {
-    //         this.router.navigate(['..'], { relativeTo: this.route });
-    //       },
-    //     });
-    // }
+    if(!this.perfilId){
+      this.perfilesService.addPerfil(this.proyectoId, this.empresaId, newPerfil).subscribe({
+        next: (data) => {
+          console.log('Perfil registrado');
+          this.perfilId = data.id!;
+          this.perfilesService.setProfileToCompetencies(data.id!);
+        },
+        error: (error) => {
+          console.log('Error registrando el perfil', error);
+          alert('Error registrando el perfil');
+        }
+      });
+    } else {
+      this.perfilesService.editPerfil(this.proyectoId, this.empresaId, this.perfilId, newPerfil).subscribe({
+        next: (data) => {
+          console.log('Perfil actualizado');
+          this.perfilesService.setProfileToCompetencies(data.id!);
+        },
+        error: (error) => {
+          console.log('Error actualizando el perfil', error);
+          alert('Error actualizando el perfil');
+        }
+      });
+    }
   }
 
   actualizarCiudades(){

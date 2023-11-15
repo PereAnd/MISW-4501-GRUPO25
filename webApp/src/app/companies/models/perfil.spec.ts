@@ -7,7 +7,7 @@ describe('Perfil', () => {
 
   const dataFake = {
     name: faker.person.jobTitle(),
-    role: faker.name.jobArea(),
+    role: faker.person.jobArea(),
     location: faker.location.country(),
     years: Math.random() * 5
   }

@@ -66,20 +66,18 @@ export class PerfilesComponent {
     });
   }
 
-  agregarPerfil() {
-    this.perfilesService.setProjectToProfile(this.proyectoId)
+  agregarPerfil(perfilId: number = 0) {
+    if (perfilId) this.perfilesService.setProfileToCompetencies(perfilId)
     const dialogRef = this.dialog.open(CreatePerfilComponent, {
       width: '1000px',
       height: '500px'
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result){
-        this.perfilesService.listPerfiles(this.empresaId, this.proyectoId).subscribe({
-          next: data => {
-            this.ngOnInit()
-          }
-        })
-      }
+      this.perfilesService.listPerfiles(this.empresaId, this.proyectoId).subscribe({
+        next: data => {
+          this.ngOnInit()
+        }
+      })
     });
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Proyecto } from 'src/app/companies/models/proyecto';
+import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 
 @Component({
@@ -24,13 +25,15 @@ export class CreateProyectoComponent {
   constructor(
     private proyectosService: ProyectosService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private perfilesService: PerfilesService
   ) {
     this.empresaId = +localStorage.getItem('empresaId')!;
   }
 
   ngOnInit(): void {
     this.indexProyecto = this.route.snapshot.params['idp'];
+    this.perfilesService.setProjectToProfile(this.indexProyecto)
     if (this.indexProyecto) {
       this.proyectosService.findProyecto(this.empresaId, this.indexProyecto).subscribe({
         next: (data) => {

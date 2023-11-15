@@ -1618,7 +1618,7 @@
                         "in": "path",
                         "description": "Id de la proyecto",
                         "required": true,
-                        "type": "integer",
+                        "type": "integer"
                     },
                     {
                         "name": "perfil",
@@ -1664,7 +1664,7 @@
                         "required": true,
                         "type": "integer",
                         "format": "int64"
-                    },            
+                    },
                     {
                         "name": "proyectoId",
                         "in": "path",
@@ -1878,7 +1878,7 @@
                         "in": "path",
                         "description": "Id de la proyecto",
                         "required": true,
-                        "type": "integer",
+                        "type": "integer"
                     },
                     {
                         "name": "perfilId",
@@ -1932,7 +1932,7 @@
                         "required": true,
                         "type": "integer",
                         "format": "int64"
-                    },            
+                    },
                     {
                         "name": "proyectoId",
                         "in": "path",
@@ -2170,7 +2170,7 @@
                         "in": "path",
                         "description": "Id de la proyecto",
                         "required": true,
-                        "type": "integer",
+                        "type": "integer"
                     },
                     {
                         "name": "perfilId",
@@ -2224,7 +2224,7 @@
                         "required": true,
                         "type": "integer",
                         "format": "int64"
-                    },            
+                    },
                     {
                         "name": "proyectoId",
                         "in": "path",
@@ -2462,7 +2462,7 @@
                         "in": "path",
                         "description": "Id de la proyecto",
                         "required": true,
-                        "type": "integer",
+                        "type": "integer"
                     },
                     {
                         "name": "perfilId",
@@ -2516,7 +2516,7 @@
                         "required": true,
                         "type": "integer",
                         "format": "int64"
-                    },            
+                    },
                     {
                         "name": "proyectoId",
                         "in": "path",
@@ -2679,7 +2679,814 @@
                     }
                 }
             }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/aplicacion": {
+            "get": {
+                "description": "Retorna las aplicaciones de una perfil",
+                "operationId": "findAplicacion",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Aplicacion",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Aplicacion"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de aplicacion para una perfil",
+                "operationId": "addAplicacion",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "aplicacion",
+                        "in": "body",
+                        "description": "aplicacion a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewAplicacion"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Aplicacion",
+                        "schema": {
+                            "$ref": "#/definitions/Aplicacion"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/aplicacion/{id}": {
+            "get": {
+                "description": "Retorna una aplciacion a partir de su id",
+                "operationId": "findAplicacionById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta aplicacion",
+                        "schema": {
+                            "$ref": "#/definitions/Aplicacion"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una aplicacion a partir de su id",
+                "operationId": "deleteAplicacionById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó una aplicacion"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una aplicacion a partir de su id",
+                "operationId": "updateAplicacionById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "aplicacion",
+                        "in": "body",
+                        "description": "Perfil a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateAplicacion"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta Aplicacion",
+                        "schema": {
+                            "$ref": "#/definitions/Aplicacion"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/aplicacion/{aplicacionId}/entrevista": {
+            "get": {
+                "description": "Retorna las entrevistas de una aplicacion",
+                "operationId": "findEntrevista",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "aplicacionId",
+                        "in": "path",
+                        "description": "Id del aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Entrevista",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Entrevista"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Crea un registro de una entevista para una aplicacion",
+                "operationId": "addEntrevista",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "aplicacionId",
+                        "in": "path",
+                        "description": "Id del aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "entrevista",
+                        "in": "body",
+                        "description": "entrevista a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewEntrevista"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Respuesta Entrevista",
+                        "schema": {
+                            "$ref": "#/definitions/Entrevista"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{empresaId}/proyecto/{proyectoId}/perfil/{perfilId}/aplicacion/{aplicacionId}/entrevista/{id}": {
+            "get": {
+                "description": "Retorna una entrevista a partir de su id",
+                "operationId": "findEntrevistaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "aplicacionId",
+                        "in": "path",
+                        "description": "Id del aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la entrevista",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta entrevista",
+                        "schema": {
+                            "$ref": "#/definitions/Entrevista"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Elimina una entrevista a partir de su id",
+                "operationId": "deleteEntrevistaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "aplicacionId",
+                        "in": "path",
+                        "description": "Id del aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la entrevista",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Se eliminó una entrevista"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "actualiza una entrevista a partir de su id",
+                "operationId": "updateEntrevistaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "proyectoId",
+                        "in": "path",
+                        "description": "Id de la proyecto",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "perfilId",
+                        "in": "path",
+                        "description": "Id del perfil",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "aplicacionId",
+                        "in": "path",
+                        "description": "Id del aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la entrevista",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "entrevista",
+                        "in": "body",
+                        "description": "entrevista a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateEntrevista"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta Entrevista",
+                        "schema": {
+                            "$ref": "#/definitions/Entrevista"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{candidatoId}/aplicacion/{aplicacionId}/entrevista": {
+            "get": {
+                "description": "Retorna las entrevistas de una aplicacion",
+                "operationId": "findEntrevista",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "aplicacionId",
+                        "in": "path",
+                        "description": "Id del aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Entrevista",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Entrevista"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{candidatoId}/aplicacion/{aplicacionId}/entrevista/{id}": {
+            "get": {
+                "description": "Retorna una entrevista a partir de su id",
+                "operationId": "findEntrevistaById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "aplicacionId",
+                        "in": "path",
+                        "description": "Id del aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la entrevista",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta entrevista",
+                        "schema": {
+                            "$ref": "#/definitions/Entrevista"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{candidatoId}/aplicacion": {
+            "get": {
+                "description": "Retorna las aplicaciones de un candidato",
+                "operationId": "findCandidato",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Aplicacion",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Aplicacion"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/candidato/{candidatoId}/aplicacion/{id}": {
+            "get": {
+                "description": "Retorna una aplicacion a partir de su id",
+                "operationId": "findAplicacionById",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "candidatoId",
+                        "in": "path",
+                        "description": "Id del candidato",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de la aplicacion",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "respuesta aplicacion",
+                        "schema": {
+                            "$ref": "#/definitions/Aplicacion"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
         }
+        
     },
     "definitions": {
         "CandidatoRegistro": {
@@ -3073,7 +3880,6 @@
                         "$ref": "#/definitions/Proyecto"
                     }
                 }
-
             }
         },
         "NewEmpresa": {
@@ -3112,8 +3918,6 @@
                 "description": {
                     "type": "string"
                 }
-
-                
             }
         },
         "UpdateVertical": {
@@ -3145,8 +3949,6 @@
                 "description": {
                     "type": "string"
                 }
-
-                
             }
         },
         "UpdateUbicacion": {
@@ -3177,8 +3979,6 @@
                 "description": {
                     "type": "string"
                 }
-
-                
             }
         },
         "UpdateProyecto": {
@@ -3193,7 +3993,6 @@
                 }
             }
         },
-
         "NewPerfil": {
             "type": "object",
             "required": [
@@ -3216,7 +4015,6 @@
                     "type": "integer",
                     "format": "int32"
                 }
-                
             }
         },
         "Perfil": {
@@ -3263,7 +4061,6 @@
                         "$ref": "#/definitions/Idioma"
                     }
                 }
-                
             }
         },
         "UpdatePerfil": {
@@ -3284,7 +4081,6 @@
                 }
             }
         },
-        
         "NewHabilidad": {
             "type": "object",
             "required": [
@@ -3317,7 +4113,6 @@
                 "description": {
                     "type": "string"
                 }
-                
             }
         },
         "UpdateHabilidad": {
@@ -3363,7 +4158,6 @@
                 "description": {
                     "type": "string"
                 }
-                
             }
         },
         "UpdateConocimiento": {
@@ -3377,8 +4171,6 @@
                 }
             }
         },
-        
-        
         "NewIdioma": {
             "type": "object",
             "required": [
@@ -3411,7 +4203,6 @@
                 "description": {
                     "type": "string"
                 }
-                
             }
         },
         "UpdateIdioma": {
@@ -3424,9 +4215,139 @@
                     "type": "string"
                 }
             }
+        },
+        "NewAplicacion": {
+            "type": "object",
+            "required": [
+                "applicationDate",
+                "status",
+                "candidatoId"
+            ],
+            "properties": {
+                "applicationDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "candidatoId": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "Aplicacion": {
+            "type": "object",
+            "required": [
+                "applicationDate",
+                "status",
+                "candidatoId"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "applicationDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "candidatoId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "proyectoId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "empresaId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "perfilId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "entrevista": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Entrevista"
+                    }
+                }
+            }
+        },
+        "UpdateAplicacion": {
+            "type": "object",
+            "properties": {
+                "applicationDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "NewEntrevista": {
+            "type": "object",
+            "required": [
+                "enterviewDate",
+                "done"
+            ],
+            "properties": {
+                "enterviewDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "feedback": {
+                    "type": "string"
+                }
+            }
+        },
+        "Entrevista": {
+            "type": "object",
+            "required": [
+                "enterviewDate",
+                "done"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "enterviewDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "feedback": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateEntrevista": {
+            "type": "object",
+            "properties": {
+                "enterviewDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "feedback": {
+                    "type": "string"
+                }
+            }
         }
-
-
-
     }
 }

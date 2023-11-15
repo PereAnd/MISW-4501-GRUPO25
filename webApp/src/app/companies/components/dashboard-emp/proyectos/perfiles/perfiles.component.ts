@@ -73,13 +73,11 @@ export class PerfilesComponent {
       height: '500px'
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result){
-        this.perfilesService.listPerfiles(this.empresaId, this.proyectoId).subscribe({
-          next: data => {
-            this.ngOnInit()
-          }
-        })
-      }
+      this.perfilesService.listPerfiles(this.empresaId, this.proyectoId).subscribe({
+        next: data => {
+          this.ngOnInit()
+        }
+      })
     });
   }
 }

@@ -32,10 +32,7 @@ export class CreatePerfilComponent {
     role: new FormControl('', Validators.required),
     country: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
-    years: new FormControl('', Validators.required),
-    conocimientos: new FormControl(null),
-    habilidades: new FormControl(null),
-    idiomas: new FormControl(null),
+    years: new FormControl('', Validators.required)
   });
 
   get name() { return this.formPerfiles.get('name') }
@@ -70,10 +67,7 @@ export class CreatePerfilComponent {
                   role: data.role,
                   country: data.location.split(',')[1].trim(),
                   city: data.location.split(',')[0].trim(),
-                  years: data.years,
-                  conocimientos: null,
-                  habilidades: null,
-                  idiomas: null
+                  years: data.years
                 });
                 this.conocimientos = data.conocimientos!;
                 this.habilidades = data.habilidades!;
@@ -90,7 +84,7 @@ export class CreatePerfilComponent {
             });
           }
       }
-     })
+    })
 
   }
 
@@ -100,52 +94,31 @@ export class CreatePerfilComponent {
       this.formPerfiles.value.role,
       this.formPerfiles.value.city + ', ' + this.formPerfiles.value.country,
       this.formPerfiles.value.years
-      // Validar cómo enviar todos estos datos, ya que van a diferentes servicios
     );
-    this.perfilesService.addPerfil(this.proyectoId, this.empresaId, newPerfil).subscribe({
-      next: (data) => {
-        console.log('Perfil registrado');
-        this.perfilId = data.id!;
-        this.perfilesService.setProfileToCompetencies(data.id!);
-      },
-      error: (error) => {
-        console.log('Error registrando el perfil', error);
-        alert('Error registrando el perfil');
-      }
-    });
-
-    // if (!this.proyectoId) {
-    //   this.perfilesService.addPerfil(this.proyectoId, this.empresaId, newPerfil).subscribe({
-    //     next: (data) => {
-    //       console.log('Perfil registrado');
-    //       this.formPerfiles.reset();
-    //     },
-    //     error: (error) => {
-    //       console.log('Error registrando el perfil', error);
-    //       alert('Error registrando el perfil');
-    //     },
-    //     complete: () => {
-    //       this.router.navigate(['..'], { relativeTo: this.route });
-    //     },
-    //   });
-    // }
-    // else {
-    //   this.perfilesService
-    //     .editProyecto(newProyecto, this.proyectoId, this.empresaId)
-    //     .subscribe({
-    //       next: (data) => {
-    //         console.log('Proyecto actualizado');
-    //         this.formProyectos.reset();
-    //       },
-    //       error: (error) => {
-    //         console.log('Error editando el proyecto', error);
-    //         alert('Error editando el proyecto');
-    //       },
-    //       complete: () => {
-    //         this.router.navigate(['..'], { relativeTo: this.route });
-    //       },
-    //     });
-    // }
+    if(!this.perfilId){
+      this.perfilesService.addPerfil(this.proyectoId, this.empresaId, newPerfil).subscribe({
+        next: (data) => {
+          console.log('Perfil registrado');
+          this.perfilId = data.id!;
+          this.perfilesService.setProfileToCompetencies(data.id!);
+        },
+        error: (error) => {
+          console.log('Error registrando el perfil', error);
+          alert('Error registrando el perfil');
+        }
+      });
+    } else {
+      this.perfilesService.editPerfil(this.proyectoId, this.empresaId, this.perfilId, newPerfil).subscribe({
+        next: (data) => {
+          console.log('Perfil actualizado');
+          this.perfilesService.setProfileToCompetencies(data.id!);
+        },
+        error: (error) => {
+          console.log('Error actualizando el perfil', error);
+          alert('Error actualizando el perfil');
+        }
+      });
+    }
   }
 
   actualizarCiudades(){
@@ -171,6 +144,5 @@ export class CreatePerfilComponent {
   }
   cancelarCreacion() {
     this.formPerfiles.reset();
-    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }

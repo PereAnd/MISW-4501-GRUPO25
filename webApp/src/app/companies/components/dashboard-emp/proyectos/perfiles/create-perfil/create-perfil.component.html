@@ -69,7 +69,7 @@
           >La descripción del proyecto es requerida</div> -->
     <div class="botones">
       <div class="button">
-        <a mat-raised-button color="secondary" (click)="cancelarCreacion()">Atrás</a>
+        <a mat-raised-button color="secondary" mat-dialog-close (click)="cancelarCreacion()">Atrás</a>
       </div>
       <div class="button">
         <button mat-raised-button color="primary"
@@ -90,7 +90,7 @@
         </div>
         <div class="card-container">
           <mat-card *ngFor="let competencia of conocimientos" class="card">
-            <p><b>{{ competencia.name }}</b>: {{ competencia.description }}</p>
+            <p class="card-text"><b>{{ competencia.name }}</b>: {{ competencia.description }}</p>
           </mat-card>
         </div>
       </section>
@@ -102,7 +102,7 @@
         </div>
         <div class="card-container">
           <mat-card *ngFor="let competencia of habilidades" class="card">
-            <p><b>{{ competencia.name }}</b>: {{ competencia.description }}</p>
+            <p class="card-text"><b>{{ competencia.name }}</b>: {{ competencia.description }}</p>
           </mat-card>
         </div>
       </section>
@@ -114,11 +114,13 @@
         </div>
         <div class="card-container">
           <mat-card *ngFor="let competencia of idiomas" class="card">
-            <p><b>{{ competencia.name }}</b>: {{ competencia.description }}</p>
+            <p class="card-text"><b>{{ competencia.name }}</b>: {{ competencia.description }}</p>
           </mat-card>
         </div>
       </section>
     </div>
     <br><mat-divider></mat-divider><br>
+
+    <button mat-button mat-dialog-close>Cerrar</button>
 
 </div>

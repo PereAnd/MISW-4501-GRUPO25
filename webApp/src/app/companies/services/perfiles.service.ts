@@ -74,6 +74,11 @@ export class PerfilesService {
     return this.httpClient.post<Perfil>(baseUrl, perfil);
   }
 
+  editPerfil(proyectoId: number, empresaId: number, perfilId: number, perfil: Perfil):Observable<Perfil>{
+    let baseUrl: string = environment.HOST_PERF + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId;
+    return this.httpClient.patch<Perfil>(baseUrl, perfil);
+  }
+
   addCompetencia(empresaId: number, proyectoId: number, perfilId: number, competencia: Competencia, tipo: string): Observable<Competencia>{
     let baseUrl: string = environment.HOST_PERF + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId
     if (tipo == 'Conocimiento') baseUrl += '/conocimiento';

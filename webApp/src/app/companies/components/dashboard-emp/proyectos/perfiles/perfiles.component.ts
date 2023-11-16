@@ -60,19 +60,33 @@ export class PerfilesComponent {
 
   detallePerfil(profile: Perfil) {
     this.perfilesService.setProfileDetail(profile);
-    const dialogRef = this.dialog.open(DetailPerfilComponent, { width: '900px' });
+    const dialogRef = this.dialog.open(DetailPerfilComponent, { width: '1000px' });
     dialogRef.afterClosed().subscribe((result) => {
       //console.log(`Dialog result: ${result}`);
     });
   }
 
-  agregarPerfil(perfilId: number = 0) {
-    if (perfilId) this.perfilesService.setProfileToCompetencies(perfilId)
-    const dialogRef = this.dialog.open(CreatePerfilComponent, {
-      width: '1000px',
-      height: '500px'
-    });
+  agregarPerfil(perfilNuevo: boolean, perfilId: number = 0) {
+    if (!perfilNuevo) { this.perfilesService.setProfileToCompetencies(perfilId) }
+    else { this.perfilesService.setProfileToCompetencies(0) }
+    const dialogRef = this.dialog.open(CreatePerfilComponent, { width: '1000px' });
     dialogRef.afterClosed().subscribe((result) => {
+      if (!result && perfilNuevo && perfilId){
+        this.perfilesService.getProfileToCompetencies().subscribe({
+          next: data => {
+            perfilId = data;
+            this.perfilesService.deletePerfil(this.empresaId, this.proyectoId, perfilId).subscribe({
+              next: data => {
+                console.log('Creación cancelada', data)
+                this.ngOnInit()
+                this.perfilesService.setProfileToCompetencies(0)
+              }, error: error => {
+                console.log(error)
+              }
+            })
+          }
+        })
+      }
       this.perfilesService.listPerfiles(this.empresaId, this.proyectoId).subscribe({
         next: data => {
           this.ngOnInit()

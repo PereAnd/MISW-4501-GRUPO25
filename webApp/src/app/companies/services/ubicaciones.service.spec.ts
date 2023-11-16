@@ -4,7 +4,7 @@ import { UbicacionesService } from './ubicaciones.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
 import { environment } from 'src/environments/environment.development';
-import { Ubicacion } from '../models/ubicacion';
+import { Ubicacion } from '../models/empresas';
 
 describe('UbicacionesService', () => {
   let service: UbicacionesService;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Empresa } from 'src/app/companies/models/empresa';
+import { Empresa } from 'src/app/companies/models/empresas';
 import { RegEmpresaService } from 'src/app/companies/services/reg-empresa.service';
 
 @Component({

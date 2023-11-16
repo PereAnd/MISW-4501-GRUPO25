@@ -4,7 +4,7 @@ import { VerticalesService } from './verticales.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
 import { environment } from 'src/environments/environment.development';
-import { Vertical } from '../models/vertical';
+import { Vertical } from '../models/empresas';
 
 describe('VerticalesService', () => {
   let service: VerticalesService;

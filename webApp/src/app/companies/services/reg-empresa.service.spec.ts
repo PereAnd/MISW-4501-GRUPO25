@@ -3,11 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { RegEmpresaService } from './reg-empresa.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
-import { Empresa } from '../models/empresa';
+import { Empresa } from '../models/empresas';
 import { environment } from 'src/environments/environment.development';
 
 describe('Servicio RegEmpresaService', () => {
-  let service: RegEmpresaService;
+  let empresaService: RegEmpresaService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
@@ -15,12 +15,12 @@ describe('Servicio RegEmpresaService', () => {
       imports: [HttpClientTestingModule],
       providers: [RegEmpresaService]
     });
-    service = TestBed.inject(RegEmpresaService);
+    empresaService = TestBed.inject(RegEmpresaService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
   it("Creación de la instancia de 'RegEmpresaService'", () => {
-    expect(service).toBeTruthy();
+    expect(empresaService).toBeTruthy();
   });
 
   it("Método 'registrarEmpresa', servicio 'RegEmpresaService'", () => {
@@ -40,7 +40,7 @@ describe('Servicio RegEmpresaService', () => {
       "mail": newEmpresa.mail
     }
 
-    service.registrarEmpresa(newEmpresa).subscribe({
+    empresaService.registrarEmpresa(newEmpresa).subscribe({
       next: response => {
         expect(response).toEqual(mockResponse)
       }
@@ -64,7 +64,7 @@ describe('Servicio RegEmpresaService', () => {
       "description": faker.lorem.paragraph(5)
     }
 
-    service.getDatosEmpresa(empresaId).subscribe({
+    empresaService.getDatosEmpresa(empresaId).subscribe({
       next: response => {
         expect(response).toEqual(mockResponse)
       }
@@ -101,7 +101,7 @@ describe('Servicio RegEmpresaService', () => {
       "description": newEmpresa.description
     }
 
-    service.updateDatosEmpresa(newEmpresa).subscribe({
+    empresaService.updateDatosEmpresa(newEmpresa).subscribe({
       next: response => {
         expect(response).toEqual(mockResponse)
       }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Ubicacion } from 'src/app/companies/models/ubicacion';
+import { Ubicacion } from 'src/app/companies/models/empresas';
 import { UbicacionesService } from 'src/app/companies/services/ubicaciones.service';
 import { DataService } from 'src/app/shared/services/data.service';
 

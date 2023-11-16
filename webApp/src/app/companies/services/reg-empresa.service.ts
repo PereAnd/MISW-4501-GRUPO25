@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Empresa } from '../models/empresa';
+import { Empresa } from '../models/empresas';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 

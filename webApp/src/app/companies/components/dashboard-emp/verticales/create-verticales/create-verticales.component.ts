@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InfoTecnica } from 'src/app/candidates/models/info-tecnica';
-import { InfTecnicaService } from 'src/app/candidates/services/inf-tecnica.service';
-import { Vertical } from 'src/app/companies/models/vertical';
+import { Vertical } from 'src/app/companies/models/empresas';
 import { VerticalesService } from 'src/app/companies/services/verticales.service';
 
 @Component({

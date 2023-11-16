@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Perfil } from 'src/app/companies/models/perfil';
+import { Perfil } from 'src/app/companies/models/proyectos';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { DetailPerfilComponent } from './detail-perfil/detail-perfil.component';
 import { CreatePerfilComponent } from './create-perfil/create-perfil.component';

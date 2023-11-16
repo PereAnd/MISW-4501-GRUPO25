@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ubicacion } from 'src/app/companies/models/empresas';
-import { UbicacionesService } from 'src/app/companies/services/ubicaciones.service';
+import { RegEmpresaService } from 'src/app/companies/services/reg-empresa.service';
 import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class CreateUbicacionComponent {
   get description() { return this.formUbicaciones.get('description') }
 
   constructor(
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: RegEmpresaService,
     private router: Router,
     private route: ActivatedRoute,
     private dataService: DataService

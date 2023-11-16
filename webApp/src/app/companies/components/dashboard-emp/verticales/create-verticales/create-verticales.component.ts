@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Vertical } from 'src/app/companies/models/empresas';
-import { VerticalesService } from 'src/app/companies/services/verticales.service';
+import { RegEmpresaService } from 'src/app/companies/services/reg-empresa.service';
 
 @Component({
   selector: 'app-create-verticales',
@@ -23,7 +23,7 @@ export class CreateVerticalesComponent {
   get description() { return this.formVerticales.get('description') }
 
   constructor(
-    private verticalesService: VerticalesService,
+    private verticalesService: RegEmpresaService,
     private router: Router,
     private route: ActivatedRoute
   ) {

@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { VerticalesService } from 'src/app/companies/services/verticales.service';
+import { RegEmpresaService } from 'src/app/companies/services/reg-empresa.service';
 
 @Component({
   selector: 'app-verticales',
@@ -19,7 +19,7 @@ export class VerticalesComponent {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private verticalesService: VerticalesService,
+    private verticalesService: RegEmpresaService,
     private router: Router
   ) {
     this.empresaId = +localStorage.getItem('empresaId')!;

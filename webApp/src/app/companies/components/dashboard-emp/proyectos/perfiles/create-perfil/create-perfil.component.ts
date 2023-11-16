@@ -1,9 +1,7 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map, startWith } from 'rxjs';
 import { Competencia, Perfil } from 'src/app/companies/models/perfil';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -55,7 +53,7 @@ export class CreatePerfilComponent {
   }
 
   ngOnInit(): void {
-    this.perfilesService.getProjectToProfile().subscribe({ next: data => { this.proyectoId = data } })
+    this.perfilesService.getProjectToProfile().subscribe({ next: data => { this.proyectoId = data; } })
     this.perfilesService.getProfileToCompetencies().subscribe({
       next: data => {
         this.perfilId = data;
@@ -139,11 +137,8 @@ export class CreatePerfilComponent {
         if (tipo == 'Conocimiento') this.perfilesService.getConocimientos(this.empresaId, this.proyectoId, this.perfilId).subscribe({ next: data => this.conocimientos = data });
         else if (tipo == 'Habilidad') this.perfilesService.getHabilidades(this.empresaId, this.proyectoId, this.perfilId).subscribe({ next: data => this.habilidades = data });
         else if (tipo == 'Idioma') this.perfilesService.getIdiomas(this.empresaId, this.proyectoId, this.perfilId).subscribe({ next: data => this.idiomas = data });
+        this.perfilesService.setCompetenciaSelected('');
       }
     });
-  }
-  cancelarCreacion() {
-    this.formPerfiles.reset();
-    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }

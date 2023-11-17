@@ -38,7 +38,9 @@ class VistaAplicaciones(Resource):
         if response.status_code != 200:
             return response.text, response.status_code 
 
-
+        result = None
+        if "result" in request.json:
+            result = request.json["result"]
         
         try:
             applicationDate = datetime.strptime(request.json["applicationDate"], "%Y-%m-%dT%H:%M:%S.%fZ")
@@ -52,7 +54,8 @@ class VistaAplicaciones(Resource):
                                         perfilId=perfilId,
                                         proyectoId=proyectoId,
                                         empresaId=empresaId,
-                                        candidatoId=candidatoId)
+                                        candidatoId=candidatoId,
+                                        result=result)
 
             db.session.add(nuevo_aplicacion)
             db.session.commit()
@@ -113,6 +116,9 @@ class VistaAplicacion(Resource):
                     if request.json["status"] == "":
                         return 'El campo status es requerido', 400
                     aplicacion.status = request.json["status"]
+
+                if "result" in request.json:
+                    aplicacion.result = request.json["result"]
                     
                 try:
                     db.session.commit()

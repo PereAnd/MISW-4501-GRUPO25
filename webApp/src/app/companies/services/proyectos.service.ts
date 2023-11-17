@@ -9,9 +9,21 @@ import { Proyecto } from '../models/proyecto';
 })
 export class ProyectosService {
 
+  projectDetail: Proyecto;
+
   constructor(
     private httpClient: HttpClient
   ) { }
+
+  setProjectDetail(project: Proyecto){
+    this.projectDetail = project;
+  }
+
+  getProjectDetail(): Observable<Proyecto>{
+    return new Observable<Proyecto>(observer => {
+      observer.next(this.projectDetail)
+    });
+  }
 
   listProyectos(empresaId: number): Observable<any>{
     let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/proyecto';

@@ -15,6 +15,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from "@angular/material/select";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatCardModule } from "@angular/material/card";
+import { MatGridListModule } from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [],
@@ -33,7 +36,10 @@ import { MatMenuModule } from "@angular/material/menu";
     MatPaginatorModule,
     MatTableModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule,
+    MatCardModule,
+    MatGridListModule
   ],
   exports: [
     MatButtonModule,
@@ -49,7 +55,10 @@ import { MatMenuModule } from "@angular/material/menu";
     MatPaginatorModule,
     MatTableModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule,
+    MatCardModule,
+    MatGridListModule
   ]
 })
 export class AngularMaterialModule { }

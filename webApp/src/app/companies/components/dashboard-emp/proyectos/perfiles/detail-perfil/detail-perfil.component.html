@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Perfil <i>{{ profileDetail.name }}</i></h2>
+<mat-dialog-content class="mat-typography">
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Rol a desempeñar:</h3>
+    <p>{{ profileDetail.role }}</p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Ubicación:</h3>
+    <p>{{ profileDetail.location }}</p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Años de experiencia:</h3>
+    <p>{{ profileDetail.years }} año{{profileDetail.years > 1 ? 's': ''}}</p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Conocimientos:</h3>
+    <ul>
+      <li *ngFor="let conocimiento of profileDetail.conocimientos"><b>{{ conocimiento.name }}</b>, {{ conocimiento.description }}</li>
+    </ul>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Habilidades:</h3>
+    <ul>
+      <li *ngFor="let habilidad of profileDetail.habilidades"><b>{{ habilidad.name }}</b>, {{ habilidad.description }}</li>
+    </ul>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Idiomas:</h3>
+    <ul>
+      <li *ngFor="let idioma of profileDetail.idiomas"><b>{{ idioma.name }}</b>, {{ idioma.description }}</li>
+    </ul>
+  </div>
+
+  <mat-divider></mat-divider>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions>

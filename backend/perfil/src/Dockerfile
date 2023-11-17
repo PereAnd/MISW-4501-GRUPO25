@@ -15,5 +15,6 @@ RUN pip install -r requirements.txt
 #COPY . /app
 # Agregar variable de entorno con el nombre del estudiante
 ENV SQLALCHEMY_DATABASE_URI default
-EXPOSE 5001
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5001"]
+ENV EMPR_BACK_URL http://127.0.0.1:5003
+EXPOSE 5005
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5005"]

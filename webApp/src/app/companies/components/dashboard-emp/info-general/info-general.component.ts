@@ -57,7 +57,7 @@ export class InfoGeneralComponent implements OnInit {
         })
       },
       error: error => {
-        console.log("Error obteniendo los datos del candidato", error)
+        console.log("Error obteniendo los datos de la empresa", error)
       }
     })
   }

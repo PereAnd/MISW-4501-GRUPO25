@@ -4231,6 +4231,9 @@
                 "status": {
                     "type": "string"
                 },
+                "result": {
+                    "type": "string"
+                },
                 "candidatoId": {
                     "type": "integer",
                     "format": "int64"
@@ -4254,6 +4257,9 @@
                     "format": "date-time"
                 },
                 "status": {
+                    "type": "string"
+                },
+                "result": {
                     "type": "string"
                 },
                 "candidatoId": {
@@ -4288,6 +4294,9 @@
                     "format": "date-time"
                 },
                 "status": {
+                    "type": "string"
+                },
+                "result": {
                     "type": "string"
                 }
             }

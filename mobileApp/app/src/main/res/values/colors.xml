@@ -14,6 +14,7 @@
     <color name="light_gray">#EDF3F3</color>
     <color name="dark_purple">#333333</color>
     <color name="dark_red">#FC5F60</color>
+    <color name="rojo_alerta">#AC0E26</color>
     <color name="dark_gray">#545454</color>
     <color name="dark_yellow">#083d6c</color>
 

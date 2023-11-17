@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Proyecto <i>{{ projectDetail.proyecto }}</i></h1>
+<mat-dialog-content class="mat-typography">
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h2>Descripción:</h2>
+    <p>{{ projectDetail.description }}</p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h2>Perfiles solicitados:</h2>
+    <app-perfiles [proyectoId]="projectDetail.id!"></app-perfiles>
+  </div>
+
+  <mat-divider></mat-divider>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions>

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ubicacion } from 'src/app/companies/models/ubicacion';
 import { UbicacionesService } from 'src/app/companies/services/ubicaciones.service';
+import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-create-ubicacion',
@@ -14,28 +15,13 @@ export class CreateUbicacionComponent {
   empresaId: number;
   countrySelected: string = '';
   citiesOfCountry: string[] = [];
+  countryAndCity = [{pais: '', ciudades: ['']}];
 
   formUbicaciones: FormGroup = new FormGroup({
     country: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required)
   })
-
-  countryAndCity = [
-    { pais: "Argentina", ciudades: ["Buenos Aires", "Córdoba", "Rosario", "Mendoza", "Mar del Plata"] },
-    { pais: "Brasil", ciudades: ["Río de Janeiro", "São Paulo", "Brasilia", "Salvador", "Recife"] },
-    { pais: "Canadá", ciudades: ["Toronto", "Montreal", "Vancouver", "Ottawa", "Calgary"] },
-    { pais: "China", ciudades: ["Pekín", "Shanghái", "Hong Kong", "Guangzhou", "Xi'an"] },
-    { pais: "Colombia", ciudades: ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena", "Bucaramanga", "Pereira", "Manizales", "Cúcuta", "Santa Marta"] },
-    { pais: "España", ciudades: ["Madrid", "Barcelona", "Sevilla", "Valencia", "Málaga"] },
-    { pais: "Francia", ciudades: ["París", "Marsella", "Lyon", "Niza", "Toulouse"] },
-    { pais: "Italia", ciudades: ["Roma", "Milán", "Florencia", "Venecia", "Nápoles"] },
-    { pais: "Japón", ciudades: ["Tokio", "Kioto", "Osaka", "Hiroshima", "Nara"] },
-    { pais: "México", ciudades: ["Ciudad de México", "Cancún", "Guadalajara", "Monterrey", "Puebla"] },
-    { pais: "Reino Unido", ciudades: ["Londres", "Mánchester", "Edimburgo", "Birmingham", "Liverpool"] },
-    { pais: "Rusia", ciudades: ["Moscú", "San Petersburgo", "Novosibirsk", "Ekaterimburgo", "Kazán"] },
-    { pais: "Estados Unidos", ciudades: ["Nueva York", "Los Ángeles", "Chicago", "Miami", "San Francisco"] },
-  ];
 
   get country() { return this.formUbicaciones.get('country') }
   get city() { return this.formUbicaciones.get('city') }
@@ -44,9 +30,13 @@ export class CreateUbicacionComponent {
   constructor(
     private ubicacionesService: UbicacionesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dataService: DataService
   ) {
     this.empresaId = +localStorage.getItem('empresaId')!;
+    dataService.getCountriesAndCities().subscribe({
+      next: data => { this.countryAndCity = data }
+    });
   }
 
   ngOnInit(): void {
@@ -112,7 +102,6 @@ export class CreateUbicacionComponent {
 
   actualizarCiudades(){
     const paisSeleccionado = this.formUbicaciones.value.country;
-    const pais = this.countryAndCity.find(item => item.pais === paisSeleccionado);
     this.countryAndCity.forEach(item => {
       if(item.pais === paisSeleccionado){
         this.countrySelected = item.pais;

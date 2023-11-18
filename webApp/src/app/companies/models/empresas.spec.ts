@@ -40,7 +40,7 @@ describe('Class Empresa', () => {
     expect(empresa).toBeTruthy();
   })
   it("Crear instancia de la clase 'Ubicacion'", () => {
-    const fakeUbicacion = {
+    ubicacion = {
       country: faker.location.country(),
       city: faker.location.city(),
       description: faker.lorem.words(5)
@@ -48,7 +48,7 @@ describe('Class Empresa', () => {
     expect(ubicacion).toBeTruthy();
   })
   it("Crear instancia de la clase 'Vertical'", () => {
-    const fakeVertical = {
+    vertical = {
       vertical: faker.company.buzzPhrase(),
       description: faker.lorem.paragraph(5)
     }

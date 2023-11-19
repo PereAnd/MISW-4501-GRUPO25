@@ -1,22 +1,21 @@
 package com.example.vinyls.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.vinyls.models.Empresa
 import com.example.vinyls.models.repository.EmpresaRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-//import org.json.JSONObject
+import org.json.JSONObject
 
-class EmpresaListViewModel (application: Application) :  AndroidViewModel(application) {
+class IngresoEmpresaViewModel (application: Application) :  AndroidViewModel(application)  {
     private val empresaRepository = EmpresaRepository(application)
 
-    private val _empresas = MutableLiveData<List<Empresa>>()
+    private val _empresa = MutableLiveData<Empresa>()
 
-    val empresas: LiveData<List<Empresa>>
-        get() = _empresas
+    val empresa: LiveData<Empresa>
+        get() = _empresa
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -28,39 +27,32 @@ class EmpresaListViewModel (application: Application) :  AndroidViewModel(applic
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    init {
-        refreshDataFromNetwork()
-    }
-
-
-    private fun refreshDataFromNetwork() {
-        viewModelScope.launch(Dispatchers.Default) {
-            try {
+    suspend fun ingresoEmpresaFromNetwork(empresa: JSONObject): Int {
+        var id: Int = 0 // Inicializar id fuera del bloque try
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {
-                    val data = empresaRepository.refreshData()
-                    _empresas.postValue(data)
+                    var data = empresaRepository.ingresoEmpresa(empresa)
+                    _empresa.postValue(data)
+                    id = data.empresaId
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
-            } catch (e: Exception) {
-                Log.e("EmpresaListViewModel", "Error al actualizar datos desde la red", e)
-                _eventNetworkError.postValue(true)
             }
+        } catch (e: Exception) {
+            _eventNetworkError.postValue(true)
         }
+        return id // Devolver id, que tendrá 0 si no se pudo completar el ingresoEmpresa
     }
 
-    fun onNetworkErrorShown() {
-        _isNetworkErrorShown.value = true
-    }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(EmpresaListViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(IngresoEmpresaViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return EmpresaListViewModel(app) as T
+                return IngresoEmpresaViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
 }
-

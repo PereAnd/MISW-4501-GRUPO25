@@ -9,7 +9,7 @@
     android:paddingHorizontal="60dp"
     android:paddingTop="30dp"
     android:background="@color/background_general"
-    tools:context=".view.FragmentMenuLogin">
+    tools:context=".view.FragmentMenuLoginEmpresa">
 
     <LinearLayout
         android:id="@+id/linearLayoutIngresoEmpresa"

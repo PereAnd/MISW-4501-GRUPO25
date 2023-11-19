@@ -8,8 +8,8 @@ import org.json.JSONObject
 
 class EmpresaRepository (val application: Application){
 
-    suspend fun refreshData(): List<Empresa>{
-        return NetworkServiceAdapter.getInstance(application).getEmpresa()
+    suspend fun ingresoEmpresa(empresa: JSONObject): Empresa{
+        return NetworkServiceAdapter.getInstance(application).ingresoEmpresa(empresa)
     }
 
 }

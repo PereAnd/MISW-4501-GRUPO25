@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
+import { forkJoin } from 'rxjs';
 import { Perfil, Proyecto } from 'src/app/companies/models/proyectos';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
@@ -11,8 +12,8 @@ import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 })
 export class EntrevistasEmpComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  projects: Proyecto[] = []; // name, description, id
-  profiles: Perfil[] = [];
+
+  projects: any[] = [{project: {}, profiles: []}];
   empresaId: number;
 
   constructor(
@@ -23,42 +24,30 @@ export class EntrevistasEmpComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.proyectosService.listProyectos(this.empresaId).subscribe({
-      next: (data) => {
-        this.projects = data;
-        data.forEach((project: { id: number; }) => {
-          this.perfilesService
-            .listPerfiles(this.empresaId, project.id!)
-            .subscribe({
-              next: (data) => {
-                this.profiles.push(...data);
-              },
-              error: (error) => {
-                console.error('Error obteniendo los perfiles', error);
-              },
-            });
-        });
-      },
-      error: (error) => {
-        console.error('Error obteniendo los proyectos', error);
-      }, complete: () => {
-        console.log(this.projects);
-        console.log(this.profiles);
-      }
-    });
+    this.getProjectsaAndProfiles();
   }
-
-  getProfiles(projects: Proyecto[]) {
-    this.profiles = [];
-    projects.forEach((project) => {
-      this.perfilesService.listPerfiles(this.empresaId, project.id!).subscribe({
-        next: (data) => {
-          this.profiles.push(...data);
-        },
-        error: (error) => {
-          console.error('Error obteniendo los perfiles', error);
-        },
-      });
-    });
+  getProjectsaAndProfiles(){
+    this.proyectosService.listProyectos(this.empresaId).subscribe({
+      next: (projects: any) => {
+        const perfilesRequests = projects.map((project: Proyecto) =>
+          this.perfilesService.listPerfiles(this.empresaId, project.id!)
+        );
+        forkJoin(perfilesRequests).subscribe({
+          next: (profilesForProject: any) => {
+            this.projects = projects.map((project: Proyecto, index: number) => ({
+              project,
+              profiles: profilesForProject[index],
+            }));
+          },
+          error: (error) => {
+            console.error('Error al obtener perfiles:', error);
+          }, complete: () => {
+            console.log(this.projects)
+          }
+        })
+      }, error: error => {
+        console.error('Error al obtener proyectos:', error)
+      }
+    })
   }
 }

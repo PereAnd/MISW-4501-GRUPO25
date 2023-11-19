@@ -4,14 +4,26 @@
     <button mat-button (click)="accordion.openAll()">Expand All</button>
     <button mat-button (click)="accordion.closeAll()">Collapse All</button>
   </div>
-  <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel *ngFor="let project of projects">
+  <mat-accordion class="headers-accordion" multi>
+    <mat-expansion-panel *ngFor="let projectObj of projects">
       <mat-expansion-panel-header>
-        <mat-panel-title> {{ project.proyecto }} </mat-panel-title>
+        <mat-panel-title> {{ projectObj.project.proyecto }} </mat-panel-title>
         <mat-panel-description>
-          {{ project.description }}
+          {{ projectObj.project.description }}
         </mat-panel-description>
       </mat-expansion-panel-header>
+
+      <mat-accordion class="headers-accordion" multi>
+        <mat-expansion-panel *ngFor="let profileObj of projectObj.profiles">
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ profileObj.name }} </mat-panel-title>
+            <mat-panel-description>
+              {{ profileObj.location }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+        </mat-expansion-panel>
+      </mat-accordion>
 
     </mat-expansion-panel>
   </mat-accordion>

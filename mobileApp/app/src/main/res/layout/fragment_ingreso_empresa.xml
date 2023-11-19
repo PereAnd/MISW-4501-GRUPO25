@@ -9,7 +9,7 @@
     android:paddingHorizontal="60dp"
     android:paddingTop="30dp"
     android:background="@color/background_general"
-    tools:context=".view.FragmentMenuLoginEmpresa">
+    tools:context=".view.FragmentIngresoEmpresa">
 
     <LinearLayout
         android:id="@+id/linearLayoutIngresoEmpresa"
@@ -82,7 +82,7 @@
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etIngresoEmpresa"
+                    android:id="@+id/etPasswordIngresoEmpresa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"

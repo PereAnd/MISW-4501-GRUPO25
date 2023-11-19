@@ -107,8 +107,8 @@
     <!-- Menú Login Empresa -->
     <fragment
         android:id="@+id/fragment_menu_login_empresa"
-        android:name="com.example.vinyls.view.FragmentMenuLoginEmpresa"
-        tools:layout="@layout/fragment_menu_login_empresas">
+        android:name="com.example.vinyls.view.FragmentIngresoEmpresa"
+        tools:layout="@layout/fragment_ingreso_empresa">
         <action
             android:id="@+id/action_fragment_menu_login_to_fragment_entrevista"
             app:destination="@id/fragment_candidato_list" />

@@ -263,12 +263,12 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     private var currentEmpresaId: Int = -1
     suspend fun ingresoEmpresa(body: JSONObject) = suspendCoroutine<Empresa> { cont ->
-        requestQueue.add(postRequest("login", body,
+        requestQueue.add(postRequest("logIn", body,
             { response ->
                 val empresaId = response.getInt("id_empresa")
                 currentEmpresaId = empresaId
-                val mail = response.getString("mail")
-                val password = response.getString("password")
+                val mail = response.optString("mail", "Sin mail")
+                val password = response.optString("password", "Sin password")
 
                 val empresa = Empresa(
                     empresaId = empresaId,
@@ -284,7 +284,6 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
     
-
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL +path, responseListener,errorListener)

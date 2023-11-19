@@ -12,6 +12,7 @@ import com.example.vinyls.models.InfoAcademica
 import com.example.vinyls.models.InfoPersonal
 import com.example.vinyls.models.InfoTecnica
 import com.example.vinyls.models.InfoLaboral
+import com.example.vinyls.models.Empresa
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -258,6 +259,39 @@ class NetworkServiceAdapter constructor(context: Context) {
             ))
         }
     }
+
+
+    private var currentEmpresa: Int = -1
+    suspend fun getEmpresa() = suspendCoroutine<List<Empresa>> { cont ->
+        requestQueue.add(getRequest("empresa?mail=juan@gmail.com",
+            { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Empresa>()
+                var currentEmpresa = -1
+
+                if (resp.length() > 0) {
+                    val primerItem = resp.getJSONObject(0)
+
+                    val empresaId = primerItem.getInt("id")
+                    currentEmpresa = empresaId
+                    val name = primerItem.getString("name")
+
+                    val primerEmpresa = Empresa(
+                        empresaId = empresaId,
+                        name = name
+                    )
+
+                    list.add(primerEmpresa)
+                }
+
+                cont.resume(list)
+            },
+            {
+                cont.resumeWithException(it)
+            })
+        )
+    }
+
 
 
 

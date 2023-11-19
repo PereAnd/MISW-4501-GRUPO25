@@ -19,6 +19,7 @@ import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+import android.util.Log
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
@@ -263,7 +264,7 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     private var currentEmpresaId: Int = -1
     suspend fun ingresoEmpresa(body: JSONObject) = suspendCoroutine<Empresa> { cont ->
-        requestQueue.add(postRequest("logIn", body,
+        requestQueue.add(postRequest("login", body,
             { response ->
                 val empresaId = response.getInt("id_empresa")
                 currentEmpresaId = empresaId
@@ -279,6 +280,7 @@ class NetworkServiceAdapter constructor(context: Context) {
             },
             {
                 cont.resumeWithException(it)
+                Log.e("NetworkServiceAdapter", "Error en la solicitud", it)
             }
         ))
     }
@@ -286,7 +288,7 @@ class NetworkServiceAdapter constructor(context: Context) {
 
 
     suspend fun getEntrevistas() = suspendCoroutine<List<Entrevista>> { cont ->
-        requestQueue.add(getRequest("entrevista",
+        requestQueue.add(getRequest("empresa/1/entrevistas",
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Entrevista>()
@@ -320,6 +322,7 @@ class NetworkServiceAdapter constructor(context: Context) {
             },
             {
                 cont.resumeWithException(it)
+                Log.e("NetworkServiceAdapter", "Error en la solicitud", it)
             })
         )
     }

@@ -55,7 +55,7 @@ class FragmentIngresoEmpresa : Fragment(R.layout.fragment_ingreso_empresa) {
             sendDataToServer()
 
             if (currentState) {
-                findNavController().navigate(R.id.action_fragment_menu_login_to_fragment_entrevista)
+                findNavController().navigate(R.id.action_fragment_menu_login_to_fragment_entrevista_empresa)
             } else {
                 //
             }

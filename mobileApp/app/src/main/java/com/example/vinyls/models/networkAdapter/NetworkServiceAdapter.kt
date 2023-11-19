@@ -288,7 +288,11 @@ class NetworkServiceAdapter constructor(context: Context) {
 
 
     suspend fun getEntrevistas() = suspendCoroutine<List<Entrevista>> { cont ->
-        requestQueue.add(getRequest("empresa/1/entrevistas",
+        if (currentEmpresaId == -1) {
+            // Handle this situation appropriately, for example, by throwing an exception.
+            // return@suspendCoroutine
+        }
+        requestQueue.add(getRequest("empresa/$currentEmpresaId/entrevistas",
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Entrevista>()

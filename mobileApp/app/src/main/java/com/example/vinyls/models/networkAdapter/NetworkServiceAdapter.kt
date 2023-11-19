@@ -21,7 +21,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
-        const val BASE_URL = "http://k8s-proyecto-ingressp-eb59205740-1747100398.us-east-1.elb.amazonaws.com/"
+        const val BASE_URL = "http://candidatos.us-east-2.elasticbeanstalk.com/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -261,40 +261,29 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
-    private var currentEmpresa: Int = -1
-    suspend fun getEmpresa() = suspendCoroutine<List<Empresa>> { cont ->
-        requestQueue.add(getRequest("empresa?mail=juan@gmail.com",
+    private var currentEmpresaId: Int = -1
+    suspend fun ingresoEmpresa(body: JSONObject) = suspendCoroutine<Empresa> { cont ->
+        requestQueue.add(postRequest("login", body,
             { response ->
-                val resp = JSONArray(response)
-                val list = mutableListOf<Empresa>()
-                var currentEmpresa = -1
+                val empresaId = response.getInt("id_empresa")
+                currentEmpresaId = empresaId
+                val mail = response.getString("mail")
+                val password = response.getString("password")
 
-                if (resp.length() > 0) {
-                    val primerItem = resp.getJSONObject(0)
-
-                    val empresaId = primerItem.getInt("id")
-                    currentEmpresa = empresaId
-                    val name = primerItem.getString("name")
-
-                    val primerEmpresa = Empresa(
-                        empresaId = empresaId,
-                        name = name
-                    )
-
-                    list.add(primerEmpresa)
-                }
-
-                cont.resume(list)
+                val empresa = Empresa(
+                    empresaId = empresaId,
+                    mail = mail,
+                    password = password
+                )
+                cont.resume(empresa)
             },
             {
                 cont.resumeWithException(it)
-            })
-        )
+            }
+        ))
     }
 
-
-
-
+    
 
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {

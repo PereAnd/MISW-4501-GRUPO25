@@ -4,5 +4,6 @@ import java.util.Date
 
 data class Empresa(
     val empresaId: Int,
-    val name: String
+    val mail: String,
+    val password: String
 )

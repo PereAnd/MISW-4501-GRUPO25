@@ -13,6 +13,7 @@ import com.example.vinyls.models.InfoPersonal
 import com.example.vinyls.models.InfoTecnica
 import com.example.vinyls.models.InfoLaboral
 import com.example.vinyls.models.Empresa
+import com.example.vinyls.models.Entrevista
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -48,7 +49,6 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val lastNames = item.getString("lastNames")
                     val mail = item.getString("mail")
 
-                    // Verificar si la clave "password" está presente en el objeto JSON
                     val password = if (item.has("password")) {
                         item.getString("password")
                     } else { "nd" }
@@ -281,6 +281,47 @@ class NetworkServiceAdapter constructor(context: Context) {
                 cont.resumeWithException(it)
             }
         ))
+    }
+
+
+
+    suspend fun getEntrevistas() = suspendCoroutine<List<Entrevista>> { cont ->
+        requestQueue.add(getRequest("entrevista",
+            { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Entrevista>()
+
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+
+                    val entrevistaId = item.getInt("id")
+                    val nameCandidato = item.getString("nameCandidato")
+                    val lastNameCandidato = item.getString("lastNameCandidato")
+                    val fecha = item.getString("fecha")
+                    val hora = item.getString("hora")
+                    val reclutador = item.getString("reclutador")
+                    val direcction = item.getString("direcction")
+                    val observatios = item.getString("observatios")
+                    val status = item.getString("status")
+
+                    list.add(i, Entrevista(
+                        entrevistaId = entrevistaId,
+                        nameCandidato = nameCandidato,
+                        lastNameCandidato = lastNameCandidato,
+                        fecha = fecha,
+                        hora = hora,
+                        reclutador = reclutador,
+                        direcction = direcction,
+                        observatios = observatios,
+                        status = status
+                    ))
+                }
+                cont.resume(list)
+            },
+            {
+                cont.resumeWithException(it)
+            })
+        )
     }
 
     

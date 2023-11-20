@@ -498,7 +498,8 @@ class VistaProyecto(Resource):
 
 # Entrevistas
 # Vista POST - GET
-
+class VistaEntrevistas(Resource):
+    
     def get(self, empresaId):
         if empresaId.isnumeric() == False:
             return 'El empresaId no es un número.', 400

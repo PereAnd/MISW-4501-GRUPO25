@@ -5,6 +5,34 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_
 db = SQLAlchemy()
 
 
+class Entrevista(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    enterviewDate = db.Column(db.DateTime, nullable=False)
+    done = db.Column(db.Boolean, nullable=False)
+    feedback = db.Column(db.Text, nullable=True)
+    proyectoId = db.Column(db.Integer, nullable=False)
+    empresaId = db.Column(db.Integer, nullable=False)
+    perfilId = db.Column(db.Integer, nullable=False)
+    aplicacionId = db.Column(db.Integer, nullable=False)
+
+
+
+
+class EntrevistaEschema(SQLAlchemySchema):
+    class Meta:
+         model = Entrevista
+         include_relationships = False
+         load_instance = True         
+    id = auto_field()
+    enterviewDate = auto_field()
+    done = auto_field()
+    feedback = auto_field()
+    aplicacionId = auto_field()
+    proyectoId = auto_field()
+    empresaId = auto_field()
+    perfilId = auto_field()
+
+
 class Proyecto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     proyecto = db.Column(db.String(50), nullable=False)
@@ -68,67 +96,7 @@ class Empresa(db.Model):
     proyecto = db.relationship('Proyecto', backref='proyectoRel')
 
 
-# class InformacionAcademica(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(50), nullable=False)
-#     institution = db.Column(db.String(50), nullable=False)
-#     beginDate = db.Column(db.DateTime, nullable=False)
-#     endDate = db.Column(db.DateTime, nullable=True)
-#     studyType = db.Column(db.String(50), nullable=True)
-#     candidatoId = db.Column(db.Integer, db.ForeignKey('candidato.id'))
 
-# class InformacionTecnica(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     type = db.Column(db.String(20), nullable=False)
-#     description = db.Column(db.String(150), nullable=False)
-#     candidatoId = db.Column(db.Integer, db.ForeignKey('candidato.id'))
-
-# class InformacionLaboral(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     position = db.Column(db.String(150), nullable=False)
-#     organization = db.Column(db.String(150), nullable=False)
-#     activities = db.Column(db.Text, nullable=False)
-#     dateFrom = db.Column(db.DateTime, nullable=False)
-#     dateTo = db.Column(db.DateTime, nullable=True)
-#     candidatoId = db.Column(db.Integer, db.ForeignKey('candidato.id'))
-
-
-# class InformacionLaboralEschema(SQLAlchemySchema):
-#     class Meta:
-#          model = InformacionLaboral
-#          include_relationships = False
-#          load_instance = True         
-#     id = auto_field()
-#     position = auto_field()
-#     organization = auto_field()
-#     activities = auto_field()
-#     dateFrom = auto_field()
-#     dateTo = auto_field()
-#     candidatoId = auto_field()
-
-
-# class InformacionAcademicaEschema(SQLAlchemySchema):
-#     class Meta:
-#          model = InformacionAcademica
-#          include_relationships = False
-#          load_instance = True         
-#     id = auto_field()
-#     title = auto_field()
-#     institution = auto_field()
-#     beginDate = auto_field()
-#     endDate = auto_field()
-#     studyType = auto_field()
-#     candidatoId = auto_field()
-
-# class InformacionTecnicaEschema(SQLAlchemySchema):
-#     class Meta:
-#          model = InformacionTecnica
-#          include_relationships = False
-#          load_instance = True         
-#     id = auto_field()
-#     type = auto_field()
-#     description = auto_field()
-#     candidatoId = auto_field()
 
 class EmpresaEschema(SQLAlchemySchema):
     class Meta:

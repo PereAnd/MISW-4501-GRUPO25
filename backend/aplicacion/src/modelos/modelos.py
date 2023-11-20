@@ -20,6 +20,9 @@ class Entrevista(db.Model):
     enterviewDate = db.Column(db.DateTime, nullable=False)
     done = db.Column(db.Boolean, nullable=False)
     feedback = db.Column(db.Text, nullable=True)
+    proyectoId = db.Column(db.Integer, nullable=False)
+    empresaId = db.Column(db.Integer, nullable=False)
+    perfilId = db.Column(db.Integer, nullable=False)
     aplicacionId = db.Column(db.Integer, db.ForeignKey('aplicacion.id'))
 
 class EntrevistaEschema(SQLAlchemySchema):

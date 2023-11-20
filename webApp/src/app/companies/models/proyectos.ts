@@ -26,3 +26,26 @@ export class Competencia {
     public id?: number
   ){}
 }
+
+export class Aplicacion {
+  constructor(
+    public applicationDate: string,
+    public status: string,
+    public candidatoId: number,
+    public result: string,
+    public proyectoId?: number,
+    public empresaId?: number,
+    public perfilId?: number,
+    public entrevista?: Entrevista[],
+    public id?: number
+  ) {}
+}
+
+export class Entrevista {
+  constructor(
+    public enterviewDate: string,
+    public done: boolean,
+    public feedback: string,
+    public id?: number
+  ) {}
+}

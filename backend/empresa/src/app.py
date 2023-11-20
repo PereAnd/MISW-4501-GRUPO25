@@ -29,6 +29,7 @@ db.create_all()
 cors = CORS(app)
 
 api = Api(app)
+api.add_resource(VistaLogIn, '/login')
 api.add_resource(VistaRegistro, '/empresa')
 api.add_resource(VistaEmpresa, '/empresa/<string:id>')
 api.add_resource(VistaVerticales, '/empresa/<string:empresaId>/vertical')

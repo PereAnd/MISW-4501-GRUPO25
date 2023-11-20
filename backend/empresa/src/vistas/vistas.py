@@ -15,6 +15,23 @@ proyecto_schema = ProyectoEschema()
 
 
 # Empresas
+
+class VistaLogIn(Resource):
+    def post(self):
+        if not "mail" in request.json or not "password" in request.json:
+            return 'Los campos mail y password son requeridos', 400
+
+        if request.json["mail"] == "" or request.json["password"] == "":
+            return 'Los campos mail y password son requeridos', 400
+
+        empresa = Empresa.query.filter_by(mail=request.json["mail"]).first()
+
+        if empresa and empresa.password == request.json["password"]:
+            return {'id_empresa': empresa.id}, 200
+        else:
+            return 'Mail o contraseña incorrecta', 401
+
+
 # Vista POST - GET
 class VistaRegistro(Resource):
 

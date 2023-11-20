@@ -214,6 +214,9 @@ class VistaEntrevistas(Resource):
             nueva_entrevista = Entrevista(enterviewDate=enterviewDate, 
                                         done=done,
                                         feedback=feedback,
+                                        perfilId=perfilId,
+                                        proyectoId=proyectoId,
+                                        empresaId=empresaId,
                                         aplicacionId=aplicacionId)
             db.session.add(nueva_entrevista)
             db.session.commit()

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Perfil } from 'src/app/companies/models/perfil';
+import { Perfil } from 'src/app/companies/models/proyectos';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 
 @Component({

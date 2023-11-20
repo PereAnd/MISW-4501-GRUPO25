@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Competencia } from 'src/app/companies/models/perfil';
+import { Competencia } from 'src/app/companies/models/proyectos';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 
 @Component({

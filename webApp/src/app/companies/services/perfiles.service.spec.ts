@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http/testing';
 import { environment } from 'src/environments/environment.development';
 import { faker } from '@faker-js/faker';
-import { Perfil } from '../models/perfil';
+import { Perfil } from '../models/proyectos';
 
 describe('PerfilesService', () => {
   let service: PerfilesService;

@@ -15,11 +15,16 @@ class FragmentHome : Fragment(R.layout.fragment_home) {
             View? {
                 val view = inflater.inflate(R.layout.fragment_home, container, false);
                 val buttonMenuLogin: Button = view.findViewById(R.id.btnLogin)
+                val buttonMenuLoginEmpresa: Button = view.findViewById(R.id.btnLoginEmpresa)
 
                 buttonMenuLogin.setOnClickListener {
                     findNavController().navigate(R.id.action_fragment_home_to_fragment_menu_login)
-                        }
-                return view
                 }
 
-}
+                buttonMenuLoginEmpresa.setOnClickListener {
+                    findNavController().navigate(R.id.action_fragment_home_to_fragment_menu_login_empresa)
+                }
+
+                return view
+            }
+        }

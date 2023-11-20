@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Competencia, Perfil } from 'src/app/companies/models/perfil';
+import { Competencia, Perfil } from 'src/app/companies/models/proyectos';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CreateCompetenciaComponent } from '../create-competencia/create-competencia.component';

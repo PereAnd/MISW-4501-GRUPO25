@@ -1,3 +1,11 @@
+export class Proyecto {
+  constructor(
+    public proyecto: string,
+    public description: string,
+    public id?: number
+  ){}
+}
+
 export class Perfil {
   constructor(
     public name: string,

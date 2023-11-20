@@ -1008,6 +1008,45 @@
                 }
             }
         },
+        "/empresa/{empresaId}/entrevista": {
+            "get": {
+                "description": "Retorna las entrevistas de una empresa",
+                "operationId": "findEntrevista",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "empresaId",
+                        "in": "path",
+                        "description": "Id de la empresa",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Entrevista",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Entrevista"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
         "/empresa/{empresaId}/vertical/{id}": {
             "get": {
                 "description": "Retorna una vertical a partir de su id",

@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Proyecto } from 'src/app/companies/models/proyecto';
+import { Proyecto } from 'src/app/companies/models/proyectos';
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { DetailProyectoComponent } from './detail-proyecto/detail-proyecto.component';

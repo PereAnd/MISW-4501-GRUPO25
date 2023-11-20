@@ -1,6 +1,6 @@
 from flask_restful import Api
 from .modelos import db
-from .vistas import VistaPing,VistaRegistro,VistaEmpresa,VistaVerticales, VistaVertical,VistaUbicacion,VistaUbicaciones, VistaProyecto, VistaProyectos, VistaEntrevistas
+from .vistas import VistaPing,VistaRegistro,VistaEmpresa,VistaVerticales, VistaVertical,VistaUbicacion,VistaUbicaciones, VistaProyecto, VistaProyectos, VistaEntrevistas, VistaLogIn
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask

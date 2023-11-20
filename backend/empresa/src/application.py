@@ -1,7 +1,7 @@
 from flask_restful import Api
 from pathlib import Path
 from modelos import db
-from vistas import VistaPing,VistaRegistro,VistaEmpresa,VistaVerticales, VistaVertical,VistaUbicacion,VistaUbicaciones, VistaProyecto, VistaProyectos
+from vistas import VistaPing,VistaRegistro,VistaEmpresa,VistaVerticales, VistaVertical,VistaUbicacion,VistaUbicaciones, VistaProyecto, VistaProyectos, VistaLogIn, VistaEntrevistas
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
@@ -33,15 +33,18 @@ db.create_all()
 cors = CORS(application)
 
 api = Api(application)
+api.add_resource(VistaLogIn, '/login')
 api.add_resource(VistaRegistro, '/empresa')
 api.add_resource(VistaEmpresa, '/empresa/<string:id>')
 api.add_resource(VistaVerticales, '/empresa/<string:empresaId>/vertical')
+api.add_resource(VistaEntrevistas, '/empresa/<string:empresaId>/entrevista')
 api.add_resource(VistaVertical, '/empresa/<string:empresaId>/vertical/<string:id>')
 api.add_resource(VistaUbicaciones, '/empresa/<string:empresaId>/ubicacion')
 api.add_resource(VistaUbicacion, '/empresa/<string:empresaId>/ubicacion/<string:id>')
 api.add_resource(VistaProyectos, '/empresa/<string:empresaId>/proyecto')
 api.add_resource(VistaProyecto, '/empresa/<string:empresaId>/proyecto/<string:id>')
 api.add_resource(VistaPing, '/empresa/ping')
+
 
 if __name__ == '__main__':
     application.run(port=5002, debug=True)

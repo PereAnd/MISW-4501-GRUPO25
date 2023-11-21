@@ -114,8 +114,8 @@ export class PerfilesService {
     return this.httpClient.get<Aplicacion[]>(baseUrl);
   }
 
-  listEntrevistas(empresaId: number, proyectoId: number, perfilId: number, aplicacionId: number): Observable<Entrevista[]>{
-    let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion/' + aplicacionId + '/entrevista';
+  listEntrevistas(empresaId: number): Observable<any[]>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/entrevista';
     return this.httpClient.get<any[]>(baseUrl);
   }
 }

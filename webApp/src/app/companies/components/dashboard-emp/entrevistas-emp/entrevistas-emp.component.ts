@@ -4,6 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { faker } from '@faker-js/faker';
+import { forkJoin } from 'rxjs';
+import { RegCandidatoService } from 'src/app/candidates/services/reg-candidato.service';
+import { PerfilesService } from 'src/app/companies/services/perfiles.service';
+import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 
 @Component({
   selector: 'app-entrevistas-emp',
@@ -12,41 +16,79 @@ import { faker } from '@faker-js/faker';
 })
 export class EntrevistasEmpComponent implements OnInit {
   empresaId: number;
+  proyectos: any[] = [];
+  perfiles: any[] = [];
+  candidatos: any[] = [];
+  aplicaciones: any[] = [];
 
-  candidates: any[] = [];
-  projects: any[] = [];
-  profiles: any[] = [];
-  applications: any[] = [];
-  interviews: any[] = [];
+  responseInterviews: any[] = []
+  interviews: any[] = []
 
-  displayedColumns: string[] = ['id', 'proyecto', 'perfil', 'candidato', 'fecha', 'estado', 'actions']
+  displayedColumns: string[] = ['id', 'project', 'profile', 'candidate', 'enterviewDate', 'done', 'actions']
   dataSource = new MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
+    private perfilesService: PerfilesService,
+    private proyectosService: ProyectosService,
+    private candidatosService: RegCandidatoService,
     public dialog: MatDialog
   ) {
     this.empresaId = +localStorage.getItem('empresaId')!;
   }
 
   ngOnInit(): void {
-    let statusList = ['Pendiente', 'Aceptado', 'Rechazado'];
-    for (let i = 0; i < 10; i++){
-      this.interviews.push({
-        id: i + 1,
-        proyecto: faker.science.chemicalElement().name,
-        perfil: faker.number.int({ min: 1, max: 10 }),
-        candidato: faker.person.firstName() + ' ' + faker.person.lastName(),
-        fecha: faker.date.future(),
-        estado: statusList[faker.number.int({ min: 0, max: statusList.length - 1 })],
-      })
-    }
-    this.dataSource = new MatTableDataSource(this.interviews);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    forkJoin([
+      this.candidatosService.getListCandidatos(),
+      this.proyectosService.listProyectos(this.empresaId),
+      this.perfilesService.listEntrevistas(this.empresaId)
+    ]).subscribe({
+      next: ([listCandidatos, listProyectos, listEntrevistas]) => {
+        this.candidatos = listCandidatos
+        this.proyectos = listProyectos
+        this.responseInterviews = listEntrevistas
+
+        listProyectos.forEach((proyecto: { id: number; }) => {
+          this.perfilesService.listPerfiles(this.empresaId, proyecto.id).subscribe({
+            next: listPerfiles => {
+              this.perfiles.push(...listPerfiles)
+
+              listPerfiles.forEach((perfil: { id: number; }) => {
+                this.perfilesService.listAplicaciones(this.empresaId, proyecto.id, perfil.id).subscribe({
+                  next: listAplicaciones => {
+                    this.aplicaciones.push(...listAplicaciones)
+                  }
+                })
+              })
+            }
+          })
+        })
+      }, complete: () => {
+        this.responseInterviews.forEach(entrevista => {
+          const application = this.aplicaciones.find(aplicacion => aplicacion.id == entrevista.aplicacionId)
+          const candidateId = application.candidatoId;
+          const candidate = this.candidatos.find(candidato => candidato.id === candidateId);
+          this.interviews.push({
+            id: entrevista.id,
+            project: application.proyecto,
+            profile: application.perfil,
+            candidate: candidate.names + ' ' + candidate.lastNames,
+            enterviewDate: entrevista.enterviewDate,
+            done: entrevista.done ? 'Sí' : 'No'
+          })
+        })
+        this.dataSource = new MatTableDataSource(this.interviews);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    })
   }
+
+  /*
+
+  */
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -57,7 +99,7 @@ export class EntrevistasEmpComponent implements OnInit {
     }
   }
   // detalleProyecto(project: Proyecto){
-  //   this.proyectoService.setProjectDetail(project);
+  //   this.perfilesService.setProjectDetail(project);
   //   const dialogRef = this.dialog.open(DetailProyectoComponent, { width: '1000px' });
   //   dialogRef.afterClosed().subscribe(result => {
   //     //console.log(`Dialog result: ${result}`);

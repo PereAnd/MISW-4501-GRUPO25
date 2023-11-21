@@ -7,7 +7,7 @@ import requests, sys
 
 empresa_schema = EmpresaEschema()
 vertical_schema = VerticalEschema()
-entrevista_schema = VerticalEschema()
+entrevista_schema = EntrevistaEschema()
 ubicacion_schema = UbicacionEschema()
 proyecto_schema = ProyectoEschema()
 # informacion_schema = InformacionAcademicaEschema()

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Proyecto } from 'src/app/companies/models/proyecto';
+import { Proyecto } from 'src/app/companies/models/proyectos';
+import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 
 @Component({
@@ -24,13 +25,15 @@ export class CreateProyectoComponent {
   constructor(
     private proyectosService: ProyectosService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private perfilesService: PerfilesService
   ) {
     this.empresaId = +localStorage.getItem('empresaId')!;
   }
 
   ngOnInit(): void {
     this.indexProyecto = this.route.snapshot.params['idp'];
+    this.perfilesService.setProjectToProfile(this.indexProyecto)
     if (this.indexProyecto) {
       this.proyectosService.findProyecto(this.empresaId, this.indexProyecto).subscribe({
         next: (data) => {
@@ -55,14 +58,11 @@ export class CreateProyectoComponent {
       this.proyectosService.addProyecto(newProyecto, this.empresaId).subscribe({
         next: (data) => {
           console.log('Proyecto registrado');
-          this.formProyectos.reset();
+          this.router.navigate(['../', data.id], { relativeTo: this.route });
         },
         error: (error) => {
           console.log('Error registrando el proyecto', error);
           alert('Error registrando el proyecto');
-        },
-        complete: () => {
-          this.router.navigate(['..'], { relativeTo: this.route });
         },
       });
     } else {
@@ -71,14 +71,10 @@ export class CreateProyectoComponent {
         .subscribe({
           next: (data) => {
             console.log('Proyecto actualizado');
-            this.formProyectos.reset();
           },
           error: (error) => {
             console.log('Error editando el proyecto', error);
             alert('Error editando el proyecto');
-          },
-          complete: () => {
-            this.router.navigate(['..'], { relativeTo: this.route });
           },
         });
     }
@@ -86,5 +82,6 @@ export class CreateProyectoComponent {
 
   cancelarCreacion() {
     this.formProyectos.reset();
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }

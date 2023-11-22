@@ -1,0 +1,58 @@
+.container{
+  margin-top: 1rem;
+  max-width: 90%;
+}
+#titulo{
+  text-align: center;
+  background-color: #ffffff;
+  margin-bottom: 0;
+}
+mat-form-field{
+  width: 100%;
+}
+.botones{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.text-help{
+  text-align: center;
+  color: black;
+}
+.row{
+  margin-bottom: 0.5rem;
+}
+
+.card-container{
+  border: #9b9b9b 1px solid;
+  border-radius: 15px;
+  padding: 0.5rem;
+  overflow-y: auto;
+  max-height: 300px;
+}
+.controles {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.controles h2{
+  margin-bottom: 0;
+}
+.card {
+  margin-bottom: 16px;
+  text-align: left;
+  padding: 0.5rem;
+  height: 75px;
+  font-size: small;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #dcdcdc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+.card-text{
+  text-align: left;
+}

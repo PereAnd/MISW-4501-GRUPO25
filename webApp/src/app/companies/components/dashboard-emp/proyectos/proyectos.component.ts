@@ -3,8 +3,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { InfTecnicaService } from 'src/app/candidates/services/inf-tecnica.service';
+import { Proyecto } from 'src/app/companies/models/proyectos';
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { DetailProyectoComponent } from './detail-proyecto/detail-proyecto.component';
 
 @Component({
   selector: 'app-proyectos',
@@ -21,7 +23,7 @@ export class ProyectosComponent {
 
   constructor(
     private proyectoService: ProyectosService,
-    private router: Router
+    public dialog: MatDialog
   ) {
     this.empresaId = +localStorage.getItem('empresaId')!;
   }
@@ -48,5 +50,12 @@ export class ProyectosComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  detalleProyecto(project: Proyecto){
+    this.proyectoService.setProjectDetail(project);
+    const dialogRef = this.dialog.open(DetailProyectoComponent, { width: '1000px' });
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`Dialog result: ${result}`);
+    });
   }
 }

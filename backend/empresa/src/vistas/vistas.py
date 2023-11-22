@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from ..modelos import db, Empresa, EmpresaEschema, Vertical, VerticalEschema, Ubicacion, UbicacionEschema, Proyecto, ProyectoEschema, Entrevista, EntrevistaEschema
+from ..modelos import db, Empresa, EmpresaEschema, Vertical, VerticalEschema, Ubicacion, UbicacionEschema, Proyecto, ProyectoEschema, Entrevista, EntrevistaEschema, Aplicacion, AplicacionEschema
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime, timedelta
 import requests, sys
@@ -10,6 +10,7 @@ vertical_schema = VerticalEschema()
 entrevista_schema = EntrevistaEschema()
 ubicacion_schema = UbicacionEschema()
 proyecto_schema = ProyectoEschema()
+aplicacion_schema = AplicacionEschema()
 # informacion_schema = InformacionAcademicaEschema()
 # informacionTecnica_schema = InformacionTecnicaEschema()
 # informacionLaboral_schema = InformacionLaboralEschema()
@@ -528,5 +529,24 @@ class VistaEntrevistas(Resource):
         try:
                 return[entrevista_schema.dump(t) for t in Entrevista.query.filter(
                 (Entrevista.empresaId == empresaId))], 200
+        except:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+
+# Entrevistas
+# Vista POST - GET
+class VistaAplicaciones(Resource):
+    
+    def get(self, empresaId):
+        if empresaId.isnumeric() == False:
+            return 'El empresaId no es un número.', 400
+        else:
+            empresa = Empresa.query.get(empresaId)
+            if empresa is None:
+                return 'No existe la cuenta del empresa solicitada', 404
+            
+        try:
+                return[aplicacion_schema.dump(t) for t in Aplicacion.query.filter(
+                (Aplicacion.empresaId == empresaId))], 200
         except:
             return {'Error': str(sys.exc_info()[0])}, 412

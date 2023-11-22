@@ -5,6 +5,17 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_
 db = SQLAlchemy()
 
 
+class Aplicacion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    applicationDate = db.Column(db.DateTime, nullable=False)
+    status = db.Column(db.String(50), nullable=False)
+    result =  db.Column(db.Text, nullable=False)
+    proyectoId = db.Column(db.Integer, nullable=False)
+    empresaId = db.Column(db.Integer, nullable=False)
+    perfilId = db.Column(db.Integer, nullable=False)
+    candidatoId = db.Column(db.Integer, nullable=False)
+    entrevistas = db.relationship('Entrevista', backref='aplicacion')
+
 class Entrevista(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     enterviewDate = db.Column(db.DateTime, nullable=False)
@@ -13,7 +24,7 @@ class Entrevista(db.Model):
     proyectoId = db.Column(db.Integer, nullable=False)
     empresaId = db.Column(db.Integer, nullable=False)
     perfilId = db.Column(db.Integer, nullable=False)
-    aplicacionId = db.Column(db.Integer, nullable=False)
+    aplicacionId = db.Column(db.Integer, db.ForeignKey('aplicacion.id'))
 
 
 
@@ -32,6 +43,19 @@ class EntrevistaEschema(SQLAlchemySchema):
     empresaId = auto_field()
     perfilId = auto_field()
 
+
+class AplicacionEschema(SQLAlchemySchema):
+    class Meta:
+         model = Aplicacion
+         include_relationships = True
+         load_instance = True         
+    id = auto_field()
+    applicationDate = auto_field()
+    status = auto_field()
+    result = auto_field()
+    perfilId = auto_field()
+    candidatoId = auto_field()
+    entrevistas = fields.Nested(EntrevistaEschema(many=True), many=True)
 
 class Proyecto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -105,7 +129,6 @@ class EmpresaEschema(SQLAlchemySchema):
          load_instance = True         
     id = auto_field()
     name = auto_field()
-#     lastNames = auto_field()
     mail = auto_field()
     docType = auto_field()
     docNumber = auto_field()
@@ -113,14 +136,4 @@ class EmpresaEschema(SQLAlchemySchema):
     description = auto_field()
     vertical = fields.Nested(VerticalEschema, many=True)
     ubicacion = fields.Nested(UbicacionEschema, many=True)
-#     docType = auto_field()
-#     docNumber = auto_field()
-#     phone = auto_field()
-#     address = auto_field()
-#     birthDate = auto_field()
-#     country = auto_field()
-#     city = auto_field()
-#     language = auto_field()
-#     informacionAcademica = fields.Nested(InformacionAcademicaEschema(many=True), many=True)
-#     informacionTecnica = fields.Nested(InformacionTecnicaEschema, many=True)
-#     informacionLaboral = fields.Nested(InformacionLaboralEschema, many=True)
+

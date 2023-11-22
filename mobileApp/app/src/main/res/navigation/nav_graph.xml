@@ -118,8 +118,46 @@
     <fragment
         android:id="@+id/fragment_entrevista_list"
         android:name="com.example.vinyls.view.FragmentEntrevistaList"
-        tools:layout="@layout/fragment_entrevista_list" />
+        tools:layout="@layout/fragment_entrevista_list" >
+        <argument
+            android:name="user"
+            app:argType="integer" />
+    </fragment>
 
+    <action
+        android:id="@+id/action_fragmentEntrevistaList_to_fragmentEntrevistaDetail"
+        app:destination="@+id/fragmentEntrevistaDetail" />
+
+    <!-- Detalle entrevista  -->
+    <fragment
+        android:id="@+id/fragmentEntrevistaDetail"
+        android:name="com.example.vinyls.view.FragmentEntrevistaDetail"
+        tools:layout="@layout/fragment_entrevista_detail">
+    <argument
+        android:name="nameCandidato"
+        app:argType="string" />
+    <argument
+        android:name="lastNameCandidato"
+        app:argType="string" />
+    <argument
+        android:name="fecha"
+        app:argType="string" />
+    <argument
+        android:name="hora"
+        app:argType="string" />
+    <argument
+        android:name="reclutador"
+        app:argType="string" />
+    <argument
+        android:name="direcction"
+        app:argType="string" />
+    <argument
+        android:name="status"
+        app:argType="string" />
+    <argument
+        android:name="observations"
+        app:argType="string" />
+    </fragment>
 
 </navigation>
 

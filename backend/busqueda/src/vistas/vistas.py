@@ -1,14 +1,28 @@
+import asyncio
+from threading import Thread
 from flask_restful import Resource
 from flask import request
 from ..modelos import db, Busqueda, BusquedaEschema, Resultado, ResultadoEschema
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime, timedelta
 import requests, sys, os
-
-
+from sqlalchemy.sql import text as SQLQuery
+import time
+import boto3
+from flask_socketio import SocketIO
 
 busqueda_schema = BusquedaEschema()
 resultado_schema = ResultadoEschema()
+
+
+def ejecutarProcedimiento(app, empresaId, proyectoId, perfilId, busquedaId):
+    querystring = 'CALL ejecutarBusqueda (' + str(empresaId) + ',' +  str(proyectoId) + ',' +  str(perfilId) + ',' +  str(busquedaId) + ')'
+    sql = SQLQuery(querystring)
+    with app.app_context():
+        with db.engine.begin() as connection:
+            connection.execute(sql) 
+
+
 
 # Busquedaes
 # Vista POST - GET
@@ -18,6 +32,7 @@ class VistaBusquedaes(Resource):
     def __init__(self, **kwargs):
         self.urlBackEnd = str(os.getenv("PERF_BACK_URL")) + "/empresa"
         self.urlBackEnd2 = str(os.getenv("CAND_BACK_URL")) + "/candidato"
+        self.urlQueue = str(os.getenv("QUEUE_URL")) 
 
     def post(self,empresaId,proyectoId,perfilId):
 
@@ -32,9 +47,44 @@ class VistaBusquedaes(Resource):
                                         perfilId=perfilId,
                                         proyectoId=proyectoId,
                                         empresaId=empresaId)
+            
+
 
             db.session.add(nuevo_busqueda)
+
+
             db.session.commit()
+
+            sqs = boto3.client('sqs')
+
+            queue_url = 'SQS_QUEUE_URL'
+
+            # Send message to SQS queue
+            response = sqs.send_message(
+                QueueUrl=self.urlQueue,
+                DelaySeconds=10,
+                MessageAttributes={
+                    'empresaId': {
+                        'DataType': 'Number',
+                        'StringValue': str(empresaId)
+                    },
+                    'proyectoId': {
+                        'DataType': 'Number',
+                        'StringValue': str(proyectoId)
+                    },
+                    'perfilId': {
+                        'DataType': 'Number',
+                        'StringValue': str(perfilId)
+                    },
+                    'busquedaId': {
+                        'DataType': 'Number',
+                        'StringValue': str(nuevo_busqueda.id)
+                    }
+                },
+                MessageBody=(
+                    'Busqueda de perfiles'
+                )
+            )
         except:
             db.session.rollback()
             return {'Error': str(sys.exc_info()[0])}, 412
@@ -232,3 +282,21 @@ class VistaResultado(Resource):
             db.session.rollback()
             return {'Error': str(sys.exc_info()[0])}, 412
         
+
+#Ejecución asincronica
+class VistaEjecuta(Resource):
+    def __init__(self, **kwargs):
+        self.urlBackEnd = str(os.getenv("PERF_BACK_URL")) + "/empresa"
+        self.app = kwargs['app']
+        self.db = kwargs['db']
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        self.sio = SocketIO(self.app)
+
+
+    def post(self, empresaId, proyectoId, perfilId, id):     
+        thread = self.sio.start_background_task(ejecutarProcedimiento,self.app,empresaId, proyectoId, perfilId, id)
+        #thread = Thread(target=ejecutarProcedimiento, args=(empresaId, proyectoId, perfilId, id))
+        #thread.start()
+        return 'Enviado exitosamente', 201
+    

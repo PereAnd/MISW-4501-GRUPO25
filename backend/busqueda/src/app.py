@@ -1,6 +1,6 @@
 from flask_restful import Api
 from .modelos import db
-from .vistas import VistaPing, VistaBusqueda, VistaBusquedaes, VistaResultado, VistaResultados
+from .vistas import VistaPing, VistaBusqueda, VistaBusquedaes, VistaResultado, VistaResultados,VistaEjecuta
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
@@ -30,6 +30,7 @@ cors = CORS(app)
 
 api = Api(app)
 api.add_resource(VistaBusquedaes, '/empresa/<string:empresaId>/proyecto/<string:proyectoId>/perfil/<string:perfilId>/busqueda')
+api.add_resource(VistaEjecuta, '/empresa/<string:empresaId>/proyecto/<string:proyectoId>/perfil/<string:perfilId>/busqueda/<string:id>/run', resource_class_kwargs={ 'app': app, 'db': db })
 api.add_resource(VistaBusqueda, '/empresa/<string:empresaId>/proyecto/<string:proyectoId>/perfil/<string:perfilId>/busqueda/<string:id>')
 api.add_resource(VistaResultados, '/empresa/<string:empresaId>/proyecto/<string:proyectoId>/perfil/<string:perfilId>/busqueda/<string:busquedaId>/resultado')
 api.add_resource(VistaResultado, '/empresa/<string:empresaId>/proyecto/<string:proyectoId>/perfil/<string:perfilId>/busqueda/<string:busquedaId>/resultado/<string:id>')

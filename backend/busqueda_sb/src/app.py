@@ -1,5 +1,5 @@
 from flask_restful import Api
-from .vistas import  VistaPing, VistaBusqueda, VistaBusquedaes, VistaResultado, VistaResultados
+from .vistas import  VistaPing, VistaBusqueda, VistaBusquedaes, VistaResultado, VistaResultados, VistaEjecuta
 from flask_cors import CORS
 from flask import Flask
 from datetime import datetime, timedelta
@@ -34,6 +34,6 @@ api.add_resource(VistaBusqueda, '/empresa/<string:empresaId>/proyecto/<string:pr
 api.add_resource(VistaResultados, '/empresa/<string:empresaId>/proyecto/<string:proyectoId>/perfil/<string:perfilId>/busqueda/<string:busquedaId>/resultado', resource_class_kwargs={ 'breaker': breaker })
 api.add_resource(VistaResultado, '/empresa/<string:empresaId>/proyecto/<string:proyectoId>/perfil/<string:perfilId>/busqueda/<string:busquedaId>/resultado/<string:id>', resource_class_kwargs={ 'breaker': breaker })
 api.add_resource(VistaPing, '/empresa/<string:empresaId>/proyecto/<string:proyectoId>/perfil/ping', resource_class_kwargs={ 'breaker': breaker })
-
+api.add_resource(VistaEjecuta, '/empresa/<string:empresaId>/proyecto/<string:proyectoId>/perfil/<string:perfilId>/busqueda/<string:id>/run', resource_class_kwargs={ 'breaker': breaker })
 
 

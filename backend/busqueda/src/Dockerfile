@@ -1,5 +1,6 @@
 # Empezar corriendo una imagen de python 
 FROM 798178280816.dkr.ecr.us-east-1.amazonaws.com/python:3.8-alpine
+#FROM python:3.8-alpine
 #FROM public.ecr.aws/lambda/python:3.8
 # Copiar requerimientos para ejecutar el programa
 COPY ./requirements.txt /app/requirements.txt
@@ -18,5 +19,9 @@ ENV SQLALCHEMY_DATABASE_URI default
 ENV EMPR_BACK_URL http://127.0.0.1:5003
 ENV CAND_BACK_URL http://127.0.0.1:5001
 ENV PERF_BACK_URL http://127.0.0.1:5005
-EXPOSE 5007
+ENV AWS_ACCESS_KEY_ID AKIA3TVZCAVYFA2JKCV2
+ENV AWS_SECRET_ACCESS_KEY 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
+ENV QUEUE_URL=https://sqs.us-east-1.amazonaws.com/798178280816/busquedasQueue
+
+EXPOSE 5009
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5009"]

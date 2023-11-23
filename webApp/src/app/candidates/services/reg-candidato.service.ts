@@ -38,4 +38,9 @@ export class RegCandidatoService {
     let baseUrl: string = environment.HOST_CAND + 'candidato/' + idCandidato;
     return this.httpClient.get<Candidato>(baseUrl);
   }
+
+  getListApplications(idCandidato: number): Observable<any[]> {
+    let baseUrl: string = environment.HOST_ENTR + 'candidato/' + idCandidato + '/aplicacion';
+    return this.httpClient.get<any[]>(baseUrl);
+  }
 }

@@ -13,6 +13,11 @@ export class RegEmpresaService {
     private httpClient: HttpClient
   ) { }
 
+  getListEmpresas(): Observable<Empresa[]> {
+    let baseUrl: string = environment.HOST_EMP + 'empresa'
+    return this.httpClient.get<Empresa[]>(baseUrl)
+  }
+
   registrarEmpresa(empresa: Empresa): Observable<Empresa> {
     let baseUrl: string = environment.HOST_EMP + 'empresa'
     return this.httpClient.post<Empresa>(baseUrl, empresa)

@@ -109,13 +109,13 @@ export class PerfilesService {
     return this.httpClient.get<Competencia[]>(baseUrl);
   }
 
-  listAplicaciones(empresaId: number, proyectoId: number, perfilId: number): Observable<Aplicacion[]>{
-    let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion';
+  listAplicacionesEmpresa(empresaId: number): Observable<Aplicacion[]>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/aplicacion';
     return this.httpClient.get<Aplicacion[]>(baseUrl);
   }
 
-  listEntrevistas(empresaId: number): Observable<any[]>{
-    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/entrevista';
-    return this.httpClient.get<any[]>(baseUrl);
-  }
+  // listEntrevistas(empresaId: number): Observable<any[]>{
+  //   let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/entrevista';
+  //   return this.httpClient.get<any[]>(baseUrl);
+  // }
 }

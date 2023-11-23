@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { faker } from '@faker-js/faker';
-import { forkJoin } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { RegCandidatoService } from 'src/app/candidates/services/reg-candidato.service';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
@@ -16,12 +16,11 @@ import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 })
 export class EntrevistasEmpComponent implements OnInit {
   empresaId: number;
+  candidatos: any[] = [];
   proyectos: any[] = [];
   perfiles: any[] = [];
-  candidatos: any[] = [];
-  aplicaciones: any[] = [];
+  responseApplications: any[] = []
 
-  responseInterviews: any[] = []
   interviews: any[] = []
 
   displayedColumns: string[] = ['id', 'project', 'profile', 'candidate', 'enterviewDate', 'done', 'actions']
@@ -43,45 +42,39 @@ export class EntrevistasEmpComponent implements OnInit {
     forkJoin([
       this.candidatosService.getListCandidatos(),
       this.proyectosService.listProyectos(this.empresaId),
-      this.perfilesService.listEntrevistas(this.empresaId)
+      this.perfilesService.listAplicacionesEmpresa(this.empresaId)
     ]).subscribe({
-      next: ([listCandidatos, listProyectos, listEntrevistas]) => {
+      next: ([listCandidatos, listProyectos, listAplicaciones]) => {
         this.candidatos = listCandidatos
         this.proyectos = listProyectos
-        this.responseInterviews = listEntrevistas
+        this.responseApplications = listAplicaciones
 
-        listProyectos.forEach((proyecto: { id: number; }) => {
-          this.perfilesService.listPerfiles(this.empresaId, proyecto.id).subscribe({
-            next: listPerfiles => {
-              this.perfiles.push(...listPerfiles)
+        const requests: Observable<any>[] = this.proyectos.map( proyecto =>
+          this.perfilesService.listPerfiles(this.empresaId, proyecto.id)
+        );
 
-              listPerfiles.forEach((perfil: { id: number; }) => {
-                this.perfilesService.listAplicaciones(this.empresaId, proyecto.id, perfil.id).subscribe({
-                  next: listAplicaciones => {
-                    this.aplicaciones.push(...listAplicaciones)
-                  }
-                })
+        forkJoin(requests).subscribe({
+          next: (responses) => {
+            this.perfiles.push(...responses.flat());
+
+            this.responseApplications.forEach(responseApplicacion => {
+              let candidate = this.candidatos.find(candidato => candidato.id === responseApplicacion.candidatoId)
+              this.interviews.push({
+                id: responseApplicacion.id,
+                project: this.proyectos.find(proyecto => proyecto.id === responseApplicacion.entrevistas[0].proyectoId).proyecto,
+                profile: this.perfiles.find(perfil => perfil.id === responseApplicacion.perfilId).name,
+                candidate: candidate.names + ' ' + candidate.lastNames,
+                enterviewDate: responseApplicacion.entrevistas[0].enterviewDate,
+                done: responseApplicacion.entrevistas[0].done ? 'Sí' : 'No'
               })
-            }
-          })
+            })
+            this.dataSource = new MatTableDataSource(this.interviews);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }
         })
-      }, complete: () => {
-        this.responseInterviews.forEach(entrevista => {
-          const application = this.aplicaciones.find(aplicacion => aplicacion.id == entrevista.aplicacionId)
-          const candidateId = application.candidatoId;
-          const candidate = this.candidatos.find(candidato => candidato.id === candidateId);
-          this.interviews.push({
-            id: entrevista.id,
-            project: application.proyecto,
-            profile: application.perfil,
-            candidate: candidate.names + ' ' + candidate.lastNames,
-            enterviewDate: entrevista.enterviewDate,
-            done: entrevista.done ? 'Sí' : 'No'
-          })
-        })
-        this.dataSource = new MatTableDataSource(this.interviews);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+
+
       }
     })
   }

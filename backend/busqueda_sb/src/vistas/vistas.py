@@ -103,3 +103,15 @@ class VistaResultado(Resource):
             return {'Error': str(sys.exc_info()[0])}, 412
 
 
+#Ejecución asincronica
+class VistaEjecuta(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("BUSQ_BACK_URL"))
+
+    def post(self, empresaId, proyectoId, perfilId, Id):       
+        try:
+            return self.breaker.make_remote_call_post(self.urlBackEnd + '/empresa/' + empresaId + '/proyecto/' + proyectoId + "/perfil/" + perfilId + "/busqueda/" + busquedaId + "/run", json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412

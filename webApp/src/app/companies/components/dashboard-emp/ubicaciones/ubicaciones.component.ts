@@ -3,8 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { InfTecnicaService } from 'src/app/candidates/services/inf-tecnica.service';
-import { UbicacionesService } from 'src/app/companies/services/ubicaciones.service';
+import { RegEmpresaService } from 'src/app/companies/services/reg-empresa.service';
 
 @Component({
   selector: 'app-ubicaciones',
@@ -20,7 +19,7 @@ export class UbicacionesComponent {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private ubicacionService: UbicacionesService,
+    private ubicacionService: RegEmpresaService,
     private router: Router
   ) {
     this.empresaId = +localStorage.getItem('empresaId')!;

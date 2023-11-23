@@ -20,6 +20,7 @@ import { UbicacionesComponent } from './companies/components/dashboard-emp/ubica
 import { CreateUbicacionComponent } from './companies/components/dashboard-emp/ubicaciones/create-ubicacion/create-ubicacion.component';
 import { ProyectosComponent } from './companies/components/dashboard-emp/proyectos/proyectos.component';
 import { CreateProyectoComponent } from './companies/components/dashboard-emp/proyectos/create-proyecto/create-proyecto.component';
+import { CreatePerfilComponent } from './companies/components/dashboard-emp/proyectos/perfiles/create-perfil/create-perfil.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -51,7 +52,7 @@ const routes: Routes = [
       { path: 'ubicaciones/:idu', component: CreateUbicacionComponent },
       { path: 'proyectos', component: ProyectosComponent },
       { path: 'proyectos/add', component: CreateProyectoComponent },
-      { path: 'proyectos/:idp', component: CreateProyectoComponent },
+      { path: 'proyectos/:idp', component: CreateProyectoComponent }
     ]
   }
 ];

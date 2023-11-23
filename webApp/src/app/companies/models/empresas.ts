@@ -11,3 +11,20 @@ export class Empresa {
     public id?: number
   ) { }
 }
+
+export class Ubicacion {
+  constructor(
+    public country: string,
+    public city: string,
+    public description: string,
+    public id?: number
+  ){}
+}
+
+export class Vertical {
+  constructor (
+    public vertical: string,
+    public description: string,
+    public id?: number
+  ){ }
+}

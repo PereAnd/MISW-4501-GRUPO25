@@ -1,6 +1,6 @@
 from flask_restful import Api
 from .modelos import db
-from .vistas import VistaPing,VistaRegistro,VistaEmpresa,VistaVerticales, VistaVertical,VistaUbicacion,VistaUbicaciones, VistaProyecto, VistaProyectos, VistaEntrevistas, VistaAplicaciones
+from .vistas import VistaPing,VistaRegistro,VistaEmpresa,VistaVerticales, VistaVertical,VistaUbicacion,VistaUbicaciones, VistaProyecto, VistaProyectos, VistaEntrevistas, VistaLogIn, VistaAplicaciones
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
@@ -29,6 +29,7 @@ db.create_all()
 cors = CORS(app)
 
 api = Api(app)
+api.add_resource(VistaLogIn, '/login')
 api.add_resource(VistaRegistro, '/empresa')
 api.add_resource(VistaEmpresa, '/empresa/<string:id>')
 api.add_resource(VistaVerticales, '/empresa/<string:empresaId>/vertical')

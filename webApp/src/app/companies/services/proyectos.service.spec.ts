@@ -4,7 +4,7 @@ import { ProyectosService } from './proyectos.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from 'src/environments/environment.development';
 import { faker } from '@faker-js/faker';
-import { Proyecto } from '../models/proyecto';
+import { Proyecto } from '../models/proyectos';
 
 describe('ProyectosService', () => {
   let service: ProyectosService;

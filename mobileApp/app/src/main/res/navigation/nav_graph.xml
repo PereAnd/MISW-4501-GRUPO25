@@ -16,9 +16,14 @@
         <action
             android:id="@+id/action_fragment_home_to_fragment_menu_login"
             app:destination="@id/fragment_menu_login" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_menu_login_empresa"
+            app:destination="@+id/fragment_ingreso_empresa" />
     </fragment>
 
-    <!-- Menú Login   -->
+    <!-- SECCIÓN CANDIDATOS -   -->
+
+    <!-- Menú Login  Candidato -->
     <fragment
         android:id="@+id/fragment_menu_login"
         android:name="com.example.vinyls.view.FragmentMenuLogin"
@@ -31,14 +36,14 @@
             app:destination="@+id/fragment_registro" />
     </fragment>
 
-    <!-- Menú Login - Lista  -->
+    <!-- Menú Login Candidato - Lista  -->
     <fragment
         android:id="@id/fragment_candidato_list"
         android:name="com.example.vinyls.view.FragmentCandidatoList"
         tools:layout="@layout/fragment_candidato_list" >
     </fragment>
 
-    <!-- Menú Login - Registro  -->
+    <!-- Menú Login Candidato- Registro  -->
     <fragment
         android:id="@+id/fragment_registro"
         android:name="com.example.vinyls.view.FragmentRegistro"
@@ -47,7 +52,6 @@
             android:id="@+id/action_fragment_registro_to_fragment_infoPersonal"
             app:destination="@+id/fragment_info_personal" />
     </fragment>
-
 
     <!-- InfoPersonal -   -->
     <fragment
@@ -96,6 +100,63 @@
         <action
             android:id="@+id/action_fragment_infolaboral_fragment_login"
             app:destination="@+id/fragment_menu_login" />
+    </fragment>
+
+    <!-- SECCIÓN EMPRESAS -   -->
+
+    <!-- Menú Login Empresa -->
+    <fragment
+        android:id="@+id/fragment_ingreso_empresa"
+        android:name="com.example.vinyls.view.FragmentIngresoEmpresa"
+        tools:layout="@layout/fragment_ingreso_empresa">
+        <action
+            android:id="@+id/action_fragment_menu_login_to_fragment_entrevista_empresa"
+            app:destination="@+id/fragment_entrevista_list" />
+    </fragment>
+
+    <!-- Lista entrevistas -->
+    <fragment
+        android:id="@+id/fragment_entrevista_list"
+        android:name="com.example.vinyls.view.FragmentEntrevistaList"
+        tools:layout="@layout/fragment_entrevista_list" >
+        <argument
+            android:name="user"
+            app:argType="integer" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_fragmentEntrevistaList_to_fragmentEntrevistaDetail"
+        app:destination="@+id/fragmentEntrevistaDetail" />
+
+    <!-- Detalle entrevista  -->
+    <fragment
+        android:id="@+id/fragmentEntrevistaDetail"
+        android:name="com.example.vinyls.view.FragmentEntrevistaDetail"
+        tools:layout="@layout/fragment_entrevista_detail">
+    <argument
+        android:name="nameCandidato"
+        app:argType="string" />
+    <argument
+        android:name="lastNameCandidato"
+        app:argType="string" />
+    <argument
+        android:name="fecha"
+        app:argType="string" />
+    <argument
+        android:name="hora"
+        app:argType="string" />
+    <argument
+        android:name="reclutador"
+        app:argType="string" />
+    <argument
+        android:name="direcction"
+        app:argType="string" />
+    <argument
+        android:name="status"
+        app:argType="string" />
+    <argument
+        android:name="observations"
+        app:argType="string" />
     </fragment>
 
 </navigation>

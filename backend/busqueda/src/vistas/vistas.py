@@ -55,7 +55,7 @@ class VistaBusquedaes(Resource):
 
             db.session.commit()
 
-            sqs = boto3.client('sqs')
+            sqs = boto3.client('sqs', region_name='us-east-1')
 
             queue_url = 'SQS_QUEUE_URL'
 

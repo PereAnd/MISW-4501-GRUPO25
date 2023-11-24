@@ -35,6 +35,8 @@ import { PerfilesComponent } from './companies/components/dashboard-emp/proyecto
 import { DetailPerfilComponent } from './companies/components/dashboard-emp/proyectos/perfiles/detail-perfil/detail-perfil.component';
 import { CreatePerfilComponent } from './companies/components/dashboard-emp/proyectos/perfiles/create-perfil/create-perfil.component';
 import { CreateCompetenciaComponent } from './companies/components/dashboard-emp/proyectos/perfiles/create-competencia/create-competencia.component';
+import { EntrevistasEmpComponent } from './companies/components/dashboard-emp/entrevistas-emp/entrevistas-emp.component';
+import { EntrevistasCandComponent } from './candidates/components/dashboard-cand/entrevistas-cand/entrevistas-cand.component';
 
 
 @NgModule({
@@ -67,6 +69,8 @@ import { CreateCompetenciaComponent } from './companies/components/dashboard-emp
     DetailPerfilComponent,
     CreatePerfilComponent,
     CreateCompetenciaComponent,
+    EntrevistasEmpComponent,
+    EntrevistasCandComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { Competencia, Perfil } from '../models/proyectos';
+import { Aplicacion, Competencia, Entrevista, Perfil } from '../models/proyectos';
+import { ProyectosService } from './proyectos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class PerfilesService {
   profileToCompetencies: number;
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private proyectosService: ProyectosService
   ) { }
 
   // Tipo de competencia seleccionada (conocimiento, habilidad, idioma)
@@ -106,4 +108,14 @@ export class PerfilesService {
     let baseUrl: string = environment.HOST_PERF + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/idioma';
     return this.httpClient.get<Competencia[]>(baseUrl);
   }
+
+  listAplicacionesEmpresa(empresaId: number): Observable<Aplicacion[]>{
+    let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/aplicacion';
+    return this.httpClient.get<Aplicacion[]>(baseUrl);
+  }
+
+  // listEntrevistas(empresaId: number): Observable<any[]>{
+  //   let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/entrevista';
+  //   return this.httpClient.get<any[]>(baseUrl);
+  // }
 }

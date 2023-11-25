@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: candidato
-        image: 299577415580.dkr.ecr.us-east-1.amazonaws.com/candidato:latest
+        image: 798178280816.dkr.ecr.us-east-1.amazonaws.com/candidato:latest
         ports:
         - containerPort: 5001
         env:

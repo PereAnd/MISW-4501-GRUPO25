@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from ..modelos import db, Empresa, EmpresaEschema, Vertical, VerticalEschema, Ubicacion, UbicacionEschema, Proyecto, ProyectoEschema, Entrevista, EntrevistaEschema, Aplicacion, AplicacionEschema
+from ..modelos import db, Empresa, EmpresaEschema, Vertical, VerticalEschema, Ubicacion, UbicacionEschema, Proyecto, ProyectoEschema, Entrevista, EntrevistaEschema, Aplicacion, AplicacionEschema, DatosCombinados, DatosCombinadosEsquema, Candidato, CandidatoEschema
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime, timedelta
 import requests, sys
@@ -11,6 +11,8 @@ entrevista_schema = EntrevistaEschema()
 ubicacion_schema = UbicacionEschema()
 proyecto_schema = ProyectoEschema()
 aplicacion_schema = AplicacionEschema()
+datos_combinados_schema = DatosCombinadosEsquema()
+candidato_schema = CandidatoEschema()
 # informacion_schema = InformacionAcademicaEschema()
 # informacionTecnica_schema = InformacionTecnicaEschema()
 # informacionLaboral_schema = InformacionLaboralEschema()
@@ -19,6 +21,7 @@ aplicacion_schema = AplicacionEschema()
 # Empresas
 
 class VistaLogIn(Resource):
+
     def post(self):
         if not "mail" in request.json or not "password" in request.json:
             return 'Los campos mail y password son requeridos', 400
@@ -29,9 +32,59 @@ class VistaLogIn(Resource):
         empresa = Empresa.query.filter_by(mail=request.json["mail"]).first()
 
         if empresa and empresa.password == request.json["password"]:
-            return {'id_empresa': empresa.id}, 200
+
+            DatosCombinados.query.delete()
+            db.session.commit()
+
+            entrevistas = Entrevista.query.filter_by(empresaId=empresa.id).all()
+            aplicaciones = Aplicacion.query.all()
+            candidatos = Candidato.query.all()
+
+            # Crear un diccionario para mapear proyectos a aplicaciones
+            proyectos_aplicaciones = {(a.proyectoId, a.empresaId): a for a in aplicaciones}
+            candidatos_dict = {c.id: c for c in candidatos}
+
+            for entrevista in entrevistas:
+                clave_proyecto = (entrevista.proyectoId, entrevista.empresaId)
+                aplicacion = proyectos_aplicaciones.get(clave_proyecto)
+
+                if aplicacion:
+                    candidato_id = aplicacion.candidatoId
+                    candidato = candidatos_dict.get(candidato_id)
+
+                    if candidato:
+                        full_name = f"{candidato.names} {candidato.lastNames}"
+                        datos_combinados = DatosCombinados(
+                            empresaId=entrevista.empresaId,
+                            proyectoId=entrevista.proyectoId,
+                            perfilId=entrevista.perfilId, 
+                            candidatoId=aplicacion.candidatoId,
+
+                            fullName=full_name,
+                            applicationDate=aplicacion.applicationDate,
+                            status=aplicacion.status,
+
+                            enterviewDate=entrevista.enterviewDate,
+                            result=aplicacion.result,    
+                            feedback=entrevista.feedback
+                            )
+                        db.session.add(datos_combinados)
+
+            db.session.commit()
+            datos_combinados = DatosCombinados.query.all()
+
+            empresa_ids_combinados = [dc.empresaId for dc in datos_combinados]
+
+            return {'id_empresa': empresa.id, 'empresa_ids_combinados': empresa_ids_combinados}, 200
         else:
             return 'Mail o contraseña incorrecta', 401
+
+class VistaListaEntrevistas(Resource):
+
+    def get(self):
+        datos_combinados = DatosCombinados.query.all()
+        return [datos_combinados_schema.dump(t) for t in datos_combinados], 200
+
 
 
 # Vista POST - GET

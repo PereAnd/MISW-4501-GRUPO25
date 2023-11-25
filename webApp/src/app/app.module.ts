@@ -41,6 +41,7 @@ import { MotorEmpComponent } from './companies/components/dashboard-emp/motor-em
 import { DashboardAbcComponent } from './employees/components/dashboard-abc/dashboard-abc.component';
 import { EntrevistasAbcComponent } from './employees/components/dashboard-abc/entrevistas-abc/entrevistas-abc.component';
 import { DatePipe } from '@angular/common';
+import { CreateEntrevistaComponent } from './employees/components/dashboard-abc/entrevistas-abc/create-entrevista/create-entrevista.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { DatePipe } from '@angular/common';
     MotorEmpComponent,
     DashboardAbcComponent,
     EntrevistasAbcComponent,
+    CreateEntrevistaComponent,
   ],
   imports: [
     BrowserModule,

@@ -52,8 +52,8 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
           <mat-cell *matCellDef="let element">
-            <a mat-icon-button><mat-icon>visibility</mat-icon></a> <!-- (click)="detalleProyecto(element)" -->
-            <!-- <a mat-icon-button><mat-icon>edit</mat-icon></a> (click)="editarProyecto(element)" -->
+            <!-- <a mat-icon-button><mat-icon>visibility</mat-icon></a> (click)="detalleProyecto(element)" -->
+            <a mat-icon-button (click)="crearEntrevista(element)"><mat-icon>edit</mat-icon></a>
             <a mat-icon-button disabled><mat-icon>delete</mat-icon></a>
           </mat-cell>
         </ng-container>

@@ -9,6 +9,7 @@ import { RegCandidatoService } from 'src/app/candidates/services/reg-candidato.s
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 import { RegEmpresaService } from 'src/app/companies/services/reg-empresa.service';
+import { CreateEntrevistaComponent } from './create-entrevista/create-entrevista.component';
 
 @Component({
   selector: 'app-entrevistas-abc',
@@ -91,6 +92,15 @@ export class EntrevistasAbcComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  crearEntrevista(element: any){
+    let appl = this.responseApplications.find(application => application.id === element.id)
+    this.proyectosService.setApplToInterview(appl)
+    // this.perfilesService.setProjectDetail(project);
+    const dialogRef = this.dialog.open(CreateEntrevistaComponent, { width: '700px' });
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`Dialog result: ${result}`);
+    });
   }
   // detalleProyecto(project: Proyecto){
   //   this.perfilesService.setProjectDetail(project);

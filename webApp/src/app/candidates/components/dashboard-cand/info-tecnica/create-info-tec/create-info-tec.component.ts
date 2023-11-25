@@ -18,7 +18,7 @@ export class CreateInfoTecComponent {
     description: new FormControl('', Validators.required)
   })
 
-  tiposInfoTecnica = ['Conocimiento', 'Habilidad']
+  tiposInfoTecnica = ['Conocimiento', 'Habilidad', 'Idioma']
 
   get type() { return this.formInfoTecnica.get('type') }
   get description() { return this.formInfoTecnica.get('description') }

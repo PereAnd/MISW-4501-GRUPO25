@@ -23,6 +23,7 @@ import { CreateProyectoComponent } from './companies/components/dashboard-emp/pr
 import { CreatePerfilComponent } from './companies/components/dashboard-emp/proyectos/perfiles/create-perfil/create-perfil.component';
 import { EntrevistasEmpComponent } from './companies/components/dashboard-emp/entrevistas-emp/entrevistas-emp.component';
 import { EntrevistasCandComponent } from './candidates/components/dashboard-cand/entrevistas-cand/entrevistas-cand.component';
+import { MotorEmpComponent } from './companies/components/dashboard-emp/motor-emp/motor-emp.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -56,7 +57,8 @@ const routes: Routes = [
       { path: 'proyectos', component: ProyectosComponent },
       { path: 'proyectos/add', component: CreateProyectoComponent },
       { path: 'proyectos/:idp', component: CreateProyectoComponent },
-      { path: 'entrevistas-emp', component: EntrevistasEmpComponent }
+      { path: 'entrevistas-emp', component: EntrevistasEmpComponent },
+      { path: 'motor-emp', component: MotorEmpComponent }
     ]
   }
 ];

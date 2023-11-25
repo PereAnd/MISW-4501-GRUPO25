@@ -38,6 +38,9 @@ import { CreateCompetenciaComponent } from './companies/components/dashboard-emp
 import { EntrevistasEmpComponent } from './companies/components/dashboard-emp/entrevistas-emp/entrevistas-emp.component';
 import { EntrevistasCandComponent } from './candidates/components/dashboard-cand/entrevistas-cand/entrevistas-cand.component';
 import { MotorEmpComponent } from './companies/components/dashboard-emp/motor-emp/motor-emp.component';
+import { DashboardAbcComponent } from './employees/components/dashboard-abc/dashboard-abc.component';
+import { EntrevistasAbcComponent } from './employees/components/dashboard-abc/entrevistas-abc/entrevistas-abc.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -73,6 +76,8 @@ import { MotorEmpComponent } from './companies/components/dashboard-emp/motor-em
     EntrevistasEmpComponent,
     EntrevistasCandComponent,
     MotorEmpComponent,
+    DashboardAbcComponent,
+    EntrevistasAbcComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +89,8 @@ import { MotorEmpComponent } from './companies/components/dashboard-emp/motor-em
   ],
   providers: [
     RegCandidatoService,
-    InicioComponent
+    InicioComponent,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 

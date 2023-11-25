@@ -1,0 +1,115 @@
+<div class="container text-center">
+  <h2 id="titulo">
+    <mat-icon>person_search</mat-icon> Motor de emparejamiento
+  </h2>
+
+  <form
+    [formGroup]="formBusqueda"
+    (ngSubmit)="!formBusqueda.invalid && buscar()"
+  >
+    <div class="filters">
+      <mat-form-field>
+        <mat-label>Proyecto</mat-label>
+        <mat-select
+          formControlName="project"
+          id="project"
+          (selectionChange)="updateProfiles($event.value)"
+        >
+          <mat-option *ngFor="let project of projects" [value]="project.id">
+            {{ project.proyecto }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Perfil</mat-label>
+        <mat-select formControlName="profile" id="profile">
+          <mat-option *ngFor="let profile of profiles" [value]="profile.id">
+            {{ profile.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-fab color="primary" type="submit">
+        <mat-icon>search</mat-icon>
+      </button>
+      <a mat-mini-fab (click)="provisionalKillSearch()">
+        <mat-icon>close</mat-icon>
+      </a>
+      <a mat-mini-fab color="accent" (click)="getSearchResults()">
+        <mat-icon>refresh</mat-icon>
+      </a>
+    </div>
+  </form>
+  <h2>Resultados</h2>
+  <div class="results">
+    <div class="controles">
+      <button mat-button (click)="accordion.openAll()">Expand All</button>
+      <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+    </div>
+
+    <!-- Accordion -->
+    <mat-accordion
+      class="headers-align"
+      multi
+      *ngFor="let candidate of matchesCandidates"
+    >
+      <mat-expansion-panel>
+        <!-- Header -->
+        <mat-expansion-panel-header>
+          <!-- Title -->
+          <mat-panel-title>
+            {{ candidate.names }} {{ candidate.lastNames }}
+          </mat-panel-title>
+
+          <!-- Description -->
+          <mat-panel-description>
+            <mat-icon>school</mat-icon>
+            : {{ candidate.informacionAcademica![0].title }}
+          </mat-panel-description>
+
+          <!-- Description -->
+          <mat-panel-description>
+            <mat-icon>location_on</mat-icon>
+            : {{ candidate.city }}, {{ candidate.country }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <!-- Content -->
+        <div class="item">
+          <h3>Información Académica:</h3>
+          <section class="tipo-info">
+            <div *ngFor="let infoAcad of candidate.informacionAcademica!">
+              <b>Título: </b>{{ infoAcad.title }}, {{ infoAcad.studyType }} <br />
+              <b>Institución: </b>, {{ infoAcad.institution }} <br />
+              <b>Periodo: </b>{{ infoAcad.beginDate | date : "MMM-yyyy" }} - {{ infoAcad.endDate | date : "MMM-yyyy" }} <br />
+            </div>
+          </section>
+        </div>
+
+        <div class="item">
+          <h3>Información Laboral:</h3>
+          <ul>
+            <li *ngFor="let infoLab of candidate.informacionLaboral!">
+              <b>Organización: </b>{{ infoLab.organization }}<br />
+              <b>Cargo: </b>, {{ infoLab.position }} <br />
+              <b>Periodo: </b>{{ infoLab.dateFrom | date : "MMM-yyyy" }} -
+              {{ infoLab.dateTo | date : "MMM-yyyy" }} <br />
+            </li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3>Información Técnica:</h3>
+          <ul *ngFor="let infoTec of candidate.informacionTecnica!">
+            <div *ngIf="infoTec.type == 'Conocimiento'">
+              <li>
+                <b>Conocimiento: </b>{{ infoTec.description }} <br />
+              </li>
+            </div>
+          </ul>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+<router-outlet></router-outlet>

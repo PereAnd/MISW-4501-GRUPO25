@@ -5,5 +5,6 @@ export const environment = {
   HOST_EMP: 'http://localhost:3002/',
   HOST_PERF: 'http://localhost:3003/',
   HOST_ENTR: 'http://localhost:3004/',
+  HOST_BUSQ: 'http://localhost:3005/',
 }
 

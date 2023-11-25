@@ -60,31 +60,31 @@ class VistaBusquedaes(Resource):
             queue_url = 'SQS_QUEUE_URL'
 
             # Send message to SQS queue
-            response = sqs.send_message(
-                QueueUrl=self.urlQueue,
-                DelaySeconds=10,
-                MessageAttributes={
-                    'empresaId': {
-                        'DataType': 'Number',
-                        'StringValue': str(empresaId)
-                    },
-                    'proyectoId': {
-                        'DataType': 'Number',
-                        'StringValue': str(proyectoId)
-                    },
-                    'perfilId': {
-                        'DataType': 'Number',
-                        'StringValue': str(perfilId)
-                    },
-                    'busquedaId': {
-                        'DataType': 'Number',
-                        'StringValue': str(nuevo_busqueda.id)
-                    }
-                },
-                MessageBody=(
-                    'Busqueda de perfiles'
-                )
-            )
+            # response = sqs.send_message(
+            #     QueueUrl=self.urlQueue,
+            #     DelaySeconds=10,
+            #     MessageAttributes={
+            #         'empresaId': {
+            #             'DataType': 'Number',
+            #             'StringValue': str(empresaId)
+            #         },
+            #         'proyectoId': {
+            #             'DataType': 'Number',
+            #             'StringValue': str(proyectoId)
+            #         },
+            #         'perfilId': {
+            #             'DataType': 'Number',
+            #             'StringValue': str(perfilId)
+            #         },
+            #         'busquedaId': {
+            #             'DataType': 'Number',
+            #             'StringValue': str(nuevo_busqueda.id)
+            #         }
+            #     },
+            #     MessageBody=(
+            #         'Busqueda de perfiles'
+            #     )
+            # )
         except:
             db.session.rollback()
             return {'Error': str(sys.exc_info()[0])}, 412

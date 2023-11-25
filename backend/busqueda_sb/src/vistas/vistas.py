@@ -110,8 +110,8 @@ class VistaEjecuta(Resource):
         self.breaker = kwargs['breaker']
         self.urlBackEnd = str(os.getenv("BUSQ_BACK_URL"))
 
-    def post(self, empresaId, proyectoId, perfilId, Id):       
+    def post(self, empresaId, proyectoId, perfilId, id):       
         try:
-            return self.breaker.make_remote_call_post(self.urlBackEnd + '/empresa/' + empresaId + '/proyecto/' + proyectoId + "/perfil/" + perfilId + "/busqueda/" + busquedaId + "/run", json=request.json)
+            return self.breaker.make_remote_call_post(self.urlBackEnd + '/empresa/' + empresaId + '/proyecto/' + proyectoId + "/perfil/" + perfilId + "/busqueda/" + id + "/run", json=request.json)
         except Exception:
             return {'Error': str(sys.exc_info()[0])}, 412

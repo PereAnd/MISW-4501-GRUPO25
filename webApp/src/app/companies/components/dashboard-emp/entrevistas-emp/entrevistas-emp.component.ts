@@ -45,9 +45,9 @@ export class EntrevistasEmpComponent implements OnInit {
       this.perfilesService.listAplicacionesEmpresa(this.empresaId)
     ]).subscribe({
       next: ([listCandidatos, listProyectos, listAplicaciones]) => {
-        this.candidatos = listCandidatos
-        this.proyectos = listProyectos
-        this.responseApplications = listAplicaciones
+        this.candidatos.push(...listCandidatos)
+        this.proyectos.push(...listProyectos)
+        this.responseApplications.push(...listAplicaciones)
 
         const requests: Observable<any>[] = this.proyectos.map( proyecto =>
           this.perfilesService.listPerfiles(this.empresaId, proyecto.id)
@@ -59,13 +59,17 @@ export class EntrevistasEmpComponent implements OnInit {
 
             this.responseApplications.forEach(responseApplicacion => {
               let candidate = this.candidatos.find(candidato => candidato.id === responseApplicacion.candidatoId)
+              let project = this.proyectos.find(proyecto => proyecto.id === responseApplicacion.proyectoId)
+              let profile = this.perfiles.find(perfil => perfil.id === responseApplicacion.perfilId)
+              let enterviewDate = responseApplicacion.entrevistas[0] ? responseApplicacion.entrevistas[0].enterviewDate : 'No programada'
+              let done = responseApplicacion.entrevistas[0] ? responseApplicacion.entrevistas[0].done : false
               this.interviews.push({
                 id: responseApplicacion.id,
-                project: this.proyectos.find(proyecto => proyecto.id === responseApplicacion.entrevistas[0].proyectoId).proyecto,
-                profile: this.perfiles.find(perfil => perfil.id === responseApplicacion.perfilId).name,
+                project: project.proyecto,
+                profile: profile.name,
                 candidate: candidate.names + ' ' + candidate.lastNames,
-                enterviewDate: responseApplicacion.entrevistas[0].enterviewDate,
-                done: responseApplicacion.entrevistas[0].done ? 'Sí' : 'No'
+                enterviewDate: enterviewDate,
+                done: done
               })
             })
             this.dataSource = new MatTableDataSource(this.interviews);

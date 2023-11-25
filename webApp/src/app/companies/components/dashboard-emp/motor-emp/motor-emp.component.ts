@@ -27,7 +27,8 @@ export class MotorEmpComponent implements OnInit{
   searchId: number;
   matchesCandidates: any[] = [];
 
-  aplicaciones: Aplicacion[] = [];
+  aplicaciones: any[] = [];
+  msgNotFound: string = 'No hay resultados';
 
   constructor(
     private busquedaService: BusquedaService,
@@ -44,11 +45,11 @@ export class MotorEmpComponent implements OnInit{
         this.projects = listProjects;
       }
     })
-
-
-    this.candidatosService.getListCandidatos().subscribe({
-      next: listCandidatos => {
-        this.matchesCandidates = listCandidatos
+    this.perfilesService.listAplicacionesEmpresa(this.empresaId).subscribe({
+      next: listAplicaciones => {
+        listAplicaciones.forEach(aplicacion => {
+          this.aplicaciones.push(aplicacion.candidatoId)
+        })
       }
     })
   }
@@ -90,14 +91,12 @@ export class MotorEmpComponent implements OnInit{
   getSearchResults(){
     this.busquedaService.getSearchResults(this.empresaId, this.projectId, this.profileId, this.searchId).subscribe({
       next: response => {
-        console.log(response);
         if(response.resultados.length == 0){
-          console.log('No hay candidatos aptos para este perfil');
+          this.msgNotFound = 'No hay resultados para esta búsqueda'
         } else {
           response.resultados.map( (result: any) => {
             this.candidatosService.getDatosCandidato(result.candidatoId).subscribe({
-              next: (candidato: any) => {
-                candidato['tieneAplicacion'] = true;
+              next: candidato => {
                 this.matchesCandidates.push(candidato);
               }
             })
@@ -114,6 +113,17 @@ export class MotorEmpComponent implements OnInit{
       'candidatoId': candidateId,
       'result': 'Entrevista'
     }
-    this.perfilesService.addAplicacionCand(this.empresaId, this.projectId, this.profileId, aplicacion).subscribe({})
+    this.perfilesService.addAplicacionCand(this.empresaId, this.projectId, this.profileId, aplicacion).subscribe({
+      next: response => {
+        console.log('Entrevista solicitada');
+        this.perfilesService.listAplicacionesEmpresa(this.empresaId).subscribe({
+          next: listAplicaciones => {
+            listAplicaciones.forEach(aplicacion => {
+              this.aplicaciones.push(aplicacion.candidatoId)
+            })
+          }
+        })
+      }
+    })
   }
 }

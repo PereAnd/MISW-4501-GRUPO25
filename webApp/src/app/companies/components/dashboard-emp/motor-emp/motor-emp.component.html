@@ -44,7 +44,7 @@
   <br><h2>Resultados</h2>
   <div class="results">
     <mat-card *ngIf="!matchesCandidates.length">
-      <mat-card-content>No hay resultados</mat-card-content>
+      <mat-card-content>{{ msgNotFound }}</mat-card-content>
     </mat-card>
 
     <!-- Accordion -->
@@ -123,6 +123,7 @@
           <div class="row boton-entrevista">
             <button mat-raised-button color="primary" class="col-12 col-md-3"
             (click)="solicitarEntrevista(candidate.id!)"
+            [disabled]="aplicaciones.includes(candidate.id)"
             >Solicitar entrevista</button>
           </div>
         </div>

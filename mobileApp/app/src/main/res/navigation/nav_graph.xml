@@ -146,28 +146,22 @@
         android:name="com.example.vinyls.view.FragmentEntrevistaDetail"
         tools:layout="@layout/fragment_entrevista_detail">
     <argument
-        android:name="nameCandidato"
+        android:name="fullName"
         app:argType="string" />
     <argument
-        android:name="lastNameCandidato"
-        app:argType="string" />
-    <argument
-        android:name="fecha"
-        app:argType="string" />
-    <argument
-        android:name="hora"
-        app:argType="string" />
-    <argument
-        android:name="reclutador"
-        app:argType="string" />
-    <argument
-        android:name="direcction"
+        android:name="applicationDate"
         app:argType="string" />
     <argument
         android:name="status"
         app:argType="string" />
     <argument
-        android:name="observations"
+        android:name="enterviewDate"
+        app:argType="string" />
+    <argument
+        android:name="result"
+        app:argType="string" />
+    <argument
+        android:name="feedback"
         app:argType="string" />
     </fragment>
 

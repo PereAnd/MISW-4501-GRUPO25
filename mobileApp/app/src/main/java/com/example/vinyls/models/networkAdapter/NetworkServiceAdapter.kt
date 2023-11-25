@@ -292,7 +292,7 @@ class NetworkServiceAdapter constructor(context: Context) {
             // Handle this situation appropriately, for example, by throwing an exception.
             // return@suspendCoroutine
         }
-        requestQueue.add(getRequest("empresa/$currentEmpresaId/entrevistas",
+        requestQueue.add(getRequest("empresa/entrevistas",
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Entrevista>()
@@ -301,25 +301,21 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val item = resp.getJSONObject(i)
 
                     val entrevistaId = item.getInt("id")
-                    val nameCandidato = item.getString("nameCandidato")
-                    val lastNameCandidato = item.getString("lastNameCandidato")
-                    val fecha = item.getString("fecha")
-                    val hora = item.getString("hora")
-                    val reclutador = item.getString("reclutador")
-                    val direcction = item.getString("direcction")
-                    val observatios = item.getString("observatios")
+                    val fullName = item.getString("fullName")
+                    val applicationDate = item.getString("applicationDate")
                     val status = item.getString("status")
+                    val enterviewDate = item.getString("enterviewDate")
+                    val result = item.getString("result")
+                    val feedback = item.getString("feedback")
 
                     list.add(i, Entrevista(
                         entrevistaId = entrevistaId,
-                        nameCandidato = nameCandidato,
-                        lastNameCandidato = lastNameCandidato,
-                        fecha = fecha,
-                        hora = hora,
-                        reclutador = reclutador,
-                        direcction = direcction,
-                        observatios = observatios,
-                        status = status
+                        fullName = fullName,
+                        applicationDate = applicationDate,
+                        status = status,
+                        enterviewDate = enterviewDate,
+                        result = result,
+                        feedback = feedback
                     ))
                 }
                 cont.resume(list)

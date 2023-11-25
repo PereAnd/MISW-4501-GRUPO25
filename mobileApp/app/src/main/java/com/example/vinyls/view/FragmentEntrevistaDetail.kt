@@ -29,25 +29,20 @@ class FragmentEntrevistaDetail : Fragment() {
         _binding = FragmentEntrevistaDetailBinding.inflate(inflater, container, false)
         val args: FragmentEntrevistaDetailArgs by navArgs()
         val view = inflater.inflate(R.layout.fragment_entrevista_detail, container, false);
-        val tvNameCandidato: TextView = view.findViewById(R.id.tvNameCandidato)
-        val tvLastNameCandidato: TextView = view.findViewById(R.id.tvLastNameCandidato)
-        val tvFecha: TextView = view.findViewById(R.id.tvFecha)
-        val tvHora: TextView = view.findViewById(R.id.tvHora)
-        val tvReclutador: TextView = view.findViewById(R.id.tvReclutador)
-        val tvDirecction: TextView = view.findViewById(R.id.tvDirecction)
+        val tvFullName: TextView = view.findViewById(R.id.tvFullName)
+        val tvApplicationDate: TextView = view.findViewById(R.id.tvApplicationDate)
         val tvStatus: TextView = view.findViewById(R.id.tvStatus)
-        val tvObservations: TextView = view.findViewById(R.id.tvObservations)
+        val tvEnterviewDate: TextView = view.findViewById(R.id.tvEnterviewDate)
+        val tvResult: TextView = view.findViewById(R.id.tvResult)
+        val tvFeedback: TextView = view.findViewById(R.id.tvFeedback)
 
 
-
-        tvNameCandidato.text = args.nameCandidato
-        tvLastNameCandidato.text = args.lastNameCandidato
-        tvFecha.text = args.fecha
-        tvHora.text = args.hora
-        tvReclutador.text = args.reclutador
-        tvDirecction.text = args.direcction
+        tvFullName.text = args.fullName
+        tvApplicationDate.text = args.applicationDate
         tvStatus.text = args.status
-        tvObservations.text = args.observations
+        tvEnterviewDate.text = args.enterviewDate
+        tvResult.text = args.result
+        tvFeedback.text = args.feedback
 
        // val imgUrl: String? = args.cover
         //Picasso.get().load(imgUrl).into(ivCover);

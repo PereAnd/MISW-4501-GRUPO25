@@ -42,14 +42,12 @@ class EntrevistasAdapter : RecyclerView.Adapter<EntrevistasAdapter.EntrevistaVie
         // acceder al detalle de entrevista
         holder.viewDataBinding.root.setOnClickListener {
             val action = FragmentEntrevistaListDirections.actionFragmentEntrevistaListToFragmentEntrevistaDetail(
-                entrevistas[position].nameCandidato,
-                entrevistas[position].lastNameCandidato,
-                entrevistas[position].fecha,
-                entrevistas[position].hora,
-                entrevistas[position].reclutador,
-                entrevistas[position].direcction,
+                entrevistas[position].fullName,
+                entrevistas[position].applicationDate,
                 entrevistas[position].status,
-                entrevistas[position].observatios)
+                entrevistas[position].enterviewDate,
+                entrevistas[position].result,
+                entrevistas[position].feedback)
             // Navigate using that action
             holder.viewDataBinding.root.findNavController().navigate(action)
         }

@@ -4,12 +4,10 @@ import java.util.Date
 
 data class Entrevista(
     val entrevistaId: Int,
-    val nameCandidato: String,
-    val lastNameCandidato: String,
-    val fecha: String,
-    val hora: String,
-    val reclutador: String,
-    val direcction: String,
+    val fullName: String,
+    val applicationDate: String,
     val status: String,
-    val observatios: String
+    val enterviewDate: String,
+    val result: String,
+    val feedback: String
     )

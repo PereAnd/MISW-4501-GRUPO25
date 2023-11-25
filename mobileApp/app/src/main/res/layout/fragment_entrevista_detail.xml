@@ -8,7 +8,7 @@
     tools:context=".view.FragmentEntrevistaDetail">
 
     <LinearLayout
-        android:id="@+id/fragmentAlbumDetails"
+        android:id="@+id/fragmentEnterviewDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -26,19 +26,19 @@
         android:textSize="25sp" />
 
 
-
+        <!-- fullName -->
     <TextView
-        android:id="@+id/tvNameCandidatoTittle"
+        android:id="@+id/tvFullNameTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="nombre"
+        android:text="Candidato"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/tvNameCandidato"
+        android:id="@+id/tvFullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -46,19 +46,19 @@
         android:textColor="@color/white"
         android:textSize="18sp" />
 
-
+        <!-- applicationDate -->
     <TextView
-        android:id="@+id/tvLastNameCandidatoTittle"
+        android:id="@+id/tvApplicationDateTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Apellido"
+        android:text="Fecha de aplicación"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/tvLastNameCandidato"
+        android:id="@+id/tvApplicationDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -66,88 +66,9 @@
         android:textColor="@color/white"
         android:textSize="18sp" />
 
-
+        <!-- status -->
     <TextView
-        android:id="@+id/tvFechaTittle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Fecha"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/tvFecha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="clip_horizontal"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
-
-    <TextView
-        android:id="@+id/tvHoraTittle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Hora"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/tvHora"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="clip_horizontal"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
-
-    <TextView
-        android:id="@+id/tvReclutadorTittle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Reclutador"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/tvReclutador"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="clip_horizontal"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
-
-    <TextView
-        android:id="@+id/tvDirecctionTittle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Dirección"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/tvDirecction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="clip_horizontal"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/tvStatusTittle"
+        android:id="@+id/tvStatusTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -165,18 +86,59 @@
         android:textColor="@color/white"
         android:textSize="18sp" />
 
+        <!-- enterviewDate -->
     <TextView
-        android:id="@+id/tvObservationsTittle"
+        android:id="@+id/tvEnterviewDateTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Observaciones"
+        android:text="Fecha de entrevista"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/tvObservations"
+        android:id="@+id/tvEnterviewDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="clip_horizontal"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+        <!-- result -->
+    <TextView
+        android:id="@+id/tvResultTittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Resultados de la entrevista"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="clip_horizontal"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+        <!-- feedback -->
+    <TextView
+        android:id="@+id/tvFeedbackTittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Feedback"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvFeedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

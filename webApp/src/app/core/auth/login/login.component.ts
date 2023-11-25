@@ -27,7 +27,10 @@ export class LoginComponent {
   get role() { return this.formLogin.get('role') }
 
   login(){
-    if(this.formLogin.value.role == 'Candidato'){
+    if(this.formLogin.value.role == 'Funcionario'){
+      console.log('Funcionario')
+      this.router.navigate(['/abc/dashboard'])
+    } else if(this.formLogin.value.role == 'Candidato'){
       this.loginService.loginCandidatos(this.formLogin.value.email).subscribe({
         next: data => {
           try {

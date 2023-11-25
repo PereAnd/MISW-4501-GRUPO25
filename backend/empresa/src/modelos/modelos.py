@@ -72,6 +72,7 @@ class ProyectoEschema(SQLAlchemySchema):
     id = auto_field()
     proyecto = auto_field()
     description = auto_field()
+    empresaId = auto_field()
 
 
 class Vertical(db.Model):

@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight=".85"
-                    android:text="@{entrevista.nameCandidato}"
+                    android:text="@{entrevista.fullName}"
                     android:textColor="@color/fontTextButton"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -50,7 +50,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{entrevista.lastNameCandidato}"
+                android:text="@{entrevista.applicationDate}"
                 android:textColor="@color/fontTextButton"
                 android:textSize="16sp"
                 android:textStyle="italic" />

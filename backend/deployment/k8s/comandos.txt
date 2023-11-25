@@ -33,7 +33,7 @@ eksctl create iamserviceaccount \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name AmazonEKSLoadBalancerControllerRole \
-  --attach-policy-arn=arn:aws:iam::299577415580:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::798178280816:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve --override-existing-serviceaccounts
 
 helm repo add eks https://aws.github.io/eks-charts
@@ -48,13 +48,13 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 
 
 
-export TRUST="{ \"Version\": \"2012-10-17\", \"Statement\": [ { \"Effect\": \"Allow\", \"Principal\": { \"AWS\": \"arn:aws:iam::299577415580:root\" }, \"Action\": \"sts:AssumeRole\" } ] }"
+export TRUST="{ \"Version\": \"2012-10-17\", \"Statement\": [ { \"Effect\": \"Allow\", \"Principal\": { \"AWS\": \"arn:aws:iam::798178280816:root\" }, \"Action\": \"sts:AssumeRole\" } ] }"
 aws iam create-role --role-name CodeBuildEKSRole --assume-role-policy-document "$TRUST" --output text --query 'Role.Arn'
 echo '{ "Version": "2012-10-17", "Statement": [ { "Effect": "Allow", "Action": "eks:Describe*", "Resource": "*" } ] }' > /tmp/eksdescribe.json
 aws iam put-role-policy --role-name CodeBuildEKSRole --policy-name eks-describe-policy --policy-document file:///tmp/eksdescribe.json
 
 kubectl get configmap aws-auth -o yaml -n kube-system
-export ROLE="    - rolearn: arn:aws:iam::299577415580:role/CodeBuildEKSRole\n      username: build\n      groups:\n        - system:masters"
+export ROLE="    - rolearn: arn:aws:iam::798178280816:role/CodeBuildEKSRole\n      username: build\n      groups:\n        - system:masters"
 kubectl get -n kube-system configmap/aws-auth -o yaml | awk "/mapRoles: \|/{print;print \"$ROLE\";next}1" > /tmp/auth-patch.yml
 kubectl patch configmap/aws-auth -n kube-system --patch "$(cat /tmp/auth-patch.yml)"
 
@@ -63,7 +63,7 @@ kubectl patch configmap/aws-auth -n kube-system --patch "$(cat /tmp/auth-patch.y
 eksctl delete cluster --name backend-proyecto11--region us-east-1
 
 
-arn:aws:iam::299577415580:role/codebuild-proyecto-final-grupo-25-service-role
+arn:aws:iam::798178280816:role/codebuild-proyecto-final-grupo-25-service-role
 
 
 https://devopslearning.medium.com/ci-cd-pipeline-for-eks-using-codecommit-codebuild-codepipeline-and-elastic-container-100f4b85e434

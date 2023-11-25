@@ -246,3 +246,28 @@ class VistaAplicaciones(Resource):
             return {'Error': str(sys.exc_info()[0])}, 412
 
 
+class VistaLogIn(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("EMPR_BACK_URL")) + "/login"
+    def post(self):
+        try:
+            return self.breaker.make_remote_call_post(self.urlBackEnd, json=request.json)
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+class VistaListaEntrevistas(Resource):
+    def __init__(self, **kwargs):
+        # smart_engine is a black box dependency
+        self.breaker = kwargs['breaker']
+        self.urlBackEnd = str(os.getenv("EMPR_BACK_URL")) + "/empresa"
+
+    def get(self):
+
+        try:
+            return self.breaker.make_remote_call_get(self.urlBackEnd + "/entrevistas", params=request.args.to_dict())
+        except Exception:
+            return {'Error': str(sys.exc_info()[0])}, 412
+
+

@@ -37,6 +37,15 @@ phases:
       - REPOSITORY_URI_APL_CB=798178280816.dkr.ecr.us-east-1.amazonaws.com/aplicacion_cb
       - COMMIT_HASH_APL_CB=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG_APL_CB=${COMMIT_HASH_APL_CB:=latest}
+
+      - REPOSITORY_URI_BUS=798178280816.dkr.ecr.us-east-1.amazonaws.com/busqueda
+      - COMMIT_HASH_BUS=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG_BUS=${COMMIT_HASH_BUS:=latest}
+      - REPOSITORY_URI_BUS_CB=798178280816.dkr.ecr.us-east-1.amazonaws.com/busqueda_cb
+      - COMMIT_HASH_BUS_CB=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG_BUS_CB=${COMMIT_HASH_BUS_CB:=latest}
+
+
       - sed -i 's@CANDIDATO_IMAGE@'"$REPOSITORY_URI:$IMAGE_TAG"'@' backend/deployment/k8s/deployment.yaml
       - sed -i 's@CANDIDATO_CB_IMAGE@'"$REPOSITORY_URI_CB:$IMAGE_TAG_CB"'@' backend/deployment/k8s/deployment.yaml
       - sed -i 's@EMPRESA_IMAGE@'"$REPOSITORY_URI_EMP:$IMAGE_TAG_EMP"'@' backend/deployment/k8s/deployment.yaml
@@ -45,6 +54,8 @@ phases:
       - sed -i 's@PERFIL_CB_IMAGE@'"$REPOSITORY_URI_PER_CB:$IMAGE_TAG_PER_CB"'@' backend/deployment/k8s/deployment.yaml
       - sed -i 's@APLICACION_IMAGE@'"$REPOSITORY_URI_APL:$IMAGE_TAG_APL"'@' backend/deployment/k8s/deployment.yaml
       - sed -i 's@APLICACION_CB_IMAGE@'"$REPOSITORY_URI_APL_CB:$IMAGE_TAG_APL_CB"'@' backend/deployment/k8s/deployment.yaml
+      - sed -i 's@BUSQUEDA_IMAGE@'"$REPOSITORY_URI_BUS:$IMAGE_TAG_BUS"'@' backend/deployment/k8s/deployment.yaml
+      - sed -i 's@BUSQUEDA_CB_IMAGE@'"$REPOSITORY_URI_BUS_CB:$IMAGE_TAG_BUS_CB"'@' backend/deployment/k8s/deployment.yaml
   build:
     commands:
       - echo Build started on `date`
@@ -65,6 +76,10 @@ phases:
       - docker tag $REPOSITORY_URI_APL:latest $REPOSITORY_URI_APL:$IMAGE_TAG_APL
       - docker build -t $REPOSITORY_URI_APL_CB:latest ./backend/aplicacion_sb/src
       - docker tag $REPOSITORY_URI_APL_CB:latest $REPOSITORY_URI_APL_CB:$IMAGE_TAG_APL_CB
+      - docker build -t $REPOSITORY_URI_BUS:latest ./backend/busqueda/src
+      - docker tag $REPOSITORY_URI_BUS:latest $REPOSITORY_URI_BUS:$IMAGE_TAG_BUS
+      - docker build -t $REPOSITORY_URI_BUS_CB:latest ./backend/busqueda_sb/src
+      - docker tag $REPOSITORY_URI_BUS_CB:latest $REPOSITORY_URI_BUS_CB:$IMAGE_TAG_BUS_CB
   post_build:
     commands:
       - echo Build completed on `date`
@@ -85,6 +100,10 @@ phases:
       - docker push $REPOSITORY_URI_APL:$IMAGE_TAG_APL
       - docker push $REPOSITORY_URI_APL_CB:latest
       - docker push $REPOSITORY_URI_APL_CB:$IMAGE_TAG_APL_CB
+      - docker push $REPOSITORY_URI_BUS:latest
+      - docker push $REPOSITORY_URI_BUS:$IMAGE_TAG_BUS
+      - docker push $REPOSITORY_URI_BUS_CB:latest
+      - docker push $REPOSITORY_URI_BUS_CB:$IMAGE_TAG_BUS_CB
       - echo Writing image definitions file...
       - printf '[{"name”:"candidato","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - printf '[{"name”:"candidato_cb","imageUri":"%s"}]' $REPOSITORY_URI_CB:$IMAGE_TAG_CB > imagedefinitions_cb.json
@@ -94,6 +113,8 @@ phases:
       - printf '[{"name”:"perfil_cb","imageUri":"%s"}]' $REPOSITORY_URI_PER_CB:$IMAGE_TAG_PER_CB > imagedefinitions_per_cb.json
       - printf '[{"name”:"aplicacion","imageUri":"%s"}]' $REPOSITORY_URI_APL:$IMAGE_TAG_APL > imagedefinitions_apl.json
       - printf '[{"name”:"aplicacion_cb","imageUri":"%s"}]' $REPOSITORY_URI_APL_CB:$IMAGE_TAG_APL_CB > imagedefinitions_apl_cb.json
+      - printf '[{"name”:"busqueda","imageUri":"%s"}]' $REPOSITORY_URI_BUS:$IMAGE_TAG_BUS > imagedefinitions_bus.json
+      - printf '[{"name”:"busqueda_cb","imageUri":"%s"}]' $REPOSITORY_URI_BUS_CB:$IMAGE_TAG_BUS_CB > imagedefinitions_bus_cb.json
       - CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::798178280816:role/CodeBuildEKSRole --role-session-name eks-codebuild --duration-seconds 900)
       - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
       - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
@@ -119,4 +140,6 @@ artifacts:
     - imagedefinitions_per_cb.json
     - imagedefinitions_apl.json
     - imagedefinitions_apl_cb.json
+    - imagedefinitions_bus.json
+    - imagedefinitions_bus_cb.json
     - backend/deployment/k8s/deployment.yaml

@@ -15,7 +15,7 @@ kubectl apply -f 0-cluster-autoscaler.yaml
 
 
 
-eksctl create cluster --name backend-proyecto10 --region us-east-1
+eksctl create cluster --name backend-proyecto11 --region us-east-1
 kubectl get nodes -o wide
 kubectl get pods -A -o wide
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
@@ -23,17 +23,17 @@ curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-cont
 
 
 aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy8 \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://iam_policy.json
 
-eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=backend-proyecto10 --approve
+eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=backend-proyecto11 --approve
 
 eksctl create iamserviceaccount \
-  --cluster=backend-proyecto10 \
+  --cluster=backend-proyecto11 \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
-  --role-name AmazonEKSLoadBalancerControllerRole8 \
-  --attach-policy-arn=arn:aws:iam::798178280816:policy/AWSLoadBalancerControllerIAMPolicy8 \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::798178280816:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve --override-existing-serviceaccounts
 
 helm repo add eks https://aws.github.io/eks-charts
@@ -60,7 +60,7 @@ kubectl patch configmap/aws-auth -n kube-system --patch "$(cat /tmp/auth-patch.y
 
 
 
-eksctl delete cluster --name backend-proyecto10 --region us-east-1
+eksctl delete cluster --name backend-proyecto11--region us-east-1
 
 
 arn:aws:iam::798178280816:role/codebuild-proyecto-final-grupo-25-service-role

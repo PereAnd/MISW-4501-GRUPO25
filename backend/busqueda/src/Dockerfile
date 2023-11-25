@@ -19,7 +19,7 @@ ENV SQLALCHEMY_DATABASE_URI default
 ENV EMPR_BACK_URL http://127.0.0.1:5003
 ENV CAND_BACK_URL http://127.0.0.1:5001
 ENV PERF_BACK_URL http://127.0.0.1:5005
-ENV QUEUE_URL https://sqs.us-east-1.amazonaws.com/299577415580/ejecutarBusqueda
+ENV QUEUE_URL https://sqs.us-east-1.amazonaws.com/798178280816/ejecutarBusqueda2
 
 EXPOSE 5009
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5009"]

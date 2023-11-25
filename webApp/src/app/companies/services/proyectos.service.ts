@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { Proyecto } from '../models/proyectos';
+import { Aplicacion, Proyecto } from '../models/proyectos';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,21 @@ import { Proyecto } from '../models/proyectos';
 export class ProyectosService {
 
   projectDetail: Proyecto;
+  applInterview: Aplicacion;
 
   constructor(
     private httpClient: HttpClient
   ) { }
+
+  setApplToInterview(application: any){
+    this.applInterview = application;
+  }
+
+  getApplToInterview(): Observable<any>{
+    return new Observable<any>(observer => {
+      observer.next(this.applInterview)
+    });
+  }
 
   setProjectDetail(project: Proyecto){
     this.projectDetail = project;

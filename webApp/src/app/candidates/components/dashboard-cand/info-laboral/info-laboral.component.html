@@ -36,17 +36,17 @@
 
         <ng-container matColumnDef="activities">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Actividades </th>
-          <td mat-cell *matCellDef="let row"> {{row.activities}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.activities | slice:0:90}} </td>
         </ng-container>
 
         <ng-container matColumnDef="dateFrom">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de inicio </th>
-          <td mat-cell *matCellDef="let row"> {{row.dateFrom}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.dateFrom | date:'dd MMM yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="dateTo">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de fin </th>
-          <td mat-cell *matCellDef="let row"> {{row.dateTo}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.dateTo | date:'dd MMM yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">

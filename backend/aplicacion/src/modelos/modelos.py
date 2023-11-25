@@ -47,4 +47,6 @@ class AplicacionEschema(SQLAlchemySchema):
     result = auto_field()
     perfilId = auto_field()
     candidatoId = auto_field()
+    empresaId = auto_field()
+    proyectoId = auto_field()
     entrevistas = fields.Nested(EntrevistaEschema(many=True), many=True)

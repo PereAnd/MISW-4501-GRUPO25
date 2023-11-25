@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { Candidato } from 'src/app/candidates/models/candidato';
 import { RegCandidatoService } from 'src/app/candidates/services/reg-candidato.service';
-import { Perfil, Proyecto } from 'src/app/companies/models/proyectos';
+import { Aplicacion, Perfil, Proyecto } from 'src/app/companies/models/proyectos';
 import { BusquedaService } from 'src/app/companies/services/busqueda.service';
 import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
@@ -15,6 +15,7 @@ import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 })
 export class MotorEmpComponent implements OnInit{
   @ViewChild(MatAccordion) accordion: MatAccordion;
+  panelOpenState = false;
 
   empresaId: number;
   projectId: number;
@@ -24,7 +25,9 @@ export class MotorEmpComponent implements OnInit{
   profiles: Perfil[] = [];
 
   searchId: number;
-  matchesCandidates: Candidato[] = [];
+  matchesCandidates: any[] = [];
+
+  aplicaciones: Aplicacion[] = [];
 
   constructor(
     private busquedaService: BusquedaService,
@@ -39,6 +42,13 @@ export class MotorEmpComponent implements OnInit{
     this.proyectosService.listProyectos(this.empresaId).subscribe({
       next: listProjects => {
         this.projects = listProjects;
+      }
+    })
+
+
+    this.candidatosService.getListCandidatos().subscribe({
+      next: listCandidatos => {
+        this.matchesCandidates = listCandidatos
       }
     })
   }
@@ -76,6 +86,7 @@ export class MotorEmpComponent implements OnInit{
       }
     })
   }
+
   getSearchResults(){
     this.busquedaService.getSearchResults(this.empresaId, this.projectId, this.profileId, this.searchId).subscribe({
       next: response => {
@@ -85,7 +96,8 @@ export class MotorEmpComponent implements OnInit{
         } else {
           response.resultados.map( (result: any) => {
             this.candidatosService.getDatosCandidato(result.candidatoId).subscribe({
-              next: candidato => {
+              next: (candidato: any) => {
+                candidato['tieneAplicacion'] = true;
                 this.matchesCandidates.push(candidato);
               }
             })
@@ -93,5 +105,15 @@ export class MotorEmpComponent implements OnInit{
         }
       }
     })
+  }
+
+  solicitarEntrevista(candidateId: number){
+    const aplicacion: Aplicacion = {
+      'applicationDate': new Date().toISOString(),
+      'status': 'Entrevista',
+      'candidatoId': candidateId,
+      'result': 'Entrevista'
+    }
+    this.perfilesService.addAplicacionCand(this.empresaId, this.projectId, this.profileId, aplicacion).subscribe({})
   }
 }

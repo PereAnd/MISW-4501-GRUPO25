@@ -10,22 +10,27 @@
   display: flex;
   justify-content: center;
   column-gap: 1rem;
-
 }
 .row{
   margin-bottom: 0.5rem;
-}
-
-table {
-  width: 100%;
 }
 .controles{
   display: flex;
   justify-content: flex-end;
 }
-.odd-row {
-  background-color: #e4e4e4;
+.item{
+  text-align: left;
+  margin-bottom: 1rem;
 }
-.even-row {
-  background-color: #ffffff;
+mat-expansion-panel {
+  margin-bottom: 0.3rem;
+  background-color: #efefef;
+  border: 1px solid #b8b8b8;
+}
+h3{
+  text-align: center;
+  margin-top: 1rem;
+}
+.boton-entrevista{
+  justify-content: center;
 }

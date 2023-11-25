@@ -111,7 +111,7 @@ export class MotorEmpComponent implements OnInit{
       'applicationDate': new Date().toISOString(),
       'status': 'Entrevista',
       'candidatoId': candidateId,
-      'result': 'Entrevista'
+      'result': 'Seleccion'
     }
     this.perfilesService.addAplicacionCand(this.empresaId, this.projectId, this.profileId, aplicacion).subscribe({
       next: response => {

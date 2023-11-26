@@ -125,8 +125,8 @@ phases:
       - aws eks update-kubeconfig --name backend-proyecto11
       # Show time, applying manifests changes using kubectl
       - echo "Apply changes to kube manifests"            
-      - kubectl apply -f backend/deployment/k8s/deployment.yaml
-      - echo "All done!!!! Kubernetes changes applied"           
+      # kubectl apply -f backend/deployment/k8s/deployment.yaml
+      # echo "All done!!!! Kubernetes changes applied"           
       # Create Artifacts which we can use if we want to continue our pipeline for other stages
       - printf '[{"name":"deployment.yaml","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > build.json            
 

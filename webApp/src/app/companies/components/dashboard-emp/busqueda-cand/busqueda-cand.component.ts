@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Proyecto } from 'src/app/companies/models/proyectos';
 import { RegCandidatoService } from 'src/app/candidates/services/reg-candidato.service';
+import { DetailCandComponent } from './detail-cand/detail-cand.component';
+import { Candidato } from 'src/app/candidates/models/candidato';
 
 @Component({
   selector: 'app-busqueda-cand',
@@ -63,11 +64,11 @@ export class BusquedaCandComponent {
     }
   }
 
-  detalleProyecto(project: Proyecto){
-    // this.proyectoService.setProjectDetail(project);
-    // const dialogRef = this.dialog.open(DetailProyectoComponent, { width: '1000px' });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   //console.log(`Dialog result: ${result}`);
-    // });
+  detalleProyecto(candidate: Candidato){
+    this.candidatosService.setCandidateForDetail(candidate);
+    const dialogRef = this.dialog.open(DetailCandComponent, { width: '1000px' });
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`Dialog result: ${result}`);
+    });
   }
 }

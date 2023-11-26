@@ -165,11 +165,6 @@ spec:
     app.kubernetes.io/name: empresa-cb
 ---
 
-
-
-
-
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -252,14 +247,6 @@ spec:
   selector:
     app.kubernetes.io/name: perfil-cb
 ---
-
-
-
-
-
-
-
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -367,6 +354,10 @@ spec:
         name: busqueda
         ports:
         - containerPort: 5009
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
         env:
         - name: SQLALCHEMY_DATABASE_URI
           value: "postgresql://postgres:postgres@postgres.cfgkb3tpxr7g.us-east-1.rds.amazonaws.com:5432/postgres"
@@ -378,7 +369,23 @@ spec:
           value: "http://service-candidato-cb:5002"
         - name: QUEUE_URL
           value: "https://sqs.us-east-1.amazonaws.com/798178280816/ejecutarBusqueda2"
-
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials # Name of the secret in Kubernetes Secrets, which has been set in the secretProviderClass 
+              key: aws_key.txt
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials # Name of the secret in Kubernetes Secrets, which has been set in the secretProviderClass 
+              key: aws_secret.txt
+      volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "secrets-provider" # Name of the secretProviderClass
 ---
 apiVersion: apps/v1
 kind: Deployment

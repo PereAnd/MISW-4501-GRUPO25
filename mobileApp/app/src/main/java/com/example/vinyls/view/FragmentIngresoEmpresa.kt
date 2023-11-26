@@ -78,8 +78,6 @@ class FragmentIngresoEmpresa : Fragment(R.layout.fragment_ingreso_empresa) {
                 i = idIngresoEmpresad.await()
             }
 
-
-
         }
     }
 
@@ -104,10 +102,7 @@ class FragmentIngresoEmpresa : Fragment(R.layout.fragment_ingreso_empresa) {
 
         currentState = isValid
         return currentState
-
+        }
     }
-
-
-}
 
 }

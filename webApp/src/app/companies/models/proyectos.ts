@@ -36,7 +36,7 @@ export class Aplicacion {
     public proyectoId?: number,
     public empresaId?: number,
     public perfilId?: number,
-    public entrevista?: Entrevista[],
+    public entrevistas?: Entrevista[],
     public id?: number
   ) {}
 }

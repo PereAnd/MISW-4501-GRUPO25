@@ -39,7 +39,24 @@
     <string name="elektra_label">Elektra</string>
     <string name="fania_records_label">Fania Records</string>
 
-    <string name="sobre_nosotros">Nulla feugiat dictum magna, eget aliquam orci vestibulum ac. Phasellus laoreet dignissim tortor, et iaculis quam auctor at. In hac habitasse platea dictumst. Aenean nec orci congue, ultrices nisi sit amet, vulputate turpis. Vivamus interdum diam eget lectus pharetra lobortis eu ut purus.\n\nAliquam vitae ultrices nisi. Etiam magna orci, efficitur et urna at, cursus faucibus ipsum. Nulla scelerisque, ante sed faucibus rutrum, elit nunc mattis lacus, eget blandit lorem mi cursus elit. Maecenas faucibus quam in ante consequat interdum. </string>
+    <string name="sobre_nosotros_1">
+        En aquellos primeros días, éramos un equipo pequeño con una gran visión:
+        redefinir la forma en que las empresas encuentran y valoran el talento. A pesar de contar con recursos limitados,
+        nuestra pasión por conectar personas con oportunidades significativas nos impulsó a superar obstáculos iniciales.
+    </string>
+
+    <string name="sobre_nosotros_2">
+        Nuestra empresa se fundó con la convicción de que la conexión adecuada de las personas con las oportunidades
+        correctas puede impulsar el éxito tanto de individuos como de empresas. Desde sus primeros días, Abc Jobs se ha
+        dedicado a superar obstáculos y a evolucionar continuamente.
+    </string>
+
+    <string name="sobre_nosotros_3">
+        Durante esta etapa, hemos enfrentado cambios significativos y desafíos, transformándonos en una entidad más robusta
+        y especializada. Desde ajustes estratégicos hasta la expansión de nuestros servicios, la fase de transición ha
+        sido crucial para redefinir nuestra identidad y fortalecer nuestra posición en la intermediación de talento.
+    </string>
+
     <string name="reclutamiento_y_seleccion">Simplificamos su búsqueda de talento con servicios especializados. Identificamos perfiles precisos, publicamos ofertas estratégicas y evaluamos candidatos destacados. Optimice su proceso de contratación con nuestra experiencia.</string>
     <string name="evaluacion_de_candidatos">Garantizamos un proceso completo para seleccionar al mejor talento. Verificamos habilidades técnicas, laborales y experiencia relevante, evaluamos la personalidad y habilidades blandas destacando características personales clave.</string>
     <string name="formacion_online">Nuestra oferta de Formación y Desarrollo se centra en el desarrollo de programas de capacitación diseñados para beneficiar tanto a los empleados actuales como a los futuros. Permitiendo un acceso flexible para el crecimiento profesional</string>

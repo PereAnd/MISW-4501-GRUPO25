@@ -1,5 +1,5 @@
 from flask_restful import Api
-from .vistas import  VistaPing, VistaRegistro, VistaEmpresa, VistaVertical, VistaVerticales, VistaUbicaciones, VistaUbicacion, VistaProyecto, VistaProyectos,VistaEntrevistas, VistaAplicaciones
+from .vistas import  VistaListaEntrevistas, VistaLogIn, VistaPing, VistaRegistro, VistaEmpresa, VistaVertical, VistaVerticales, VistaUbicaciones, VistaUbicacion, VistaProyecto, VistaProyectos,VistaEntrevistas, VistaAplicaciones
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask import Flask
@@ -30,6 +30,11 @@ api = Api(app)
 
 breaker = CircuitBreaker(exceptions=(Exception,), threshold=5, delay=10)
 
+
+
+
+api.add_resource(VistaLogIn, '/login', resource_class_kwargs={ 'breaker': breaker })
+api.add_resource(VistaListaEntrevistas, '/empresa/entrevistas', resource_class_kwargs={ 'breaker': breaker })
 api.add_resource(VistaRegistro, '/empresa', resource_class_kwargs={ 'breaker': breaker })
 api.add_resource(VistaEmpresa, '/empresa/<string:id>', resource_class_kwargs={ 'breaker': breaker })
 api.add_resource(VistaVerticales, '/empresa/<string:empresaId>/vertical', resource_class_kwargs={ 'breaker': breaker })
@@ -40,8 +45,4 @@ api.add_resource(VistaProyectos, '/empresa/<string:empresaId>/proyecto', resourc
 api.add_resource(VistaProyecto, '/empresa/<string:empresaId>/proyecto/<string:id>', resource_class_kwargs={ 'breaker': breaker })
 api.add_resource(VistaEntrevistas, '/empresa/<string:empresaId>/entrevista', resource_class_kwargs={ 'breaker': breaker })
 api.add_resource(VistaAplicaciones, '/empresa/<string:empresaId>/aplicacion', resource_class_kwargs={ 'breaker': breaker })
-# api.add_resource(VistaInformacionesTecnicas, '/candidato/<string:candidatoId>/informacionTecnica', resource_class_kwargs={ 'breaker': breaker })
-# api.add_resource(VistaInformacionTecnica, '/candidato/<string:candidatoId>/informacionTecnica/<string:id>', resource_class_kwargs={ 'breaker': breaker })
-# api.add_resource(VistaInformacionesLaborales, '/candidato/<string:candidatoId>/informacionLaboral', resource_class_kwargs={ 'breaker': breaker })
-# api.add_resource(VistaInformacionLaboral, '/candidato/<string:candidatoId>/informacionLaboral/<string:id>', resource_class_kwargs={ 'breaker': breaker })
 api.add_resource(VistaPing, '/empresa/ping')

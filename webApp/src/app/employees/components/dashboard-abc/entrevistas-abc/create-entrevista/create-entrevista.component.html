@@ -46,15 +46,17 @@
         </mat-form-field>
       </div>
     </div>
-        <!-- <div class="row">
-          <div class="col-sm-12">
-            <mat-form-field>
-              <mat-label>Feedback</mat-label>
-              <input matInput maxlength="90" id="feedback" formControlName="feedback">
-              <mat-hint align="end">{{feedback?.value.length}} / 90</mat-hint>
-            </mat-form-field>
-          </div>
-        </div> -->
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field>
+          <mat-label>Resultado</mat-label>
+          <mat-select formControlName="results" id="results">
+            <mat-option value="Aprobado">Aprobado</mat-option>
+            <mat-option value="Rechazado">Rechazado</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
 
       <mat-dialog-actions align="end">
       <button mat-raised-button [mat-dialog-close]="true" color="primary"

@@ -9,6 +9,7 @@ import { RegCandidatoService } from 'src/app/candidates/services/reg-candidato.s
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
 import { RegEmpresaService } from 'src/app/companies/services/reg-empresa.service';
 import { CreateEntrevistaComponent } from './create-entrevista/create-entrevista.component';
+import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 
 @Component({
   selector: 'app-entrevistas-abc',
@@ -22,7 +23,6 @@ export class EntrevistasAbcComponent {
   perfiles: any[] = [];
   empresas: any[] = [];
   responseApplications: any[] = []
-
   interviews: any[] = []
 
   displayedColumns: string[] = ['id', 'company', 'project', 'candidate', 'enterviewDate', 'done', 'actions']
@@ -35,11 +35,17 @@ export class EntrevistasAbcComponent {
     private proyectosService: ProyectosService,
     private candidatosService: RegCandidatoService,
     private empresasService: RegEmpresaService,
+    private perfilesService: PerfilesService,
     private datePipe: DatePipe,
     public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+    this.interviews = []
+    this.candidatos = []
+    this.empresas = []
+    this.proyectos = []
+    this.responseApplications = []
     forkJoin([
       this.candidatosService.getListCandidatos(),
       this.empresasService.getListEmpresas()
@@ -58,6 +64,7 @@ export class EntrevistasAbcComponent {
         })
         forkJoin(aplicacionesObservables).subscribe({
           next: (listApplications) => {
+            this.interviews = []
             listApplications.forEach((applications: any) => this.responseApplications.push(...applications))
             this.responseApplications.forEach(responseApplicacion => {
               let company = this.empresas.find(empresa => empresa.id === responseApplicacion.empresaId)
@@ -73,7 +80,7 @@ export class EntrevistasAbcComponent {
                 project: project.proyecto,
                 candidate: candidate.names + ' ' + candidate.lastNames,
                 enterviewDate: enterviewDate,
-                done: done ? 'Si' : 'No'
+                done: done ? 'Si - ' + responseApplicacion.status : 'No - ' + responseApplicacion.status
               })
             })
             this.dataSource = new MatTableDataSource(this.interviews);
@@ -92,12 +99,12 @@ export class EntrevistasAbcComponent {
       this.dataSource.paginator.firstPage();
     }
   }
-  crearEntrevista(element: any){
+  registrarEntrevista(element: any){
     let appl = this.responseApplications.find(application => application.id === element.id)
     this.proyectosService.setApplToInterview(appl)
     const dialogRef = this.dialog.open(CreateEntrevistaComponent, { width: '700px' });
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      if(result) this.ngOnInit()
     });
   }
   // detalleProyecto(project: Proyecto){

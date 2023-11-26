@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -34,6 +35,7 @@ export class EntrevistasCandComponent {
     private perfilesService: PerfilesService,
     private proyectosService: ProyectosService,
     private candidatosService: RegCandidatoService,
+    private datePipe: DatePipe,
     public dialog: MatDialog
   ) {
     this.candidatoId = +localStorage.getItem('candidatoId')!;
@@ -96,14 +98,17 @@ export class EntrevistasCandComponent {
         const empresa = this.empresas.find(empresa => empresa.id === aplicacion.empresaId);
         const proyecto = this.proyectos.find(proyecto => proyecto.id === aplicacion.proyectoId);
         const perfil = this.perfiles.find(perfil => perfil.id === aplicacion.perfilId);
+        const interviewDate = aplicacion.entrevistas.length > 0 ? this.datePipe.transform(aplicacion.entrevistas[0].enterviewDate, 'dd-MMM-yyyy HH:mm') : 'No programada';
+        const isDone = aplicacion.entrevistas.length > 0 ? aplicacion.entrevistas[0].done : false;
+        const statusAppl = aplicacion.status;
 
         this.interviews.push({
           id: aplicacion.id,
           company: empresa.name,
           project: proyecto.proyecto,
           profile: perfil.name,
-          enterviewDate: aplicacion.entrevistas[0].enterviewDate,
-          done: aplicacion.entrevistas[0].done ? 'Sí' : 'No'
+          enterviewDate: interviewDate,
+          done: isDone ? 'Sí' + statusAppl : 'No' + statusAppl
         })
         this.dataSource = new MatTableDataSource(this.interviews);
           this.dataSource.paginator = this.paginator;

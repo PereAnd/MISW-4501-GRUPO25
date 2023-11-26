@@ -1,0 +1,34 @@
+.container{
+  margin-top: 5%;
+  max-width: 90%;
+}
+#titulo{
+  text-align: left;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+}
+mat-form-field{
+  width: 100%;
+}
+.botones{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.row{
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.calendar-card {
+  margin-bottom: 1rem;
+}
+.error{
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+.feedback{
+  width: 100%;
+}

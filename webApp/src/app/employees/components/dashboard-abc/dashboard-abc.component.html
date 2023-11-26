@@ -1,0 +1,70 @@
+<div
+  class="dash-container"
+  [class.dash-is-mobile]="mobileQuery.matches"
+>
+  <mat-toolbar color="warn">
+    <button
+      mat-icon-button
+      class="dash-icon"
+      aria-label="dash icon-button with menu icon"
+      (click)="snav.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img src="../../../../assets/img/LogoABC.png" alt="Logo ABC Jobs" />
+    <span class="dash-spacer"></span>
+    <button
+      mat-icon-button
+      class="dash-icon favorite-icon"
+      aria-label="dash icon-button with heart icon"
+    >
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="dash-icon"
+      aria-label="dash icon-button with share icon"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="dash-icon"
+      aria-label="dash icon-button with share icon"
+      (click)="logout()"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container
+    class="dash-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav opened
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list>
+        <h4 mat-list-item>Mis Tareas</h4>
+        <!--
+        <a mat-list-item [routerLink]="['info-personal']"><mat-icon>person</mat-icon>Información Personal</a>
+        <a mat-list-item [routerLink]="['info-academica']"><mat-icon>school</mat-icon>Información Académica</a>
+        <a mat-list-item [routerLink]="['info-tecnica']"><mat-icon>build</mat-icon>Información Técnica</a>
+        <a mat-list-item [routerLink]="['info-laboral']"><mat-icon>work</mat-icon>Información Laboral</a>
+        <br> -->
+        <mat-divider></mat-divider>
+        <a mat-list-item [routerLink]="['entrevistas-abc']"><mat-icon>event</mat-icon>Entrevistas</a>
+        <a mat-list-item [routerLink]=""><mat-icon>event</mat-icon>Pruebas</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

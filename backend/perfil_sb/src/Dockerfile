@@ -15,6 +15,6 @@ RUN pip3 install -r requirements.txt
 # Copiar el contenido del directorio actual en la imagen de docker
 #COPY . /app
 # Agregar variable de entorno con el nombre del estudiante
-ENV EMPR_BACK_URL http://127.0.0.1:5005
+ENV PERF_BACK_URL http://127.0.0.1:5005
 EXPOSE 5006
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5006"]

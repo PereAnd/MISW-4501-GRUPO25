@@ -444,28 +444,7 @@ spec:
   rules:
     - http:
         paths:
-        - path: /empresa/[0-9]/proyecto/[0-9A-Za-z]/perfil/[0-9A-Za-z]/busqueda
-          pathType: Prefix
-          backend:
-            service:
-              name: service-busqueda-cb
-              port:
-                number: 5010
-        - path: /empresa/[0-9]/proyecto/[0-9A-Za-z]/perfil/[0-9A-Za-z]/aplicacion
-          pathType: Prefix
-          backend:
-            service:
-              name: service-aplicacion-cb
-              port:
-                number: 5008
-        - path: /candidato/[0-9A-Za-z]/aplicacion
-          pathType: Prefix
-          backend:
-            service:
-              name: service-aplicacion-cb
-              port:
-                number: 5008
-        - path: /empresa/[0-9A-Za-z]/proyecto/[0-9A-Za-z]/perfil
+        - path: /perfi
           pathType: Prefix
           backend:
             service:

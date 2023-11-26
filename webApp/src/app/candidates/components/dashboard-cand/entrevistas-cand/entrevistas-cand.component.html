@@ -1,9 +1,9 @@
 <div class="container text-center">
-  <h2 id="titulo"><mat-icon>event</mat-icon>Entrevistas</h2>
+  <h2 id="titulo" i18n><mat-icon>event</mat-icon>Entrevistas</h2>
     <div class="controles">
       <div>
         <mat-form-field>
-          <mat-label>Filtrar</mat-label>
+          <mat-label i18n>Filtrar</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="Escribe algo" #input>
         </mat-form-field>
       </div>
@@ -25,32 +25,32 @@
         </ng-container>
 
         <ng-container matColumnDef="company">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Empresa </th>
           <td mat-cell *matCellDef="let row"> {{row.company}} </td>
         </ng-container>
 
         <ng-container matColumnDef="project">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Proyecto </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Proyecto </th>
           <td mat-cell *matCellDef="let row"> {{row.project}} </td>
         </ng-container>
 
         <ng-container matColumnDef="profile">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Perfil </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Perfil </th>
           <td mat-cell *matCellDef="let row"> {{row.profile}} </td>
         </ng-container>
 
         <ng-container matColumnDef="enterviewDate">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Fecha </th>
           <td mat-cell *matCellDef="let row"> {{row.enterviewDate}} </td>
         </ng-container>
 
         <ng-container matColumnDef="done">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Realizada </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Realizada </th>
           <td mat-cell *matCellDef="let row"> {{row.done}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Acciones </th>
           <mat-cell *matCellDef="let element">
             <a mat-icon-button><mat-icon>visibility</mat-icon></a> <!-- (click)="detalleProyecto(element)" -->
             <!-- <a mat-icon-button><mat-icon>edit</mat-icon></a> (click)="editarProyecto(element)" -->
@@ -64,7 +64,7 @@
         [ngClass]="isOdd ? 'odd-row' : 'odd-even'"></tr>
 
         <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell text-center" colspan="4">No hay registros</td>
+          <td class="mat-cell text-center" colspan="4" i18n>No hay registros</td>
         </tr>
       </table>
 

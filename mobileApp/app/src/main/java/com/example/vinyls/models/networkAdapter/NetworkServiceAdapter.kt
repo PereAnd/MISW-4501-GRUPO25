@@ -23,7 +23,7 @@ import android.util.Log
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
-        const val BASE_URL = "http://candidatos.us-east-2.elasticbeanstalk.com/"
+        const val BASE_URL = "http://k8s-proyecto-ingressp-4cd6368b1b-1854900434.us-east-1.elb.amazonaws.com/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {

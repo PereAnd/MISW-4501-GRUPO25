@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Entrevistas"
+        android:text="Ofertas laborales"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"

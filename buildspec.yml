@@ -23,7 +23,7 @@ phases:
       - REPOSITORY_URI_EMP_CB=798178280816.dkr.ecr.us-east-1.amazonaws.com/empresa_cb
       - COMMIT_HASH_EMP_CB=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG_EMP_CB=${COMMIT_HASH_EMP_CB:=latest}
-      - REPOSITORY_URI_PER=798178280816.dkr.ecr.us-east-1.amazonaws.com/pefil
+      - REPOSITORY_URI_PER=798178280816.dkr.ecr.us-east-1.amazonaws.com/perfil
       - COMMIT_HASH_PER=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG_PER=${COMMIT_HASH_PER:=latest}
       - REPOSITORY_URI_PER_CB=798178280816.dkr.ecr.us-east-1.amazonaws.com/perfil_cb

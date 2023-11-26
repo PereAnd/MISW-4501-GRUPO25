@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RegCandidatoService } from 'src/app/candidates/services/reg-candidato.service';
-import { Aplicacion } from 'src/app/companies/models/proyectos';
+import { PerfilesService } from 'src/app/companies/services/perfiles.service';
 import { ProyectosService } from 'src/app/companies/services/proyectos.service';
-import { RegEmpresaService } from 'src/app/companies/services/reg-empresa.service';
 
 @Component({
   selector: 'app-create-entrevista',
@@ -32,19 +29,15 @@ export class CreateEntrevistaComponent {
   get enterviewTime() { return this.formEntrevista.get('enterviewTime') }
 
   constructor(
-    private serviceProyectos: ProyectosService,
+    private proyectosService: ProyectosService,
+    private perfilesService: PerfilesService
   ) { }
 
   ngOnInit(): void {
-    this.serviceProyectos.getApplToInterview().subscribe({
+    this.proyectosService.getApplToInterview().subscribe({
       next: data => {
+        this.application = data;
         if(data.entrevistas.length > 0){
-          // this.formEntrevista.setValue({
-          //   enterviewDate: new Date(data.entrevistas[0].enterviewDate),
-          //   enterviewTime: data.entrevistas[0].enterviewDate.split('T')[1].split('.')[0],
-          //   done: data.entrevistas[0].done,
-          //   feedback: data.entrevistas[0].feedback
-          // })
           this.formEntrevista.patchValue({
             enterviewDate: new Date(data.entrevistas[0].enterviewDate),
             enterviewTime: data.entrevistas[0].enterviewDate.split('T')[1].split('.')[0],
@@ -68,22 +61,30 @@ export class CreateEntrevistaComponent {
     this.isDone ? this.formEntrevista.get('feedback')?.enable() : this.formEntrevista.get('feedback')?.disable()
   }
 
-
   registrarEntrevista() {
+    let fecha: Date = this.enterviewDate?.value;
+    let interviewDate = fecha.toISOString().slice(0, 10) + 'T' + this.enterviewTime?.value;
+    this.application.entrevistas.length > 0 ? interviewDate += '.000Z' : interviewDate += ':00.000Z'
 
-    // this.perfilesService.getProfileToCompetencies().subscribe({
-    //   next: data => { this.perfilId = data }
-    // })
-    // const newCompetencia = new Competencia(
-    //   this.formEntrevista.value.name,
-    //   this.formEntrevista.value.description
-    // );
-    // this.perfilesService.addCompetencia(this.empresaId, this.proyectoId, this.perfilId, newCompetencia, this.title).subscribe({
-    //   next: data => {
-    //     console.log(this.title + ' registrado');
-    //   },
-    //   error: error => console.error('Error registrando' + this.title, error)
-    // })
+    const newInterview = {
+      enterviewDate: interviewDate,
+      done: this.done?.value,
+      feedback: this.feedback?.value
+    }
+    console.log('Entrevista a registrar', newInterview)
+    if(this.application.entrevistas.length > 0){
+      this.perfilesService.updateInterview(this.application, newInterview, this.application.entrevistas[0].id!).subscribe({
+        next: data => {
+          console.log('Entrevista actualizada');
+        }, error: error => console.error('Error actualizando entrevista', error)
+      })
+    } else {
+      this.perfilesService.addInterview(this.application, newInterview).subscribe({
+        next: data => {
+          console.log('Entrevista registrada');
+        }, error: error => console.error('Error registrando entrevista', error)
+      })
+    }
   }
 
   cancelarCreacion() {

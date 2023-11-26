@@ -29,7 +29,7 @@ export class LoginComponent {
   login(){
     if(this.formLogin.value.role == 'Funcionario'){
       console.log('Funcionario')
-      this.router.navigate(['/abc/dashboard'])
+      this.router.navigate(['/abc/dashboard/entrevistas-abc'])
     } else if(this.formLogin.value.role == 'Candidato'){
       this.loginService.loginCandidatos(this.formLogin.value.email).subscribe({
         next: data => {

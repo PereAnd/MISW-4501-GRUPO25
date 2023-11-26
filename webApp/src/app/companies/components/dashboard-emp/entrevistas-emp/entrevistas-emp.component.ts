@@ -62,6 +62,7 @@ export class EntrevistasEmpComponent implements OnInit {
               let project = this.proyectos.find(proyecto => proyecto.id === responseApplicacion.proyectoId)
               let profile = this.perfiles.find(perfil => perfil.id === responseApplicacion.perfilId)
               let enterviewDate = responseApplicacion.entrevistas[0] ? responseApplicacion.entrevistas[0].enterviewDate : 'No programada'
+              let status = responseApplicacion.status
               let done = responseApplicacion.entrevistas[0] ? responseApplicacion.entrevistas[0].done : false
               this.interviews.push({
                 id: responseApplicacion.id,
@@ -69,7 +70,7 @@ export class EntrevistasEmpComponent implements OnInit {
                 profile: profile.name,
                 candidate: candidate.names + ' ' + candidate.lastNames,
                 enterviewDate: enterviewDate,
-                done: done
+                done: done ? 'Sí - ' + status : 'No - ' + status,
               })
             })
             this.dataSource = new MatTableDataSource(this.interviews);

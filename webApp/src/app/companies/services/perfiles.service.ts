@@ -124,6 +124,15 @@ export class PerfilesService {
     return this.httpClient.get<Aplicacion>(baseUrl);
   }
 
+  updateApplication(appl: Aplicacion, newAppl: Aplicacion): Observable<Aplicacion>{
+    let empresaId: number = appl.empresaId!;
+    let proyectoId: number = appl.proyectoId!;
+    let perfilId: number = appl.perfilId!;
+    let applicationId: number = appl.id!;
+    let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion/' + applicationId;
+    return this.httpClient.patch<Aplicacion>(baseUrl, newAppl);
+  }
+
   deleteInterview(empresaId: number, proyectoId: number, perfilId: number, aplicacionId: number, entrevistaId: number): Observable<string>{
     let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion/' + aplicacionId + '/entrevista/' + entrevistaId;
     return this.httpClient.delete<string>(baseUrl);

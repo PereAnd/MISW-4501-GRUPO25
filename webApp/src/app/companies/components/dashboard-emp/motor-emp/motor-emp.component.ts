@@ -109,9 +109,9 @@ export class MotorEmpComponent implements OnInit{
   solicitarEntrevista(candidateId: number){
     const aplicacion: Aplicacion = {
       'applicationDate': new Date().toISOString(),
-      'status': 'Entrevista',
+      'status': 'Entrevista no programada',
       'candidatoId': candidateId,
-      'result': 'Seleccion'
+      'result': 'En entrevistas'
     }
     this.perfilesService.addAplicacionCand(this.empresaId, this.projectId, this.profileId, aplicacion).subscribe({
       next: response => {

@@ -100,6 +100,7 @@ export class EntrevistasCandComponent {
         const perfil = this.perfiles.find(perfil => perfil.id === aplicacion.perfilId);
         const interviewDate = aplicacion.entrevistas.length > 0 ? this.datePipe.transform(aplicacion.entrevistas[0].enterviewDate, 'dd-MMM-yyyy HH:mm') : 'No programada';
         const isDone = aplicacion.entrevistas.length > 0 ? aplicacion.entrevistas[0].done : false;
+        const statusAppl = aplicacion.status;
 
         this.interviews.push({
           id: aplicacion.id,
@@ -107,7 +108,7 @@ export class EntrevistasCandComponent {
           project: proyecto.proyecto,
           profile: perfil.name,
           enterviewDate: interviewDate,
-          done: isDone ? 'Si' : 'No'
+          done: isDone ? 'Sí' + statusAppl : 'No' + statusAppl
         })
         this.dataSource = new MatTableDataSource(this.interviews);
           this.dataSource.paginator = this.paginator;

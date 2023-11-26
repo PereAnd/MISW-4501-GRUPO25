@@ -108,7 +108,7 @@ export class EntrevistasCandComponent {
           project: proyecto.proyecto,
           profile: perfil.name,
           enterviewDate: interviewDate,
-          done: isDone ? 'Sí' + statusAppl : 'No' + statusAppl
+          done: isDone ? 'Sí - ' + statusAppl : 'No - ' + statusAppl
         })
         this.dataSource = new MatTableDataSource(this.interviews);
           this.dataSource.paginator = this.paginator;

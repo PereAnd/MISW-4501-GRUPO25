@@ -376,6 +376,8 @@ spec:
           value: "http://service-empresa-cb:5004"
         - name: CAND_BACK_URL
           value: "http://service-candidato-cb:5002"
+        - name: QUEUE_URL
+          value: "https://sqs.us-east-1.amazonaws.com/798178280816/ejecutarBusqueda2"
 
 ---
 apiVersion: apps/v1

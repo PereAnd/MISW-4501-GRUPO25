@@ -78,6 +78,7 @@ export class CreateEntrevistaComponent {
       done: this.done?.value,
       feedback: this.feedback?.value
     }
+
     if(this.application.entrevistas.length > 0){
       this.perfilesService.updateInterview(this.application, newInterview, this.application.entrevistas[0].id!).subscribe({
         next: data => {
@@ -93,7 +94,7 @@ export class CreateEntrevistaComponent {
     }
     // Actualización de la aplicación
     let newAppl = this.application;
-    newAppl.applicationDate += '.000Z';
+    newAppl.applicationDate = newAppl.applicationDate.split('T')[0] + 'T' + new Date().toISOString().split('T')[1];
     newAppl.result = 'En entrevistas';
     if (resultadoEntr == 'Aprobado') {
       newAppl.status = 'Entrevista aprobada';

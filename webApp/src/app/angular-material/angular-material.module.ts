@@ -19,6 +19,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatCardModule } from "@angular/material/card";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [],
@@ -41,7 +42,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
     MatDialogModule,
     MatCardModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatButtonToggleModule
   ],
   exports: [
     MatButtonModule,
@@ -61,7 +63,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
     MatDialogModule,
     MatCardModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatButtonToggleModule
   ]
 })
 export class AngularMaterialModule { }

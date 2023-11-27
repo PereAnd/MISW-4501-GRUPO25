@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-  await page.goto('http://localhost:4200/');
+  await page.goto('http://bucket-abcjobs-angular.s3-website-us-east-1.amazonaws.com/');
   await page.getByRole('link', { name: 'Login' }).click();
   await page.getByRole('button', { name: 'Crear cuenta' }).click();
   await page.getByRole('menuitem', { name: 'Empresa' }).click();

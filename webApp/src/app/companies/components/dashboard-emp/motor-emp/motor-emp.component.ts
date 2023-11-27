@@ -80,13 +80,13 @@ export class MotorEmpComponent implements OnInit{
     })
   }
   // TODO: Funcion provisional para terminar busqueda
-  provisionalKillSearch(){
-    this.busquedaService.provisionalKillSearch(this.empresaId, this.projectId, this.profileId, this.searchId).subscribe({
-      next: response => {
-        console.log(response);
-      }
-    })
-  }
+  // provisionalKillSearch(){
+  //   this.busquedaService.provisionalKillSearch(this.empresaId, this.projectId, this.profileId, this.searchId).subscribe({
+  //     next: response => {
+  //       console.log(response);
+  //     }
+  //   })
+  // }
 
   getSearchResults(){
     this.busquedaService.getSearchResults(this.empresaId, this.projectId, this.profileId, this.searchId).subscribe({

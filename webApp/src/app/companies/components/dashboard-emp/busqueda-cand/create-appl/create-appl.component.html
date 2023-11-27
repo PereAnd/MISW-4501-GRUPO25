@@ -1,0 +1,42 @@
+<h2 mat-dialog-title id="titulo"><mat-icon>terminal</mat-icon> Agregar {{ title }}</h2>
+<div class="container text-center col-12">
+  <!-- <h2 id="titulo"><mat-icon>terminal</mat-icon> Agregar {{ title }}</h2> -->
+
+  <form
+    [formGroup]="formAsignacion"
+    (ngSubmit)="!formAsignacion.invalid && solicitarEntrevista(candidato.id!)">
+
+      <div class="filters">
+        <mat-form-field>
+          <mat-label>Proyecto</mat-label>
+          <mat-select
+            formControlName="project"
+            id="project"
+            (selectionChange)="updateProfiles($event.value)"
+          >
+            <mat-option *ngFor="let project of projects" [value]="project.id">
+              {{ project.proyecto }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Perfil</mat-label>
+          <mat-select formControlName="profile" id="profile">
+            <mat-option *ngFor="let profile of profiles" [value]="profile.id">
+              {{ profile.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-dialog-actions align="end">
+      <button mat-raised-button [mat-dialog-close]="true" color="primary"
+      type="submit"
+      [disabled]="formAsignacion.invalid || aplicaciones.includes(candidato.id!)"
+      >Guardar</button>
+
+    </mat-dialog-actions>
+  </form>
+
+</div>

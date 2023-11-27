@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RegCandidatoService {
+  candidateForDetail: Candidato;
 
   constructor(
     private httpClient: HttpClient
@@ -42,5 +43,13 @@ export class RegCandidatoService {
   getListApplications(idCandidato: number): Observable<any[]> {
     let baseUrl: string = environment.HOST_ENTR + 'candidato/' + idCandidato + '/aplicacion';
     return this.httpClient.get<any[]>(baseUrl);
+  }
+
+  setCandidateForDetail(candidate: Candidato){
+    this.candidateForDetail = candidate;
+  }
+
+  getCandidateForDetail(): Candidato {
+    return this.candidateForDetail;
   }
 }

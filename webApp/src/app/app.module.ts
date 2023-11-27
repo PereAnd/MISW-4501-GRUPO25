@@ -42,6 +42,9 @@ import { DashboardAbcComponent } from './employees/components/dashboard-abc/dash
 import { EntrevistasAbcComponent } from './employees/components/dashboard-abc/entrevistas-abc/entrevistas-abc.component';
 import { DatePipe } from '@angular/common';
 import { CreateEntrevistaComponent } from './employees/components/dashboard-abc/entrevistas-abc/create-entrevista/create-entrevista.component';
+import { BusquedaCandComponent } from './companies/components/dashboard-emp/busqueda-cand/busqueda-cand.component';
+import { DetailCandComponent } from './companies/components/dashboard-emp/busqueda-cand/detail-cand/detail-cand.component';
+import { CreateApplComponent } from './companies/components/dashboard-emp/busqueda-cand/create-appl/create-appl.component';
 
 
 @NgModule({
@@ -80,6 +83,9 @@ import { CreateEntrevistaComponent } from './employees/components/dashboard-abc/
     DashboardAbcComponent,
     EntrevistasAbcComponent,
     CreateEntrevistaComponent,
+    BusquedaCandComponent,
+    DetailCandComponent,
+    CreateApplComponent,
   ],
   imports: [
     BrowserModule,

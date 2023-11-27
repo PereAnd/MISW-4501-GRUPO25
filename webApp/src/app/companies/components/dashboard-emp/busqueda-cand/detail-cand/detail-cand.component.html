@@ -1,0 +1,99 @@
+<!-- <h1 mat-dialog-title>Proyecto <i>{{ projectDetail.proyecto }}</i></h1>
+<mat-dialog-content class="mat-typography">
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h2>Descripción:</h2>
+    <p>{{ projectDetail.description }}</p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h2>Perfiles solicitados:</h2>
+    <app-perfiles [proyectoId]="projectDetail.id!"></app-perfiles>
+  </div>
+
+  <mat-divider></mat-divider>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions> -->
+
+<h2 mat-dialog-title><i>{{ candidatoDetail.names }} {{ candidatoDetail.lastNames }}</i></h2>
+<mat-dialog-content class="mat-typography">
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Ubicación:</h3>
+    <p>{{ candidatoDetail.city }}, {{ candidatoDetail.country }}</p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Información académica:</h3>
+    <ul>
+      <li *ngFor="let infoAcad of candidatoDetail.informacionAcademica">
+        <b>Institución:</b>
+        {{ infoAcad.institution }} <br>
+        <b>Tipo de estudio:</b>
+        {{ infoAcad.studyType }} <br>
+        <b>Título obtenido:</b>
+        {{ infoAcad.title }} <br><br>
+      </li>
+    </ul>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Información laboral:</h3>
+    <ul>
+      <li *ngFor="let infoLab of candidatoDetail.informacionLaboral">
+        <b>Organización:</b>
+        {{ infoLab.organization }} <br>
+        <b>Cargo:</b>
+        {{ infoLab.position }} <br><br>
+      </li>
+    </ul>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Conocimientos:</h3>
+    <ul>
+      <div *ngFor="let conocimiento of candidatoDetail.informacionTecnica">
+        <li *ngIf="conocimiento.type == 'Conocimiento'"><b>{{ conocimiento.description }}</b></li>
+      </div>
+    </ul>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Habilidades:</h3>
+    <ul>
+      <div *ngFor="let conocimiento of candidatoDetail.informacionTecnica">
+        <li *ngIf="conocimiento.type == 'Habilidad'"><b>{{ conocimiento.description }}</b></li>
+      </div>
+    </ul>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="item">
+    <h3>Idiomas:</h3>
+    <ul>
+      <div *ngFor="let conocimiento of candidatoDetail.informacionTecnica">
+        <li *ngIf="conocimiento.type == 'Idioma'"><b>{{ conocimiento.description }}</b></li>
+      </div>
+    </ul>
+  </div>
+
+  <mat-divider></mat-divider>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button
+      mat-raised-button
+      color="primary"
+      (click)="createAplicacion(candidatoDetail.id!)"
+      [disabled]="aplicaciones.includes(candidatoDetail.id!)"
+      >
+      {{ aplicaciones.includes(candidatoDetail.id!) ? 'Ya solicitado' : 'Preseleccionar' }}
+    </button>
+</mat-dialog-actions>

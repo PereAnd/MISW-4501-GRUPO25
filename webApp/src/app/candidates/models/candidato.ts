@@ -1,4 +1,5 @@
 import { InfoAcademica } from "./info-academica";
+import { InfoLaboral } from "./info-laboral";
 import { InfoTecnica } from "./info-tecnica";
 
 export class Candidato {
@@ -18,6 +19,7 @@ export class Candidato {
     public language?: string,
     public id?: number,
     public informacionAcademica?: InfoAcademica[],
-    public informacionTecnica?: InfoTecnica[]
+    public informacionTecnica?: InfoTecnica[],
+    public informacionLaboral?: InfoLaboral[]
   ) { }
 }

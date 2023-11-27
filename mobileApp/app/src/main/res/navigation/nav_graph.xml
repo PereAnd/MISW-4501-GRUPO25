@@ -110,9 +110,21 @@
         android:name="com.example.vinyls.view.FragmentIngresoEmpresa"
         tools:layout="@layout/fragment_ingreso_empresa">
         <action
-            android:id="@+id/action_fragment_menu_login_to_fragment_entrevista_empresa"
+            android:id="@+id/action_fragment_menu_login_to_fragment_menu_empresa"
+            app:destination="@+id/fragment_menu_empresa" />
+    </fragment>
+
+
+    <!-- Menú Empresas -->
+    <fragment
+        android:id="@+id/fragment_menu_empresa"
+        android:name="com.example.vinyls.view.FragmentMenuEmpresa"
+        tools:layout="@layout/fragment_menu_empresa">
+        <action
+            android:id="@+id/action_fragment_menu_empresa_to_fragment_entrevista_empresa"
             app:destination="@+id/fragment_entrevista_list" />
     </fragment>
+
 
     <!-- Lista entrevistas -->
     <fragment
@@ -134,28 +146,22 @@
         android:name="com.example.vinyls.view.FragmentEntrevistaDetail"
         tools:layout="@layout/fragment_entrevista_detail">
     <argument
-        android:name="nameCandidato"
+        android:name="fullName"
         app:argType="string" />
     <argument
-        android:name="lastNameCandidato"
-        app:argType="string" />
-    <argument
-        android:name="fecha"
-        app:argType="string" />
-    <argument
-        android:name="hora"
-        app:argType="string" />
-    <argument
-        android:name="reclutador"
-        app:argType="string" />
-    <argument
-        android:name="direcction"
+        android:name="applicationDate"
         app:argType="string" />
     <argument
         android:name="status"
         app:argType="string" />
     <argument
-        android:name="observations"
+        android:name="enterviewDate"
+        app:argType="string" />
+    <argument
+        android:name="result"
+        app:argType="string" />
+    <argument
+        android:name="feedback"
         app:argType="string" />
     </fragment>
 

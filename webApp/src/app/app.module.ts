@@ -37,6 +37,14 @@ import { CreatePerfilComponent } from './companies/components/dashboard-emp/proy
 import { CreateCompetenciaComponent } from './companies/components/dashboard-emp/proyectos/perfiles/create-competencia/create-competencia.component';
 import { EntrevistasEmpComponent } from './companies/components/dashboard-emp/entrevistas-emp/entrevistas-emp.component';
 import { EntrevistasCandComponent } from './candidates/components/dashboard-cand/entrevistas-cand/entrevistas-cand.component';
+import { MotorEmpComponent } from './companies/components/dashboard-emp/motor-emp/motor-emp.component';
+import { DashboardAbcComponent } from './employees/components/dashboard-abc/dashboard-abc.component';
+import { EntrevistasAbcComponent } from './employees/components/dashboard-abc/entrevistas-abc/entrevistas-abc.component';
+import { DatePipe } from '@angular/common';
+import { CreateEntrevistaComponent } from './employees/components/dashboard-abc/entrevistas-abc/create-entrevista/create-entrevista.component';
+import { BusquedaCandComponent } from './companies/components/dashboard-emp/busqueda-cand/busqueda-cand.component';
+import { DetailCandComponent } from './companies/components/dashboard-emp/busqueda-cand/detail-cand/detail-cand.component';
+import { CreateApplComponent } from './companies/components/dashboard-emp/busqueda-cand/create-appl/create-appl.component';
 
 
 @NgModule({
@@ -71,6 +79,13 @@ import { EntrevistasCandComponent } from './candidates/components/dashboard-cand
     CreateCompetenciaComponent,
     EntrevistasEmpComponent,
     EntrevistasCandComponent,
+    MotorEmpComponent,
+    DashboardAbcComponent,
+    EntrevistasAbcComponent,
+    CreateEntrevistaComponent,
+    BusquedaCandComponent,
+    DetailCandComponent,
+    CreateApplComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +97,8 @@ import { EntrevistasCandComponent } from './candidates/components/dashboard-cand
   ],
   providers: [
     RegCandidatoService,
-    InicioComponent
+    InicioComponent,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 

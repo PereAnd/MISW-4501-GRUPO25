@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Aplicacion, Competencia, Entrevista, Perfil } from '../models/proyectos';
 import { ProyectosService } from './proyectos.service';
@@ -112,6 +112,48 @@ export class PerfilesService {
   listAplicacionesEmpresa(empresaId: number): Observable<Aplicacion[]>{
     let baseUrl: string = environment.HOST_EMP + 'empresa/' + empresaId + '/aplicacion';
     return this.httpClient.get<Aplicacion[]>(baseUrl);
+  }
+
+  addAplicacionCand(empresaId: number, proyectoId: number, perfilId: number, aplicacion: Aplicacion): Observable<Aplicacion>{
+    let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion';
+    return this.httpClient.post<Aplicacion>(baseUrl, aplicacion);
+  }
+
+  getAplicacionCand(empresaId: number, proyectoId: number, perfilId: number, aplicacionId: number): Observable<Aplicacion>{
+    let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion/' + aplicacionId;
+    return this.httpClient.get<Aplicacion>(baseUrl);
+  }
+
+  updateApplication(appl: Aplicacion, newAppl: Aplicacion): Observable<Aplicacion>{
+    let empresaId: number = appl.empresaId!;
+    let proyectoId: number = appl.proyectoId!;
+    let perfilId: number = appl.perfilId!;
+    let applicationId: number = appl.id!;
+    let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion/' + applicationId;
+    return this.httpClient.patch<Aplicacion>(baseUrl, newAppl);
+  }
+
+  deleteInterview(empresaId: number, proyectoId: number, perfilId: number, aplicacionId: number, entrevistaId: number): Observable<string>{
+    let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion/' + aplicacionId + '/entrevista/' + entrevistaId;
+    return this.httpClient.delete<string>(baseUrl);
+  }
+
+  addInterview(application: Aplicacion, interview: any): Observable<any>{
+    let empresaId: number = application.empresaId!;
+    let proyectoId: number = application.proyectoId!;
+    let perfilId: number = application.perfilId!;
+    let applicationId: number = application.id!;
+    let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion/' + applicationId + '/entrevista';
+    return this.httpClient.post<any>(baseUrl, interview);
+  }
+
+  updateInterview(application: Aplicacion, interview: any, interviewId: number): Observable<any>{
+    let empresaId: number = application.empresaId!;
+    let proyectoId: number = application.proyectoId!;
+    let perfilId: number = application.perfilId!;
+    let applicationId: number = application.id!;
+    let baseUrl: string = environment.HOST_ENTR + 'empresa/' + empresaId + '/proyecto/' + proyectoId + '/perfil/' + perfilId + '/aplicacion/' + applicationId + '/entrevista/' + interviewId;
+    return this.httpClient.patch<any>(baseUrl, interview);
   }
 
   // listEntrevistas(empresaId: number): Observable<any[]>{

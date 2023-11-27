@@ -51,11 +51,11 @@ class FragmentIngresoEmpresa : Fragment(R.layout.fragment_ingreso_empresa) {
     private var currentState: Boolean = false
 
     private fun createButton() {
-        binding.buttonEntrevista.setOnClickListener {
+        binding.buttonMenuEmpresa.setOnClickListener {
             sendDataToServer()
 
             if (currentState) {
-                findNavController().navigate(R.id.action_fragment_menu_login_to_fragment_entrevista_empresa)
+                findNavController().navigate(R.id.action_fragment_menu_login_to_fragment_menu_empresa)
             } else {
                 //
             }
@@ -77,8 +77,6 @@ class FragmentIngresoEmpresa : Fragment(R.layout.fragment_ingreso_empresa) {
                 val idIngresoEmpresad = async { viewModel.ingresoEmpresaFromNetwork(JSONObject(strEmpresa)) }
                 i = idIngresoEmpresad.await()
             }
-
-
 
         }
     }
@@ -104,10 +102,7 @@ class FragmentIngresoEmpresa : Fragment(R.layout.fragment_ingreso_empresa) {
 
         currentState = isValid
         return currentState
-
+        }
     }
-
-
-}
 
 }

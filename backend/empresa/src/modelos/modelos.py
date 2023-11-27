@@ -54,6 +54,7 @@ class AplicacionEschema(SQLAlchemySchema):
     status = auto_field()
     result = auto_field()
     perfilId = auto_field()
+    proyectoId = auto_field()
     candidatoId = auto_field()
     entrevistas = fields.Nested(EntrevistaEschema(many=True), many=True)
 
@@ -71,6 +72,7 @@ class ProyectoEschema(SQLAlchemySchema):
     id = auto_field()
     proyecto = auto_field()
     description = auto_field()
+    empresaId = auto_field()
 
 
 class Vertical(db.Model):
@@ -137,3 +139,65 @@ class EmpresaEschema(SQLAlchemySchema):
     vertical = fields.Nested(VerticalEschema, many=True)
     ubicacion = fields.Nested(UbicacionEschema, many=True)
 
+
+class DatosCombinados(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    empresaId = db.Column(db.Integer, nullable=False)
+    proyectoId = db.Column(db.Integer, nullable=False)
+    perfilId = db.Column(db.Integer, nullable=False)
+    candidatoId = db.Column(db.Integer, nullable=False)
+    fullName=db.Column(db.String(50), nullable=False)
+    applicationDate = db.Column(db.DateTime, nullable=False)
+    status = db.Column(db.String(50), nullable=False)
+    enterviewDate = db.Column(db.DateTime, nullable=False)
+    result = db.Column(db.Text, nullable=False)
+    feedback = db.Column(db.Text, nullable=True)
+    
+class DatosCombinadosEsquema(SQLAlchemySchema):
+    class Meta:
+        model = DatosCombinados
+        include_relationships = False
+        load_instance = True
+
+    id = auto_field()
+    fullName = auto_field()
+    applicationDate = auto_field()
+    enterviewDate = auto_field()
+    status = auto_field()
+    enterviewDate = auto_field()
+    result = auto_field()
+    feedback = auto_field()
+    
+
+class Candidato(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    names = db.Column(db.String(50), nullable=False)
+    lastNames = db.Column(db.String(50), nullable=False)
+    mail = db.Column(db.String(120),unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+    docType = db.Column(db.String(10), nullable=True)
+    docNumber = db.Column(db.String(30), nullable=True)
+    phone = db.Column(db.String(20), nullable=True)
+    address = db.Column(db.String(120), nullable=True)
+    birthDate = db.Column(db.DateTime, nullable=True)
+    country = db.Column(db.String(50))
+    city = db.Column(db.String(50))
+    language = db.Column(db.String(50))
+
+class CandidatoEschema(SQLAlchemySchema):
+    class Meta:
+         model = Candidato
+         include_relationships = True
+         load_instance = True         
+    id = auto_field()
+    names = auto_field()
+    lastNames = auto_field()
+    mail = auto_field()
+    docType = auto_field()
+    docNumber = auto_field()
+    phone = auto_field()
+    address = auto_field()
+    birthDate = auto_field()
+    country = auto_field()
+    city = auto_field()
+    language = auto_field()

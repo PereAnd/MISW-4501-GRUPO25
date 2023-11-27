@@ -1,0 +1,80 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <ImageView
+            android:id="@+id/logo_1"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/entrevitas"
+            android:layout_gravity="center_horizontal" />
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/btnMenuEmpresa"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+
+                android:backgroundTint="@color/dark_yellow"
+                android:fontFamily="@font/raleway_bold"
+                android:text="ENTREVISTAS"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:cornerRadius="10dp"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp"
+                android:textAlignment="center"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/btnLoginEmpresa"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+
+                android:backgroundTint="@color/dark_yellow"
+                android:fontFamily="@font/raleway_bold"
+                android:text="PRUEBAS"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:cornerRadius="10dp"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_marginLeft="8dp" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</ScrollView>
+

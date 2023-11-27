@@ -165,11 +165,6 @@ spec:
     app.kubernetes.io/name: empresa-cb
 ---
 
-
-
-
-
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -252,14 +247,6 @@ spec:
   selector:
     app.kubernetes.io/name: perfil-cb
 ---
-
-
-
-
-
-
-
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -345,6 +332,115 @@ spec:
     app.kubernetes.io/name: aplicacion-cb
 ---
 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: proyecto-grupo-25
+  name: busqueda
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: busqueda
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: busqueda
+    spec:
+      containers:
+      - image: BUSQUEDA_IMAGE
+        imagePullPolicy: Always
+        name: busqueda
+        ports:
+        - containerPort: 5009
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
+        env:
+        - name: SQLALCHEMY_DATABASE_URI
+          value: "postgresql://postgres:postgres@postgres.cfgkb3tpxr7g.us-east-1.rds.amazonaws.com:5432/postgres"
+        - name: PERF_BACK_URL
+          value: "http://service-perfil-cb:5006"
+        - name: EMPR_BACK_URL
+          value: "http://service-empresa-cb:5004"
+        - name: CAND_BACK_URL
+          value: "http://service-candidato-cb:5002"
+        - name: QUEUE_URL
+          value: "https://sqs.us-east-1.amazonaws.com/798178280816/ejecutarBusqueda2"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials # Name of the secret in Kubernetes Secrets, which has been set in the secretProviderClass 
+              key: aws_key.txt
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials # Name of the secret in Kubernetes Secrets, which has been set in the secretProviderClass 
+              key: aws_secret.txt
+      volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "secrets-provider" # Name of the secretProviderClass
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: proyecto-grupo-25
+  name: busqueda-cb
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: busqueda-cb
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: busqueda-cb
+    spec:
+      containers:
+      - image: BUSQUEDA_CB_IMAGE
+        imagePullPolicy: Always
+        name: busqueda-cb
+        ports:
+        - containerPort: 5010
+        env:
+        - name: BUSQ_BACK_URL
+          value: "http://service-busqueda:5009"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: proyecto-grupo-25
+  name: service-busqueda
+spec:
+  ports:
+    - port: 5009
+      targetPort: 5009
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: busqueda
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: proyecto-grupo-25
+  name: service-busqueda-cb
+spec:
+  ports:
+    - port: 5010
+      targetPort: 5010
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: busqueda-cb
+---
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -358,21 +454,35 @@ spec:
   rules:
     - http:
         paths:
-        - path: /empresa/[0-9]/proyecto/[0-9]/perfil/[0-9]/aplicacion
+        - path: /busqueda1
+          pathType: Prefix
+          backend:
+            service:
+              name: service-busqueda-cb
+              port:
+                number: 5010
+        - path: /busqueda2
+          pathType: Prefix
+          backend:
+            service:
+              name: service-busqueda-cb
+              port:
+                number: 5010
+        - path: /aplicacion1
           pathType: Prefix
           backend:
             service:
               name: service-aplicacion-cb
               port:
                 number: 5008
-        - path: /candidato/[0-9]/aplicacion
+        - path: /aplicacion2
           pathType: Prefix
           backend:
             service:
               name: service-aplicacion-cb
               port:
                 number: 5008
-        - path: /empresa/[0-9]/proyecto/[0-9]/perfil
+        - path: /perfil
           pathType: Prefix
           backend:
             service:
@@ -386,6 +496,13 @@ spec:
               name: service-candidato-cb
               port:
                 number: 5002
+        - path: /login
+          pathType: Prefix
+          backend:
+            service:
+              name: service-empresa-cb
+              port:
+                number: 5004
         - path: /empresa
           pathType: Prefix
           backend:

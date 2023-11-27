@@ -4,7 +4,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_general">#FDFDFD</color>
-    <color name="background_clear">#26407C</color>
+    <color name="background_clear">#2F3B85</color>
     <color name="fontOrange">#FFC107</color>
     <color name="fontTextButton">#151f36</color>
     <color name="backgroungButton">#30374D</color>
@@ -16,6 +16,7 @@
     <color name="dark_red">#FC5F60</color>
     <color name="rojo_alerta">#AC0E26</color>
     <color name="dark_gray">#545454</color>
-    <color name="dark_yellow">#083d6c</color>
+    <color name="dark_yellow">#2F3B85</color>
+
 
 </resources>

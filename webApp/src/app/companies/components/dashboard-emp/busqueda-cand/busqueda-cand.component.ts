@@ -64,7 +64,7 @@ export class BusquedaCandComponent {
     }
   }
 
-  detalleProyecto(candidate: Candidato){
+  detalleCandidato(candidate: Candidato){
     this.candidatosService.setCandidateForDetail(candidate);
     const dialogRef = this.dialog.open(DetailCandComponent, { width: '1000px' });
     dialogRef.afterClosed().subscribe(result => {

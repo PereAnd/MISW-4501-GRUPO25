@@ -44,6 +44,7 @@ import { DatePipe } from '@angular/common';
 import { CreateEntrevistaComponent } from './employees/components/dashboard-abc/entrevistas-abc/create-entrevista/create-entrevista.component';
 import { BusquedaCandComponent } from './companies/components/dashboard-emp/busqueda-cand/busqueda-cand.component';
 import { DetailCandComponent } from './companies/components/dashboard-emp/busqueda-cand/detail-cand/detail-cand.component';
+import { CreateApplComponent } from './companies/components/dashboard-emp/busqueda-cand/create-appl/create-appl.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { DetailCandComponent } from './companies/components/dashboard-emp/busque
     CreateEntrevistaComponent,
     BusquedaCandComponent,
     DetailCandComponent,
+    CreateApplComponent,
   ],
   imports: [
     BrowserModule,

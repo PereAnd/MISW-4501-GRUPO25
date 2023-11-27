@@ -60,7 +60,7 @@ const routes: Routes = [
       { path: 'proyectos', component: ProyectosComponent },
       { path: 'proyectos/add', component: CreateProyectoComponent },
       { path: 'proyectos/:idp', component: CreateProyectoComponent },
-      { path: 'entrevistas-emp', component: EntrevistasEmpComponent },
+      { path: 'aplicaciones-emp', component: EntrevistasEmpComponent },
       { path: 'busqueda-cand', component: BusquedaCandComponent },
       { path: 'motor-emp', component: MotorEmpComponent }
     ]

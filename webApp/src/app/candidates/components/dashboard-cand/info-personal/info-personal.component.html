@@ -1,5 +1,5 @@
 <div class="container text-center">
-  <h2 id="titulo">Información personal</h2>
+  <h2 id="titulo" i18n>Información personal</h2>
 
   <form
     [formGroup]="formInfoPersonal"
@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="names">Nombre</mat-label>
+          <mat-label name="names" i18n>Nombre</mat-label>
           <input matInput type="text"
           id="names" formControlName="names">
         </mat-form-field>
@@ -16,7 +16,7 @@
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="lastNames">Apellido</mat-label>
+          <mat-label name="lastNames" i18n>Apellido</mat-label>
           <input matInput type="text"
           id="lastNames" formControlName="lastNames">
         </mat-form-field>
@@ -26,7 +26,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="mail">Email</mat-label>
+          <mat-label name="mail" i18n>Email</mat-label>
           <input matInput type="mail"
           id="mail" formControlName="mail">
         </mat-form-field>
@@ -34,7 +34,7 @@
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="phone">Teléfono</mat-label>
+          <mat-label name="phone" i18n>Teléfono</mat-label>
           <input matInput type="tel"
           id="phone" formControlName="phone">
         </mat-form-field>
@@ -44,7 +44,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <mat-form-field>
-          <mat-label>Tipo de documento</mat-label>
+          <mat-label i18n>Tipo de documento</mat-label>
           <mat-select formControlName="docType" id="docType">
             <mat-option *ngFor="let tipoDoc of tiposDocumento" [value]="tipoDoc.value">
               {{tipoDoc.nameDoc}}
@@ -55,7 +55,7 @@
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="docNumber">Número de documento</mat-label>
+          <mat-label name="docNumber" i18n>Número de documento</mat-label>
           <input matInput type="tel"
           id="docNumber" formControlName="docNumber">
         </mat-form-field>
@@ -65,7 +65,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="address">Dirección</mat-label>
+          <mat-label name="address" i18n>Dirección</mat-label>
           <input matInput type="text"
           id="address" formControlName="address">
         </mat-form-field>
@@ -73,7 +73,7 @@
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="country">País</mat-label>
+          <mat-label name="country" i18n>País</mat-label>
           <input matInput type="text"
           id="country" formControlName="country">
         </mat-form-field>
@@ -83,7 +83,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <mat-form-field appearance="outline">
-          <mat-label name="city">Ciudad</mat-label>
+          <mat-label name="city" i18n>Ciudad</mat-label>
           <input matInput type="tel"
           id="city" formControlName="city">
         </mat-form-field>
@@ -91,7 +91,7 @@
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field>
-          <mat-label name="birthDate">Fecha de nacimiento</mat-label>
+          <mat-label name="birthDate" i18n>Fecha de nacimiento</mat-label>
           <input matInput [matDatepicker]="birthDate" id="birthDate"
             type="datetime" formControlName="birthDate">
           <mat-hint>MM/DD/YYYY</mat-hint>
@@ -107,7 +107,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <mat-form-field>
-          <mat-label>Idioma preferido</mat-label>
+          <mat-label i18n>Idioma preferido</mat-label>
           <mat-select formControlName="language" id="language">
             <mat-option *ngFor="let idioma of idiomasPreferidos" [value]="idioma">
               {{idioma}}
@@ -123,19 +123,19 @@
         mat-raised-button color="secondary"
         (click)="cancelarCreacion()"
         [disabled]="!isEditMode"
-        >Cancelar</a>
+        i18n>Cancelar</a>
       </div>
       <div class="button" *ngIf="!isEditMode">
         <button mat-raised-button color="primary"
         (click)="changeEditMode()"
-        >Editar</button>
+        i18n>Editar</button>
       </div>
       <div class="button" *ngIf="isEditMode">
         <button mat-raised-button color="primary"
         type="submit"
         [disabled]="formInfoPersonal.invalid"
         (click)="guardarInfoPersonal()"
-        >Guardar</button>
+        i18n>Guardar</button>
       </div>
     </div>
   </form>

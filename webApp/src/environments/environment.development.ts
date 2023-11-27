@@ -1,3 +1,4 @@
+import '@angular/localize/init';
 export const environment = {
   HOST_CAND: 'http://k8s-proyecto-ingressp-4cd6368b1b-1854900434.us-east-1.elb.amazonaws.com/',
   HOST_EMP: 'http://k8s-proyecto-ingressp-4cd6368b1b-1854900434.us-east-1.elb.amazonaws.com/',
